@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>運算子：遞增(自增)和遞減(自減)</title>
+    <script>
+        /*
+            1.遞增(自增)：++
+                - 通過自增可以使變量在自身的基礎上加 1 ，是會影響原變量的值。
+                - 對於一個變量自增後，原變量的值會「立即同步」自增 1 。
+                - 自增分成兩種：後++(a++) 和 前++(++a)。
+                - 無論是 a++ 還是 ++a，都會「立即同步」使原變量的值自增 1。
+                ※ 不同的是 a++ 和 ++a 的值是不同的值：
+                    a++(後++) 的值等於「原變量的原值」(自增前的值)。
+                    ++a(前++) 的值等於「原變量的新值」(自增後的值)。
+                    原變量 a 在自增後立即同步自增 1 。
+
+                ※ 三個值要分開看。
+                    - 例一：前++
+                        var a = 20; => 原變量 a 未自增前的原值 20
+                        ++a; => 前++後，原變量 a 的值立即同步自增 1，變為 21
+                            => 而 ++a 本身的值為 自增後的新值 21
+                        console.log(a); => 21
+
+                    - 例二：
+                        var a = 20;
+                        a++; => 20
+                        console.log(a); => 21;
+                        console.log(a++); => 此為再次後自增一次，為 a 的原新值 => 21
+                        console.log(a); => 再次後自增一次的最新值 22
+
+                    - 例三：後++
+                        var a = 20; => 原變量 b 未自增前的原值 20
+                        a++; => 後++後，原變量 b 的值立即同步自增 1，變為 21
+                             => 而 a++ 本身的值為 自增前的原值 20
+                        console.log(a); => 21
+
+                    - 例四：
+                        var a = 20;
+                        ++a; => 21
+                        console.log(a); => 21
+                        console.log(++a); => 22
+                        console.log(a); => 22
+
+                    - 例五：前++、後++
+                        var b = 20; => 原變量 b 未自增前的原值 20
+                        var result = d++ + ++b + b;
+                                     20  + 22  + 22
+
+                        分解步驟：d++:20 (同步自增b:21) + ++b:22 (同步字增b:22) + b:22
+
+                        => d++ 為後++，值為20，原變量b立即同步自增1，為21，前++在原變量已變為21的
+                           基礎上進行前++，故 前++的值為 22，b的原變量新值 21 再次同步自增1，為 22。
+                        => 20+22+22 = 64
+
+                        console.log(result); => 64
+
+                    - 例六：前++、後++
+                        var c = 20;
+                        var result = ++c + c + c++; => 21 + 21 + 21
+                        console.log(result); => 63
+
+                    - 例七：前++、後++
+                        var d = 20;
+                        var result = ++d + d++ + d; => 21 + 21 + 22
+                        console.log(result); => 64
+
+                    - 例八：前++、後++
+                        var e = 20;
+                        var result = e + ++e + e++; => 20 + 21 + 21
+                        console.log(result); => 62
+
+                    - 例九：前++、後++
+                        var f = 20;
+                        var result = f++ + f + ++f + f ; => 20 + 21 + 22 + 22
+                        console.log(result); => 85
+
+            2.遞減(自減)：--
+                - 通過自減可以使變量在字身的基礎上減 1。
+                - 自減分為兩種：後--(a--) 和 前-- (--a)。
+                - 無論是 a-- 還是 --a，都會「立即同步」使原變量的值自減 1。
+                ※ 不同的是 a-- 和 --a 的值是不同的：
+                    a-- 的值等於「原變量的原值」(自減前的值)。
+                    --a 的值等於「原變量的新值」(自減後的值)。
+                    原變量 a 在自減後立即同步自減 1 。
+                ※ 原理與自增相同。
+
+                    - 例十：--後
+                        var h = 10;
+                        h--; => 10
+                        console.log(h); => 9
+
+                        var h = 10;
+                        console.log(h--); => 10
+                        console.log(h); => 9
+
+                    - 例十一：後--、後--
+                        var i = 20;
+                        i--; => 20
+                        console.log(i); => 19
+                        console.log(i--); => 19
+                        console.log(i); => 18
+
+                    - 例十二：前--、前--
+                        var k = 20;
+                        --k; => 19
+                        console.log(k); => 19
+                        console.log(--k); => 18
+                        console.log(k); => 18
+
+
+         */
+
+        // 自增：後++
+        var a = 20;
+        console.log(a++); // 20  => 等於寫 a++
+        console.log(a);  //21
+
+        // 自增：後++、後++
+        var a = 10;
+        a++; // 10
+        console.log(a); // 11
+        console.log(a++); // 此為再次後自增一次，a++ 為 原值 11
+        console.log(a); // a 立即同步自增 1 12
+
+        // 自增：前++
+        var a = 30;
+        console.log(++a); // 31
+        console.log(a); // 31
+
+        // 自增：前++、前++
+        var a = 40;
+        ++a; // 41
+        console.log(a); // 41
+        console.log(++a); // 此為再次前自增一次，++a 為 新值 42
+        console.log(a); // a 立即同步自增 1 42
+
+        // 自增1：20 + 22 + 22 = 64
+        var b = 20;
+        var result = b++ + ++b + b;
+        console.log(result);
+
+        // 自增2：21 + 21 + 21 = 63
+        var c = 20;
+        var result = ++c + c + c++;
+        console.log(result);
+
+        // 自增3：21 + 21 + 22 = 64
+        var d = 20;
+        var result = ++d + d++ + d;
+        console.log(result);
+
+        // 自增4：20 + 21 + 21 = 62
+        var e = 20;
+        var result = e + ++e + e++;
+        console.log(result);
+
+        // 自增5：20 + 21 + 22 + 22 = 85
+        var f = 20;
+        var result = f++ + f + ++f + f ;
+        console.log(result);
+
+        // 自減：
+        var i = 10;
+        i--; // 10
+        console.log(i); // 9
+        // 與上方相同結果，不同寫法
+        var j = 10;
+        console.log(j--); // 10
+        console.log(j); // 9
+
+        // 自減：後--、後--
+        var k = 20;
+        k--; // 20
+        console.log(k); // 19
+        console.log(k--); // 19
+        console.log(k); // 18
+
+        // 自減：前--、前--
+        var l = 30;
+        --l; // 29
+        console.log(l); // 29
+        console.log(--l); // 28
+        console.log(l); // 28
+
+          // 自減1：
+         var m = 10;
+        --m; // 9
+        console.log(m); // 9
+        console.log(--m); // 8
+        console.log(m--); // 8
+        console.log(m); // 7
+
+        // 自減2：20 - 19 - 19 - 17 = -35
+        var n = 20;
+        var result = n-- - n - n-- - --n;
+        console.log(result);
+
+        // 自減3：1 - -1 - -1 - -2 = 5 (負負得正)
+        var o = 1;
+        var result = o-- - --o - o - --o;
+        console.log(result);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
