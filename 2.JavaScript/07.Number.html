@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數據類型：Number</title>
+    <script>
+
+        /*
+            Number：
+                - 在JS中所有的數值都是Number類型，包括「整數」和「浮點數(小數)」。
+                - JS中可以表示的數字的最大正值與最小正值：
+                    1.Number.MAX_VALUE => 1.7976931348623157e+308
+                        var a = Number.MAX_VALUE;
+                        console.log(a);
+                    2.Number.MIN_VALUE => 5-324 (為0以上的最小正值，0.0000....)。
+                        var b = Number.MIZ_VALUE;
+                        console.log(b);
+
+                - 如果使用Number表示的數字超過了JS的最大值，則會返回一個「Infinity」。
+                    - 例：
+                        var c = Number.MAX_VALUE * Number.MAX_VALUE;
+                        console.log(c);
+                        返回 "Infinity" 表示正無窮。
+
+                        var d = -Number.MAX_VALUE * Number.MAX_VALUE;
+                        console.log(d);
+                        返回 "-Infinity" 表示負無窮。
+
+                    ※ 使用「typeof」檢查Infinity的類型時，會返回"number"。
+                        var e = Infinity; => JS中 Infinity 為字面量，非字符串，故不需加上""！！
+                        console.log(typeof e);
+                        返回 "number" 表示為 Number類型。
+
+                - 如果使用非Number來計算時，會返回一個 NaN。
+                    - NaN：是一個特殊的數字，表示 Not A Number。
+                    - 例：
+                        var f = "123" * "456"; (字符串*字符串)
+                        console.log(f);
+                        返回 "NaN" 表示 Not A Number。
+                    ※ 使用「typeof」來檢查Nan的類型時，會返回"number"。
+                        var g = NaN; => JS中 NaN 為字面量，非字符串，故不需加上""！！
+                        console.log(typeof g);
+                        返回 "number" 表示為 number類型。
+
+                - 在JS中「整數」的運算基本可以保證精確。
+                    var i = 1565161 + 15615154
+                    console.log(i);
+
+                - 如果使用JS進行「浮點(小數)」運算時，可能會得到一個不精確的結果，所以
+                  千萬不要使用JS進行對精確度要求表示高的運算(EX：錢)。
+                    var j = 0.1 + 0.2;
+                    console.log(j);
+        */
+
+        // JS的最大正值
+        var a = Number.MAX_VALUE;
+        console.log(a);
+
+        // JS的最小正值 (0.000.......)
+        var b = Number.MIN_VALUE;
+        console.log(b);
+
+        // typeof 用來檢查該值的類型為何？
+        var h = 123;
+        console.log(typeof h);
+
+        // 超過JS的最大正值時，返回 Infinity (正無窮)
+        var c = Number.MAX_VALUE * Number.MAX_VALUE;
+        console.log(c);
+
+        // 檢查 Infinity 的類型為何？ 返回 number
+        // JS中 Infinity 為字面量，非字符串，故不需加""
+        var d = Infinity;
+        console.log(typeof d);
+
+        // 超過JS的最大負值時，返回 -Infinity (負無窮)
+        var e = -Number.MAX_VALUE * Number.MAX_VALUE;
+        console.log(e);
+
+        // 使用非Number類型來計算時，JS會返回一個NaN
+        var f = "abc" * "456";  // 字符串*字符串
+        console.log(f);
+
+        // ，檢查 NaN 的類型為何？ 返回 number
+        // JS中 NaN 為字面量，非字符串，故不需加""
+        var g = NaN;
+        console.log(typeof g);
+
+        // JS中整數運算基本可以保證精確
+        var i = 1565161 + 15615154;
+        console.log(i);
+
+        // JS中浮點運算可能得到一個不精確的結果，故盡量不做要求精確度高的運算
+        // 要求精確度高的運算交給伺服器進行
+        var j = 0.1 + 0.2;
+        console.log(j);
+           
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

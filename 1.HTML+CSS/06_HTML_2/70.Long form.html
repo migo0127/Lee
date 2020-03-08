@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>長表格：如銀行流水帳等有多個單元格</title>
+</head>
+<body>
+
+    <table border="1" width="30%" align="center">
+        <!--
+            可以將一個表格分成三個部份：
+                1.頭部：thead，可搭配 <th> 使用，th 表示頭部的單元格。
+                2.主體：tbody
+                3.底部：tfoot
+         -->
+         <thead>
+             <tr>
+                <th>日期</th>
+                <th>收入</th>
+                <th>支出</th>
+                <th>淨值</th>
+            </tr>
+         </thead>
+         <tbody>
+             <tr>
+                 <td>2000.1.1</td>
+                 <td>500</td>
+                 <td>200</td>
+                 <td>300</td>
+             </tr>
+             <tr>
+                 <td>2000.1.2</td>
+                 <td>500</td>
+                 <td>200</td>
+                 <td>300</td>
+             </tr>
+             <tr>
+                 <td>2000.1.3</td>
+                 <td>500</td>
+                 <td>200</td>
+                 <td>300</td>
+             </tr>
+         </tbody>
+         <tfoot>
+             <tr>
+                 <td></td>
+                 <td></td>
+                 <td>合計</td>
+                 <td>900</td>
+             </tr>
+         </tfoot>
+    </table>
+
+</body>
+</html>

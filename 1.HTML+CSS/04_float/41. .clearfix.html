@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>.clearfix：可一次性解決 外邊距重疊 及 高度塌陷 問題</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+
+            .box1{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+            }
+
+            .box2{
+                width: 100px;
+                height: 100px;
+                background-color: orange;
+                margin-top: 50px;
+            }
+
+            .box3{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+            }
+
+            .box4{
+                width: 100px;
+                height: 100px;
+                background-color: orange;
+                margin-top: 50px;
+            }
+
+            /*
+            ※※※ 「.clearfix」：這個樣式可以同時解決高度塌陷和外邊距重疊的問題，當遇到這些問題時，直接使用此公式即可。
+                ※ 要使用 display:table， table為轉換為「表格」，後續教學補充說明。
+            */
+            .clearfix::before ,
+            .clearfix::after{
+                content:"";
+                display: table;
+                clear:both;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <br />
+        <p>● 外邊距重疊現象：當垂直相鄰(未浮動)的父子元素，其子元素的外邊距值會「傳遞」給父元素，造成一起移動的情況</p>
+        <br />
+        <div class="box1">
+            <div class="box2"></div>
+        </div>
+        <br />
+        <hr />
+        <p>● 解決外邊距重疊的情況，就要將父子元素垂直但不相鄰，即要垂直但要隔開此兩元素，使其不成立影響因素，有以下幾種方式</p>
+        <br />
+        <p>1.透過開啟BFC：float、overflow:hidden、、display:inline-block：使用開啟BFC來隔開父子元素仍會造成其他問題，故不推薦使用。</p>
+        <br>
+        <hr />
+        <p>2.使用 .clearfix::before 來處理 父子元素上邊距重疊現象：最好的處理方式。</p>
+        <br />
+        <br>
+        <p>
+            ※※ .clearfix 搭配 display:table; 可同時處理 上外邊距重疊 及 高度塌陷 問題，記住公式！！！
+        </p>
+        <br>
+        <div class="box3 clearfix">
+            <div class="box4 clearfix"></div>
+        </div>
+        <br />
+        <hr />
+
+
+    </body>
+</html>

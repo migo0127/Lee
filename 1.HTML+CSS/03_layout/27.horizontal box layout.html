@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>盒模型的水平方向布局</title>
+
+        <style>
+            .outer{
+                width: 800px;
+                height: 200px;
+                border:10px red dashed;
+                /* overflow: auto; => 詳見28.verticl box layout.html*/
+            }
+
+            .inner{
+                /* 若子元素未設置width時，則默認為父元素的內容寬度。*/
+                width: 400px;
+                /* width: auto; */
+                height: 200px;
+                background-color:#bfa;
+                margin: 0px auto;
+                /* margin-left: 300px; */
+                /* margin-left: 100px; */
+                /* margin-left: auto; */
+                /* margin-right: 200px; */
+                /* margin-right: auto; */
+            }
+            /* 
+            ※ 元素的水平方向布局：
+                 - 元素在其父元素(此例outer)中水平方向的位置由以下 7個 屬性共同決定：
+                    1.marging-left
+                    2.borfer-left
+                    3.padding-left
+                    4.width (content)
+                    5.padding-right
+                    6.border-right
+                    7.margin-right
+                
+                - 一個元素(此例inner)在其父元素(此例outer)中，水平布局必須要滿足以下的等式：
+                marging-left + borfer-left + padding-left + width + padding-right + border-right + margin-right = 其父元素內容的寬度(width)
+            EX：      auto   +     0       +      0       + 400   +        0      +       0      +     auto     = 800
+                
+                - 7個屬性的加總必須成立，若以上等式相加結果使等式不成立，則稱為過渡約束，
+                   則等式會自動調整，瀏覽器自動調整滿足等式，若未有設置auto的情況，則優
+                   先調整 margin-right。
+
+                - 例：未設置auto，等式不滿足時：
+
+                    EX1：0 + 0 + 0 + 400 + 0 + 0 + 0 = 800  ↓
+                         0 + 0 + 0 + 400 + 0 + 0 + 400 = 800 
+                     =>  不滿足等式，瀏覽器自動優先調整 margin-right 來滿足等式。
+
+                    EX2：100 + 0 + 0 + 400 + 0 + 0 + 0 = 800  ↓
+                         100 + 0 + 0 + 400 + 0 + 0 + 300 = 800 
+                     =>  不滿足等式，瀏覽器自動調整 margin-right 來滿足等式。
+
+                     EX3：0 + 0 + 0 + 1000 + 0 + 0 + 0 = 800  ↓
+                          0 + 0 + 0 + 1000 + 0 + 0 + -200 = 800  
+                     =>  不滿足等式，瀏覽器自動調整 margin-right -200，以滿足等式。
+                
+                - 這7個屬性值中有三個值可以設置為 auto：
+                    1.width
+                    2.margin-left
+                    3.margin-right
+                
+                - 如果某個值為auto時，則會根據auto的規則來調整auto值以使等式成立，有以下幾種情況：
+                    
+                    1.當「1個值」設置為 auto 時，會自動調整 auto 值。
+                    2.當「一個寬度」和「一個外邊距」設置為 auto 時，則寬度會調整到最大，
+                      設置 auto 的外邊距會自動調整為 0。
+                    3.當「兩個外邊距」都設置為 auto，寬度為固定值時，則會將外邊距設置為
+                      相同的值，此時該元素會在其父元素中水平居中(常用)。
+
+                        - 語法：
+                                width:ZZZpx;
+                                margin:0 auto;                    
+
+                    4.當「三個值」都設置為 auto 時，則外邊距都是 0 ，寬度最大。
+
+                - 例一：當「1個值」設置為 auto 時，會自動調整 auto：
+
+                    EX1：0 + 0 + 0 + auto + 0 + 0 + 0 = 800 ↓
+                         0 + 0 + 0 +  800 + 0 + 0 + 0 = 800 
+                     =>  動調整 auto 為 800。
+
+                    EX2：auto + 0 + 0 + 0 + 0 + 0 + 0 = 800 ↓
+                          800 + 0 + 0 + 0 + 0 + 0 + 0 = 800
+                
+                - 例二：當「一個寬度」和「一個外邊距」設置為 auto 時，則寬度會調整到最大，
+                        設置 auto 的外邊距會自動調整為 0：
+                    
+                    EX： 0 + 0 + 0 + auto + 0 + 0 + auto = 800 ↓
+                         0 + 0 + 0 +  800 + 0 + 0 +   0  = 800
+                     =>  寬度會調整到最大，設置 auto 的外邊距會自動調整為 0 。
+                
+                - 例三：當「兩個外邊距」都設置為 auto，寬度為固定值時，則會將外邊距設置為
+                        相同的值：
+                  ※※※ CSS中經常利用此特點來使一個元素在其父元素中水平居中。
+
+                    EX： auto + 0 + 0 + 0 + 0 + 0 + auto = 800 ↓
+                          800 + 0 + 0 + 0 + 0 + 0 +  800 = 800
+                     =>  外邊距為相同的值，該元素會在其父元素中水平居中。
+                
+                - 例四：當「三個值」都設置為 auto 時，則外邊距都是 0 ，寬度最大：
+
+                    EX： auto + 0 + 0 + auto + 0 + 0 + auto = 800 ↓
+                           0  + 0 + 0 +  800 + 0 + 0 +   0  = 800
+                     =>  外邊距都是 0 ，寬度最大。
+               
+               ※ auto 結論：
+                    1.只要當「寬度」設置為auto時，寬度自動調整為最大，其他auto為 0。
+                    2.當「外邊距」設置為auto時，1個時調整該值，2個時則平均該值。
+            */
+
+            .box1{
+                width: 600px;
+                height: 200px;
+                background-color: blanchedalmond;
+            }
+
+            .box2{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                border: 5px red solid;
+                margin: 0px 75px;
+            }
+            
+            .box3{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                border: 5px black solid;
+                
+            }
+
+            .box4{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                border: 5px blue solid;
+                margin: 0px 75px;
+            }
+
+            .box5{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                border: 5px gray solid;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <div class="outer">
+            <div class="inner"></div>
+        </div>
+        <hr />
+        <div class="box1">
+            <span class="box2">123
+                <span class="b2"></span>
+            </span>
+            <span class="box3">456
+                <span class="b3"></span>
+            </span>
+            <span class="box4">789
+                <span class="b4"></span>
+            </span>
+            <span class="box5">101
+                <span class="b5"></span>
+            </span>
+        </div>
+        <hr />
+
+    </body>
+</html>

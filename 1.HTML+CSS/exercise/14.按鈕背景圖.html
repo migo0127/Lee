@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>按鈕背景圖設置</title>
+    <style>
+
+        a:link{
+            display: block;
+            width: 93px;
+            height: 29px;
+            margin: 50px auto;
+            background-image: url("./img/14/link.png");
+        }
+
+        a:hover{
+            background-image: url("./img/14/hover.png");
+        }
+
+        a:active{
+            background-image: url("./img/14/active.png");
+        }
+
+        /*
+            當第一次滑入(hover)、點擊(active)超連接圖片時，會有閃爍空白的瞬間發生，此情況是因為
+            圖片屬於網頁中的外部資源，外部資源都需要瀏覽器單獨發送請求加載，瀏覽器加載外部資源時
+            是按需求加載的，用則加載，不用則不加載，因此像此例子的練習，瀏覽器在網頁加載時就會先
+            加載link，而hover和active會再指定狀態觸發時才加載。
+
+            ※ 當都加載過資源後，瀏覽器就會自動緩存，之後就不會再發生閃爍的情況了(除非清緩存)。
+
+            ※ 此例子若要查看閃爍空白情況，將網頁關掉重新運行就可以看出問題所在，而瀏覽器的加載順
+               序可從F12 -> network > all 中看到加載順序。
+
+            → 解法於15.5.CSS-sprite_按鈕背景圖.html
+        */
+
+    </style>
+
+</head>
+<body>
+
+    <a href="jacasrcipt:;"></a>
+
+</body>
+</html>

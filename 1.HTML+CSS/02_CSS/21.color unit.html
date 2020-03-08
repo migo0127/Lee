@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>顏色單位</title>
+
+        <style>
+        /*  
+        ※ 顏色單位：
+            在CSS中可以直接使用顏色名(red、blue、yellow...)等來直接設置各種顏色，但是在
+            CSS中直接使用顏色名是非常不方便的，以下為CSS常用的顏色單位。
+
+            1.RGB值：(常用)
+                - RGB通過三種顏色的不同濃度來調整出不同的顏色。
+                - R red, G green, B blue，此為光學三原色，非美術三原色(紅、黃、藍)。
+                - 每一種顏色的範圍在 0 - 255 (0 - 100%)之間，255最大，即最濃。
+                - 語法：rbg(紅色,綠色,藍色)
+                - 例子：background-color:rgb(255,0,0) => 紅色，
+                　(0,0,0,)=>黑色(意似 關燈)，(255,255,255)=>白色(意似開燈)，美術三原色剛好相反。
+
+            2.RGBA：(常用)
+                - 在RGB的基礎上增加了一個A表示不透明度。
+                - 需要四個值，前三個與RGB一樣，第四個表示不透明度。
+                - 語法： rgba(紅，綠，藍，不透明)
+                  1=完全不透明、0.5=半透明、0=完全透明，數值在 0 ~ 1 間。
+                - 例子：background-color:rgba(0,255,0,0.5) => 黃色半透明。
+
+            3.十六進制的RGB值：(常用)
+                - 顏色濃度通過 00-ff 調整，ff為最大，即最濃。
+                - 語法：#紅色綠色藍色，為六位數值。
+                - 例子：background-color:rgb(#0000ff) => 藍色。
+                  如果顏色兩位兩位兩位重覆時，可進行簡寫
+                  如 #0000ff => #00f，#aabbcd => 不可縮寫。 
+
+            4.HSL值、HSLA值：PS等繪圖軟件較常使用，CSS較少用。
+                - H hue 色相 0 - 360，為一個環狀，0與360都是紅色。
+                - S saturation 飽和度，即濃度 0% - 100%，濃度調整會影響變成何種顏色。
+                - L lightness 亮度，即顏色的光暗度 0% - 100%，0%最暗(黑色)，100%(白色)，50%(顏色正色)。
+                - A 不透明度，0 ~ 1。
+                - 語法：hsl(色相,飽和度,亮度)，background-color:hsl(0,100%,50%) => 正紅色。
+                  hsl(0,80%,100%) => 因亮度為100%，不管前面兩個數值都為 白色，僅影響飽和度(濃淡)。
+                  hsl(0,80%,100%) => 因亮度為0%，不管前面兩個數值都為 黑色，僅影響飽和度(濃淡)。
+                  hsla(0,80%,100%,0.2) => 因亮度為0%，不管前面兩個數值都為 黑色，
+                  僅影響飽和度(濃淡)、透明度。
+        */
+        .div1{
+            width: 200px;
+            height: 200px;
+            background-color: hotpink;
+            background-color: rgb(255,0,0);
+            background-color: rgba(0,255,0,0.3);
+            background-color: #0000ff;
+            background-color: #00f;
+            background-color: #bfa;
+            background-color:hsl(0,100%,50%);
+            background-color:hsl(0,80%,100%);
+            background-color:hsl(50,10%,0%);
+            background-color:hsla(50,10%,0%,0.2);
+        }       
+        </style>
+
+    </head>
+
+    <body>
+        
+        <div class="div1"></div>
+
+    </body>
+</html>

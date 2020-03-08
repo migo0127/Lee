@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8">
+
+    <title>複合式選擇</title>
+
+    <style>
+
+    /* 
+    ※ 複合式選擇器種類 (complex)：
+
+    1.交集選擇器：
+       - 作用：選中同時複合多個條件的元素 (滿足A且滿足B...)
+       - 語法：選擇器1選擇器2選擇器3選擇器4選擇器n{}
+       - 例子：p.red{}、a.b.c{}
+       - 注意：
+         1.交集選擇器中如果有「元素選擇器」，必須使用「元素選擇器」開頭
+         2.div#fred{} => 元素選擇器+id選擇器{}，此語法正確，但沒必要，因id屬性值已是
+           唯一屬性值，只會有一個，直接指定該唯一值即可
+        
+    */
+    .fred{
+        color:red;
+    }
+
+    div.fred{
+        font-size: 30px;
+    }
+
+    div.ftd{
+        text-decoration: underline;
+    }
+
+    h2.a.b.c{
+        color:blueviolet;
+    }
+
+    /* 
+    2.並集選擇器(選擇器分組)：
+       - 作用：同時選擇多個選擇器對應的元素 (滿足A或B或C....)
+       - 語法：選擇器1,選擇器2,選擇器3,選擇器n{}
+       - 例子：div,p,h2,div.fred,#red,.fred{}
+    */
+    span,p,h2.d{
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    </style>
+
+  </head>
+  <body>
+    
+    <div class="fred ftd">我是div</div>
+
+    <p class="fred">我是p標籤</p>
+
+    <h1 id="fgreen">我是h1</h1>
+
+    <span>我是span</span>
+
+    <h2 class="a b c">我是h2</h2>
+
+    <h2 class="a b d">我是h22</h2>
+
+
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>米兔的動畫過渡效果：鼠標移入時</title>
+    <style>
+        .box1{
+            width: 132px;
+            height: 271px;
+            background-image: url(./img/18/bigtap-mitu-queue-big.png);
+            background-position: 0 0;
+            transition:0.3s steps(3);
+            /* transition：未寫要過渡的屬性時，默認為 all */
+        }
+
+        .box1:hover{
+            background-position: -396px 0;
+        }
+
+        .box2{
+            width: 132px;
+            height: 271px;
+            background-image: url(./img/18/bigtap-mitu-queue-big.png);
+            background-position: 0 0;
+        }
+
+        .box2:hover{
+            background-position: -132px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h2>原始圖片：</h2>
+    <img src="./img/18/bigtap-mitu-queue-big.png" >
+    <br />
+    <hr />
+    <h2>1.鼠標移入時的動畫效果，使用 transition 的方式：三張連續切換，使用steps(3)，後面幾張就幾步。</h2>
+    <div class="box1"></div>
+    <br />
+    <hr />
+    <h2>2.鼠標移入時的動畫效果，使用 background-position 雪碧圖的方式：只能切換一張</h2>
+    <div class="box2"></div>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh>">
+<head>
+    <meta charset="UTF-8">
+    <title>音頻、視頻標籤</title>
+</head>
+<body>
+
+    <!-- 
+    audio標籤：向頁面中引入一個外部音頻文件(替換元素)，
+    音頻文件引入時，默認情況下不允許客戶自己控制播放停止(網頁呈空白)，
+    故需透過屬性(controls)設定讓用戶控制播放，但IE8不支援audio標籤
+
+    屬性：
+      controls標籤：是否允許用戶控制播放
+      autoplay標籤：音頻文件是否自動播放，如果設置了autoplay則音樂在打開網頁時會自度播放，
+      但目前大部份瀏覽器不會自動對音樂進行播放(就算有設定autoplay)，要強制的話需透過CSS
+      loop標籤：是否循環播放
+      
+      ※ 因不同瀏覽器顯示的播放器樣式會不一樣(chrome、IE)，故仍需透過CSS後續來進行表現一致
+
+    -->
+    <p>audio標籤，無controls ↓<br>
+    <audio src="./source/郑云龙&阿云嘎 - 为乐而生.mp3"></audio>
+    <br>
+    audio標籤，有controls ↓
+    <br>
+    <audio src="./source/小朋友.mp3" controls><audio>
+    <br>
+    audio標籤，有controls，有autoplay ↓
+    <audio src="./source/郑云龙&阿云嘎 - I’ll Cover You.mp3" controls autoplay></audio>
+    </p>
+
+    <!-- 
+    除了通過src來指定外部文件的路徑外，還可以通過sourcr標籤來指定文件路徑，常用，
+    即可對不支持的瀏覽器顯示文字說明(IE8)，及指定多種音頻格式來過濾(是否支援)播放，
+    目前大多數瀏覽器都可支援mp3，但仍有少數不支援
+
+     -->
+     <p>source標籤套嵌 ↓</p>
+     <audio controls>
+         對不起，您的瀏覽器不支持播放音頻，請升級瀏覽器！
+         <source src="./source/郑云龙&阿云嘎 - 为乐而生.mp3">
+         <source src="./source/郑云龙&阿云嘎 - 为乐而生.ogg">
+     </audio>
+     <br><br>
+
+     <!-- 
+     若要兼容IE8等老版本瀏覽器，可使用 embed標籤 合併 source標籤 (都是自結束標籤)
+     embed標籤：type、wdith、heigt 必須要有，且此會強制自動播放，使用 Windows Media Player
+
+     <embed src="音頻路徑" type="種類(音頻或視頻)/格式(mp3或mp4)" wdith="xx" height="cc">
+    
+    ※ 因embed標籤兼容多數版本，故嵌套再source標籤時，無須文字說明
+    -->
+    <p>embed標籤套嵌 ↓</p>
+    <audio controls>
+        <source src="source/小朋友.mp3">
+        <source src="source/小朋友.ogg">
+        <embed src="source/小朋友.mp3" type="audio/mp3" wdith="300" height="100">
+    </audio>
+    <br><br>  
+    
+    <!-- 
+    使用video標籤來向網頁中引入一個視頻，使用方式與audio標籤套嵌source標籤一樣
+
+     -->
+     <video controls width="600" height="400">
+        <source src="source/云次方 - 婚礼跟拍Vlog.webm">
+        <source src="source/云次方 - 婚礼跟拍Vlog.mp4">
+        <embed src="source/云次方 - 婚礼跟拍Vlog.mp4" type="video/mp4" width="400" height="200">
+     </video>
+     <br><br>
+
+     <!--
+     也可使用iframe標籤引入音視頻網址來減少空間及寬頻費用
+
+     -->
+     <iframe width="560" height="315" src="https://www.youtube.com/embed/MkuiSlcJwtg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+     <br><br>
+    <hr>
+
+</body>
+</html>

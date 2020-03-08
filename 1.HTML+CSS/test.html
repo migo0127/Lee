@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>絨絨的立體圖</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        html{
+            perspective: 800px;
+        }
+
+        .outer-wrapper{
+            height: 430px;
+            width: 230px;
+            margin:300px auto;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 15s linear infinite alternate-reverse;
+        }
+
+        .outer-wrapper  div{
+            height: 430px;
+            width: 230px;
+            opacity: 0.8;
+            position: absolute;
+        }
+
+        .outer-wrapper img{
+            position: absolute;
+            height: 430px;
+            width: 230px;
+            vertical-align: top;
+        }
+
+        .outer-wrapper .img-1,
+        .outer-wrapper .img-2{
+            height: 430px;
+            width: 430px;
+        }
+
+        .box1{
+            transform: rotateY(90deg) translateX(-100px) translateZ(115px);
+        }
+
+        .box2{
+            transform: rotateY(-90deg) translateX(-100px)  translateZ(115px);
+        }
+
+        .box3{
+            transform: rotateX(90deg) translateZ(215px);
+        }
+
+        .box4{
+            transform: rotateX(-90deg) translateZ(215px);
+        }
+
+        .box5{
+            transform: rotateY(180deg) translateZ(216px);
+        }
+
+        .box6{
+            transform: rotateY(0deg) translateZ(216px);
+        }
+
+        @keyframes rotate{
+            from{
+                transform:rotateX(0deg) rotateZ(0deg) rotateY(0deg);
+            }
+            to{
+                transform:rotateY(360deg) rotateX(-540deg)  rotateZ(-540deg) ;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="outer-wrapper">
+        <div class="box1">
+            <img class="img-1" src="./test/大龙 - 8.jpg" alt="">
+        </div>
+        <div class="box2">
+            <img class="img-2" src="./test/大龙 - 69.jpg" alt="">
+        </div>
+        <div class="box3">
+            <img src="./test/大龙 - 48.jpg" alt="">
+        </div>
+        <div class="box4">
+            <img src="./test/大龙 - 26.jpg" alt="">
+        </div>
+        <div class="box5">
+            <img src="./test/大龙 - 67.jpg" alt="">
+        </div>
+        <div class="box6">
+            <img src="./test/大龙 - 75.jpg" alt="">
+        </div>
+    </div>
+
+</body>
+</html>

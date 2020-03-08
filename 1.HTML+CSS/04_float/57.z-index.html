@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>元素的層級：z-index屬性</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+
+            /*
+                層級：
+                    - 對於開啟了定位的元素，可以通過z-index屬性來指定元素的層級。
+                    - z-index需要一個「整數」作為參數，值越大的元素層級越高，越優先顯示。
+                    - 如果元素的層級一樣，則優先顯示靠下的元素(即後至前，弟->兄)。
+                    - 祖先元素的層級再高也不會蓋住后代元素，意似 后代元素會隨著祖先的層級，
+                      就算本身也有設置較高的層級時，若祖先元素有設置，也是依祖先元素的層級走；
+                      但若祖先元素未設置層級時，就依本身的層級走，故有可能發生祖先元素未設置
+                      層級時被A元素覆蓋，但后代元素層級比覆蓋祖先元素的A元素高，后代元素仍會
+                      位於A元素之上。
+
+             */
+
+            .box1{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                position: absolute;
+            }
+
+            .box2{
+                width: 100px;
+                height: 100px;
+                background-color: tomato;
+                position: absolute;
+                top:120px;
+                left: 50px;
+            }
+
+            .box3{
+                width: 100px;
+                height: 100px;
+                background-color: blanchedalmond;
+                position: absolute;
+                top:170px;
+                left: 100px;
+            }
+
+            .box4{
+                width: 50px;
+                height: 50px;
+                background-color: pink;
+            }
+
+            .box5{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                position: absolute;
+                z-index: 3;
+            }
+
+            .box6{
+                width: 100px;
+                height: 100px;
+                background-color: tomato;
+                position: absolute;
+                top:440px;
+                left: 50px;
+            }
+
+            .box7{
+                width: 100px;
+                height: 100px;
+                background-color: blanchedalmond;
+                position: absolute;
+                top:490px;
+                left: 100px;
+            }
+
+            .box8{
+                width: 50px;
+                height: 50px;
+                background-color: pink;
+                position: absolute;
+            }
+
+            .box9{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                position: absolute;
+            }
+
+            .box10{
+                width: 100px;
+                height: 100px;
+                background-color: tomato;
+                position: absolute;
+                top:740px;
+                left: 50px;
+                z-index: 2;
+            }
+
+            .box11{
+                width: 100px;
+                height: 100px;
+                background-color: blanchedalmond;
+                position: absolute;
+                top:790px;
+                left: 100px;
+                z-index: 1;
+            }
+
+            .box12{
+                width: 50px;
+                height: 50px;
+                background-color: pink;
+                position: absolute;
+                z-index: 3;
+            }
+
+            .box13{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                position: absolute;
+            }
+
+            .box14{
+                width: 100px;
+                height: 100px;
+                background-color: tomato;
+                position: absolute;
+                top:1040px;
+                left: 50px;
+                z-index: 2;
+            }
+
+            .box15{
+                width: 100px;
+                height: 100px;
+                background-color: blanchedalmond;
+                position: absolute;
+                top:1070px;
+                left: 100px;
+            }
+
+            .box16{
+                width: 50px;
+                height: 50px;
+                background-color: pink;
+                position: absolute;
+                z-index: 3;
+            }
+
+
+        </style>
+
+    </head>
+    <body>
+        <br />
+        <p>● box1、box2、box3 設置絕對定位後，元素的層級提高一層，故會使得元素互相覆蓋</p>
+        <br />
+        <p>層級順序：box4=box3 > box2 > box1 。</p>
+        <br />
+        <div class="box1">1</div>
+        <div class="box2">2</div>
+        <div class="box3">3
+            <div class="box4">4</div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <hr />
+        <br />
+        <p>● 使用 z-index屬性設置層級優先：如box1設置層級1、其它未設置。</p>
+        <br />
+        <p>層級順序：box1 > box4=box3 > box2。</p>
+        <br />
+        <div class="box5">1</div>
+        <div class="box6">2</div>
+        <div class="box7">3
+            <div class="box8">4</div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <hr />
+        <p>● 使用 z-index屬性設置層級優先：box2設置層級值為 2，box3設置層級值為 1，box4設置層級3，box1未設置，因box3為box4的父元素，故依box3的層級為主。</p>
+        <br />
+        <p>層級順序：box2 > box3=box4 >box1。</p>
+        <br />
+        <div class="box9">1</div>
+        <div class="box10">2</div>
+        <div class="box11">3
+            <div class="box12">4</div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <hr />
+        <p>● 使用 z-index屬性設置層級優先：box2設置層級值為 2，box4設置層級3，box1、box3未設置，box3為box4的父元素，但box3未設置層級，故box4依自身層級為主。</p>
+        <br />
+        <p>層級順序：box4 > box2 > box3 > box1。</p>
+        <br />
+        <div class="box13">1</div>
+        <div class="box14">2</div>
+        <div class="box15">3
+            <div class="box16">4</div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <hr />
+
+    </body>
+</html>

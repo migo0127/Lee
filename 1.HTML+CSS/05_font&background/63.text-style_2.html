@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>文本樣式：文本修飾</title>
+        <style>
+        /*
+            text-decoration：設置文本修飾
+                - 可選值：
+                    1.none：什麼修飾都沒有，通常用於去除a標籤的底線。
+                    2.underline：下底線。
+                    3.overline：上底線。
+                    4.line-through：刪除線。
+
+            ※ text-decoration 可以同時設置底線、線顏色、線條樣式，但目前IE不支援，故
+               暫時不用，待後續支援後再使用。
+
+               EX： text-decoration:underline red dotted;
+
+        */
+        .box1{
+            font-size:30px;
+            text-decoration:underline;
+            /* text-decoration:overline; */
+            /* text-decoration:line-through; */
+            /* text-decoration:none; */
+
+            /* 最新功能，可同時設置底線、線顏色、線樣式等，但IE目前不支援。
+            text-decoration:red underline dotted;
+            */
+        }
+
+        /*
+            white-space：設置網頁如何處理文本中的「空白」。
+                - 可選值：
+                    1.normal：默認值，正常。
+                    2.nowrap：不換行，即一整行輸滿後自動跳下一行(未段行)時，強制不換行，故文字會一直書寫
+                              ，變成有滾動軸的方式。
+                    3.pre：保留空白，即依編碼時的樣子顯示。
+        */
+        .box2{
+            /* white-space:normal; */
+            /* white-space:nowrap; */
+            white-space:pre;
+        }
+
+        /*
+        ※※ 當某一行文字超過頁面可顯示的字數時，希望能用「...」省略方式來表示時，必須要設置以下四個屬性：
+            1.width 設置文本寬度 (顯示的頁面大小)。
+            2.white-nowrap：行文不換行，保持一行。
+            3.overflow:hodden 裁剪溢出的文字。
+            4.text-overflow:ellipsis 將溢出的文本文字依「...」來顯示。
+        */
+        .box3{
+            width: 600px;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            /*
+                text-overflow：
+                    - 可選值 (主要為以下兩種)：
+                        1.clipe：將超出範圍的字串切斷。
+                        2.ellipsis：用點點點(...)來表示被切斷的字串 (最常用)。
+            */
+        }
+
+
+
+        </style>
+
+    </head>
+    <body>
+
+        <div class="box1">今天天氣真不錯</div>
+        <hr />
+        <div class="box2">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+                pre 保留空白了嗎?
+                    pre 保留空白了嗎?
+        </div>
+        <hr />
+        <div class="box3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </div>
+        <hr />
+
+    </body>
+</html>

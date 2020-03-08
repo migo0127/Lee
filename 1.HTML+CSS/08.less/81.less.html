@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>less：預處理語言</title>
+        <style>
+            /*
+                css原生也支持變量的設置，但目前的瀏覽器相融性不好。
+                 - 語法：
+                    --變量名:值;
+
+                EX：
+                    ● 設置color的變量：
+                        --color:#bfa;
+
+                    ● 引用color變量：
+                        var(--color);
+
+                calc()：為計算函數，瀏覽器會自動計算()中的值，目前的瀏覽器相融性不好。
+                    - 語法：
+                        cale(200px*2);
+                        cale(200px/2);
+            */
+
+            /*
+                box1的背景色、box2的文字顏色、box3的邊框顏色都是 #bfa，故可以使用變量來引入。
+            */
+
+            html{
+                /* 將同一種顏色設置變量 */
+                --color:#bfa;
+                /* 將同一種長度進行變量 */
+                --lenght:100px;
+            }
+
+            div{
+                margin: 10px;
+            }
+
+            .box1{
+                width: 100px;
+                height:var(--lenght);
+                /* background-color: #bfa; */
+                /* 改引入color變量 */
+                background-color: var(--color);
+            }
+
+            .box2{
+                width: 100px;
+                height: var(--lenght);
+                /* color: #bfa; */
+                color: var(--color);
+            }
+
+            .box3{
+                width: 100px;
+                height: var(--lenght);
+                /* border:5px #bfa solid; */
+                border:5px var(--color) solid;
+            }
+
+            .box4{
+                width: calc(500px/2);
+                height: 100px;
+                background-color: pink;
+            }
+
+            .box5{
+                width: 250px;
+                height: calc(50px*2);
+                background-color:palegoldenrod;
+            }
+
+
+        </style>
+    </head>
+    <body>
+
+        <!--
+            less：是一門css的預處理語言。
+                - 是一個css的增強版，通過less可以編寫更少的代碼實現更強大的樣式。
+                - 在less中添加了許多的新特性：
+                    像是對「變量的支持」、對「mixing的支持」...等。
+                    ※ CSS本身就支持變量，但目前的瀏覽器相融性不好，故少用。
+                - less的語法大體上和css一致，但是less中增添了許多對css的擴展，所以瀏覽器無法直接執行
+                  less代碼，要執行必須先將less轉換(編譯)為css，然後再由瀏覽器執行。
+            EX：
+                ● 原CSS寫法：
+                    div{
+                        width:100px;
+                    }
+                         ↑ 轉換(編譯)
+                ● less寫法：
+                    div
+                        width 100px
+
+                - less用法：
+                    在css資料夾中創建一個 style.less 檔案，之後使用less語法寫入css樣式，將會自動生成一個
+                    style.css 檔案，可互相對照其差異。
+                    <link>不可直接引入less檔案，仍要引入css檔案。
+         -->
+
+         <div class="box1">b1：背景顏色</div>
+         <div class="box2">b2：文字顏色</div>
+         <div class="box3">b3：邊框顏色</div>
+         <div class="box4">b4：width: calc(500px/2);</div>
+         <div class="box5">b5：height: calc(50px*2);</div>
+
+    </body>
+</html>

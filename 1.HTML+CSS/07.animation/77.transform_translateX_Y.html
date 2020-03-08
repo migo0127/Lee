@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>變形、轉變 (transform)：平移</title>
+        <style>
+        /*
+            transform (變形、轉變)：就是指通過CSS來改變元素的形狀或位置。
+                - 變形(轉變)不會影響到頁面的布局，也不會脫離文檔流。
+                 (不像 margin 會影響其他元素位置的情況)。
+                - transform 用來設置元素的變形效果：
+                    - XYZ方向：如左手定律(未旋轉方向的情況下)，手掌攤平，X表大姆朝向左，Y表食指朝向前，
+                      Z表中指向上(在網頁中表示凸出螢幕的感覺)。
+                    - 平移：
+                        1.transform:translateX()：沿著X軸方向平移。
+                        2.transform:translateY()：沿著Y軸方向平移。
+                        3.transform:translateZ()：沿著Z軸方向平移。
+                            - 平移的值是指相對於自身元素的大小計算，可使用 px、%。
+                            - 可同時寫多個屬性，用「空格」隔開。
+                                EX：transform:translateX() translateY();
+                    - z軸平移：此處先提供一個參考方式，當鼠標滑入時，其外框有像浮動的感覺，其他後續補充。
+        */
+            .box1{
+                background-color: #bfa;
+
+                /* 元素的定位位置為其父包含塊(根元素) */
+                position: absolute;
+                /* 左50%、上50% 使元素位於網頁的中間偏右偏下，元素的(0,0)會貼其中線，故本身內容大小是偏移的 */
+                left:50%;
+                top:50%;
+                /* 透過變形將元素的中心點(●)對齊居中位置 */
+                transform: translateX(-50%) translateY(-50%);
+
+                /*
+                    ※※ 當元素「有指定的寬高」時，要使元素於頁面中居中，可使用定位(position)來完成。
+                    - 語法：
+                        width: 200px;
+                        height: 200px;
+                        position:absolute;
+                        left:0;
+                        right:0;
+                        top:0;
+                        bottom:0;
+                        margin:auto;
+
+                    ※※ 當元素「未有指定的寬高」時，其寬高是由內容撐開時，無法直接使用定位(position)來
+                         完成，而是要加上其他方式來完成：
+
+                            方法一：vertical-align: middle; 及 text-align: center;
+                            方法二：position 及 transform 變形，一起來完成。
+                 */
+            }
+
+            .box2 , .box3 , .box4{
+                float: left;
+                width: 230px;
+                height: 300px;
+                background-color: pink;
+                margin-left: 20px;
+            }
+
+            /* 將box2設置滑鼠移入時，其框會有飄浮浮動的效果：transition(過渡) 及 transform(變形)。 */
+            .box2:hover{
+                transform: translateY(-4px);
+                box-shadow: 0 0 10px rgba(0,0,0,.3);
+                transition:all 0.3s;
+            }
+
+            /* 將box2設置滑鼠移入時，其框會有飄浮浮動的效果：僅設置 transform(變形)。 */
+            .box3:hover{
+                transform: translateY(-4px);
+                box-shadow: 0 0 10px rgba(0,0,0,.5);
+            }
+
+            .box5 ,.box6 ,.box7{
+                width: 200px;
+                height: 200px;
+                margin-bottom:10px;
+            }
+
+            .box5{
+                background-color: #bfa;
+            }
+
+            .box6{
+                background-color: orange;
+                transform: translateX(100px) translateY(100px);
+            }
+
+            .box7{
+                background-color:skyblue;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <h2>1.未指定寬高，其寬高由內容撐開；透過 position 及 transform 來使 「●」對齊網頁的居中位置，可拉動視窗大小來查看。</h2>
+        <div class="box1">a●a</div>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <hr />
+        <h2>2.使用 transition(過渡) 及 transform(變形) 的方式，使以下廣告框在滑鼠移入時，有一種浮動的效果</h2>
+        <div class="box2">b2：設置transition(過渡) 及 transform(變形)</div>
+        <div class="box3">b3：僅設置 transform(變形)，未設置transition(過渡)</div>
+        <div class="box4">b4：都未設置</div>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <hr />
+        <h2>3.transform(變形/轉變)：不會影響到其它元素，也不會脫離文檔流。</h2>
+        <div class="box5">b5</div>
+        <div class="box6">b6：transform: translateX(100px) translateY(100px)</div>
+        <div class="box7">b7</div>
+
+    </body>
+</html>

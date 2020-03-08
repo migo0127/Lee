@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>線性漸變</title>
+
+        <link rel="stylesheet" href="../source/css/reset.css">
+
+        <style>
+
+            .box1{
+                width: 200px;
+                height: 200px;
+                /*
+                    通過線性漸變可以設置一些複雜的背景顏色，可以實現從一個顏色向其他顏色過度的效果。
+                    ※※ 漸變是另類的一種圖片，需要通過background-image來設置。
+
+                    線性漸變：顏色沿著一條直線發生變化。
+                        - 語法：linear-gradient()
+
+                        - linear-gradient(red,orange)：紅色在開頭，橘色在結尾，中間是過渡區域。
+                        - 線性漸變的開頭，我們可以指定一個漸變的方向。
+                            - 可選值：
+                                1.to left：向左漸變。
+                                2.to right：向左漸變
+                                3.to bottom：默認值。
+                                4.to top：向上漸變。
+                                5.xx deg：deg表示"度數"，EX：45deg，從45度開始漸變。
+                                6.x turn：turn表示"圈"，EX：0.25turn，從左向右漸變。
+                        - 漸變可以同時指定多個顏色，多個顏色默默情況下平均分布，也可以手動指定漸變
+                          的分布情況。
+                */
+                /* background-image: linear-gradient(red,orange); */
+                /* background-image:linear-gradient(to left,red,orange,yellow); */
+                /* background-image:linear-gradient(45deg,red,orange,yellow,green,blue); */
+                /* background-image: linear-gradient(.25turn,red,orange,yellow,green); */
+                background-image: linear-gradient(red 40px,orange 70px,yellow 150px, green 180px);
+            }
+
+            .box2{
+                width: 200px;
+                height: 200px;
+
+                /*
+                    repeating-linear-gradient()：可以平鋪的線性漸變。
+                    當設置 repeating-linear-gradient() 後，再設置 background-repeat：no-repeat;是無效的。
+                */
+                background-image: repeating-linear-gradient(to top,red 0px,green 50px);
+                background-repeat:no-repeat;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="box1"></div>
+        <hr />
+        <br />
+        <div class="box2"></div>
+
+    </body>
+</html>

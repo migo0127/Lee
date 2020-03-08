@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8">
+
+    <title>關係選擇器</title>
+
+    <style>
+    
+        /* 
+        ※ 兄弟元素選擇器(2種)：
+
+            1.選擇下一個兄弟：
+                - 語法：前一個兄 + 相連的下一個弟 (間隔開的不算)
+                - 例子：p + span{}
+
+            2.選擇下邊所有兄弟：
+                - 語法：兄 ~ 下面所有的弟
+                - 例子：p ~ span{}、div.red > p ~ span{}
+        */
+        span + p{
+           color:magenta
+        }
+
+        span~p{
+            font-size: 30px;
+        }
+
+        p~span{
+            background-color:yellowgreen;
+        }
+
+        p~p{
+            text-decoration: underline;
+        }
+
+        span~span{
+            font-style: italic;
+        }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <!-- 
+        ※ 關係元素(5種)：
+
+        1.父元素：
+            - 直接包含子元素的元素叫做父元素
+        2.子元素：
+            - 直接被父元素包含的元素是子元素
+        3.祖先元素：
+            - 直接或間接包含后代元素的元素叫做祖先元素
+            - 一個元素的父元素也是它的祖先元素
+        4.后代元素：
+            - 直接或間接被祖父元素包含的元素叫做后代元素
+            - 子元素也是后代元素
+        5.兄弟元素：
+            - 擁有相同父元素的元素是兄弟元素
+    -->
+    
+    <div>
+        涼風有信，<br /><br />
+        <span>秋月無邊，<br /><br />
+            <p>
+                虧我思嬌的情緒好比度日如年，<br /><br />
+                <span>雖然我不是玉樹臨風，<br /><br />
+                    <q>但我有廣闊的胸襟加強勁的臂彎</q>
+                </span>
+            </p>
+        </span>
+        <p>十個老婆</p>
+        <p>鹿鼎記</p>
+        <span>偉小寶</span>
+        <p>好看</p>
+        <span>打call</span>        
+    </div>
+
+  </body>
+
+</html>

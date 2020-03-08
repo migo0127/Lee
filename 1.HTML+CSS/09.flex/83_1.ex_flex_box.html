@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>彈性盒(flex)的例子</title>
+        <style>
+
+            *{
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            ul{
+                margin: 10px 30px;
+            }
+
+            ul.box2{
+                width: 400px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+            }
+
+            li{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                text-align: center;
+                line-height: 100px;
+                font-size: 34px;
+            }
+
+            li:nth-child(2){
+                background-color:orange;
+            }
+
+            li:nth-child(3){
+                background-color:skyblue;
+            }
+
+            ul.box3{
+                width: 400px;
+                height: 100px;
+                border: 5px solid red;
+                display: inline-flex;
+            }
+
+            ul.box4{
+                width: 400px;
+                height: 100px;
+                border: 5px solid red;
+                display: inline-flex;
+            }
+
+            ul.box5{
+                width: 400px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+            }
+
+            .box5 > li{
+                flex-grow:1;
+            }
+
+            ul.box6{
+                width: 400px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+            }
+
+            .box6 > li{
+                flex-grow:0;
+            }
+
+            .box6 > li:nth-child(2){
+                flex-grow:1;
+            }
+
+            .box6 > li:nth-child(3){
+                flex-grow:2;
+            }
+
+            ul.box7{
+                width: 200px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+            }
+
+            ul.box8{
+                width: 200px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+            }
+
+            ul.box8 > li{
+                flex-shrink:0;
+            }
+
+            ul.box9{
+                width: 400px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+                flex-direction:row;
+            }
+
+            ul.box10{
+                width: 400px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+                flex-direction:row-reverse;
+            }
+
+            ul.box11{
+                width: 400px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+                flex-direction:column;
+            }
+
+            ul.box12{
+                width: 400px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+                flex-direction:column-reverse;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <h2>1彈性盒：未設置flex vs 塊級彈性盒 vs 行內彈性盒。</h2>
+        <h3> 1-1.b1：未轉換成flex</h3>
+        <ul class="box1">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <h3> 1-1.b2：轉換成塊級彈性容器 display:flex; 會獨占一行(對照aaa)。</h3>
+        <ul class="box2">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        aaa
+        <h3> 1-1.b3：轉換成行內彈性容器 display:inline-flex;(對照aaa)。</h3>
+        <ul class="box3">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        aaa
+        <hr />
+        <h2>2.彈性盒：(子元素)彈性元素寬度(100px*3，共300px)，而(父元素)彈性容器寬度(400px)有多餘時，</h2>
+        <h2>設置flex-grow:1; 三個等比例伸展，此時(子元素)彈性元素會忽略本身原設置的寬度(原100px)。</h2>
+        <p>b4：flex-grow:0;(默認值，不伸展)，彈性元素寬度 100px</p>
+        <ul class="box4">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <p>b5：設置「彈性元素的屬性」flex-grow:1;後，彈性元素會依彈性容器多餘的空間進行等比例伸展</p>
+        <ul class="box5">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <p>b6：設置不同的「彈性元素的屬性」flex-grow:0 1 2;後，彈性元素會依彈性容器多餘的空間進行分配的比例伸展</p>
+        <ul class="box6">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <hr />
+        <h2>3.彈性盒：(子元素)彈性元素寬度(100px*3，共300px)，而(父元素)彈性容器寬度(200px)少餘時，</h2>
+        <h2>設置「彈性元素的屬性」flex-shrink:1; 三個等比例收縮，此時(子元素)彈性元素會忽略本身原設置的寬度(原100px)。</h2>
+        <p>b7：flex-shrink:1;(默認值，收縮)，彈性元素會依彈性容器的寬度進行等比例收縮</p>
+        <ul class="box7">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <p>b7：flex-shrink:0;(不收縮)，彈性元素會維持自身寬度</p>
+        <ul class="box8">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <hr />
+        <h2>4.彈性盒：設置彈性容器的屬性</h2>
+        <p>b9：設置彈性容器的屬性 flex-direction:row; 默認值，從左向右，排序方式如 float:left </p>
+        <ul class="box9">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <p>b10：設置彈性容器的屬性 flex-direction:row-reverse; 從右向左，排序方式如 float:right</p>
+        <ul class="box10">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <p>b9：設置彈性容器的屬性 flex-direction:row; (從上到下)</p>
+        <ul class="box11">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+        <p>b9：設置彈性容器的屬性 flex-direction:row; (從下向上)</p>
+        <ul class="box12">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+
+    </body>
+</html>

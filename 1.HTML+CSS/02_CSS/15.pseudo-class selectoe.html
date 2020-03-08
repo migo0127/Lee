@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+
+    <title>偽類選擇器 pseudo-class selectoe</title>
+
+    <style>
+    
+    /* 
+        偽類選擇器(不存在的類、特殊的類)：意似 指定元素在某個特殊狀態下
+            - 用來描述一個元素的特殊狀態
+                EX：第一個子元素(不管新增；減少都為第一個)、被點擊的元素、鼠標移入的元素
+            - 偽類一般情況下都是使用「：」開頭 => 某標籤:偽類
+            
+                1. :first-child 表示指定標籤其父標籤中的所有標籤的第一個子元素
+                2. :last-child 表示指定標籤其父標籤中的所有標籤的最後一個子元素
+                3. :nth-child() 表示指定標籤其父標籤中的所有標籤的第n個子元素，(寫入某個特殊值)
+                    - 特殊值：
+                        1.(n)：表示選中第n個，n的範圍為0到正無窮
+                        2.(2n) 或 (even)：表示選中偶數位的元素
+                        3.(2n+1) 或 (odd)：表示選中奇數位元素
+
+            ※ 以上1~3偽類都是根據「父標籤下所有的子元素」進行排序，如下例說明
+
+            EX：ul>li:first-child{}
+                <ul>
+                    <span></span>
+                    <li></li>
+                </ul>
+            
+            → 解：此時依所有子元素進行排序，故ul的第一個子元素為span，非li，而是span，語法不會應用，
+                  但其他 :last-child 及 :nth-child() 則一樣會進行排序應用
+    */
+        ul>li:first-child{
+            color: red;
+        }
+     
+        ul>li:nth-child(2n){
+            color:skyblue;
+        }
+        
+        ul>li:last-child{
+            color:orange;
+        }
+
+    /*
+                4. :first-of-type 表示指定標籤其父標籤中的同類型標籤內的第一個子元素
+                5. :last-of-type 表示指定標籤其父標籤中的同類型標籤內的最後一個子元素
+                6. :nth-of-type()  表示指定標籤其父標籤中的同類型標籤內的第n個子元素
+            
+            ※ 以上4~6偽類功能和1~3類似，不同點再於4~6是根據「父元素下指定的同類型元素」中進行排序
+
+            EX：ol>li:first-of-type{}
+                <ol>
+                    <span></span>
+                    <li></li>
+                </ol>
+    */
+        ol>li:first-of-type{
+            background-color: hotpink;
+        }
+
+        ol>li:last-of-type{
+            font-style: italic;
+        }
+
+        ol>li:nth-of-type(even){
+            color:lawngreen;
+        }
+        
+    /*
+            → 解：此時依同類型子元素進行排序，故ol指定的第一個子元素為li，非span，故語法會應用
+
+                7. :not() 否定偽類，意似 除了()，其它都應用
+                    - 將符合條件的元素從選擇器中去除
+    */
+        ul>li:not(:nth-child(4)){
+            font-size: 30px;
+        }
+
+        ol>li:not(:first-of-type){
+            text-decoration: line-through;
+        }
+
+    /* 
+                8. :empty 指「空元素」，表示指定標籤其父標籤中的同類型標籤沒有任何其他文字或空格，即空值
+                    
+                    EX：<div>
+                            <p>123</p>
+                            <p> </p>
+                            <p></p>
+                        </div>
+
+                    → 解：
+                        p:empty{
+                            width: 100px;
+                            height: 20px;
+                            background-color:red;
+                        } 
+                        
+                        => 會選中 <p></p>，再此區產生一個紅色背景色大小的框框
+
+                9. :only-child 表示指定標籤其父元素中的所有標籤中僅有唯一一個指定的子元素
+
+                    EX：<div>
+                            <span>1
+                                <p>2</p>
+                                <span>3</span>
+                            </span>
+                            <span>4</span>
+                            <span>5
+                                <p>6</p>
+                                <span>7</span>
+                                <span>8</span>
+                            </span>
+                            <p>9
+                                <span>10</span>
+                            </p>
+                            </span>
+                            <span>11
+                                <span>12</span>
+                            </span>
+                        </div>
+
+                        → 解：
+                            span:only-type{}，選中 10、12，此偽類是需所有元素進行排序，而3的
+                            父元素有另一個p元素存在，故3不算唯一子元素
+
+                10. :onlt-of-type  表示指定標籤其父元素中的同類型標籤中僅有唯一一個指定的子元素
+
+                        EX：<div>
+                            <span>1
+                                <p>2</p>
+                                <span>3</span>
+                            </span>
+                            <span>4</span>
+                            <span>5
+                                <p>6</p>
+                                <span>7</span>
+                                <span>8</span>
+                            </span>
+                            <p>9
+                                <span>10</span>
+                            </p>
+                            </span>
+                            <span>11
+                                <span>12</span>
+                            </span>
+                        </div>
+
+                        → 解：
+                            span:only-type{}，選中 3、10、12，此偽類是同類型元素進行排序，而3的
+                            父元素只一個span元素存在，故3算唯一子元素，而7、8是2個span元素存在，
+                            故不算唯一子元素
+
+    */
+
+    </style>
+
+</head>
+<body>
+    <h2>● 偽類：所有子元素排序</h2>
+        <p>例一：<br />
+            1.第一個元素變紅色(√)<br />
+            2.偶數元素變天空藍色(√)<br />
+            3.最後一個元素變橘色(√)<br />
+            4.除了第四個元素外，其它放大至30px(√)<br />
+        </p>
+            <ul>
+                <li>第一個</li>
+                <li>第二個</li>
+                <li>第三個</li>   
+                <li>第四個</li>
+                <li>第五個</li>
+    </ul>
+    <hr />
+    <h2>● 偽類：所有子元素排序</h2>
+        <p>例二：含 span <br />
+            1.第一個元素變紅色(X)<br />
+            2.偶數元素變空藍色(√)<br />
+            3.最後一個元素橘色(√)<br />
+            4.除了第四個元素外，其它放大至30px(√)<br />
+        </p>
+            <ul>
+                <span>第0個為&lt;span&gt;</span>
+                <li>第一個</li>
+                <li>第二個</li>
+                <li>第三個</li>   
+                <li>第四個</li>
+                <li>第五個</li>
+    </ul>
+    <hr />
+    <h2>○ 偽類：同類型子元素排序</h2>
+        <p>例一：<br />
+            1.第一個元素背景色變粉色(√)<br />
+            2.偶數元素變萊姆綠(√)<br />
+            3.最後一個元素變斜體(√)<br />
+            4.除了第一個元素外，其它增加刪除線(√)<br />
+        </p>
+            <ol>
+                <li>第一個</li>
+                <li>第二個</li>
+                <li>第三個</li>   
+                <li>第四個</li>
+                <li>第五個</li>
+    </ol>
+    <hr />
+    <h2>○ 偽類：同類型子元素排序</h2>
+        <p>例一：含 span<br />
+            1.第一個元素背景色變粉色 (√)<br />
+            2.偶數元素變萊姆綠(√)<br />
+            3.最後一個元素變斜體(√)<br />
+            4.除了第四個元素外，其它增加刪除線(√)<br />
+        </p>  
+            <ol>
+                <span>第0個為&lt;span&gt;</span>
+                <li>第一個</li>
+                <li>第二個</li>
+                <li>第三個</li>   
+                <li>第四個</li>
+                <li>第五個</li>
+            </ol>
+    <hr />
+
+</body>
+</html>

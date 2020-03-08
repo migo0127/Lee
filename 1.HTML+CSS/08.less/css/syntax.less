@@ -1,0 +1,71 @@
+// 為less中的單行註釋，註釋的內容不會被解析到.css中，less中通常使用這個。
+
+/*
+    為css中的多行註釋，註釋的內容會被解析到.css中。
+*/
+
+// less語法在結構上較為清晰 ↓ ，可與.css對比。
+.box1{
+    background-color: #bfa;
+
+    .box2{
+        background-color: orange;
+
+        .box3{
+            background-color: orangered;
+        }
+    }
+
+    .box4{
+        background-color: orchid;
+    }
+}
+
+// less的變量：
+//   - 變量：在變量中可以存儲(賦予)任意一個值，並且再我們需要時，可以任意修改變量中的值。
+//   - 語法：
+//      @變量名:值;
+@le:200px;
+@col:#bfa;
+
+// 變量中亦可存儲一個類(class)，但再不同的引入時有不同的寫法，需留意。
+// 設置類的變量時，於css中不會解析(看不到 @cla6:box6;)，但引入時會解析(看的到)。
+@cla6:box6; // 此行在css中看不到
+
+.box5{
+    width: @le;
+    background-color: @col;
+}
+
+// 作為類名，或者一部份值使用時必須以 @{變量名} 的形式引入，不同的引入時有不同的寫法，需留意。
+.@{cla6}{
+    width: @le;
+    background-color: @col;
+
+    // url()引入變量類名時，需加""，再css中才是正確的類名路徑。
+    background-image: url("@{cla6}/1.png");
+}
+
+// 變量發生重名時，會優先使用比較近前面或最近後面(優先)的變量為準
+@d:200px;
+@d:300px;
+
+div{
+    @d:115px;
+    width: @d;
+    @d:200px;
+    height: @e;
+}
+
+// 可以在變量聲明前就先使用變量，但此法不建議
+@e:335px;
+
+// 最新版本用法：$屬性名，表示套用該屬性的值。 (目前載的easy-less版本過低，未支援此法)
+div{
+    width: 300px;
+    height: $width;
+}
+
+span{
+    color: average(red,yellow);
+}

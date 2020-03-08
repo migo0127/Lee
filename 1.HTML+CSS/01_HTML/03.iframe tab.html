@@ -1,0 +1,37 @@
+<!doctype html>
+
+<html>
+
+  <head>
+  
+    <!-- 註解 -->
+    <meta charset="UTF-8" />
+	<title>iframe標籤</title>
+  </head>
+  
+  <!-- 註解 -->
+  <body>
+  
+   <!--
+	  使用內聯框框可以引入一個外部頁面
+	  <iframe src=""></iframe>
+	  
+	  搭配屬性：
+	  src: 只向一個外部頁面路徑
+	  width
+	  height
+	  frameborder：邊框的顯示，0 = 無邊框，1 = 有邊框
+	  name：可以為內聯框架指定一個name屬性，將a標籤(超鏈接)內容套入內聯框架頁面中顯示
+	  
+	  ※ 現實中不推荐使用，因內聯框架的內容不會被搜索引擎檢索，除特殊情況 EX：內網，不需讓搜索引擎檢索時
+	  -->
+	  <iframe src="https://www.douban.com/group/648493/?ref=sidebar" width="400" height="300" frameborder="0"></iframe>
+	  <br />
+	  <iframe src="02.img tab.html" name="02" frameborder="1"></iframe>
+	  <br />
+	  <a href="01.html Lean.html" target="XX">我是一個內聯框架超鏈接</a>
+	  <br />
+	  <iframe src="06.CSS Lean.html" name="XX" frameborder="0"></iframe>
+	  	
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>偽元素選擇器 pseudo-element selecto</title>
+
+        <style>
+        
+        /* 
+        ※ 偽元素：表示頁面中一些特殊的並不真實存在的元素(意似 不存在的特殊位置、特殊部份、特殊區塊)，
+           使用「::」開頭 => 某標籤::偽元素。
+
+            1. ::first-letter 表示指定標籤的第一個字母的特殊位置，不管文字增加減少修改，效果僅會應用
+                在第一個字母位置上。
+
+            2. ::first-line 表示指定標籤的第一行(整行)的位置，非文字段落的第一行，不管頁面縮小放大
+                ，或文字增加減少，效果僅會應用在第一行(整行)的位置上。
+
+            3. ::selection 表示鼠標選取的內容區塊。
+
+       ※※ 4. ::before 表示指定標籤開始前面的特殊位置(區塊)，必須結合 content(內容)屬性來使用，
+                 最常使用，後序教學再補充說明。
+
+       ※※ 5. ::after 表示指定標籤結尾後面的特殊位置(空間)，必須結合 content(內容)屬性來使用，
+                 最常使用，後序教學再補充說明。
+                
+                EX：<p>Hellow, how are you?</p>
+
+                → 解：
+                    p::before{content:"「"}，此時的::before表示<p>與Hellow中間的特殊位置，
+                    看似不存在的空間會加上不存在的元素「。
+
+                    p::after{content:"」"}，此時的::before表示</p>與?中間的特殊位置，看似不
+                    存在的空間會加上不存在的元素 」。
+
+                    → 「Hellow, how are you?」
+
+                    ※ html的 <q></q> 為前後加上""，有些類似於 ::before、::after 用法。
+        */
+            p::first-letter{
+                font-size: 50px;
+            }
+
+            p::first-line{
+                background-color:gray;
+            }
+
+            p::selection{
+                color:greenyellow;
+                background-color: indigo;
+            }
+
+            div::before{
+                content:"『";
+            }
+
+            div::after{
+                content:"』";
+            }
+
+        </style>
+
+    </head>
+    <body>
+        
+        <div>Hellow, how are you?</div><br />
+
+        <q>I'm fine. Thank you.</q>
+
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+    
+
+    </body>
+</html>

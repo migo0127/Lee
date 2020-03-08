@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>強制轉換(coercion)：String</title>
+    <script>
+
+        /*
+
+            強制轉換(coercion)：
+                - 指將一個數據類型強制轉換為其他的數據類型。
+                - 類型轉換主要指，將其他的數據類型轉換為「String、Number、Boolean」。
+                - 轉換為「Null、Undefined」沒意義，可轉但通常不做轉換。
+        */
+
+        /*
+
+            將其他的數據類型轉換為String (注意第一個字母大寫)：
+                方法一：變量名.toSring()
+                    - 調用被轉換數據類型的toSring()方法。
+                        - 語法：
+                            要被轉換的數據類型變量名.toString();
+
+                    - 該方法不會影響到原變量的類型，它會將轉換的結果返回，故需在使用一個
+                      變量保存返回的賦值。
+                    - 注意：null和undefined這兩個值沒有toString()方法，如果調用會報錯。
+
+                方法二：String()
+                    - 調用String()函數，並將要被轉換的數據作為參數傳遞給函數。
+                    - 使用String()函數做強制轉換類型時，也會將轉換的結果返回，故需在使用一個
+                      變量保存返回的賦值。
+                    - 注意：使用String()函數做強制轉換類型時，對於 Number和Boolean實施上就是
+                      toString()方法，但是對於 null 和 undefined 就不是調用toString()方法，
+                      而是會將 null 直接轉換為 "null" ， undefined 轉換為 "undefined"，不會報錯。
+        */
+
+        // 方法一：要被轉換的數據類型變量名.toString();
+
+        var a = 123;
+        // 檢查原變量的類型為number
+        console.log(typeof a);
+        console.log(a);
+
+        // 強制轉換a為字符串，但未將返回值重新賦予給其他變量，即無效轉換
+        a.toString(); // 沒有將 a 轉換為字符串後的值賦予給其他變量，故a仍為原變量的類型(number)
+        console.log(typeof a);
+        console.log(a);
+
+        // 強制轉換a為字符串，並將返回值重新賦值給a 來保存強制轉換後的值與數據類型
+        a = a.toString();
+        console.log(typeof a);
+        console.log(a);
+
+        // 亦可新設一個新的聲明來保存返回的值與數據類型
+        var b = a.toString();
+        console.log(typeof b);
+        console.log(b);
+
+        // 強制轉換原變量值為 null 或 undefined，toSring()會報錯！
+        // var c = null;
+        // c = c.toString();
+        // console.log(typeof c);
+        // console.log(c);
+
+        // var d = undefined;
+        // d = d.toString();
+        // console.log(typeof bd);
+        // console.log(d);
+
+        // 方法二：使用String()函數來做強制轉換
+        var e = 123;
+        console.log(typeof e);
+        console.log(e);
+
+        // String()函數：強制轉換a為字符串，但未將返回值重新賦予給其他變量，即無效轉換
+        var f = 123;
+        String(f); // 沒有將 a 轉換為字符串後的值賦予給其他變量，故a仍為原變量的類型(number)
+        console.log(typeof f);
+        console.log(f);
+
+        // String()函數：強制轉換a為字符串，並將返回值重新賦值給 a 來保存強制轉換後的值與數據類型
+        var g = 123;
+        g = String(g);
+        console.log(typeof g);
+        console.log(g);
+
+        // 使用String()函數來強制轉換 null 與 undefined 值時，可正常轉換
+        var h = null;
+        h = String(h);
+        console.log(typeof h);
+        console.log(h); // 返回一個字符串 "null"
+
+        var i = undefined;
+        i = String(i);
+        console.log(typeof i);
+        console.log(i); // 返回一個字符串 "undefined"
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

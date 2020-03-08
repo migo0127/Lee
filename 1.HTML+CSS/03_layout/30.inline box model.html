@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>行內元素的盒模型</title>
+
+        <style>
+        /* 
+        ※ 行內元素的盒模型：
+            - 行內元素不支持設置寬度與高度，而是依其字體大小及多寡來決定。
+
+            - 行內元素可以設置padding，但是垂直方向的padding(上下)不會影響頁面的布局，
+              意似 本身不會向下移動或擠開下方元素，但padding的上下會有覆蓋效果。
+
+            - 行內元素可以設置border，垂直方向的border(上下)不會影響頁面的布局，但其
+              線條寬度會有覆蓋效果。
+              
+            - 行內元素可以設置margin，垂直方向的margin(上下)不會影響頁面的布局，
+              意似 本身不會向下移動或擠開下方元素，但margin的上下會有覆蓋效果，兩個行
+              內元素中間的外邊距是加總的距離，各100px，其兩者中間的外邊距為200px。
+        */
+
+        .sp1{
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+            padding:100px
+        }
+
+        .sp2{
+            background-color: cornflowerblue;
+            padding:5px;
+            border:black 30px solid;
+            margin:100px;
+        }
+
+        .sp3{
+            background-color: crimson;
+            margin:100px;
+        }
+
+        /* 
+            display屬性：用來設置元素顯示的類型
+                - 可選值：
+                    inline：將元素設置為 行內元素。
+                    block：將元素設置為 塊元素。
+                    inline-block：將元素設置為 行內塊元素(二合一，優缺點都有)。
+                        - 行內塊元素：即可以設置寬度和高度又不會讀占一行，但不推薦使用。
+                    table：將元素設置為 表格 (後續補充教學說明)。
+                    none：使原素不在頁面中顯示且不會占據頁面的位置。
+            
+            visibility屬性：用來設置元素的顯示狀態
+                - 可選值：
+                    visible：默認值，元素在頁面中正常顯示。
+                    hidden：元素在頁面中隱藏 不顯示，但依然占據頁面的位置。
+        */
+
+        .a1{
+            /* 將a1行內元素設置為塊元素，會獨占一行且可設置寬高(會應用) */
+            display: block;
+            
+            /* 將a1行內元素設置為行內塊元素，即可設置應用寬高又不會獨占一行 */
+            /* display: inline-block; */
+            
+            /* 將a1設置為不顯示，且不會占據網頁中的位置 */
+            /* display: none; */
+
+            width: 100px;
+            height: 100px;
+            background-color: darkgoldenrod;
+        }
+
+        .a2{
+            /* 將a2設置為隱藏，但 visibility: hidden; 仍會占據頁面的位置 */
+            visibility: hidden;
+            width: 100px;
+            height: 100px;
+            background-color:crimson;
+        }
+
+        .a3{
+            /* .a3、.a4、.a5 都設置為 display: inline-block;，因其具備行內元素及
+            塊元素的特點：
+                優：可應用寬高又不獨占一整行
+                缺：a3與a4間有空格的情況，所以兩者顯示間會有一個小空格
+                    a4與a5間為連續書寫方式，所以兩者顯示為連在一起的情況 */
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background-color:yellowgreen;
+        }
+
+        .a4{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background-color:blueviolet;
+        }
+
+        .a5{
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background-color:coral;
+        }
+
+        .box1{
+            width: 1600px;
+            height: 200px;
+            background-color: bisque;
+
+        }
+ 
+        </style>
+
+    </head>
+
+    <body>
+
+        <a class="a1" href="javasrcipt:;">超連結1</a>
+        <a class="a2" href="javasrcipt:;">超連結2</a>
+        <a class="a3" href="javasrcipt:;">超連結3</a>
+        <a class="a4" href="javasrcipt:;">超連結4</a><a class="a5" href="javasrcipt:;">超連結5</a>
+
+        <span class="sp1">我是span1，不支持設置寬高，是由內容撐開</span>
+        <span class="sp2">我是span2</span>
+        <span class="sp3">我是span3</span>
+
+        <div class="box1">我是div→塊元素</div>
+        
+    </body>
+    
+</html>

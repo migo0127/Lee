@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>定位(position)：絕對定位(absolute)</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+
+            /*
+                絕對定位：
+                    - 當元素的position屬性設置為 assolute時，則開啟了元素的絕對定位。
+                    - 絕對定位的特點：
+                        1.開啟絕對定位後，如果不設置偏移量，則「元素的位置」不會發生變化。
+                        2.開啟絕對定位後，元素會從文檔流脫離。
+                        3.絕對定位會改變元素的性質，行內變塊，塊的寬高被內容撐開(與float一樣)。
+                        4.絕對定位會使元素提升一個層級(層級後續會詳細說明)。
+                        5.絕對定位元素是相對於其包含塊來進行定位。
+
+                    - 包含塊( containing block):
+                        - 正常情況下：
+                            包含塊就是離當前元素最近的祖先元素。
+                            EX：
+                            <div1><div2></div2></div1> => div2的包含塊就是 div1。
+                            <div><span><em></em></span></div> => em的包含塊是 div，非span，因為span是行內元素。
+
+                        - 絕對定位的包含塊：
+                            - 包含塊就是離它最近並且有開啟了定位的祖先元素。
+                            - 如果所有的祖先元素都沒有開啟定位，則根元素<html>就是它的包含塊。
+                            ※ 補充說明 <html> 可以稱為 根元素、初始包含塊。
+
+
+            */
+
+            .box1{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            .box2{
+                width: 300px;
+                height: 300px;
+                background-color:blanchedalmond;
+            }
+
+            .box3{
+                width: 200px;
+                height: 200px;
+                background-color: skyblue;
+            }
+
+            .box4{
+                width: 100px;
+                height: 100px;
+                background-color: yellow;
+            }
+
+            .box5{
+                width: 100px;
+                height: 100px;
+                background-color: tomato;
+            }
+
+            .box6{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            .box7{
+                width: 300px;
+                height: 300px;
+                background-color:blanchedalmond;
+                position: relative;
+            }
+
+            .box8{
+                width: 200px;
+                height: 200px;
+                background-color: skyblue;
+                position: relative;
+            }
+
+            .box9{
+                width: 100px;
+                height: 100px;
+                background-color: yellow;
+                position: absolute;
+                left: 0;
+                top:0;
+            }
+
+            .box10{
+                width: 100px;
+                height: 100px;
+                background-color: tomato;
+            }
+
+            .box11{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            .box12{
+                width: 300px;
+                height: 300px;
+                background-color:blanchedalmond;
+                position: relative;
+            }
+
+            .box13{
+                width: 200px;
+                height: 200px;
+                background-color: skyblue;
+            }
+
+            .box14{
+                width: 100px;
+                height: 100px;
+                background-color: yellow;
+                position: absolute;
+                left: 0;
+                top:0;
+            }
+
+            .box15{
+                width: 100px;
+                height: 100px;
+                background-color: tomato;
+            }
+
+            .box10{
+                width: 100px;
+                height: 100px;
+                background-color: tomato;
+            }
+
+            .box16{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            .box17{
+                width: 300px;
+                height: 300px;
+                background-color:blanchedalmond;
+            }
+
+            .box18{
+                width: 200px;
+                height: 200px;
+                background-color: skyblue;
+            }
+
+            .box19{
+                width: 100px;
+                height: 100px;
+                background-color: yellow;
+                position: absolute;
+                left: 0;
+                top:0;
+            }
+
+            .box20{
+                width: 100px;
+                height: 100px;
+                background-color: tomato;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <h3>● box1~5 於文檔流中的位置：</h3>
+        <br />
+        <br />
+        <div class="box1">1</div>
+        <div class="box2">2
+            <div class="box3">3
+                <div class="box4">4</div>
+            </div>
+        </div>
+        <div class="box5">5</div>
+        <br />
+        <hr />
+        <br />
+        <h3>● 當box4開啟絕對定位時，離其最近的包含塊Box3、box4都有開啟定位(relative)，則box4會依離其最近有開定位的包含塊box3作為其定位位置(0,0)來移動</h3>
+        <br />
+        <br />
+        <div class="box6">1</div>
+        <div class="box7">2
+            <div class="box8">3
+                <div class="box9">4</div>
+            </div>
+        </div>
+        <div class="box10">5</div>
+        <br />
+        <hr />
+        <h3>● 當box4開啟絕對定位時，離其最近的包含塊Box3未開定位、box4有開啟定位(relative)，則box4會依離其最近有開定位的包含塊box4作為其定位位置(0,0)來移動</h3>
+        <br />
+        <br />
+        <div class="box11">1</div>
+        <div class="box12">2
+            <div class="box13">3
+                <div class="box14">4</div>
+            </div>
+        </div>
+        <div class="box15">5</div>
+        <br />
+        <hr />
+        <h3>● 當box4開啟絕對定位時，離其最近的包含塊Box3、box4都未開定位，則box4會依續往上找最近有開定位的包含塊作為其定位位置(0,0)來移動，若都沒有，則依html根元素作其定位位置(0,0)</h3>
+        <br />
+        <br />
+        <div class="box16">1</div>
+        <div class="box17">2
+            <div class="box18">3
+                <div class="box19">我定位了根元素，我是最後一個例子</div>
+            </div>
+        </div>
+        <div class="box20">5</div>
+        <br />
+        <hr />
+
+    </body>
+</html>

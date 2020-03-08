@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>表格的樣式</title>
+        <style>
+            table{
+                width:50%;
+                border:1px solid black;
+            }
+
+            td{
+                border: 1px solid black;
+                height: 40px;
+            }
+
+           .t1{
+               /*
+                border-spacing：指定邊框之間的距離，雖設置0px，實際上仍是各1px，
+                單元格與單元格之間的邊框仍是2px。
+
+                故若要使單元格與單元格之間的邊框重疊為1px，需使用 border-collapse。
+                border-collapse: 設置邊框的合併，如.box2
+               */
+                border-spacing:0px;
+            }
+
+            .t1 td{
+                /* 默認情況下元素在td中是垂直居中的，可以通過vertical-align來修改*/
+                vertical-align:middle;
+                text-align: center;
+            }
+
+            .t2{
+                border-collapse: collapse;
+            }
+
+            .t2 > tr:nth-child(odd){
+                /*
+                    如果表格中沒有使用tbody，而是直接使用tr，那麼瀏覽器會自動創建一個tbody，
+                    並且將 tr 全部放到 tbody中，故 tr 不是table的子元素，故此設置無效，有效
+                    設置為下方 t3 > tbody tr:nth-child(odd)。
+                */
+                background-color: #bfa;
+            }
+
+            .t3{
+                border-collapse: collapse;
+            }
+
+            .t3 > tbody tr:nth-child(odd){
+
+                background-color: #bfa;
+            }
+
+            .box1{
+                width: 300px;
+                height: 300px;
+                background-color: orange;
+
+                /*
+                display: table-cell：
+                將元素設置為單元格(轉換成td)則可使背景子元素的垂直居中透過 vertical-align 設置
+                ，與 td 的效果一樣，若未轉換，則子元素需透過 margin 置。
+                */
+                display: table-cell;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            .box2{
+                width: 100px;
+                height: 100px;
+                background-color: yellow;
+                /* margin:0 auto; */
+            }
+
+
+        </style>
+    </head>
+    <body>
+
+        <table class="t1">
+            <tr>border-spacing
+                <td>學號</td>
+                <td>姓名</td>
+                <td>性別</td>
+                <td>年齡</td>
+                <td>地址</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>孫悟空</td>
+                <td>男</td>
+                <td>18</td>
+                <td>花果山</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>豬八戒</td>
+                <td>男</td>
+                <td>28</td>
+                <td>高老庄</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>沙和尚</td>
+                <td>男</td>
+                <td>34</td>
+                <td>流沙河</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>唐僧</td>
+                <td>男</td>
+                <td>16</td>
+                <td>女人國</td>
+            </tr>
+        </table>
+        <br />
+        <hr />
+        <br />
+        <table class="t2">
+            <tr>border-collapse
+                <td>學號</td>
+                <td>姓名</td>
+                <td>性別</td>
+                <td>年齡</td>
+                <td>地址</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>孫悟空</td>
+                <td>男</td>
+                <td>18</td>
+                <td>花果山</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>豬八戒</td>
+                <td>男</td>
+                <td>28</td>
+                <td>高老庄</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>沙和尚</td>
+                <td>男</td>
+                <td>34</td>
+                <td>流沙河</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>唐僧</td>
+                <td>男</td>
+                <td>16</td>
+                <td>女人國</td>
+            </tr>
+        </table>
+        <br />
+        <hr />
+        <br />
+        <table class="t3">
+            <tr>tr是tbody的子元素，非table的子元素，雖未設置tbody，但瀏覽器會自動添加，並將tr歸入其下。
+                <td>學號</td>
+                <td>姓名</td>
+                <td>性別</td>
+                <td>年齡</td>
+                <td>地址</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>孫悟空</td>
+                <td>男</td>
+                <td>18</td>
+                <td>花果山</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>豬八戒</td>
+                <td>男</td>
+                <td>28</td>
+                <td>高老庄</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>沙和尚</td>
+                <td>男</td>
+                <td>34</td>
+                <td>流沙河</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>唐僧</td>
+                <td>男</td>
+                <td>16</td>
+                <td>女人國</td>
+            </tr>
+        </table>
+        <br />
+        <hr />
+        <br />
+        <div class="box1">bbb
+            <div class="box2"></div>
+        </div>aaa
+
+    </body>
+</html>

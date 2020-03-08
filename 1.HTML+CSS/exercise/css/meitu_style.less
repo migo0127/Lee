@@ -1,0 +1,182 @@
+// 統一設置超鏈接樣式
+a{
+    text-decoration: none;
+    color:#fff;
+}
+
+// 設置頂部的外部容器
+.top-wrapper{
+    // 背景色應該為黑色，此處設綠色以方便查看
+    background-color: #bfa;
+}
+
+// 設置頂部容器
+.top-bar{
+    max-width: 1200px;
+    height: 48px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    padding: 0 14px;
+}
+
+.left-menu{
+    height: 100%;
+
+    &:hover .menu-list{
+        display: block;
+    }
+
+    .menu-icon{
+        width: 18px;
+        height: 48px;
+        margin: 0 auto;
+        position: relative;
+
+        // 左側菜單的三條「—」，並通過定位位置
+        li{
+            width: 18px;
+            height: 1px;
+            background-color: #fff;
+            position: absolute;
+            transition: 0.7s;
+            transform-origin: left;
+        }
+
+        li:nth-child(1){
+            top:18px;
+        }
+
+        li:nth-child(2){
+            top:24px;
+        }
+
+        li:nth-child(3){
+            top:30px;
+        }
+
+        // 響應式網頁不會有hover，正常是使用js來實現，目前僅僅占替效果查看而已
+        // 透過動畫Z軸旋轉來達成X的效果
+        &:hover{
+            li:nth-child(1){
+                transform:rotateZ(41deg);
+            }
+
+            li:nth-child(2){
+                opacity: 0;
+            }
+
+            li:nth-child(3){
+                transform: rotateZ(-41deg);
+            }
+        }
+    }
+
+    .menu-list{
+        // 使其定位於根元素，並可將背景色撐滿整個屏幕
+        display: none;
+        position: absolute;
+        top: 48px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #000;
+        padding: 0 58px;
+        padding-top: 35px;
+
+        li{
+            line-height: 44px;
+            border-bottom: 1px solid #757474;
+
+            &:last-child a{
+                display: inline;
+            }
+        }
+
+        a{
+            font-size: 14px;
+            display: block;
+        }
+
+        span{
+            color: #fff;
+            font-size: 14px;
+            margin-left: 4px;
+        }
+    }
+}
+
+.logo{
+    a{
+        // 將文字"meitu美圖" 隱藏，使其不出現在頁面中，但搜索引擎可搜索到關鍵字
+        text-indent: -9999px;
+        // 轉換成塊元素
+        display: block;
+        background-image: url("../img/27/dff63979.sprites-index@2x.png");
+        // 此時的設計圖是2x(2倍)，所以原244px、64px都要除2
+        width: 122px;
+        height: 32px;
+        // 設計圖是800px X 800px，所以也要除2
+        background-size: 400px 400px;
+    }
+}
+
+// 設置響應式-媒體查詢
+@media only screen{
+
+    // 當屏幕大於768px時生效
+    @media (min-width:768px){
+
+        .left-menu{
+            // 位置變在中間
+            order:2;
+            // 設置伸展、收縮
+            flex:auto;
+
+            .menu-list{
+                // 設置為彈性盒
+                display: flex;
+                // 取消定位
+                position: static;
+                // 無內邊距
+                padding: 0;
+                // 設置空白空間分布情況
+                justify-content: space-around;
+
+                li{
+                    // 無下邊框
+                    border-bottom: none;
+                }
+
+                // 隱藏文字
+                span{
+                    display: none;
+                }
+
+            }
+
+            // 因響應式網頁不會有hover，所以此處單純不顯示框框而已
+            &:hover{
+                display: none;
+            }
+
+            .menu-icon{
+                // 隱藏三條線(—)
+                display: none;
+
+            }
+        }
+
+        .logo{
+            // 位置變在左邊
+            order:1;
+        }
+
+        .user-info{
+            // 位置變在右邊
+            order:3;
+        }
+    }
+}

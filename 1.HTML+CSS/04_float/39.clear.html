@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>clear屬性：清除高度塌陷(副作用更小)</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+
+            .box1{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            .box2{
+                width: 100px;
+                height: 100px;
+                background-color: orange;
+            }
+
+            .box3{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            .box4{
+                width: 100px;
+                height: 100px;
+                background-color: orange;
+            }
+
+            .box5{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            /*
+                由於box1的浮動導致box2位置往上移，也就是box2受到了box1浮動的影響，位置發生了改變。
+
+                如果我們不希望某個元素因其他元素浮動的影響而改變位置，可以通過clear屬性來清儲浮動
+                元素對當前元素所產生的影響。
+
+                clear屬性：
+                    - 作用：清除浮動元素對當前元素所產生的影響，如 位置移動。
+                    - 可選值：
+                        1.left：清除左側浮動元素對當前元素的影響。
+                        2.right：清除右側浮動元素對當前元素的影響。
+                        3.both：清除兩側中「影響最大」的那側，並非兩側都清除。
+
+                    - 原理：
+                        設置清除浮動以後，瀏覽器會自動為當前元素添加一個上外邊距，以使其位置不受其
+                        他元素的影響，此外邊距值不會顯示在開發者工具(F12)的圖中。
+            */
+
+            .box6{
+                width: 100px;
+                height: 100px;
+                background-color: orange;
+                clear:left;
+            }
+
+            .box7{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            .box8{
+                width: 150px;
+                height: 150px;
+                background-color: orange;
+            }
+
+            .box9{
+                width: 200px;
+                height: 200px;
+                background-color: blanchedalmond;
+            }
+
+            .box10{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box11{
+                width: 150px;
+                height: 150px;
+                background-color: orange;
+            }
+
+            .box12{
+                width: 200px;
+                height: 200px;
+                background-color: blanchedalmond;
+            }
+
+            .box13{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box14{
+                width: 150px;
+                height: 150px;
+                background-color: orange;
+                float:right;
+            }
+
+            .box15{
+                width: 200px;
+                height: 200px;
+                background-color: blanchedalmond;
+            }
+
+            .box16{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box17{
+                width: 150px;
+                height: 150px;
+                background-color: orange;
+                float:right;
+            }
+
+            .box18{
+                width: 200px;
+                height: 200px;
+                background-color: blanchedalmond;
+                clear:left;
+            }
+
+            .box19{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box20{
+                width: 150px;
+                height:150px;
+                background-color: orange;
+                float:right;
+            }
+
+            .box21{
+                width: 200px;
+                height: 200px;
+                background-color: blanchedalmond;
+                clear:right;
+            }
+
+            .box22{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box23{
+                width: 50px;
+                height:50px;
+                background-color: orange;
+                float:right;
+            }
+
+            .box24{
+                width: 200px;
+                height: 200px;
+                background-color: blanchedalmond;
+                clear:right;
+            }
+
+            .box25{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box26{
+                width: 50px;
+                height:50px;
+                background-color: orange;
+                float:right;
+            }
+
+            .box27{
+                width: 200px;
+                height: 200px;
+                background-color: blanchedalmond;
+                clear:both;
+            }
+
+            .box28{
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box29{
+                background-color: orange;
+                float:right;
+            }
+
+            .box30{
+                background-color: blanchedalmond;
+                clear:both;
+            }
+
+            .box31{
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box32{
+                background-color: orange;
+                float:right;
+            }
+
+            .box33{
+                background-color: blanchedalmond;
+                clear:both;
+            }
+
+            .box34{
+                background-color: yellow;
+            }
+
+            .box35{
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box36{
+                background-color: orange;
+                float:right;
+            }
+
+            .box37{
+                background-color: blanchedalmond;
+            }
+
+            .box38{
+                background-color: yellow;
+            }
+
+            .box39{
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box40{
+                background-color: orange;
+                float:right;
+            }
+
+            .box41{
+                background-color: blanchedalmond;
+            }
+
+            .box42{
+                background-color: yellow;
+            }
+
+            .box43{
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box44{
+                background-color: orange;
+                float:right;
+            }
+
+            .box45{
+                background-color: blanchedalmond;
+                float:left;
+            }
+
+            .box46{
+                background-color: yellow;
+            }
+
+            .box47{
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box48{
+                background-color: orange;
+                float:right;
+            }
+
+            .box49{
+                background-color: blanchedalmond;
+                float:left;
+            }
+
+            .box50{
+                background-color: yellow;
+            }
+
+
+        </style>
+
+    </head>
+    <body>
+        <p>● box1與box2：</p>
+        <br />
+        <div class="box1">1</div>
+        <div class="box2">2</div>
+        <br />
+        <br />
+        <p>↓ 當box1浮動後，box2會往上移動，實際上box2有往上移，只是文字會環繞在浮動的周圍</p>
+        <br />
+        <div class="box3">1</div>
+        <div class="box4">2</div>
+        <br />
+        <br />
+        <br />
+        <p>↓ 當box2使用clear屬性清除box1的左邊浮動效果時，瀏覽器會自動為box2添增上外邊距，其高度為要清除的浮動高度，所以box2就不會有上移的情況</p>
+        <br />
+        <p>※ clear屬性所增加的上外邊距不會顯示在開發者工具(F12)中的圖示上。</p>
+        <br />
+        <div class="box5">1</div>
+        <div class="box6">2</div>
+        <br />
+        <hr />
+        <p>● box1、2、3：</p>
+        <br />
+        <div class="box7">1</div>
+        <div class="box8">2</div>
+        <div class="box9">3</div>
+        <br />
+        <br />
+        <p>↓當box1浮動時，box2、box3會往上移動</p>
+        <br />
+        <div class="box10">1</div>
+        <div class="box11">2</div>
+        <div class="box12">3</div>
+        <br />
+        <br />
+        <p>↓當box1、box2左側浮動時，box3g實際受box1與box2影響會往上移動，但其文字會環繞在浮動元素周圍</p>
+        <br />
+        <div class="box13">1</div>
+        <div class="box14">2</div>
+        <div class="box15">3</div>
+        <br />
+        <br />
+        <p>↓ 當box3使用clear屬性清除左側浮動時，瀏覽器會自動添增box3上外邊距，高度為box1的高度</p>
+        <br />
+        <div class="box16">1</div>
+        <div class="box17">2</div>
+        <div class="box18">3</div>
+        <br />
+        <br />
+        <p>↓ 當box3使用clear屬性清除右側浮動時，瀏覽器會自動添增box3上外邊距，高度為box2的高度</p>
+        <br />
+        <div class="box19">1</div>
+        <div class="box20">2</div>
+        <div class="box21">3</div>
+        <br />
+        <br />
+        <p>↓ 當box3使用clear屬性清除右側浮動時，瀏覽器會自動添增box3上外邊距，高度為box2的高度</p>
+        <br />
+        <div class="box22">1</div>
+        <div class="box23">2</div>
+        <div class="box24">3</div>
+        <br />
+        <br />
+        <p>↓ 當box3使用clear屬性使用both清除浮動時，瀏覽器會依浮動的元素(box1、box2)選其最大高度自動添增box3上邊距，高度為box1的高度</p>
+        <br />
+        <div class="box25">1</div>
+        <div class="box26">2</div>
+        <div class="box27">3</div>
+        <br />
+        <br />
+        <p>↓ 純文字，未有寬高的情況，box3清除屬性(both)</p>
+        <br />
+        <div class="box28">我是第一位(1)左側浮動元素</div>
+        <div class="box29">我是第二位(2)右側浮動元素</div>
+        <div class="box30">我是第三位(3)被影響的塊元素</div>
+        <br />
+        <br />
+        <p>↓ 純文字，未有寬高的情況，box3為行內元素</p>
+        <br />
+        <div class="box28">我是第一位(1)左側浮動元素</div>
+        <div class="box29">我是第二位(2)右側浮動元素</div>
+        <span class="box30">我是第三位(3)被影響的行內元素</span>
+        <br />
+        <br />
+        <br />
+        <p>↓ 純文字，未有寬高的情況，box3清除屬性(both)</p>
+        <br />
+        <div class="box31">我是第一位(1)左側浮動元素</div>
+        <div class="box32">我是第二位(2)右側浮動元素</div>
+        <div class="box33">我是第三位(3)被影響的塊元素</div>
+        <div class="box34">我是第四位(4)的塊元素</div>
+        <br />
+        <br />
+        <p>↓ 純文字，未有寬高的情況，box3未清除屬性，被往上移動</p>
+        <br />
+        <div class="box35">我是第一位(1)左側浮動元素</div>
+        <div class="box36">我是第二位(2)右側浮動元素</div>
+        <div class="box37">我是第三位(3)被影響的塊元素</div>
+        <div class="box38">我是第四位(4)塊元素</div>
+        <br />
+        <p>↓ 純文字，未有寬高的情況，box3、box4為行內元素</p>
+        <br />
+        <div class="box39">我是第一位(1)左側浮動元素</div>
+        <div class="box40">我是第二位(2)右側浮動元素</div>
+        <span class="box41">我是第三位(3)被影響的行內元素</span><span class="box42">我是第四位(4)被影響的行內元素</span>
+        <br />
+        <br />
+        <p>↓ 純文字，未有寬高的情況，box1、box2、box3浮動，box4為行內元素</p>
+        <br />
+        <div class="box43">我是第一位(1)左側浮動元素</div>
+        <div class="box44">我是第二位(2)右側浮動元素</div>
+        <span class="box45">我是第三位(3)浮動的行內元素</span><span class="box46">我是第四位(4)被影響的行內元素</span>
+        <br />
+        <br />
+        <p>↓ 純文字，未有寬高的情況，box1、box2、box3浮動，box4為塊元素</p>
+        <br />
+        <div class="box47">我是第一位(1)左側浮動元素</div>
+        <div class="box48">我是第二位(2)右側浮動元素</div><span class="box49">我是第三位(3)浮動的行內元素</span>
+        <div class="box50">我是第四位(4)被影響的塊元素</div>
+        <br />
+
+    </body>
+</html>

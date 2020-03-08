@@ -1,0 +1,421 @@
+/* 主頁index.html樣式表 */
+
+/* 頂部導航條的容器 */
+.topbar-wrapper{
+    /* 設置寬度全屏 */
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #333;
+}
+
+/* 設置頂部導航條超鏈接 */
+.topbar-wrapper a{
+    font-size: 12px;
+    color: #b0b0b0;
+    display: block;
+}
+
+/* 設置頂部導航條超鏈接移入效果 */
+.topbar-wrapper a:hover{
+    color: #fff;
+}
+
+.topbar-wrapper .line{
+    font-size: 12px;
+    color: #424242;
+    margin: 0 8px;
+}
+
+/* 設置左側導航欄 */
+.service , .topbar-wrapper li{
+    float:left;
+}
+
+/* 開啟相對定位，成為小三角型及二維碼的絕對定位 */
+.app{
+    position: relative;
+    z-index: 9999;
+}
+
+/* 設置app下的小三角，同時設置移入時的效果 */
+.app::after{
+    content: "";
+    display: none;
+    /* 開啟絕對定位，並使位置固定在中間 */
+    position: absolute;
+    width: 0;
+    height: 0;
+    /* 設置四個方向的邊框 */
+    border: 8px solid transparent;
+    /* 單獨設置下邊框的顏色 */
+    border-bottom-color: #fff;
+    /* 下邊框居中 */
+    bottom:0;
+    left: 0;
+    right: 0;
+    margin:auto;
+    z-index: 999;
+}
+
+/* 設置二維碼移入效果，方法一：
+.app-wrappar:hover > .app .qrcode{
+    display: block;
+}
+ */
+
+/* 小三角與二維碼移入效果方法二： */
+.app:hover .qrcode,
+.app:hover::after{
+    display:block;
+    height: 148px;
+
+    /* transition：用於為樣式設置過渡效果 */
+    transition:height 0.3s;
+}
+
+/* 設置下載app的下拉視窗 */
+.app .qrcode{
+    /*
+    隱藏下拉視窗，方法二：
+    */
+    height: 0px;
+    overflow: hidden;
+
+    /*
+    隱藏下拉視窗，方法一：
+    display: none;
+    height:148px;
+    */
+    position: absolute;
+    left:-40px;
+    width: 128px;
+    line-height: 1;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    z-index: 9999;
+    background-color: #FFF;
+}
+
+/* 設置二維碼圖片 */
+.app .qrcode img{
+    width: 90px;
+    margin: 17px;
+    margin-bottom: 10px;
+}
+
+/* 設置二維碼中的文字 */
+.app .qrcode span{
+    font-size: 14px;
+    color: black;
+}
+
+/* 設置右側導航欄 */
+.shop-cart , .user-info{
+    float:right;
+}
+
+.shop-cart{
+   margin-left: 25px;
+   position: relative;
+   z-index: 9999;
+}
+
+/* 設置頂部導航條超鏈接樣式 */
+.shop-cart a{
+   width: 120px;
+   background-color: #424242;
+   text-align: center;
+   position: relative;
+   z-index: 9999;
+}
+
+.shop-cart:hover a{
+    background-color: #fff;
+    color: #FF6700;
+}
+
+/* 設置購物車下拉視窗移入效果 */
+.shop-cart:hover .cart{
+    display: block;
+    height: 88px;
+    transition: height 0.3s;
+}
+
+/* 設置購物車圖標位置 */
+.shop-cart i{
+    margin-right: 2px;
+}
+
+/* 設置購物車的下拉式窗 */
+.shop-cart .cart{
+    width: 275px;
+    height: 0px;
+    overflow: hidden;
+    line-height: 88px;
+    color:black;
+    font:14px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    position: absolute;
+    right:0px;
+    z-index: 999;
+}
+
+/* 設置相對定位，以使商品分類(.goods-info)的下拉式定位 */
+.header-wrapper{
+    position: relative;
+    /* z-index: 9999; */
+}
+
+/* 設置中間header */
+.header{
+    height: 100px;
+}
+
+/* 設置logo的h1 */
+.header .logo{
+    float: left;
+    margin-top: 22px;
+    width: 55px;
+    height: 55px;
+    position: relative;
+    z-index: 999;
+    overflow: hidden;
+    /* 隱藏logo中的文字，此文字主要是讓瀏覽器可以搜索到 */
+    text-indent: -9999px;
+    margin-right: 58px;
+}
+
+/* 統一設置logo的超鏈接 */
+.header .logo a{
+    width: 55px;
+    height: 55px;
+    background-color: #FF6700;
+    background-image: url(../img/mi-logo.png);
+    background-position: center;
+    position: absolute;
+    left: 0;
+    transition: left 0.3s;
+    z-index: 999;
+}
+
+/* 設置home圖片 */
+.header .logo .home{
+    background-image: url(../img/mi-home.png);
+    left:-55px;
+}
+
+/* 設置兩個圖標移入效果 */
+.header .logo:hover .mi{
+    left:55px;
+}
+
+.header .logo:hover .home{
+    left:0;
+}
+
+/* 設置中間容器大小 */
+.nav-wrapper{
+    float: left;
+    height: 100px;
+    line-height: 100px;
+    margin-left: 7px;
+}
+
+/* 設置nav的li樣式浮動 */
+.nav > li{
+    float: left;
+}
+
+.goods-wrapper{
+    position: relative;
+}
+
+/* 設置li的超鏈接 */
+.nav-wrapper .nav a{
+    font-size: 16px;
+    padding-left: 20px;
+}
+
+/* 設置li的超鏈接移入效果 */
+.nav a:hover{
+    color:#FF6700;
+    display: block;
+}
+
+/* 設置第一個li隱藏 */
+.nav-wrapper .nav  .all-goods{
+    /* 設置指定li的隱藏，但保持占有空間，若是display:block;是完全隱藏，也會不占空間 */
+    /* visibility: hidden; */
+    padding-left: 0px;
+    float: left;
+}
+
+/* 設置商品(li)下拉視窗 */
+.goods-info{
+    width: 100%;
+    height:0px;
+    overflow: hidden;
+    background-color: #fff;
+    position: absolute;
+    top:100px;
+    left: 0;
+    transition: height 0.3s;
+    z-index: 999;
+}
+
+/* 設置商品(li)移入效果，需排除第一個及最後兩個移入時的效果 */
+/* .nav .li:not(:first-of-type):not(:nth-child(9)):not(:nth-child(10)):hover ~ .goods-info */
+.nav .show-goods:hover ~ .goods-info{
+    height: 228px;
+    border-top:1px solid rgb(224, 224, 224);
+    box-shadow: 0 5px 2px rgba(0,0,0,0.2);
+}
+
+
+.left-menu{
+    width: 174px;
+    height: 420px;
+    background-color: rgba(0,0,0,0.3);
+    line-height: 1;
+    padding: 20px 30px;
+    position: absolute;
+    left:-120px;
+    top:100px;
+    z-index: 999;
+}
+
+.nav .left-menu a{
+    height: 42px;
+    line-height: 42px;
+    color: #FFF;
+    font-size: 14px;
+}
+
+.nav .left-menu .a:hover{
+    color:#FFF;
+    background-color: #FF6700;
+}
+
+.left-menu a  i{
+    float: right;
+    height: 42px;
+    line-height: 42px;
+}
+
+/* 設置右側搜索框外部容器 */
+.search-wrapper{
+    float: right;
+    width: 296px;
+    height: 50px;
+    margin-top: 25px;
+}
+
+/* 設置文本框樣式 */
+.search-wrapper .search-inp{
+    float: left;
+    padding: 0 ;
+    padding-left: 10px;
+    border: 1px solid rgb(224, 224, 224);
+    height: 48px;
+    width: 231px;
+    outline: none;
+    font-size: 14px;
+}
+
+/* 設置文本匡及按鈕獲取焦點狀態時的邊框效果 */
+.search-wrapper .search-inp:focus,
+.search-wrapper .search-inp:focus + .search-btn{
+    border: 1px solid #FF6700;
+}
+
+/* 設置右側搜索框按鈕樣式 */
+.search-wrapper .search-btn{
+    float: left;
+    font-size: 16px;
+    height: 50px;
+    width: 52px;
+    padding: 0px;
+    border: 1px solid rgb(224, 224, 224);
+    border-left: none;
+    outline: none;
+}
+
+/* 設置右側搜索按鈕的圖標移入效果 */
+.search-wrapper .search-btn:hover{
+    color: #fff;
+    background-color: #FF6700;
+    border: none;
+}
+
+/* 設置中間banner廣告區 */
+.banner{
+    position: relative;
+}
+
+.banner .img-list li{
+    position: absolute;
+}
+
+.banner img{
+    width: 100%;
+    vertical-align: top;
+}
+
+/* 設置banner廣告區的 ●  */
+
+.pointer{
+    position: absolute;
+    right: 30px;
+    top: 420px;
+}
+
+.pointer a{
+    float: left;
+    width: 6px;
+    height: 6px;
+    border: 2px solid rgba(255,255,255,.4);
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.4);
+    margin-left: 6px;
+}
+.pointer a:hover{
+    border-color: rgba(0,0,0,0.4);
+    background-color: rgba(255,255,255,.4);
+}
+
+/* 設置右側固定導航欄 */
+.back-top{
+    width: 26px;
+    height: 206px;
+    background-color: orange;
+    /* 開啟固定定位 */
+    position: fixed;
+    right:50%; /* 設置為視口寬度的50%或其他%，只是50%好算 */
+    top:60%;
+    margin-right:-639px;
+
+    /*
+        固定定位的等式：
+            left + margin-left + width + margin-right + right = 視口寬度
+
+        ※ 依小米官網案例，往右固定：
+
+            固定定位的欄需要再右側，因視窗左右兩側寬度會隨著不同瀏覽器大小有所不同，故無法直接設定
+            left、right的固定值，此時先將right:50%，使其於1226的中間(613)，再透過將margin-right設
+            置為總負值(剩餘的一半+右側欄位本身的寬度 = 613+26 = -639 )，即可將右側固定欄固定到banner
+            的右側位置 (因上方banner設置的code有問題，尚未修改，故目前固定欄位置偏上)。
+
+            left +margin-left + padding-left + width +  padding-right + margin-right + right = 視口寬度
+            auto +    auto    +    auto      +  1226 +       auto     +  -(613+26)   +  50%  = 小米右側固定位置
+
+            ※ 將 right 設置為 50%，再將 margin-right 設置為負值後，瀏覽器為滿足等式，會自動調整
+            left 來滿足等式，故此時 left:+639px，但若是設置為 margin-left:-639px，瀏覽器為滿足等
+            式，自動調整left:+639px，兩個left會相會抵消移動的距離(負值往左移639，正值往右移639)，
+            就不會有變化，因此小米的案例必須調整 margin-right。
+
+    */
+}
+

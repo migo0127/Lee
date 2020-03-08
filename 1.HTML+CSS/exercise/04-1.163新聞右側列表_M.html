@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>Document</title>
+
+        <link rel="stylesheet" href="../03_layout/css/reset.css">
+
+        <style>
+
+            .news-list{
+                width: 300px;
+                border-top:1px #ddd solid;
+                margin:50px auto;;
+            }
+
+            .news-list .news-title{
+                display: inline-block;
+                height: 40px;
+                border-top:red 1px solid;
+
+                /* 通過margin將h2往上移，蓋住邊框 */
+                margin-top:-1px;
+                line-height: 40px;
+
+            }
+
+            a{
+                text-decoration: none;
+            }
+
+            .news-title a{
+                color:#40406B;
+                font-weight: bold;
+            }
+
+            .news-img{
+                height: 150px;
+            }
+
+            .img-title{
+                color: #ffffff;
+                margin-top:-30px;
+                font-weight: bold;
+                padding-left:30px;
+            }
+
+            .li-list{
+                margin-top: 20px;
+                /* padding-left:14px; */
+
+                /* 設置項目符號，目前不建議，後續補充*/
+                /* list-style: square; */
+
+            }
+
+            .news-list li{
+                margin-bottom: 17px;
+            }
+
+            /* 通過before偽元素，來為每一個li添加項目符號 */
+            .news-list li::before{
+                content:"■";
+                color:rgb(218, 218, 218);
+                font-size: 12px;
+                margin-right: 4px;
+            }
+
+            .news-list li a{
+                font-size: 14px;
+                color: #666;
+                /* text-overflow:clip */
+            }
+
+
+            .news-list a:hover{
+                color:#C81623;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <div class="news-list">
+            <h2 class="news-title">
+                <a href="javascript:;">體育</a>
+            </h2>
+
+            <div class="news-img">
+                <a href="#"><img src="./img/03/3-1.網易新聞圖.jpg" alt="知乎">
+                    <h3 class="img-title">費德勒手負米迪 扶額頭不滿發揮</h3>
+                </a>
+            </div>
+
+            <ul class="li-list">
+                <li><a href="javascript:;">咋做到的！从恐龙时期至今 "幽灵蠕虫"样子一直没变</a></li>
+                <li><a href="javascript:;">核泄露十年后的日本福岛：从禁区变野生动物"天堂"</a></li>
+                <li><a href="javascript:;">科学家在大脑细胞发现新机制，原来信号传递也分级！</a></li>
+                <li><a href="javascript:;">《利刃出鞘》女主一说谎就吐，在现实中真会发生吗?</a></li>
+            </ul>
+
+        </div>
+
+    </body>
+</html>

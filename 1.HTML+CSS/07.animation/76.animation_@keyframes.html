@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>小球動畫圖</title>
+        <style>
+
+            .outer{
+                height: 500px;
+                border-bottom: 20px black solid;
+            }
+
+            .outer div{
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                float: left;
+                animation:ball infinite 0.5s alternate forwards linear;
+            }
+
+            div .box1{
+                background-color: red;
+                animation-delay: .1s;
+            }
+
+            div .box2{
+                background-color: orange;
+                animation-delay: .2s;
+            }
+
+            div .box3{
+                background-color: yellow;
+                animation-delay: .3s;
+            }
+
+            div .box4{
+                background-color: green;
+                animation-delay: .4s;
+            }
+            div .box5{
+                background-color: blue;
+                animation-delay: .5s;
+            }
+            div .box6{
+                background-color: indigo;
+                animation-delay: .6s;
+            }
+            div .box7{
+                background-color: purple;
+                animation-delay: .7s;
+            }
+
+            @keyframes ball {
+                form{
+                    margin-top: 0;
+                }
+                to{
+                    margin-top: 400px;
+                }
+            }
+
+            .outer2{
+                height: 500px;
+                border-bottom: 20px black solid;
+            }
+
+            .outer2 div{
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                float: left;
+                animation: ball2 infinite forwards alternate 5s;
+            }
+
+            div .box9{
+                background-color: #bfa;
+            }
+
+
+            @keyframes ball2 {
+                from{
+                    margin-top: 0;
+                }
+                20%,60%,to{
+                    margin-top: 400px;
+                    animation-timing-function: ease-in;
+                }
+                40%,80%{
+                    margin-top: 100px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="outer">
+            <div class="box1"></div>
+            <div class="box2"></div>
+            <div class="box3"></div>
+            <div class="box4"></div>
+            <div class="box5"></div>
+            <div class="box6"></div>
+            <div class="box7"></div>
+        </div>
+        <div class="outer2">
+            <div class="box9"></div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>京東頂部導航條</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <link rel="stylesheet" href="fontawesome/css/all.css">
+
+        <style>
+
+            .clearfix::before,
+            .clearfix::after{
+                content:"";
+                display:table;
+                clear:both;
+            }
+
+            .top-bar-wrapper{
+                width: 100%;
+                font:12px "Microsoft YaHei", tahoma, arial, "Hiragino Sans GB", "\\5b8b体", sans-serif;
+                line-height: 30px;
+                background-color: rgb(227, 228, 229);
+                border-bottom:1px rgb(221, 221, 221) solid;
+            }
+
+            .top-bar{
+                width:1190px;
+                height: 30px;
+                margin: 0 auto;
+            }
+
+            .location{
+                float: left;
+                /* 開起定位，使下拉式窗可以進行絕對定位 */
+                position: relative;
+            }
+
+            .current-city{
+                width: 42px;
+                height: 29px;
+                padding: 0 7px;
+
+                /* 開啟相對定位，使下拉式選單可以設置絕對定位，讓上邊框可以被遮住 */
+                position: absolute;
+                /* 要比下拉式選單高一層級 */
+                z-index: 9999;
+
+                /* 因hover的下拉式選單有多增加邊框(1px)，導致移入時的效果其多1px，故會有跳動框的感覺
+                   只要將hover設置的邊框一併加入到父元素裡讓大小相同，再將父元素的邊框設為透明，這樣
+                   滑鼠移入時就不會有跳動的感覺了。
+                 */
+                border: 1px solid transparent;
+                border-bottom: none;
+            }
+
+            .top-bar .city-list{
+                /* 將下拉式選單設置絕對定位後，在利用偏移量往上移，因下拉式選單層級沒有(台灣)高，
+                所以上邊框重疊處會被遮住，就只會出現上層(台灣)的下邊框，而台灣的下邊框樣式為none。
+                */
+                position: absolute;
+                top:29px;
+                z-index: 999;
+            }
+
+            .top-bar:hover .city-list{
+                /* 當滑鼠移移入時，下拉式選單出現，並且在移入下拉式選單介面時依舊保持出現 */
+                display: block;
+            }
+
+            .top-bar:hover .current-city{
+                /* 設置滑鼠移入時出現底色，並且移動到下拉式選單時依舊保持底色 */
+                background-color: rgb(255, 255, 255);
+
+                /* 先設置四周編框 */
+                border: 1px solid rgb(204, 204, 204);
+
+                /* 再將下邊框設置無 */
+                border-bottom: none;
+            }
+
+            .top-bar .city-list{
+                /* 下拉式選單大小 */
+                width: 300px;
+                height: 416px;
+                background-color: rgb(255, 255, 255);
+
+                /* 設置下拉式選單的邊框、陰影 */
+                border: 1px solid rgb(204, 204, 204);
+                box-shadow: 1px 2px 1px rgba(0,0,0,0.1);
+
+                /* 將下拉式選單隱藏起來 */
+                display: none;
+
+                position: absolute;
+
+
+            }
+
+            .location .fas,
+            .location a:hover{
+                color:#f10215;
+            }
+
+            .location .fas{
+                font-size: 14px;
+            }
+
+            .top-bar a{
+                text-decoration: none;
+                color: #999999;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <div class="top-bar-wrapper">
+            <div class="top-bar clearfix">
+                <div class="location">
+                    <div class="current-city">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="javasrcipt:;">台灣</a>
+                    </div>
+
+                    <!-- 設置下拉式選單 -->
+                    <div class="city-list"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+<!--
+
+    下拉式選單設置步驟：
+
+        1.設置一個兄弟元素，將下拉式選單的框框大小、邊框、陰影等等設置出來，
+          在透過 display:none; 將其隱藏。
+
+          ※ 此時會發現鼠標滑入出現「下拉式選單」時，最底部的祖先元素也被撐開了，
+             是因為祖先元素未設置高度，其高度是由后代元素的內容撐開，所以在幫祖
+             先元素設置高度，就可以了。
+
+        2.設置:hover效果：為保持鼠標滑入到指定位置後，下拉式選單會顯示出來並
+          且再鼠標移入到下拉式選單的範圍時，仍保持顯示的情況，所以不能將:hover
+          設置在"滑入"的元素上，而是要設置在包含「滑入的元素」+「下拉式選單」
+          共同的父元素身上，這樣才能保持滑入元素時，下拉式選單出現，再移動到下
+          拉式選單時，下拉式選單不會消失。
+
+          透過 父元素:hover .下拉式選單{} => 將下拉式選單設置為出現 display:block，
+          原本是設置隱藏狀態。
+
+          ※ 若是將:hover設置在「滑入的元素」上，則在鼠標滑入到該元素時，下拉
+             式選單確實也會出現，但一旦鼠標移動到下拉式選單裡，離該「滑入的元
+             素」時，下拉式選單就會不見，無法保持顯示的狀態。
+
+          ※ 因父元素包含「滑入的元素」及「下拉式選單」，所以相當於延伸的介面，
+             所以下拉式選單就可以一直保持顯示。
+
+        3.此時下拉式選單的:hover效果已設置完畢，但「滑入的元素」會發生效果不一
+          致的情況，所以要再另外透過父元素設置「滑入的元素」的滑入效果，使其與
+          下拉式選單移入時的顯示一致。
+
+          透過 父元素:hover .「滑入的元素」{}=> 設置與下拉式選單相同底色、邊框等。
+
+        4.當「滑入的元素」及「下拉式選單」效果相同後，會發現兩者相接處多出一條邊
+          框線，此線不應該有，故可以先設置「滑入的元素」的下邊匡為無(none)，再透
+          過定位的方式讓「滑入的元素」層級變高，「下拉式選單」則透過絕對定位的方
+          式，移動位置到「滑入的元素」底部，使線條被遮蓋，這樣就可以解決問題。
+
+        5.「下拉式選單」要開啟絕對定位，所以其父元素也得開啟相對定位，以便「下拉式選單」
+           可以依父元素作為定位位置來移動自身，另需注意為避免「下拉式選單」被網頁中的其
+           它元素遮住，所以「下拉式選單」的層級要盡量設高(EX：999)，而「滑入的元素」要
+           開啟相對定位，其層級要比「下拉式選單」高才能遮住線條，所以可以設置9999。
+
+        6.當以上都設置完成後，會發現鼠標移入到「滑入的元素」時，該元素的框框會有跳動的
+          感覺，此時是因為「滑入的元素」有新增邊框，導致本身大小大於父元素，所以才會有
+          跳動的感覺，因此將「滑入的元素」的邊框值也設給父元素，在將父元素的邊框顏色設
+          置為transparent(透明)，這樣父元素與「滑入的元素」大小就會一致，不會再有跳動
+          的感覺了！
+
+          以上就是此次有關「下拉式選單」的設置方式。
+
+
+
+
+ -->

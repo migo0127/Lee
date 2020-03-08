@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh"">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>垂直方向外邊距的折疊(重疊) margin collapse</title>
+
+        <style>
+        /*
+        ※ 垂直外邊距的重疊(折疊)現象：
+            相鄰的垂直方向外邊距會發生以下兩種重疊現象：
+
+                1.兄弟元素重疊(兩個元素中間-上下邊距)：
+                    1-1.兄弟元素間的垂直相鄰外邊距，當兩者都為正值時，會取兩者之間的較大值。
+                    1-2.特殊情況：
+                        - 如果相鄰的外邊距為一正一負值時，取兩者的和。
+                        - 如果相鄰的外邊距都是負值，則取兩者中絕對值較大的。
+
+                    ※兄弟元素之間的外邊距重疊現象，對於開發者來說是有利的，因此不需進行處理。
+
+                2.父子元素重疊(上邊距-未浮動前)：
+                    1.父子元素間的垂直相鄰外邊距，其「子元素」的值會傳遞給父元素(如1)。
+                    2.父子垂直外邊距的重疊會影響到頁面的布局，必須要進行處理。
+                        - 完美處理方式待後續教學補充說明。
+                        - 暫時性解決方案：
+                            2-1.增加父元素的內邊距(padding)，再修改父元素多出來的高度(hight)，
+                            再進行相關屬性值的微調，讓父子元素大小一致 (如2-1)。
+                            2-2.增加父元素的邊框(border)，在調整相關屬性的值，讓父子元素大小一
+                                致(如2-2)。
+        */
+
+        .box1 , .box2{
+            width: 200px;
+            height: 200px;
+        }
+
+        .box1{
+            background-color: #bfa;
+            margin-bottom:100px;
+            /* margin-bottom:-100px; */
+
+        }
+
+        .box2{
+            background-color: skyblue;
+            /* margin-top:100px; */
+            margin-top:-100px;
+        }
+
+        .a1{
+            width: 200px;
+            height: 200px;
+            background-color: #bfa;
+        }
+
+        .a2{
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            margin-top: 50px;
+        }
+
+        .b1{
+            width: 200px;
+            height: 100px;
+            background-color: #bfa;
+            padding-top:100px;
+        }
+
+        .b2{
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+        }
+
+        .c1{
+            width: 200px;
+            height: 199px;
+            background-color: #bfa;
+            border-top:1px red solid;
+
+        }
+
+        .c2{
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            margin-top: 99px;
+        }
+
+
+        </style>
+
+    </head>
+
+    <body>
+        <p>1.兄弟元素的重疊現象：</p>
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <hr />
+        <p>2.父子元素的重疊現象：子元素的上邊距會傳遞給父元素，故父子元素會一起向下移動 50px</p>
+        <p>(本意原是要將子元素從左上移動至左下)</p>
+        <div class="a1">
+            <div class="a2"></div>
+        </div>
+        <hr />
+        <p>2-1.父子元素的重疊現象-暫時解法一：</p>
+        <p>A.增加父元素的上內邊距 padding-top:100px; 。</p>
+        <p>B.在修改父元素原本高度的屬性值(將多出來的高度去掉) height:200px->100px; </p>
+        <div class="b1">
+            <div class="b2"></div>
+        </div>
+        <hr />
+        <p>2-2.父子元素的重疊現象-暫時解法二：<br />
+            透過增加上邊框，讓父子元素原本上邊距重疊的區域可以分開</p>
+        <p>A.增加父元素的上邊框 border-top:1px red solid; 。</p>
+        <p>B.原本上邊距重疊的區域分開後，再將子元素使用margin-top向下移動</p>
+        <p>C.修改父元素邊框顏色及內容區高寬度使其一致，因父元素的內容區高度由height:100px->99px;，故需將子元素的移動值做調整 margin-top:100px->99px;。</p>
+        <div class="c1">
+            <div class="c2"></div>
+        </div>
+        <hr />
+
+    </body>
+</html>

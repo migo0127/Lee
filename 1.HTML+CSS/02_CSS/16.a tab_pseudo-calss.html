@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>a標籤的偽類</title>
+
+        <style>
+        
+        /* 
+        ※ a標籤用的偽類
+            - 4種(其中2種為 a標籤 的 專屬偽類)：
+
+                1. :link (暫時)用來表示沒訪問過的鏈接，實際意義為「正常的鏈接」，教學後序補充，
+                  為 a標籤 的 專屬偽類。
+
+                2. :visited 用來表示訪問過的鏈接，因個人隱私問題，:visited 僅可修改 字體顏色，
+                  為 a標籤 的 專屬偽類。
+
+                3. :hover 用來表示鼠標移入時的狀態，所有標籤都可使用此偽類。
+
+                4. :active 用來表示鼠標點擊當下的狀態，所有標籤都可使用此偽類。
+        */
+            a:link{
+                color:red;
+            }
+
+            a:visited{
+                color: grey;
+                /* 
+                因個人隱私問題，:visited 僅可修改 字體顏色，就算設定大小，也不會應用，但還是不要設定
+                */
+                font-size: 50px;
+            }
+
+            a:hover{
+                background-color: hotpink;
+            }
+
+            a:active{
+                font-style: italic;
+            }
+
+        /* 
+        ※ a標籤的偽類權重：
+
+        ● 優先級較高：link(未訪問過) = visited(訪問過) 
+        ● 優先級較低：hover(鼠標移入時)= active(鼠標點擊當下)
+
+            情況：同時存在 未訪問鏈接一、訪問鏈接二
+            1.當:hover、:active同時與:link、:vistied 設定相同元素，但不同值時，
+            :link、:visited 優先顯示，:hover、:active不會顯示。
+
+            2.當:hover、:active 同時與 :link 或 :vistied 設定相同元素，但不同值時，
+            2-1.僅與:link (未訪問過的網址) 同時設定：
+                則 未訪問過鏈接一 依 :link 優先顯示，訪問鏈接二 同時應用 :hover (及)或 :active。
+            
+            2-2.僅與 :visited (訪問過的網址) 同時設定：
+                則 訪問過鏈接二 依 :visited 優先顯示，未訪問過鏈接一 同時應用 :hover (及)或 :active。
+
+            3.當:hover 與:active 同時設定相同元素，但不同值時，優先級一樣，同時應用。
+
+            4.當:link 與:visited 同時設定相同元素，但不同值時，優先級一樣，同時應用。
+
+            a:hover{
+                color: chartreuse;
+            }
+
+            a:active{
+                color: brown;
+            }
+
+            a:visited{
+                color:darkgreen;
+            }
+
+            a:link{
+                color:darkorchid;
+            }
+        */                
+        </style>
+
+    </head>
+    <body>
+        
+        <h2>鼠標移入時變粉色，點擊當下變斜體</h2>
+        <p>● 訪問過的鏈接<br />
+            <a href="https://www.youtube.com/?gl=TW&hl=zh-TW" target="_black">YOUTUBE</a>
+        </p>
+        <p>● 沒訪問過的鏈接<br />
+            <a href="https://www123.douban.com/group/648493/?ref=sidebar">豆瓣123</a>
+        </p>
+
+    </body>
+</html>

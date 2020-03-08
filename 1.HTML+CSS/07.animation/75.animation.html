@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>動畫(animation)</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .box1{
+            width: 800px;
+            height: 1500px;
+            background-color: silver;
+        }
+
+        .box1 div{
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+
+        /*
+            動畫(animation)：
+                - 動畫與過渡類似，都是可以實現一些動態的效果。
+                - 不同的是：
+                    過渡需要再某個屬性發生變化時才會觸發動態效果(EX：鼠標移入時)。
+                    動畫可以自動觸發動態效果(EX：網頁開啟後自動播放影片)。
+                - 設置動畫效果前，必須要先設置一個關鍵幀，關鍵幀設置了動畫執行每一個步驟。
+
+                - 關鍵幀的語法：
+
+                    @keyframes 自行取的名字 {
+                        form/0%{ 要變動的屬性起始點 } -> frome表示動畫的開始位置，也可使用 0%。
+                                                     -> 中間亦可設置 30%、50% 等等。
+                        to/100%{ 要變動的屬性結束點 } -> to表示動畫的結束位置，也可使用 100%。
+                    }
+
+                    EX：
+
+                    @keyframes test{
+                        form{
+                            margin-left:0;
+                        }
+
+                        to{
+                            margin-left:600px;
+                        }
+                    }
+
+            動畫的相關屬性有八種屬性(前四個與過渡一樣)：
+                1.animation-name：要對當前元素生效的關鍵幀的名字。
+                2.animation-duration：動畫的執行(持續)時間。
+                3.animation-timing-function：動畫的時序(時間)函數。
+                4.animation-delay：動畫延時的時間。
+                5.animation-iteration-count：動畫執行的次數。
+                    - 可選值：
+                        5-1.直接輸入次數。
+                        5-2.infinite：無限執行。
+                6.animation-direction：指定動畫運行的方向。
+                    - 可選值：
+                        6-1.normal：默認值，總是從 from 向 to 運行。
+                        6-2.reverse：總是從 to 向 from 運行。
+                        6-3.alternate：從 from 向 to 運行，重覆執行時，從 to 向 from 運行。
+                        6-4.alternate-reverse：從 to 向 from 運行，重覆執行時，從 from 向 to 運行。
+                7.animation-paly-state：設置動畫的執行狀態。
+                    - 可選值：
+                        7-1.running：默認值，動畫執行。
+                        7-2.paused：動畫停止。
+                8.animation-fill-mode：動畫的填充模式(結束後停留位置)。
+                    - 可選值：
+                        8-1.none：默認值，動畫執行完畢後，元素回到原來位置。
+                        8-2.forwards：動畫執行完畢後，元素會停止再動畫結束位置。
+
+                ※※ animation 的簡寫屬性：與過渡一樣，無順序。
+                        - 只有一個要求，如果要寫延遲，則兩個時間中第一個是持續時間，第二個是延遲時間。
+                        - 語法：
+                            animation：2s 2 1s alternate infinite forwards;
+                            animation：2s infinite alternate 1s forwards 2;
+        */
+        @keyframes test{
+            form{
+                    margin-left:0;
+                }
+            to{
+                margin-left:600px;
+            }
+        }
+
+        .box2{
+            background-color: orange;
+            animation-name: test;
+            animation-duration: 6s;
+            animation-delay: 1s;
+            animation-iteration-count: 2;
+            animation-direction: normal;
+        }
+
+        .box3{
+            background-color: #bfa;
+            animation-name: test;
+            animation-duration: 6s;
+            animation-delay: 1s;
+            animation-iteration-count: 2;
+            animation-direction: reverse;
+        }
+
+        .box4{
+            background-color: yellow;
+            animation-name: test;
+            animation-duration: 6s;
+            animation-delay: 1s;
+            animation-iteration-count: 2;
+            animation-direction: alternate;
+        }
+
+        .box5{
+            background-color: skyblue;
+            animation-name: test;
+            animation-duration: 6s;
+            animation-delay: 1s;
+            animation-iteration-count: 2;
+            animation-direction: alternate-reverse;
+        }
+
+        .box6{
+            background-color: palegoldenrod;
+            animation-name: test;
+            animation-duration: 6s;
+            animation-delay: 1s;
+            animation-iteration-count: 1;
+            animation-fill-mode:none;
+        }
+
+        .box7{
+            background-color: pink;
+            animation-name: test;
+            animation-duration: 6s;
+            animation-delay: 1s;
+            animation-iteration-count: 1;
+            animation-fill-mode:forwards;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="box1">
+        <h2>執行2次，animation-direction:執行的方向不同。</h2>
+        <br />
+        <div class="box2">animation-direction: normal; 0 -> 600 *2</div>
+        <div class="box3">animation-direction: reverse; 600 -> 0 *2</div>
+        <div class="box4">animation-direction: alternate; 0 -> 600 -> 0</div>
+        <div class="box5">animation-direction: alternate-reverse; 600 -> 0 -> 600</div>
+        <hr />
+        <br />
+        <h2>執行1次，animation-fill-mode:結束後停的位置不同。</h2>
+        <br />
+        <div class="box6">animation-fill-mode:none;</div>
+        <div class="box7">animation-fill-mode:forwards;</div>
+        <div class="box8"></div>
+    </div>
+
+</body>
+</html>

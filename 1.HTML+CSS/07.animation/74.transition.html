@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>transition：過渡效果</title>
+    <style>
+        /* 重置效果，不透過link */
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .box1{
+            width: 800px;
+            height: 500px;
+            background-color: silver;
+            overflow: hidden;
+        }
+
+        .box1 div{
+            width: 200px;
+            height: 200px;
+            margin-bottom: 50px;
+        }
+
+        .box2{
+            background-color: #bfa;
+            transition: 2s all;
+        }
+
+        .box3{
+            background-color: orange;
+        }
+
+        .box1:hover .box2,.box3{
+            width: 250px;
+            height: 250px;
+        }
+
+        /*
+            transition (過渡)：
+                - 通過過渡可以指定一個屬性發生變話時的切換方式。
+                - 通過過渡可以創建一些非常好的效果，提升用戶的體驗。
+                - 所以可以計算值的變化的屬性，都可設置過渡 (寬、高、顏色)
+                - 當值設置為auto時，則無法使用過渡，因瀏覽器無法辨識 auto的值如何過渡至另一個值。
+
+            transition 有四種屬性：
+                1.transition-property：
+                    - 指定要執行的過渡屬性 (寬、高、顏色、外邊距等等)。
+                    - 多個屬性間使用「,」隔開。
+                    - 如果所有屬性都需要過渡，則使用all關鍵字。
+                    - 大部份屬性都支持過渡效果，但需注意在過渡時必須從一個有效值過渡到另一個有效值。
+                        EX：width:700px; -> width:0;
+                        不可使用 auto -> xxpx ，瀏覽器無法辨識 auto 的值。
+                    - 語法：
+                        transition-property：width;
+                        transition-property：width,heigh;
+                        transition-property：all;
+
+                2.transition-duration：指定過渡效果的持續時間。
+                    - 時間單位： s(秒) 和 ms(毫秒)，1s=1000ms。
+                    - 語法：
+                        transition-duration：2s;
+                        transition-duration：1000ms;
+                        transition-duration：2s, 100ms;
+                        (若過渡屬性有設置兩種時，可分別設置各自的過渡持續時間)
+
+                3.transition-timing-function：指過渡的時序(時間)函數。
+                    - 指定過渡的執行的方式，意似 過渡的時間運動軌跡。
+                    - 可選值：
+                        3-1.ease：默認值，慢速開始，先加速，再減速停止。
+                        3-2.liner：勻速運動。
+                        3-3.ease-in：加速運動，後加。
+                        3-4.ease-out：減速運動，後減。
+                        3-5.ease-in-out：先加速，後減速。
+                        3-6.cubic-bezier()：可指定時序函數。
+                            https://cubic-bezier.com
+                        3-7.steps()：分步執行過渡效果，意似 分幾步執行。
+                            - 可以設置兩個值，第一個值為「幾步」，第二個值可選如下：
+                                A.end：在時間結束時執行過渡效果(默認值)。
+                                B.start：在時間開始時執行過渡效果。
+
+                4.transition-delay：過渡效果的延遲，等待一段時間後在執行過渡。
+                    - 語法：
+                        transition-delay：2s;
+
+            ※※ transtion 簡寫屬性：可以同時設置過渡相關的所有屬性，無順序。
+                    - 只有一個要求，如果要寫延遲，則兩個時間中第一個是持續時間，第二個是延遲時間。
+                    - 語法：
+                        transtion：2s ease-in 1s margin-left;
+                        transtion：ease-in 2s 1s margin-left;
+                        transtion：ease-in 2s margin-left 1s;
+                        transtion：ease-in 2s 1s;
+                        ※ 未寫要過渡的屬性時，默認為 all。
+        */
+
+        .box4{
+            background-color: orange;
+            margin-left: auto;
+            transition: margin-left 2s;
+        }
+
+        .box5{
+            background-color: #bfa;
+            margin-left: 600px;
+            transition: margin-left 2s;
+        }
+
+        .box1:hover .box4,.box1:hover .box5{
+            margin-left: 0;
+        }
+
+        .box6{
+            background-color: orange;
+            margin-left: 0px;
+            transition: margin-left;
+            transition-duration: 4s;
+        }
+
+        .box7{
+            background-color: #bfa;
+            margin-left: 0px;
+            transition: margin-left;
+            transition-duration: 2s;
+        }
+
+        .box1:hover .box6 ,.box1:hover .box7{
+            margin-left: 600px;
+        }
+
+        .box50{
+            width: 800px;
+            height: 1800px;
+            background-color: silver;
+        }
+
+        .box50 div{
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+
+        .box8{
+            background-color: orange;
+            margin-left: 0px;
+            transition: margin-left;
+            transition-duration: 3s;
+            transition-timing-function: ease;
+        }
+
+        .box9{
+            background-color: #bfa;
+            margin-left: 0px;
+            transition: margin-left;
+            transition-duration: 3s;
+            transition-timing-function: liner;
+        }
+
+        .box10{
+            background-color: yellow;
+            margin-left: 0px;
+            transition: margin-left;
+            transition-duration: 3s;
+            transition-timing-function: ease-in;
+        }
+
+        .box11{
+            background-color: greenyellow;
+            margin-left: 0px;
+            transition: margin-left;
+            transition-duration: 3s;
+            transition-timing-function: ease-out;
+        }
+
+        .box12{
+            background-color: skyblue;
+            margin-left: 0px;
+            transition: margin-left;
+            transition-duration: 3s;
+            transition-timing-function: ease-in-out;
+        }
+
+        .box13{
+            background-color: pink;
+            margin-left: 0px;
+            transition: margin-left;
+            transition-duration: 3s;
+            transition-timing-function: cubic-bezier(.24,.95,.82,-0.88);
+        }
+
+        .box14{
+            background-color: palegoldenrod;
+            margin-left: 0px;
+            transition: margin-left;
+            transition-duration: 3s;
+            transition-timing-function: steps(2,end);
+        }
+
+        .box15{
+            background-color: sandybrown;
+            margin-left: 0px;
+            transition: margin-left;
+            transition-duration: 3s;
+            transition-timing-function: steps(2,start);
+        }
+
+        .box50:hover .box8 ,.box50:hover .box9,
+        .box50:hover .box10,.box50:hover .box11,
+        .box50:hover .box12,.box50:hover .box13,
+        .box50:hover .box14,.box50:hover .box15
+        {
+            margin-left: 600px;
+        }
+
+        .box16{
+            background-color: orange;
+            margin-left: 0px;
+            transition: margin-left;
+            transition-duration: 4s;
+            transition-delay: 1s;
+        }
+
+        .box17{
+            background-color: #bfa;
+            margin-left: 0px;
+            transition: margin-left;
+            transition-duration: 2s;
+        }
+
+        .box1:hover .box16 , .box1:hover .box17{
+            margin-left: 600px;
+        }
+
+        .box51{
+            width: 800px;
+            height: 700px;
+            background-color: silver;
+        }
+
+        .box51 div{
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+
+        .box18{
+            background-color: orange;
+            transition:2s margin-left 1s ease-in;
+        }
+
+        .box19{
+            background-color: #bfa;
+            transition:ease-in 2s 1s margin-left;
+        }
+
+        .box20{
+            background-color: skyblue;
+            transition:ease-in 2s 1s;
+        }
+
+        .box51:hover .box18 , .box51:hover .box19, .box51:hover .box20{
+            margin-left: 600px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="box1">
+        <div class="box3">b3：未設置過渡</div>
+        <div class="box2">b2：設置過渡</div>
+    </div>
+    <hr />
+    <br />
+    <div class="box1">
+        <div class="box4">b4：margin-left: auto; 設置auto，不會有過渡效果，而是直接從開始跳結果</div>
+        <div class="box5">b5：margin-left: 600px;</div>
+    </div>
+    <hr />
+    <br />
+    <div class="box1">
+        <div class="box6">b6：transition-duration: 4s</div>
+        <div class="box7">b7：transition-duration: 2s</div>
+    </div>
+    <hr />
+    <br />
+    <div class="box50">
+        <div class="box8">d8：transition-timing-function:ease</div>
+        <div class="box9">d9：transition-timing-function: liner</div>
+        <div class="box10">d10：transition-timing-function:ease-in</div>
+        <div class="box11">d11：transition-timing-function:ease-out</div>
+        <div class="box12">d12：transition-timing-function:ease-in-out</div>
+        <div class="box13">d13：transition-timing-function:cubic-bezier(.24,.95,.82,-0.88)</div>
+        <div class="box14">d14：transition-timing-function:steps(2,end)</div>
+        <div class="box15">d15：transition-timing-function:steps(2,start)</div>
+
+    </div>
+    <hr />
+    <br />
+    <div class="box1">
+        <div class="box16">b16：transition-delay: 1s</div>
+        <div class="box17">b17：transition-delay:未設置</div>
+    </div>
+    <hr />
+    <br />
+    <div class="box51">
+        <div class="box18">b18：transition:margin-left 2s 1s ease-in</div>
+        <div class="box19">b19：transition:ease-in 2s 1s margin-left</div>
+        <div class="box20">b20：transition:ease-in 2s 1s</div>
+    </div>
+    <hr />
+    <br />
+
+</body>
+</html>

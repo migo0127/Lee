@@ -1,0 +1,106 @@
+<!doctype html>
+
+<html>
+
+  <head>
+  
+    <meta charset="UTF-8" />
+	
+	<title>基本架構</title>
+	
+  </head>
+ 
+  <body>
+  
+  	  <!--
+	  超鏈接 a標籤 <a></a>
+	  屬性：
+	  href:指向鏈接跳轉的目標地址，可以寫一個相對路徑或一個完整外部網路路徑 (當前頁面直接跳轉)
+      target:可以用來指定打開鏈接的頁面位置
+	    可選值:
+		   _self：表示當前頁面開起
+		   _black：另開新頁
+           亦可搭配iframe的 name屬性將超鏈接內容顯示於內聯框架中
+      
+	    href="#" 則可回到當前頁面的頂部，若要同時於頁面中設定 回到頂部、去到底部，則需將回到頂部設定一個id屬性
+		id:再同一個頁面中只有一個指定元素名不能重覆，且開頭一定得為字母，不可使用數字，EX：div1	
+		※ html中有一個屬性，每一個元素都可以設置，該屬性可作為標籤的唯一標識，就是id屬性
+		EX1：設定<p id="xyz">XXX</p> 對應連結為 <a href="#xyz">去到XXX</a>
+		EX2：設定<a id="ccc" href="往址">YYY</a> 對應連結為 <a href="#ccc">去到YYY</a>		
+
+        發送電子郵件(聯繫我們)的超鏈接，點擊後自動開起默認的郵件客戶端
+        href="mailto:郵件地址"	
+		
+	  -->
+	  
+	  <!--
+	  跳轉到id為bottom元素所在位置，直接在href中寫 #id屬性值
+	  -->
+	  <a href="#bottom">去到底部</a>	  
+	  <hr />
+	  <a href="https://tw.yahoo.com/">這是一個奇摩首頁超鏈接</a>
+	  <br />
+	  <a href="02.img tab.html">img標籤</a>
+	  <br />
+	  <a href="00.Framework.html" target="_balck">另開新頁</a>
+	  <br />
+	  <a id="xyz" href="04.meta tab.html" target="04">我是一個內聯框架，點擊後顯示於下方內框</a>
+	  <br />
+	  <iframe src="03.iframe tab.html" name="04"></iframe>
+	  <p id="who">
+	  我在哪、我是誰、我不知道！
+	  </p>
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />	 
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />	
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <br />
+	  <a href="#xyz">去到內聯框架超鏈接</a>
+	  <br />
+      <a href="#who">去到我在哪</a>
+      <br />	  
+	  <a id="bottom" href="#">回到頂部</a>
+	  <br />
+	  <a href="mailto:acb@yahoo.com.tw">聯繫我們</a>
+	  <br />
+
+	  <!-- 
+		在開發中超鏈接尚位指定時，可先透過Javascrip:;(較常使用)或#作為路徑的展位符號使用，點了無反應
+	   -->
+	   <a href="javascript:;">這是一個沒反應的超鏈接</a>
+	  
+  </body>
+</html>

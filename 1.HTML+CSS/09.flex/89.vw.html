@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>移動端的長度單位：vw</title>
+        <style>
+
+            *{
+                margin: 0;
+                padding: 0;
+            }
+
+            .box1{
+                width: 6.4vw;
+                height: 4.667vw;
+                background-color: #bfa;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <!--
+
+            - 不同的移動端設備完美視口的大小是不一樣的，如：
+                i6 → 375px
+                i7 → 414px
+
+            - 由於不同設備視口和像素比不同，所以同樣是375個相素在不同的設備下意義是不一樣的，
+              比如在i6中 375px 是全屏，但在i7中 375px 就會缺一塊，所以在移動端開發時，就不能
+              在使用px來進行布局了。
+
+            - vw：表示視口的寬度 (viewport width)
+                - 100vw = 一個視口的寬度。
+                - 1vw = 1%視口寬度。
+                - 如：
+                    i6 100vw = 375px
+                    i7 100vw = 414px
+
+            - 移動端常用的設計圖寬度為 750px、1125px，為375px的 2倍 及 3倍。
+              (因1個ccs像素=2個或3個物理像素，為較好的像素比。)
+
+            - 課堂上使用的設計圖寬度為 750px，若使用vw作為單位，即 100vw = 750px。
+
+            Q：要如果依此設計圖(100vw=750px)，來創建一個 48px x 35px 大小的元素？
+
+            A： 100vw = 750px(設計圖的像素) => 1vw = ‭0.1333333333333333‬vw
+                48px = 48 * ‭0.1333333333333333‬ = 6.4vw
+                35px = 35 * ‭0.1333333333333333‬ = 4.666666666666667‬vw (4.667vw)
+         -->
+
+         <div class="box1"></div>
+
+    </body>
+</html>

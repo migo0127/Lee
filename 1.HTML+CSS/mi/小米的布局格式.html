@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            .clearfix::before,
+            .clearfix::after{
+                content:"";
+                display: block;
+                clear: both;
+            }
+
+            .outer-wrapper{
+                height: 40px;
+                background-color: #bfa;
+            }
+
+            .outer{
+                width: 1226px;
+                height: 100%;
+                background-color: orange;
+                margin: 0 auto;
+            }
+
+            .menu{
+                float: left;
+                width: 200px;
+                height: 100%;
+                margin: 0 14px 0 95px;
+                background-color: black;
+                position: relative;
+            }
+
+            .menu-list{
+                width:250px;
+                height: 500px;
+                background-color: teal;
+                position: absolute;
+                left: -95px;
+                top:40px;
+                z-index: 999;
+            }
+
+            .header-wrapper{
+                height: 500px;
+                background-color: silver;
+                position: relative;
+            }
+
+            .header{
+                width: 1226px;
+                height: 500px;
+                background-color: skyblue;
+                margin: 0 auto;
+            }
+
+            .nav-wrapper{
+                width: 30px;
+                height: 300px;
+                background-color: greenyellow;
+                position: fixed;
+                right:50%;
+                top:40%;
+                margin-right: -643px;
+            }
+
+            .nav-list{
+                width: 30px;
+                height: 300px;
+                background-color: sienna;
+            }
+
+            .nav-list .list{
+                width: 30px;
+                height: 50px;
+                background-color: hotpink;
+                margin: 0 0 12.5px 0;
+            }
+
+
+            .user-wrapper{
+                height: 300px;
+                background-color: palegoldenrod;
+            }
+
+            .user{
+                width: 1226px;
+                height: 300px;
+                background-color: pink;
+                margin: 0 auto;
+            }
+
+            .user-info{
+                float: left;
+                width: 300px;
+                height: 300px;
+                background-color: cornflowerblue;
+            }
+
+            .add .imgs{
+                float: left;
+                width: 300px;
+                height: 300px;
+                background-color: tomato;
+                margin: 0 0 0 8.5px;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <div class="outer-wrapper">
+            <div class="outer clearfix">
+                <div class="menu">
+                    <ul class="menu-list">
+                        <li class="li-list1"></li>
+                        <li class="li-list2"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-wrapper">
+            <div class="header">
+                <div class="img-list">
+                    <ul class="ad">
+                        <li class="ad-list">
+                            <a href=""><img src="" alt=""></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-wrapper">
+            <ul class="nav-list">
+                <li class="list"></li>
+                <li class="list"></li>
+                <li class="list"></li>
+                <li class="list"></li>
+                <li class="list"></li>
+            </ul>
+        </div>
+
+        <div class="user-wrapper">
+            <div class="user">
+                <div class="user-info"></div>
+                <ul class="add">
+                    <li class="imgs">
+                        <a href="#"><img src="" alt=""></a>
+                    </li>
+                    <li class="imgs">
+                        <a href="#"><img src="" alt=""></a>
+                    </li>
+                    <li class="imgs">
+                        <a href="#"><img src="" alt=""></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+
+
+    </body>
+</html>

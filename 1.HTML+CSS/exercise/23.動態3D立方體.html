@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>立方體</title>
+        <link rel="stylesheet" href="./fontawesome/css/all.css">
+        <style>
+
+            /*  有立體感時需設置視距 */
+            html{
+                perspective: 800px;
+            }
+
+
+             /* 設置左右兩邊 */
+            .cube-wrapper{
+                width: 200px;
+                height: 200px;
+                /* background-color: #bfa; */
+                margin: 100px auto;
+                /* 此時設置 anination，只會有2D平面轉動效果，因transform是平面旋轉 */
+                animation: rotate infinite 7s linear alternate;
+                /* 設置成立體3D變型效果 */
+                transform-style:preserve-3d;
+            }
+
+            .cube-wrapper > div{
+                width: 200px;
+                height: 200px;
+                position: absolute;
+                /*
+                    opacity:設置整個元素的透明度。
+                    rgba：設置顏色的透明度。
+                */
+                opacity:0.7;
+            }
+
+            /* 設置圖片貼近邊線，非貼近基線 */
+            img{
+                vertical-align: top;
+            }
+
+            /*第一張圖片設置為面向右rotateY(90deg)，此時圖片再中線面向右，故需再設置使其與右邊框
+                對齊(前推) translateZ(100px)。 */
+            .box1{
+                transform: rotateY(90deg) translateZ(100px);
+            }
+
+            /*第二張圖片設置為面向左rotateY(-90deg)，此時圖片再中線面向左，故需再設置使其與左邊框
+                對齊(前推) translateZ(100px)。 */
+            .box2{
+                transform:rotateY(-90deg) translateZ(100px);
+            }
+
+            /*第三張圖片設置為面朝上rotateX(90deg)，此時圖片再中線面朝上，故需再設置使其與上邊框
+                對齊(前推) translateZ(100px)。 */
+            .box3{
+                transform:rotateX(90deg) translateZ(100px);
+            }
+
+            /*第四張圖片設置為面朝下rotateX(-90deg)，此時圖片再中線面朝下，故需再設置使其與下邊框
+                對齊(前推) translateZ(100px)。 */
+                .box4{
+                transform:rotateX(-90deg) translateZ(100px);
+            }
+
+             /*第五張圖片設置為面向後rotateY(180deg)，此時圖片再中線面向後，故需再設置使其與後邊框
+                對齊(前推) translateZ(100px)。 */
+            .box5{
+                transform: rotateY(180deg) translateZ(100px);
+            }
+
+            /*第六張圖片設置為面向前rotateY(180deg)，此時圖片再中線面向前，故需再設置使其與前邊框
+                對齊(前推) translateZ(100px)。 */
+            .box6{
+                transform: rotateY(0deg) translateZ(100px);
+            }
+
+            @keyframes rotate{
+                from{
+                    transform:rotateX(0deg) rotateZ(0deg);
+                }
+                to{
+                    transform:rotateX(360deg) rotateZ(360deg);
+                }
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <!-- 創建一個外部容器 -->
+        <div class="cube-wrapper">
+            <!-- 引入圖片-->
+            <!-- 第一步：先設置左右兩邊的圖片 -->
+            <div class="box1">
+                <img src="./img/22/1.jpg">
+            </div>
+            <div class="box2">
+                <img src="./img/22/2.jpg">
+            </div>
+
+            <!-- 第二步：先設置上下兩邊的圖片 -->
+            <div class="box3">
+                <img src="./img/22/3.jpg">
+            </div>
+            <div class="box4">
+                <img src="./img/22/4.jpg">
+            </div>
+
+            <!-- 第三步：先設置前後兩邊的圖片 -->
+            <div class="box5">
+                <img src="./img/22/5.jpg">
+            </div>
+            <div class="box6">
+                <img src="./img/22/6.jpg">
+            </div>
+        </div>
+
+
+    </body>
+</html>

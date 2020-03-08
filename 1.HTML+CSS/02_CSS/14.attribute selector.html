@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>屬性選擇器[] attribute selector</title>
+
+        <style>
+        /* 
+        ※ 屬性選擇器[]：
+
+            1.[屬性名]：選擇含有指定屬性的元素
+                - 語法：[title]、*[title]、p[title]
+
+            2.[屬性名=屬性值]：選擇函有指定屬性和屬性值的元素
+                - 語法：[title=a]、*[title=abc]、p[title=hi]
+
+            3.[屬性名^=屬性值]：選擇屬性值以指定值開頭的元素
+                - 語法：[title^=a]、*[title^=abc]、p[title^=h]
+
+            4.[屬性名$=屬性值]：選擇屬性值以指定值結尾的元素
+                - 語法：[title$=c]、*[title$=lle]、p[title$=ly]
+
+            5.[屬性名*=屬性值]：選擇屬性值中含有某任一值的元素
+                - 語法：[title*=g]、*[title*=e]、p[title*=l]
+            
+            ※ 使用 title屬性名 時，鼠標移到文字上會顯示出 屬性值，須留意！
+        */
+            [title]{
+                color: darkblue;
+            }
+
+            p[title=abc]{
+                color: darkgoldenrod;
+            }
+
+            p[title^=a]{
+                text-decoration: underline;
+            }
+
+            p[title$=x]{
+                font-size: 30px;
+            }
+
+            p[title*=i]{
+                color: darkgreen;
+            }        
+        </style>
+
+    </head>
+    <body>
+    
+        <p title="utf">昔人已乘黃鶴去，</p>
+        <p title="abc">此地空餘黃鶴樓。</p>
+        <p title="abcx">黃鶴一去不復返，</p>
+        <p title="sayx">白雲千載空悠悠。</p>
+        <p title="hiy">晴川歷歷漢陽樹，</p>
+        <p title="div1">芳草萋萋鸚鵡洲。</p>
+        <p title="p1">日暮鄉關何處是？</p>
+        <p>煙波江上使人愁。</p>
+
+    </body>
+</html>

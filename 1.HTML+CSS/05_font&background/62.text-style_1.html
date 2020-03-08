@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>文本樣式：水平、垂直</title>
+    <style>
+    /*
+        text-align：設置文本的水平對齊。
+            - 可選值：
+                1.left：左側對齊。
+                2.right：右側對齊。
+                3.center：居中對齊。
+                4.justify：兩端對齊 (比較少用)。
+    */
+
+    .box1{
+        width: 600px;
+        font-size: 20px;
+        border:1px red solid;
+        /* text-align:left; */
+        /* text-align:right; */
+        /* text-align:center; */
+        text-align:justify;
+    }
+
+    /*
+        vertical-align：設置文本的垂直對齊。
+            - 可選值：
+                1.baseline：默認值，基線對齊，因每個字體設計風格不同，會有不一樣高度的基線。
+                2.top：頂部對齊。
+                3.bottom：底部對齊。
+                4.middle：居中對齊，非嚴格意義上的居中對齊，而是一字母「x」的中線與基線對齊，
+                  故不太會使用此屬性值來垂直居中。
+                5.直接輸入數值。
+    */
+
+    .box2{
+        font-size: 20px;
+    }
+
+    .box2 span{
+        font-size: 15px;
+        color:red;
+        /* vertical-align:baseline; */
+        /* vertical-align:top; */
+        /* vertical-align:bottom; */
+        vertical-align:middle;
+        /* vertical-align:2px; */
+    }
+
+    /*
+    ※※當插入圖片後，圖片的底部其實是與「基線」對準的，非實際上的字體框底部，所以看起來會有一小空格(非內邊距、邊框等等)，
+        此時可以使用 vertical-align 來使圖片貼齊頂部、底部。
+    */
+
+    p.p1 , p.p2{
+        border:1px red solid;
+    }
+
+    p .img2{
+        vertical-align:top;
+        /* vertical-align:bottom; */
+    }
+
+
+
+    </style>
+
+</head>
+<body>
+
+    <div class="box1">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+    </div>
+    <br />
+    <hr />
+    <br />
+    <div class="box2">
+        我家的後面有一個hyx<span>很大的園</span>，相傳叫作百草園。現在是早已並1屋子一起賣給朱文公的子孫2了，連那最末次的相見也已經隔了七八年，其中似乎確鑿3只有一些野草；但那時卻是我的樂園。
+    </div>
+    <br />
+    <hr />
+    <p>● 當插入圖片後，圖片的底部其實是與「基線」對準的，非實際上的字體框底部，所以看起來會有一小空格(非內邊距、邊框等等)，此時可以使用 vertical-align 來使圖片貼齊頂部、底部。</p>
+    <p class="p1">
+        <img src="../exercise/img/03/3-1.網易新聞圖.jpg" alt="">
+    </p>
+    <br />
+    <hr />
+    <p>↓ 使用 vertical-align：top or bottom; 來貼齊頂部或底部，這樣小空格就會不見。</p>
+    <p class="p2">
+        <img class="img2" src="../exercise/img/03/3-1.網易新聞圖.jpg" alt="">
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>W3c水平導航條的彈性盒布局方式</title>
+        <link rel="stylesheet" href="./css/reset.css">
+        <style>
+
+            .nav{
+                width: 1210px;
+                height: 48px;
+                line-height: 48px;
+                margin: 50px auto;
+                background-color: #e8e7e3;
+                /* 設置為彈性容器 */
+                display:flex;
+            }
+
+            li{
+                /* 設置彈性元素的伸縮屬性 */
+                flex-grow:1;
+            }
+
+            .nav a{
+                display: block;
+                text-decoration:none;
+                text-align: center;
+                color:#808080;
+            }
+
+            .nav a:hover{
+                color:#fff;
+                background-color: #636363;
+            }
+
+
+
+
+        </style>
+    </head>
+    <body>
+
+        <ul class="nav">
+            <li><a href="#">HTML/CSS</a></li>
+            <li><a href="#">Browser Side</a></li>
+            <li><a href="#">Server Side</a></li>
+            <li><a href="#">Programmig</a></li>
+            <li><a href="#">XML</a></li>
+            <li><a href="#">Web building</a></li>
+            <li><a href="#">Reference</a></li>
+        </ul>
+
+    </body>
+</html>

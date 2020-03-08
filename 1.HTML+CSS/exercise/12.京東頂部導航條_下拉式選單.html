@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>京東頂部導航條</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <link rel="stylesheet" href="./fontawesome/css/all.css">
+
+        <style>
+
+            .clearfix::before,
+            .clearfix::after{
+                content:"";
+                display:table;
+                clear:both;
+            }
+
+            .top-bar-wrapper{
+                width: 100%;
+                font:12px "Microsoft YaHei", tahoma, arial, "Hiragino Sans GB", "\\5b8b体", sans-serif;
+                line-height: 30px;
+                background-color: rgb(227, 228, 229);
+                border-bottom:1px rgb(221, 221, 221) solid;
+            }
+
+            .top-bar{
+                width:1190px;
+                height: 30px;
+                margin: 0 auto;
+            }
+
+
+            .location{
+                width: 64px;
+                float: left;
+                position: relative;
+                /* border: 1px solid transparent;
+                border-bottom: none; */
+            }
+
+            .current-city{
+                height: 29px;
+                padding: 0 7px ;
+                position: relative;
+                z-index: 9999;
+                border-right: -2px;
+            }
+
+            .location:hover .current-city{
+                background-color: white;
+                border: 1px solid rgb(204, 204, 204);
+                border-bottom: none;
+            }
+
+            .city-list{
+                position: absolute;
+                top:29px;
+                z-index: 999;
+            }
+
+            .location:hover .city-list{
+                display:block;
+            }
+
+            .location .fas,
+            .location a:hover{
+                color:#f10215;
+            }
+
+            .location .fas{
+                font-size: 14px;
+            }
+
+            .city-list{
+                width: 300px;
+                height: 416px;
+                background-color: white;
+                border:1px solid rgb(204, 204, 204);
+                box-shadow:1px 1px 0.2 rgba(0,0,0,0.1);
+                display: none;
+            }
+
+
+            .shortcut{
+                float:right;
+            }
+
+            .top-bar li{
+                float:left;
+            }
+
+            .top-bar .line{
+                width: 1px;
+                height: 10px;
+                background-color: #999;
+                margin: 10px 12px 0px;
+            }
+
+            .top-bar i{
+                margin-left: 2px;
+            }
+
+            .top-bar a, span ,i{
+                text-decoration: none;
+                color: #999;
+            }
+
+            .top-bar a.login{
+                margin-right: 3px;
+            }
+
+            .top-bar a:hover,
+            .top-bar a.highlight{
+                color:#f10215;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <div class="top-bar-wrapper">
+            <div class="top-bar clearfix">
+                <div class="location">
+                    <div class="current-city">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="javasrcipt:;">台灣</a>
+                    </div>
+
+                    <!-- 下拉式選單 -->
+                    <div class="city-list"></div>
+                </div>
+
+                <ul class="shortcut">
+                    <li>
+                        <a class="login" href="javasrcipt:;">你好，請登錄</a>
+                        <a class="highlight" href="javasrcipt:;">免費註冊</a>
+                    </li>
+                    <li class="line"></li>
+
+                    <li>
+                        <a href="javasrcipt:;">我的訂單</a>
+                    </li>
+                    <li class="line"></li>
+
+                    <li>
+                        <a href="javasrcipt:;">我的京東</a>
+                        <i class="fas fa-angle-down"></i>
+                    </li>
+                    <li class="line"></li>
+
+                    <li>
+                        <a href="javasrcipt:;">京東會員</a>
+                    </li>
+                    <li class="line"></li>
+
+                    <li>
+                        <a class="highlight" href="javasrcipt:;">企業採購</a>
+                        <i class="fas fa-angle-down"></i>
+                    </li>
+                    <li class="line"></li>
+
+                    <li>
+                        <span>客戶服務</span>
+                        <i class="fas fa-angle-down"></i>
+                    </li>
+                    <li class="line"></li>
+
+                    <li>
+                        <span>網站導航</span>
+                        <i class="fas fa-angle-down"></i>
+                    </li>
+                    <li class="line"></li>
+
+                    <li> <span>手機京東</span></li>
+
+                </ul>
+            </div>
+        </div>
+
+
+    </body>
+</html>

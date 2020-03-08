@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>瀏覽器的默認樣式</title>
+
+        <!--
+        ※※ 重置瀏覽器默認樣式的文件(2種)，引入的 <link> 要放在 <style> 上方，且擇其一用。
+            - resrt.css：直接去除整個瀏覽器的默認樣式(最常用)。
+            - normalize.css：將瀏覽器的默認樣式進行統一樣式。
+        -->
+        <link rel="stylesheet" href="./css/reset.css" />
+        <!-- <link rel="stylesheet" href="css/normalize.css" /> -->
+
+        <style>
+        
+            .box1{
+                width: 100px;
+                height: 100px;
+                border:1px black solid;
+            }
+
+        </style>
+
+        <style>
+        /* 
+        ※ 瀏覽器的默認樣式：
+            - 通常情況下，瀏覽器都會為元素設置一些默認樣式，不同瀏覽器會有不同的默認樣式。
+            - 默認樣式的存在會影響到頁面的布局，因此在編寫網頁時必須要去除瀏覽器的默認樣式
+              (PC端網頁為主)。
+            - 主要要去除的默認樣式屬性為 margin、padding。
+
+            - 去除方式(2種)：
+                1.重置樣式表：
+                    網上綜合提供的樣式文件(.css)，再透過link引入使用，二者擇其一，要寫再
+                    「style標籤」的上方。
+                        - resrt.css：直接去除整個瀏覽器的默認樣式(最常用)。
+                        - normalize.css：將瀏覽器的默認樣式進行統一樣式。
+                
+                2.手動去除：
+                    若是編寫簡單網頁時，可直接使用通配選擇器去除默認樣式，其它默認樣式再遇
+                    見時，再額外編寫去除，如下。
+                        - 語法：
+                                *{
+                                    margin:0px;
+                                    padding:0px;
+                                }
+
+                                ul{
+                                    list-style:none;
+                                }
+                                ※ list-style屬性：表示所有列表樣式。
+        */
+
+        
+        </style>
+
+    </head>
+    <body>
+
+        <div class="box1"></div>
+        
+        <p>我是P1</p>
+        <p>我是P2</p>
+        <p>我是P2</p>
+
+        <ul>
+            <li>列表1</li>
+            <li>列表2</li>
+            <li>列表3</li>
+        </ul>
+        
+    </body>
+</html>

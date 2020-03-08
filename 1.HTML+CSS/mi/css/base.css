@@ -1,0 +1,30 @@
+/* 通用樣式 */
+.clearfix::before
+.clearfix::after{
+    content:"";
+    display: block;
+    clear:both;
+}
+
+/* 去除超鏈接下划線，並先通一顏色，之後在個別調整 */
+a{
+    text-decoration: none;
+    color:#333;
+}
+
+body{
+    font:14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+    color:#333;
+
+    /* 設置body最小寬度，使其於頁面縮小於1226時，不會變位或造成溢出等奇怪現象 */
+    min-width: 1226px;
+}
+
+/* 設置一個類，用來表示中間容器的寬度 */
+.w{
+    /* 固定容器的寬度 */
+    width: 1226px;
+
+    /* 設置容器居中 */
+    margin: 0 auto;
+}

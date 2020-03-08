@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>徑向漸變(中心向外呈放射性漸變效果)</title>
+
+        <link rel="stylesheet" href="../source/css/reset.css">
+
+        <style>
+
+            .box1{
+                width: 300px;
+                height: 300px;
+
+                /*
+                    radial-gradient()：徑向漸變(中心向外放射性漸變的效果)。
+                        - 默認情況下徑向漸變的中心形狀是根據元素的形狀(大小)來計算的。
+                            - 正方形 --> 圓形。
+                            - 長方形 --> 橢圓形。
+                        - 可以手動指定徑向漸變(中心)的大小：
+                            1.circle：圓形。
+                            2.ellipse：橢圓形。
+
+                        - 也可以指定漸變(中心)的位置：
+                        - 語法：
+                            radial-gradient(中心大小=形狀 at 位置=座標, 顏色 位置, 顏色 位置);
+                                - 大小(即中心的形狀，可省略)：
+                                    1.circle：圓形。
+                                    2.ellipse：橢圓形。
+                                    3.closest-side：近邊，漸變範圍只到最近的邊。
+                                    4.closest-corner：近角，漸變範圍只到最近的角。
+                                    5.farthest-side：遠邊，漸變範圍到最遠的邊。
+                                    6.farthest-corner：遠角，漸變範圍到最遠的角。
+                                    7.px。
+
+                                - 位置(即中心座標，可省略)：
+                                    top right bootme left center px。
+                */
+                background-image:radial-gradient(red,#bfa);
+
+            }
+
+            .box2{
+                width: 300px;
+                height: 500px;
+                background-image:radial-gradient(red,#bfa);
+            }
+
+            .box3{
+                width: 300px;
+                height: 200px;
+                background-image:radial-gradient(closest-side at 50px 50px ,red,#bfa);
+            }
+
+            .box4{
+                width: 300px;
+                height: 200px;
+                background-image:radial-gradient(farthest-side at 50px 50px ,red,#bfa);
+            }
+
+            .box5{
+                width: 300px;
+                height: 200px;
+                background-image:radial-gradient(100px 100px at 10px 50px ,red,#bfa);
+            }
+
+
+        </style>
+    </head>
+    <body>
+
+        <div class="box1"></div>
+        <hr />
+        <br />
+        <div class="box2"></div>
+        <hr />
+        <br />
+        <div class="box3"></div>
+        <hr />
+        <br />
+        <div class="box4"></div>
+        <hr />
+        <br />
+        <div class="box5"></div>
+        <hr />
+        <br />
+
+    </body>
+</html>

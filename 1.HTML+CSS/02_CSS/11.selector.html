@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+
+    <title>選擇器 selector</title>
+
+    <style>
+    /* 
+    ● 選擇器種類(selector)：單種、複合式、屬性
+
+    1.元素選擇器：
+      - 作用：根據標籤名來選中指定的元素，僅能單一個元素且會將選中所有元素段落應用樣式
+      - 語法：標籤名{}
+      - 例子：p{}、h1{}、div{}
+    */
+    p{
+        color:red;
+    }  
+    
+    /* 
+    2.id選擇器(id屬性值只會有一個，同一個id不可重覆使用)：
+       - 作用：根據元素的id屬性值選中一個元素
+       - 語法：#id屬性值{}、『#』開頭
+       - 例子：#fblue{}、#fbox{}、#fgreen{}
+    */
+    #fblue{
+        color: blue;
+    }
+
+    /* 
+    3.類選擇器(class選擇器，同一個class可重覆使用-推荐)：
+       - 作用：根據元素的class屬性值選中一組元素 (將多個單元素組成一組，亦可單用)
+               ，也可同時為一個元素指定多個class屬性，使用空格隔開  
+       - 語法：.class屬性值{}、『.』開頭
+       - 例子：.fgreen{}、.ftomato{}、fabc{}
+    */
+    .fgreen{
+        color: green;
+    }
+
+    .fsize{
+        font-size: 10px;
+    }
+
+    /* 
+    4.通配選擇器：
+       - 作用：選中頁面中的所有元素，不會覆蓋已有選擇器的屬性值，但沒有的屬性值會套用，
+               如下方例子中的 text-decoration: underline(下底線)會全套用
+       - 語法：*{}
+       - 例子：*{}
+    */
+    *{
+        color: blueviolet;
+        text-decoration: underline;
+    }
+
+    </style>
+</head>
+
+<body>
+
+  <h1 class="fgreen">詩詞</h1>
+    <p>昔人已乘黃鶴去，</p>
+    <p id="fblue">此地空餘黃鶴樓。</p>
+    <p>黃鶴一去不復返，</p>
+    <p class="fgreen">白雲千載空悠悠。</p>
+    <p class="fgreen  fsize">晴川歷歷漢陽樹，</p>
+    <p>芳草萋萋鸚鵡洲。</p>
+    <p>日暮鄉關何處是？</p>
+    <p>煙波江上使人愁。</p>
+
+  <h2>唐代崔颢所作七言律诗</h2>
+    
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>簡單布局1</title>
+
+        <link rel="stylesheet" href="../03_layout/css/reset.css">
+
+        <style>
+
+            .main{
+                width: 800px;
+                height: 400px;
+                background-color: silver;
+                margin: 50px auto;
+                border:dashed 5px red;
+            }
+
+            .main .left{
+                width: 180px;
+                height: 380px;
+                margin:10px 10px;
+                background-color: tan;
+                float: left;
+
+            }
+
+            .main .center{
+                width: 400px;
+                height: 200px;
+                margin: 10px 0px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            .main .right{
+                width: 180px;
+                height: 380px;
+                margin-right: 10px;
+                margin-top: 10px;
+                background-color: blanchedalmond;
+                float: right;
+            }
+
+            .main .center-left{
+                width: 195px;
+                height: 170px;
+                margin-right: 10px;
+                margin-bottom: 10px 0;
+                background-color: teal;
+                float: left;
+            }
+
+            .main .center-right{
+                width: 195px;
+                height: 170px;
+                margin-bottom: 10px 0;
+                background-color:brown;
+                float: left;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <div class="main">
+            <div class="left"></div>
+            <div class="center"></div>
+            <div class="right"></div>
+            <div class="center-left"></div>
+            <div class="center-right"></div>
+
+        </div>
+
+
+    </body>
+</html>

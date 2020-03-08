@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+html {
+  font-style: 5.33333333vw;
+  background-color: #EFF0F2;
+}
+.w,
+.top-bar,
+.banner,
+.main-bar,
+.course-wrapper {
+  width: 17.325rem;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+a {
+  text-decoration: none;
+}
+.top-bar {
+  display: flex;
+  height: 4.375rem;
+  line-height: 4.375rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.top-bar a {
+  color: #24253d;
+  font-size: 1.25rem;
+}
+.top-bar a i {
+  color: #999;
+  font-size: 0.75rem;
+}
+.banner img {
+  width: 100%;
+}
+.main-bar {
+  height: 8.225rem;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-content: space-evenly;
+}
+.main-bar a {
+  width: 8.175rem;
+  height: 2.6rem;
+  line-height: 2.6rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  font-size: 0.85rem;
+}
+.main-bar i {
+  margin: 0 0.4rem 0 0.9rem;
+}
+.main-bar .Mcourses {
+  background-color: #f97053;
+}
+.main-bar .star {
+  background-color: #cd6efe;
+}
+.main-bar .sub {
+  background-color: #fe4479;
+}
+.main-bar .download {
+  background-color: #1bc4fb;
+}
+.course-wrapper {
+  margin-top: 1rem;
+}
+.Lcourse-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.Lcourse-bar .Lcourse {
+  font-size: 1rem;
+  color: #24253d;
+}
+.Lcourse-bar .Lcourse::before {
+  content: "l";
+  color: #3a84ff;
+  font-size: 1rem;
+  padding-right: 0.25rem;
+}
+.Lcourse-bar a {
+  font-size: 0.75rem;
+  color: #656565;
+}
+.cover-wrapper {
+  width: 18rem;
+  display: flex;
+  overflow: auto;
+}
+.cover-bar {
+  width: 7.25rem;
+  height: 8.45rem;
+  padding: 0 0.55rem;
+  background-color: #fff;
+  box-shadow: 0 0 0.1rem rgba(0, 0, 0, 0.3);
+  border-radius: 0.25rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  margin-right: 0.5rem;
+  flex: none;
+}
+.cover-bar img {
+  width: 100%;
+  vertical-align: top;
+}
+.cover-bar .title {
+  font-size: 0.7rem;
+  color: #24253d;
+}
+.cover-bar .user-bar {
+  display: flex;
+  align-items: center;
+}
+.cover-bar .user-phto {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+.cover-bar .nikename {
+  font-size: 0.65rem;
+  color: #969393;
+  margin-left: 0.4rem;
+}
+/*# sourceMappingURL=./mobile_style.css.map */

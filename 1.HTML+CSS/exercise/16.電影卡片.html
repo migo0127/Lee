@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <link rel="stylesheet" href="./fontawesome/css/all.css">
+        <style>
+
+            .outer-wrapper{
+                width: 240px;
+                margin: 50px auto;
+                box-shadow:0 0 10px rgba(0,0,0,0.3)
+            }
+
+            .img-wrapper img{
+                width: 100%;
+                vertical-align: bottom;
+            }
+
+            .outer-wrapper .info{
+                padding: 0 18px;
+                color:#acaaaa;
+                font-size: 14px;
+                font-family: "Times New Roman", sans-serif;
+            }
+
+            .info .title{
+                color:#717171;
+                font-size: 18px;
+                margin: 13px 0 15px 0;
+            }
+
+            .info .category::before{
+                content:"\f3c5";
+                font-family:"Font Awesome 5 Free";
+                font-weight: 900;
+                margin: 0 7px 0 4px;
+            }
+
+            .info .intro{
+                line-height: 20px;
+                margin: 16px 0 16px 4px;
+            }
+
+            .star-wrapper{
+                height: 46px;
+                line-height: 46px;
+                border: 1px solid #e9e9e9;
+                color:#ddd;
+                padding: 0 16px;
+            }
+
+            .star-wrapper .star{
+                float: left;
+            }
+
+            .star-wrapper .light{
+                color:#b9cb41;
+            }
+
+            .star-wrapper .fb{
+                float: right;
+            }
+        </style>
+
+    </head>
+    <body>
+
+        <div class="outer-wrapper">
+            <div class="img-wrapper">
+                <img src="./img/16/1.jpg" alt="">
+            </div>
+            <div class="info">
+                <h2 class="title">Animation films</h2>
+                <h3 class="category">Animations</h3>
+                <div class="intro">Lorem lpsum is simply dummy text of the printing & typesetting industry.</div>
+            </div>
+            <div class="star-wrapper">
+                <ul class="star">
+                    <li class="fas fa-star light"></li>
+                    <li class="fas fa-star light"></li>
+                    <li class="fas fa-star "></li>
+                    <li class="fas fa-star "></li>
+                </ul>
+                <ul class="fb">
+                    <li class="fab fa-facebook"></li>
+                </ul>
+            </div>
+        </div>
+
+    </body>
+</html>

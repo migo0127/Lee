@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>字體(font)的簡寫屬性</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+        /*
+            font：可以設置字體相關的所有屬性。
+                - 語法：
+                    font: 字體粗細 字體風格(斜體) 字體大小/行高 字體族。
+                ※ 字體大小 與 字體族 一定要寫在最後兩個！
+                ※ 其中 「字體粗細、自體風格、行高」可省略不寫，不寫時使用默認值。
+
+                EX：
+                    font: bold italic 50px/2 "Microsoft Yahei", Helvetica, Arial,serif;
+
+                    省略「字體粗細、自體風格、行高」不寫：
+                    font: 50px "Microsoft Yahei", Helvetica, Arial,serif;
+
+                    實際上「字體粗細、自體風格、行高」是應用默認值，是有效果的 ↓
+                    font: normal normal 50px(/瀏覽器默認值 1.xxx) "Microsoft Yahei", Helvetica, Arial,serif;
+                    → 所以當「字體粗細、自體風格、行高」寫在簡寫前時，效果會被覆蓋掉，留意！
+
+            font-weight：字重、字體的加粗效果。
+                - 可選值：
+                    normal：默認值，不加粗。
+                    bold：加粗。
+                    bolder：比加粗更粗。
+                    lighter：比正常更細。
+                    100~900：數字越大越粗，但通常不使用。
+
+            font-style：字體的風格，通常只選以下2種使用。
+                - 可選值：
+                    normal：默認值，正常標準文字樣式。
+                    italic：斜體。
+        */
+
+            div{
+                font: italic bold 40px/2 "Microsoft Yahei", Helvetica, Arial, serif;
+                /* font:50px "Microsoft Yahei", Helvetica, Arial, serif; */
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <div>
+            今天天氣好冷～ Hello, How are you？
+        </div>
+
+    </body>
+</html>

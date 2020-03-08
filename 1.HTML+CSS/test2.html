@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>豆辦-聲入人心小組</title>
+    <link rel="stylesheet" href="/source/css/reset.css">
+    <link rel="stylesheet" href="./source/fontawesome/fontawesome-free-5.12.0-web/css/all.min.css">
+    <style>
+
+        a{
+            text-decoration: none;
+        }
+
+        .top-wrap{
+            width: 100%;
+            height: 28px;
+            background-color: #545652;
+        }
+
+        .container{
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .left-items , .right-items{
+            line-height: 28px;
+            display: flex;
+        }
+
+        .left-items > li a{
+            display: block;
+            padding: 0 12px;
+            color:#D5D5D5;
+            font-size: 12px;
+        }
+
+        .left-items  li:hover > a{
+            color:#fff;
+        }
+
+        .right-items{
+            margin-right: 18px;
+            position: relative;
+        }
+
+        .right-items li > a{
+            display: block;
+            padding: 0 12px;
+            color:#D5D5D5;
+            font-size: 12px;
+        }
+
+        .right-items li:first-child > a{
+            padding: 0 8px;
+        }
+
+        .right-items li:hover > a{
+            color:#fff;
+        }
+
+        .qrcode-wrap{
+            width: 253px;
+            height: 477px;
+            border: 1px solid #E6E6E6;
+            text-align: center;
+            position: absolute;
+            top:28px;
+            left:-80px;
+            display: none;
+        }
+
+        .qrcode:hover .qrcode-wrap{
+            display: block;
+        }
+
+        .qrcode-wrap .img-logo{
+            width: 180px;
+            height: 200px;
+            margin: 20px auto;
+        }
+
+
+        .qrcode-wrap .img-qrcode{
+            width: 180px;
+            height: 180px;
+            margin: 10px auto;
+        }
+
+        .qrcode-wrap img{
+            width: 100%;
+            vertical-align: bottom;
+        }
+
+        .qrcode-wrap .txt > a{
+            color:#3377AA;
+            font-size: 12px;
+        }
+
+        .right-items .acc{
+            padding: 0 12px;
+            color:#D5D5D5;
+            font-size: 12px;
+        }
+
+        .right-items .acc:hover{
+            color:#fff;
+        }
+
+        .right-items i{
+            margin-left: 2px;
+        }
+
+        .acc:hover .user-wrap{
+            display: block;
+        }
+
+        .acc > .user-wrap{
+            width: 90px;
+            height: 162px;
+            border: solid 1px rgba(0,0,0,0.1);
+            padding-top: 10px;
+            box-sizing: border-box;
+            text-align: center;
+            position: absolute;
+            top: 28px;
+            right:8px;
+            display: none;
+        }
+
+
+        .acc > div a{
+            display: block;
+            color: #000;
+        }
+
+        .acc a:hover{
+            background-color: rgba(0,0,0,0.1);
+        }
+
+
+
+    </style>
+
+
+</head>
+<body>
+
+    <div class="top-wrap">
+        <div class="container">
+            <ul class="left-items">
+                <li>
+                    <a href="#">豆瓣</a>
+                </li>
+                <li>
+                    <a href="#">读书</a>
+                </li>
+                <li>
+                    <a href="#">电影</a>
+                </li>
+                <li>
+                    <a href="#">音乐</a>
+                </li>
+                <li>
+                    <a href="#">同城</a>
+                </li>
+                <li>
+                    <a href="#">小组</a>
+                </li>
+                <li>
+                    <a href="#">阅读</a>
+                </li>
+                <li>
+                    <a href="#">FM</a>
+                    </li>
+                <li>
+                    <a href="#">时间</a>
+                </li>
+                <li>
+                    <a href="#">豆品</a>
+                </li>
+                <li>
+                    <a href="#">更多</a>
+                </li>
+            </ul>
+            <ul class="right-items">
+                <li class="qrcode">
+                    <a href="#">下载豆瓣客户端</a>
+                    <div class="qrcode-wrap">
+                        <div class="img-logo">
+                            <img src="./test/豆瓣logo.jpg" alt="">
+                        </div>
+                        <div class="img-qrcode">
+                            <img src="./test/豆瓣QRcode.jpg" alt="">
+                        </div>
+                        <div class="txt">
+                            <a href="#">iphone</a>
+                            <span>‧</span>
+                            <a href="#">Android</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">提醒</a>
+                </li>
+                <li>
+                    <a href="#">豆邮</a>
+                </li>
+                <li>
+                    <div class="acc"> 我的账号<i class="fas fa-caret-down"></i>
+                        <div class="user-wrap">
+                            <div><a href="#">个人主页</a></div>
+                            <div><a href="#">我的订单</a></div>
+                            <div><a href="#">我的钱包</a></div>
+                            <div><a href="#">帐号管理</a></div>
+                            <div><a href="#">退出</a></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

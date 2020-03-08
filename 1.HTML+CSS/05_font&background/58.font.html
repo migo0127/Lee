@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>字體 font</title>
+        <style>
+
+            /*
+                @font-face：可以將存在服務器中的字體直接提供給用戶下載使用(不建議)。
+                    - 造成問題：
+                        1.加載速度。
+                        2.版權。
+                        3.字體格式 (.ttf .woff .svg .eot .otf 等等)。
+                    - 語法：
+                        @font-face{
+                            font-family："你自行為該字體取的名字，建議使用英文";
+                            src:url("路徑") format("字體格式完整名稱，非.ttf，但format可省略不寫");
+                        }
+            */
+            @font-face{
+                font-family:"myfont";
+                src:url("./font/ZCOOLKuaiLe-Regular.ttf") format("truetype");
+            }
+
+            p{
+            /*
+                字體相關樣式：
+                    - color：用來設置字體言色，但嚴格說起來為「前景色」。
+                    - font-size：字體的大小，和font-size相關的單位，主要有以下兩個 ↓
+                        1.em：相對單位，每個子元素透過「倍數」乘以父元素的 px 值。。
+                            EX：父元素font-size:16px、子元素font-size:2em;
+                            子元素字體大小為 16px*2em = 38px。
+
+                        2.rem：相對單位，每個元素透過「倍數」乘以根元素的 px 值。
+                            EX：根元素 font-size:14px、當前元素font-size:10rem
+                            當前元素字體大小為 14px*10rem = 140px。
+
+                    - font-family：字體家族(字體的格式)，通常寫在body標籤。
+                        - 特殊可選值：
+                            1.serif：襯線字體，以 A 為例，所謂的襯線字體即為 A 的兩個 /\ 底部
+                                     會加上_ _這類多橫槓或 K 上下方 Ⅰ 有-的字體。
+
+                            2.sans-serif：非襯線字體，即沒有多橫槓或勾類的 A K S 直筆的字體。
+
+                            3.monospace：等寬字體，每個字體間隔相同寬度。
+
+                        ※ 以上這些為整個大類別，非指定某一個字體，而是只某一個字體類別，再由瀏覽
+                           器自行選擇該類別底下的字體。
+                           EX：serif類別底下有10種字體，瀏覽器自行在這10種字體裡選1種字體應用。
+
+                        - font-family：可以同時指定多個字體，使用「,」隔開，若字體屬性值本身有空格
+                        ，則建議加上""，以避免瀏覽器發生解讀錯誤，字體依序應用生效。
+
+                        奇摩字體設置：
+                        font-family: "Helvetica Neue", Helvetica, Arial, STHeitiTC-light, STHeiti, "Microsoft JhengHei", 微軟正黑體, sans-serif;
+
+                        Google搜索後的字體設置：
+                        font-family: arial,sans-serif;
+
+                         ※ 通常類別(serif、sans-serif、monosapace)都會放再font-family最後的選擇。
+
+            */
+
+                font-size: 30px;
+                color: tomato;
+                /* font-family:"Segoe UI", Tahoma,  Verdana, serif; */
+                font-family: myfont , sans-serif;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <p>今天天氣真好！ Hello, How are you？</p>
+
+    </body>
+</html>

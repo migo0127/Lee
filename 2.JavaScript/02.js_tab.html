@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js的編寫位置</title>
+
+    <!--
+        javascript的編寫位置有三種：
+
+            1.可以將js代碼編寫到標籤的onclick屬性中，當我們點擊按鈕時，js代碼才會執行，
+              類似「內聯樣式」。
+              雖然可以寫在標籤的屬性中，但是他們屬於結構與行為耦合，不方便維護，不推荐使用。
+                例子：
+                    <button onclick="alert('討厭，你點我幹嘛~~');">點我一下</button>
+
+                    將js代碼寫在超鏈接的href屬性中，這樣當點擊超鏈接時，會執行js代碼。
+                    <a href="javascript:alert('讓你點你就點！！')">你也點我一下</a>
+
+                    ※ <a herf="javascript:;">你也點我一下part2</a> 使超鏈接不動作，常用！
+                    ※ 留意""中要使用''，否則會有問題！
+
+            2.可以將js代碼編寫到script標籤中，類似CSS的<style>標籤。
+                例子：
+                    <script  type="text/javascript">
+
+                        alert("我是script標籤中的代碼！！");
+
+                    </script>
+     -->
+                <script>
+                    alert("我是script標籤中的代碼！！");
+                </script>
+     <!--
+            3.可以將js代碼編寫到外部js文件中，然後通過script標籤引入寫到外部文件中可以在不同
+              的頁面中同時引用，也可以利用瀏覽器的緩存機制，推荐使用。類似CSS的.css檔透過<link>引入。
+                例子：
+                    <script type="text/javascript src="js/script.js"></script>
+
+                    ※ script標籤一旦用於引入外部文件了，就不能在編寫代碼，即使編寫了瀏覽器也會
+                       忽略，如果需要則可以在創建一個新的script標籤用於編寫內部代碼。
+
+                       例子：
+                            <script type="text/javascript" src="js/script.js">
+                                alert("我是script標籤引入的內部代碼");  <--- 此行瀏覽器會忽略不會執行。
+                            </script>
+
+                            <script>
+                                alert("我是另外新建的script內部代碼！！");
+                            </script>
+     -->
+            <script src="js/script.js"></script>
+            <script>
+                alert("我是另外新建的script內部代碼！！");
+            </script>
+
+</head>
+<body>
+    <!--
+        js代碼：內聯樣式，不推薦使用，除個別特定用法。
+     -->
+     <button onclick="alert('討厭，你點我幹嘛~~');">點我一下</button>
+     <br />
+     <a href="javascript:alert('讓你點你就點！！');">你也點我一下</a>
+     <br />
+     <a href="javascript:;">你也點我一下part2</a>
+
+</body>
+</html>

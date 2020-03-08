@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>高度塌陷問題：布局父元素浮動後</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+        /*
+        ※ 高度塌陷問題：
+            在使用浮動的布局中，父元素的高度默認是被子元素撐開的，當子元素浮動後，其會完全脫離文檔流，
+            當子元素從文檔流中脫離時，將無法在撐起父元素的高度，導致父元素的高度丟失(高度塌陷)。
+
+            父元素高度丟失以後，其下的元素會自動上移，導致頁面的布局混亂，所以高度塌陷是浮動布局中比
+            較常見的一個問題，我們必須要進行處理。
+        */
+
+        /*
+        ※ BFC(Block Formatting Context)塊級格式化環境：
+            解決高度塌陷的方式，以下每種解法都有其副作用，後續教學也會補充更完善的作法。
+            - BFC是CSS中的一個隱含的屬性，可以為一個元素開啟BFC，開啟BFC的該元素會變成
+              「一個獨立的布局區域」，該獨立區域內部的元素自行計算應用，不與外部其他文檔
+               流計算應用，意似 開啟BFC後，該原本無高度(靠子元素內容撐開)的父元素會架起一
+               座實體牆壁，框起(包住)上方浮動的子元素高度，繼續讓其撐開自身高度，並且牆內
+               的元素自行應用效果，不與牆外的元素應用效果。
+
+            - 元素開啟BFC後的特點：
+                有多種方式，以下演示 float、display:inline-block、overflow:hidden or auto。
+
+                1.開啟BFC的元素不會被浮動元素覆蓋。
+
+                2.開啟BFC的元素，其子元素與父元素的外邊距不會重疊，意即子元素的外邊距不會
+                  在「傳遞」給父元素。
+                ※原父子元素外邊距若重疊，則子元素的外邊距設置會「傳遞」給父元素，詳見
+                    29.margin collapse.html。
+
+                3.開啟BFC的父元素可以包含浮動的子元素。
+        */
+
+            .outer1{
+                border: 5px red solid;
+            }
+
+            .inner1{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            .outer2{
+                border: 5px red solid;
+            }
+
+            .inner2{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            .outer3{
+                border: 5px red solid;
+            }
+
+            .inner3{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            .outer7{
+                border: 5px red solid;
+            }
+
+            .inner7{
+                color:blue;
+                background-color: #bfa;
+                float: left;
+            }
+
+            .outer4{
+                border: 5px red solid;
+                float: left;
+            }
+
+            .inner4{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            .box4{
+                float: left;
+            }
+
+            .outer5-1{
+                display:inline-block;
+                border: 5px red solid;
+            }
+
+            .inner5-1{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            .outer5-2{
+                display:inline-block;
+                border: 5px red solid;
+            }
+
+            .inner5-2{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            .box5-2{
+                float:left;
+            }
+
+            .outer6{
+                border: 5px red solid;
+                overflow: hidden;
+                /* overflow: auto; */
+            }
+
+            .inner6{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+            }
+
+
+
+        </style>
+    </head>
+    <body>
+        <br />
+        <h3>一、高度塌陷問題：指當布局的父元素「未設置高度」時，原本高度是由子元素內容撐開，但當其內的子元素浮動後，<br />
+            <br />
+            會造成子元素脫離文檔流，子元素的內容無法再撐開父元素(父元素的高度坍塌了！)
+        </h3>
+        <br />
+        <p>1.父元素未設置高度時，其高度由子元素內容撐開，紅色框為父元素邊框(方便查看)。</p>
+        <br />
+        <div class="outer1">
+            <div class="inner1"></div>
+        </div>
+        <hr />
+        <p>2.父元素未設置高度，子元素浮動後導致子元素脫離文檔流，其子元素內容無法在撐開父元素的高度，造成父元素高度塌陷，紅色框為父元素邊框(方便查看)。</p>
+        <br />
+        <div class="outer2">
+            <div class="inner2">我是子元素，我浮動了</div>
+        </div>
+        <br >
+        <br >
+        <br >
+        <br >
+        <br >
+        <br >
+        <hr />
+        <p>3.父元素未設置高度，子元素浮動後，父元素高度塌陷且下方元素仍會往上移，紅色框為父元素邊框(方便查看)。</p>
+        <br />
+        <div class="outer3">
+            <div class="inner3">我是子元素，我浮動了</div>
+        </div>
+        <div style="width:200px; height:200px; background-color:blanchedalmond;">我是下方元素，我沒有浮動，但我往上移了</div>
+        <br />
+        <hr />
+        <p>4.都未設置寬高的情況下：</p>
+        <br />
+        <div class="outer7">
+            <div class="inner7">我是子元素，未設置寬高，我浮動了！</div>
+        </div>
+        <div style="color: purple; background-color: blanchedalmond;">我是下方塊元素，未設置寬高，我沒有浮動，但我往上移了</div>
+        <br />
+        <hr />
+        <h3>二、解決父元素塌陷問題的辦法是開起父元素的BFC功能，有以下幾種開啟方式：但每一個解決方式都有其副作用，解法都是應用再父元素。
+        </h3>
+        <br />
+        <p>※ BFC(Bolck formating Context)：塊級格式化環境。</p>
+        <br />
+        <p>1.高度塌陷解法一(開啟BFC)：父元素及子元素都浮動，但布局的父元素會失去寬度，故此法不推薦，紅色框為父元素邊框(方便查看)。</p>
+            <br />
+        <div class="outer4">
+            <div class="inner4">我是子元素，我也浮動了</div>
+        </div>
+        <div class="box4" style="width: 200px; height: 200px; background-color:blanchedalmond;">我是下方元素，我有浮動，我往上移了，但不會覆蓋</div>
+        <br />
+        <br >
+        <br >
+        <br >
+        <br >
+        <br >
+        <br >
+        <br >
+        <br >
+        <br >
+        <br >
+        <br >
+        <hr />
+        <p>2.高度塌陷解法二(開啟BFC)：：將父元素變成行內塊元素，但父元素會失去寬度，此時，故不推薦使用，紅色框為父元素邊框(方便查看)。</p>
+        <br />
+        <div class="outer5-1">
+            <div class="inner5-1">我是子元素，我浮動了</div>
+        </div>
+        <div class=".box5-1" style="width: 200px; height: 200px; background-color:blanchedalmond;">我是下方元素，我沒有浮動，但我沒有往上移</div>
+        <br />
+        <div class="outer5-2">
+            <div class="inner5-2">我是子元素，我浮動了</div>
+        </div>
+        <div class=".box5-2" style="width: 200px; height: 200px; background-color:blanchedalmond;">我是下方元素，我浮動了，但我沒有往上移</div>
+        <hr />
+        <p>3.高度塌陷解法三(開啟BFC)：：父元素應用 overflow:hidden or auto; 紅色框為父元素邊框(方便查看)。</p>
+        <br />
+        <p>※※ 目前學習中比較推薦的解決方案，後續教學會在補充更完善的處理方式。</p>
+        <br />
+        <div class="outer6">
+            <div class="inner6">我是子元素，我浮動了</div>
+        </div>
+        <div style="width: 200px; height: 200px; background-color:blanchedalmond;">我是下方元素，我沒有浮動，但我沒有往上移</div>
+        <hr />
+
+    </body>
+</html>

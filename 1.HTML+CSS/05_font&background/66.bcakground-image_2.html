@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>背景圖片(background-image)</title>
+        <style>
+
+            .box1{
+                width: 600px;
+                height: 600px;
+                background-color: #bfa;
+                background-image:url("./img/1.jpg");
+                background-repeat:no-repeat;
+                padding:10px;
+                border:10px red double;
+                overflow:auto;
+                /* 以上這些屬性設置完後，背景圖是會包含整個「可見框」範圍，所以內邊距、邊框都有背景圖 */
+
+                /*
+                    background-clip：設置背景的範圍。
+                        - 可選值：
+                            1.border-box：默認值，背景會出現至邊框下邊。
+                            2.padding-box：背景只會出現在內容區和內邊距裡，不會出現在邊框。
+                            3.content-box：背景只會出現在內容區。
+
+                    background-origin：背景圖片偏移量的計算原點 (0,0)。
+                        - 可選值：
+                            1.padding-box：默認值，backgrounf-position會從內邊距處開始計算。
+                            2.content-box：背景圖片的偏移量從內容區處計算。
+                            3.border-box：背景圖片的偏移量從邊框處開始計算。
+
+                    ※ background-clip 與 background-origin 的可選值(名稱)是一樣的！！
+                 */
+                 background-clip:content-box;
+                 background-origin:border-box;
+                 background-position:10px 100px;
+
+                 /*
+                    background-size：設置背景圖片的大小。
+                        - 第一個值表示寬度，第二個值表示高度。
+                        - 如果只寫一個，則第二個值默認是 auto，即等比例大小。
+                        - 可選值：
+                            1.cover：圖片比例不變，將元素鋪滿。
+                            2.contain：圖片比例不變，將圖片在元素中完整顯示。
+                 */
+                 background-size:cover;
+                 /* background-size:contain; */
+                 /* background-size:100% auto; */
+                 /* background-size:350px 200px */
+                 /* background-size: auto 100%; */
+            }
+
+            .box2{
+                width: 260px;
+                height: 1000px;
+                background-color: blanchedalmond;
+                background-image:url("./img/大龙 - 53.jpg");
+                background-repeat:no-repeat;
+                /* 以上設置box2的高度會溢出父元素，所以再父元素多設置 overflow:auto; */
+
+                /*
+                    background-attachment：設置背景圖片是否跟隨元素移動 (網頁上下滾動時，是否跟著移動)。
+                        - 可選值：
+                            1.scroll：默認值，背景圖片會跟隨元素移動。
+                            2.fixed：背景會固定在頁面中，不會隨著元素移動。
+                */
+                /* background-attachment:scroll; */
+                background-attachment:fixed;
+            }
+
+            /*
+                總結：背景相關樣式設置大約有以下 8種 ↓
+
+                    1.background-color：設置背景顏色。
+                    2.backround-image：設置背景圖片。
+                    3.background-repeat：設置背景圖片重覆方式。
+                    4.background-position：設置背景圖片定位。
+                    5.background-clip：設置背景圖片的範圍(是否至內邊距、邊框)。
+                    6.background-origin：設置背景圖片的偏移量計算原點(0,0)，若有設置，
+                      則再通過background-position來設置定位。
+                    7.background-size：設置背景圖片的小大。
+                    8.background-attachment：設置背景圖片是否跟著元素一起移動。
+
+                ※※ backgroung：背景相關的簡寫屬性，所有背景相關的樣式都可以通過該樣式來設置。
+                    - 該樣式沒有順序要求，也沒有哪個屬性必須要寫，可依開發需求設置即可。
+
+                    EX：
+                        background:#bfa url("./1.jpg") no-repeat center center/50% content-box padding-box fixef;
+                     => background:背景色#bfa 背景圖為1.jpg 不重覆 背景圖片位於中間/大小為50% 依內容區作為背景圖原點 背景圖只會於內容區及內邊距顯示 不跟隨元素移動(固定)
+
+                  ※ 注意：background 的簡寫屬性有兩點需注意！！
+                        1.background-size 必須寫在 backgorund-position 的後邊，並且使用「/」隔開。
+                            EX：
+                                background:backgorund-position/background-size;
+                            => background:top left/100% auto;
+                            => 背景圖片定位在左上/背景圖片大小為100%。
+
+                        2.background-origin 與 background-clip 兩個樣式的屬性值名稱一樣，故於簡寫
+                          時，background-origin 要在 background-clip 的「前邊」。
+                            EX：
+                                background:background-origin background-clip;
+                             => background:paddind-box content-box;
+                             => 背景原點從內邊距計算  背景範圍只會在內容區中顯示。
+
+             */
+
+
+
+        </style>
+
+    </head>
+    <body>
+
+        <div class="box1">
+            <div class="box2">絨絨超可愛！</div>
+        </div>
+
+
+    </body>
+</html>

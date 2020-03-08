@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>表格：table</title>
+
+    </head>
+    <body>
+        <!--
+        在現實生活中，我們經常需要使用表格來表示一些格式化數據：
+        如 課程表、人名單、成績單....等等。
+
+        同樣在網頁中我們也需要使用表格，我們通過table標籤來創建一個表格。
+
+        ※ table標籤不建議使用內聯屬性，此處僅供方便查看。
+        -->
+        <table border="1" width="50%" align="center">
+            <!-- 在table中使用"tr"表示表格中的一行，有幾個 tr 就有 幾行。 -->
+            <tr>
+              <!-- 在tr中使用"tb"表示一個單元格(列)，有幾個 td 就有 幾個單元格(幾列) -->
+              <td>A1</td>
+              <td>B1</td>
+              <td>C1</td>
+              <td>D1</td>
+            </tr>
+            <tr>
+              <td>A2</td>
+              <td>B2</td>
+              <td >C2</td>
+              <!--
+                  rowspan：縱向的合併單元格。
+               -->
+              <td rowspan="2">D2</td>
+            </tr>
+            <tr>
+              <td>A3</td>
+              <td>B3</td>
+              <td>C3</td>
+            </tr>
+            <tr>
+              <td>A4</td>
+              <td>B4</td>
+              <!--
+                  colspan：橫向的合併單元格。
+               -->
+              <td colspan="2">C4</td>
+            </tr>
+          </table>
+    </body>
+</html>

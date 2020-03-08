@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+    <html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>脫離文檔流的元素特點</title>
+        <link rel="stylesheet" href="/source/css/reset.css">
+        <style>
+            /* 
+                - 元素設置浮動以後，將從文檔流中脫離，從文檔流中脫離後，元素的一些特點也會發生變化。
+
+                - 脫離文檔流的特點：
+                    - 塊元素：
+                        1.塊元素不在獨占頁面的一行。
+                        2.脫離文檔流以後，塊元素的寬度和高度默認(未設置時)都被內容撐開。
+                        → 意似 文檔流中的行內元素特點。
+
+                    - 行內元素：
+                        行內元素脫離文檔流以後就可以應用寬高的設置，而未設置寬高時都被內容撐開。
+                
+                ※ 簡單總結：
+                    脫離文檔流以後，不需要再區分塊元素和行內元素了，其共通特點：
+                        1.不在獨占頁面的一行。
+                        2.寬度與高度默認(未設置)情況下，由內容撐開，設置寬度與高度時，則依其值顯示。
+            */
+
+
+        .p1{
+            background-color: tomato;
+        }
+
+        .box1{
+            background-color:teal;
+        }
+        
+        .box2{
+            width: 150px;
+            height: 60px;
+            background-color: #bfa;
+            float:left;
+        }
+
+        .p2{
+             background-color: orange;
+        }
+
+        .box3{
+            background-color:skyblue;
+        }
+
+        .p3{
+            background-color: slategray;
+            float: left;
+        }
+        
+       .sp1{
+           width: 100px;
+           height: 100px;
+           background-color: orchid;
+       }
+
+       .sp2{
+           width: 100px;
+           height: 100px;
+           background-color: yellowgreen;
+       }
+
+       .sp3{
+           width: 100px;
+           height: 100px;
+           background-color: yellow;
+           float: left;
+       }
+
+       .sp4{
+           width: 100px;
+           height: 100px;
+           background-color: blanchedalmond;
+       }
+
+       .sp5{
+        background-color:lightcoral;
+       }
+
+       .sp6{
+           width: 100px;
+           height: 100px;
+           background-color:#bfa;           
+       }
+
+       .sp7{
+           width: 100px;
+           height: 100px;
+           background-color:pink;
+           float: left;
+       }
+
+       
+
+        </style>
+
+
+
+    </head>
+    <body>
+        <br />
+        <h2>
+            1.塊元素特點(未浮動前)：其寬度由父元素撐開，高度由子元素內容撐開，並且會獨占一行。
+        </h2>
+        <br />
+        <p class="p1">我是p元素(塊元素)，未浮動</p>
+        <div class="box1">我是div元素(塊元素)，未浮動</div> 
+        <hr />
+
+        <h2>
+            2.當p1塊元素浮動後，其原本的塊元素特點會有所變化：
+        </h2>
+        <br />        
+        <div class="box2">
+            <p> ● 我是p1(塊元素) → 浮動元素，設置寬高</p>
+        </div>
+        <p class="p2"> ● 我是p2元素(塊元素)→未浮動，未設置寬高</p>
+        <br>
+        <br>
+        <br />
+        <hr />
+
+        <h2>
+            2-1.當p4塊元素浮動後，其原本的塊元素特點會有所變化：
+        </h2>
+        <br />        
+        <div class="box3">
+            <p> ● 我是p3(塊元素) → 浮動元素，未設置寬高</p>
+        </div>
+        <p class="p3"> ● 我是p4元素(塊元素)→未浮動，未設置寬高</p>
+        <br>
+        <hr />
+        
+        <h2>3.行內元素特點(未浮動前)：其寬度與高度都是由內容撐開，設置寬高不會應用：</h2>
+        <br />
+        <span class="sp1">我是span1元素(行內元素) → 未浮動，有設置寬高</span>
+        <span class="sp2">我是span2元素(行內元素) → 未浮動，有設置寬高</span>
+        <br>
+        <hr />
+
+        <h2>3-1.當span3及span5(行內元素)浮動後，其原本的行內元素特點會有所變化：</h2>
+        <br />
+        <span class="sp3">我是span3元素(行內元素) → 浮動，設置寬高</span>
+        <span class="sp4">我是span4元素(行內元素) → 未浮動，設置寬高</span>
+        <span class="sp5">我是span5元素(行內元素) → 未浮動，未設置寬高</span>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr />
+        <h2>※※ 3-2.當span6(行內元素)浮動後，其原本的行內元素特點會有所變化：原文本順序 span5 → span6</h2>
+        <br />
+        <span class="sp6">我是span5元素(行內元素) → 未浮動，設置寬高</span>
+        <span class="sp7">我是span6元素(行內元素) → 浮動，未設置寬高</span>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr />
+
+    </body>
+</html>

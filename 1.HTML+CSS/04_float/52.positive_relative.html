@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>定位 (position)：相對定位 (relative)</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+
+            h2{
+                font-size:20px;
+            }
+
+            div[class^=box]{
+                font-size:40px;
+            }
+
+            .box1{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            /*
+                定位(position)：
+                    - 定位是一種更加高級的布局手段，且不會影響其他元素的位置，但會覆蓋。
+                    ※ 對比 margin 會移動周圍的其它元素位置。
+                    - 通過定位可以將元素擺放到頁面中的任意位置。
+                    - 使用 position 屬性來設置定位。
+                        -可選值(5種)：
+
+                            1.static：默認值，元素是靜止的沒有開啟定位。
+                            2.reletive：開啟元素的 相對定位，下面詳解。
+                            3.absolute：開啟元素的 絕對定位，下面詳解。
+                            4.fixed：開啟元素的 固定定位，下面詳解。
+                            5.sticky：開啟元素的 粘滯定位，下面詳解。
+
+                    - 相對定位(relative)：
+                        - 當元素的 position屬性值設置為relative時則開啟相對定位，且必須搭配
+                         「偏移量」來設置元素的位置。
+                        - 相對定位的特點：
+                            1.元素開啟相對定位後，如果不設置偏移量，元素就不會發生任何變化。
+                            2.相對定位是參照元素自身在文檔流中的位置進行定位(元素自身定位移動前的位置)。
+                            3.相對定位會提升元素的層級。
+                            4.相對定位不會使元素脫離文檔流。
+                            5.相對定位不會改變元素的性質，塊還是塊，行內還是行內。
+                            ※ 對比 float 會改變元素的特性。
+
+                    - 偏移量(offset)：
+                        - 當元素開啟相對定位後，可以通過偏移量(正負值)來設置元素的位置。
+
+                            - 定位垂直方向的位置：通常情況下，只會使用其中一個。
+                                top：定位元素和定位位置上邊的距離，top值越大越向下移動。
+                                bottom：定位元素和定位位置下邊的距離，bottom值越大越向上移動。
+
+                            - 定位水平方向的位置：通常情況下，也只會使用其中一個。
+                                left：定位元素和定位位置左側的距離，left值越大越靠右側。
+                                right：定位元素和定位位置右側的距離，right值越大越靠左側。
+
+                    ※ 相對定位(position)使用如下：
+                            .box2{
+                                position:relative;
+                                top:200px;
+                            }
+            */
+
+            .box2{
+                width: 100px;
+                height: 100px;
+                background-color: palegoldenrod;
+            }
+
+            .box3{
+                width: 100px;
+                height: 100px;
+                background-color: skyblue;
+            }
+
+            .box4{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            .box5{
+                width: 100px;
+                height: 100px;
+                background-color: palegoldenrod;
+                position:relative;
+                left:100px
+            }
+
+            .box6{
+                width: 100px;
+                height: 100px;
+                background-color: skyblue;
+            }
+
+            .box7{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            .box8{
+                width: 100px;
+                height: 100px;
+                background-color: palegoldenrod;
+                position:relative;
+                left: 100px;
+                top:-100px
+            }
+
+            .box9{
+                width: 100px;
+                height: 100px;
+                background-color: skyblue;
+            }
+
+            .box10{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            .box11{
+                width: 100px;
+                height: 100px;
+                background-color: palegoldenrod;
+                position:relative;
+                left: 50px;
+                top:-100px
+            }
+
+            .box13{
+                width: 100px;
+                height: 100px;
+                background-color: skyblue;
+                float:left;
+            }
+
+            .box14{
+                width: 100px;
+                height: 100px;
+                background-color: palegoldenrod;
+                position:relative;
+                left:100px;
+            }
+
+            .box15{
+                width: 100px;
+                height: 100px;
+                background-color: skyblue;
+                position:relative;
+            }
+
+
+        </style>
+
+    </head>
+    <body>
+        <br />
+        <h2>● box1、2、3 未定位前在文檔流的位置：</h2>
+        <br />
+        <br />
+        <div class="box1">1</div>
+        <div class="box2">2</div>
+        <div class="box3">3</div>
+        <br />
+        <hr />
+        <p>1.相對定位：box2移動至box1右邊，因box2未脫離文檔流，所以仍會占據未移動前的位置，故不會影響box3的位置</p>
+        <br />
+        <br />
+        <div class="box4">1</div>
+        <div class="box5">2</div>
+        <div class="box6">3</div>
+        <br />
+        <hr />
+        <p>2.相對定位：box2移動至box1右上方，因box2未脫離文檔流，所以仍會占據未移動前的位置，故不會影響box3的位置</p>
+        <br />
+        <br />
+        <div class="box7">1</div>
+        <div class="box8">2</div>
+        <div class="box9">3</div>
+        <br />
+        <hr />
+        <p>3.相對定位：box2移動至box1右上方較短距離時，會覆蓋住box1</p>
+        <br />
+        <br />
+        <div class="box10">1</div>
+        <div class="box11">2</div>
+        <div class="box12">3</div>
+        <br />
+        <hr />
+        <p>4.相對定位：(異常待確認)當box1浮動後，box2、box3未移動前的位置發生變化，此時在移動時，會依目前位置(未定位前)來定位移動</p>
+        <br />
+        <br />
+        <div class="box13"></div>
+        <div class="box14"></div>
+        <div class="box15"></div>
+        <br />
+        <hr />
+
+
+
+    </body>
+</html>

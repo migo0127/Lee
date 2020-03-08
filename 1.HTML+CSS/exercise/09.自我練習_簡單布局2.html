@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>簡單布局2</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+
+            .main{
+                width: 800px;
+                height: 400px;
+                background-color: silver;
+                border:5px red dashed;
+                margin: 50px auto;
+            }
+
+            .main .main-left , .main .main-center , .main .main-right{
+                margin-top:10px;
+                margin-bottom: 10px;
+            }
+
+            .main .main-center , .main .center-left{
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            .main .main-left{
+                width: 190px;
+                height: 380px;
+                background-color: skyblue;
+                margin-left: 10px;
+                float: left;
+            }
+
+            .main .main-center{
+                width: 380px;
+                height: 200px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            .main .main-right{
+                width: 190px;
+                height: 380px;
+                background-color:powderblue;
+                margin-right: 10px;
+                float:right;
+            }
+
+            .main .center-left{
+                width: 180px;
+                height: 170px;
+                background-color: blanchedalmond;
+                margin-bottom: 10px;
+                float: left;
+            }
+
+            .main .center-tright , .main .center-dright{
+                width: 190px;
+                height: 80px;
+                margin-bottom: 10px;
+                margin-right: 10px;
+                float: right;
+            }
+
+            .main .center-tright{
+                background-color: pink;
+            }
+
+            .main .center-dright{
+                background-color: palevioletred;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <div class="main">
+            <div class="main-left"></div>
+            <div class="main-center"></div>
+            <div class="main-right"></div>
+            <div class="center-left"></div>
+            <div class="center-tright"></div>
+            <div class="center-dright"></div>
+        </div>
+
+    </body>
+</html>

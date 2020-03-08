@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>背景圖片(background-image)</title>
+        <style>
+        /*
+            backround-color：設置背景顏色。
+
+            backround-image：設置背景圖片。
+                - 可以同時設置背景圖片和背景顏色，這樣背景顏色將會成為圖片的背景色。
+                - 如果背景圖片小於元素大小，則背景圖片會自動在元素中平鋪，將元素鋪滿。
+                - 如果背景圖片大於元素大小，則將會有一部分背景圖片無法完整顯示。
+                - 如果背景圖片和元素一樣大，則會直接正常顯示。
+
+            backgrounf-repeat：用來設置背景的重覆方式。
+                - 可選值：
+                    1.repeat：默認值，背景會沿著x軸、y軸雙方向重覆平鋪。
+                    2.repeat-x：沿著x軸方向重覆平鋪。
+                    3.repeat-y：沿著y軸方向重覆平鋪。
+                    4.no-repeat：只一個背景圖，不重覆平鋪。
+
+            background-position：用來設置背景圖片的位置。
+                - 設置方式(2種)：
+                    1.通過 top、left、right、bottom、center 5種表示方位的詞來設置圖片位置，
+                      意似將元素大小劃為 九公格 ，再指定值來設置圖片位置。
+                    ※ 使用方位詞時必須要同時指定兩個值(x軸、y軸)，如果只寫一個值，第二個默認
+                       為center。
+
+                    EX：background-position:top left； => 左上。
+                        background-position:center center； => 中間。
+                        background-position:bottom right； => 右下。
+
+                    2.通過偏移量來指定背景圖片的位置：水平方向的偏移量，垂直方向的偏移量，意似
+                      box-shadow(陰影)的設置方式。
+
+                    EX：backgroud-position：10px 50px; 亦可設置負值(常用)。
+        */
+            div{
+                width: 600px;
+                height: 600px;
+
+                /* 若背景圖不是透明底色且又平鋪滿時，會看不出背景底色 */
+                background-color: #bfa;
+                background-image:url("./img/大龙 - 53.jpg");
+                background-repeat:no-repeat;
+                /* background-position:center center; */
+                background-position:-50px 10px;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <div></div>
+
+    </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>定位(position)：粘滯定位(sticky)</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+            /*
+                粘滯定位(sticky)：
+                    - 當元素的position屬性設置為sticky時則開啟了元素的粘滯定位。
+                    - 粘滯定位和相對定位的特點基本一致，不同的是粘滯定位可以在元素到達某個
+                      位置時將其固定住，意似 原本隨著視窗的可見框移動，當向上或下滑動要滾出
+                      可見範圍時，就會固定在其上方或下方之處，不會滾出可見區域。
+                      EX：京東右側的小導覽條(客服/反饋/頂部等資訊條)。
+
+                    ※ 粘滯定位的定位位置為body標籤，即body為粘滯定位的包含塊，但因目前的相容
+                       性不佳(IE都不支持)，故暫不推薦使用，待後續改扇時再補充說明。
+             */
+
+             body{
+                 height: 2000px;
+             }
+
+             .box1{
+                width: 300px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            .box2{
+                width: 500px;
+                height: 100px;
+                background-color: blanchedalmond;
+
+                /* 粘滯定位的包含塊為body */
+                position:sticky;
+                top:0;
+                left:0;
+            }
+
+            .box3{
+                width: 200px;
+                height: 100px;background-color: tomato;
+            }
+
+
+        </style>
+
+    </head>
+    <body>
+
+        <div class="box1">1</div>
+
+        <div class="box2">2</div>
+
+        <div class="box3">3</div>
+
+    </body>
+</html>

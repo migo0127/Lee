@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>按鈕背景圖設置</title>
+    <style>
+
+        a:link{
+            display: block;
+            width: 93px;
+            height: 29px;
+            background-image: url("./img/15/btn.png");
+        }
+
+        a:hover{
+            background-position: -93px 0;
+        }
+
+        a:active{
+            background-position: -186px 0;
+        }
+
+        /*
+            解決圖片閃爍的問題：
+                可以將多個小圖片統一保存到一個大圖片中，然後通過調整背景位置 backfround-position
+                來顯示圖片，這樣圖片會同時加載到網頁中，就可以有效的避免出現閃爍的問題。
+
+            ※※這個技術在網頁中應用十分廣泛，被稱為 CSS-Sprite，稱為 雪碧圖。
+
+            CSS-Sprite (雪碧圖) 的使用步驟：
+                1.先確定要使用的圖標 (多個小圖片統一在一個大圖片中)。
+                2.測量圖標的大小。
+                3.根據測量結果創建一個元素(寬高)。
+                4.將雪碧圖設置為元素的背景圖片。
+                5.設置一個偏移量以顯示正確的圖片。
+        */
+        .box1{
+            width: 129px;
+            height: 46px;
+            background-image: url("./img/15/amazon-sprite_.png");
+            background-position: 0 0;
+        }
+
+        .box2{
+            width: 26px;
+            height: 26px;
+            background-image: url("./img/15/amazon-sprite_.png");
+            background-position: -98px -288px;
+        }
+
+        .box3{
+            width: 26px;
+            height: 26px;
+            background-image: url("./img/15/amazon-sprite_.png");
+            background-position: -7px -287px;
+            border:1px red solid;
+        }
+
+    </style>
+
+</head>
+<body>
+    <br />
+    <a href="jacasrcipt:;"></a>
+    <br />
+    <hr />
+    <br />
+    <div class="box1"></div>
+    <br />
+    <hr />
+    <br />
+    <div class="box2"></div>
+    <br />
+    <hr />
+    <br />
+    <div class="box3"></div>
+
+
+
+</body>
+</html>

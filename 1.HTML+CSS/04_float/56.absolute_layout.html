@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>絕對定位元素的布局：常用！！</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+
+            /*
+                一、正常水平布局 -> 必須滿足等式：7個值
+
+                    marhin-left + border-left + padding-left + width + padding-right + border-right + margin-right = 包含塊的內容寬度
+
+                  ※ 垂值方向布局則不一定要滿足。
+
+                二、浮動布局： 水平布局 -> 不須滿足等式。
+
+                三、開啟「絕對定位」後的水平布局與垂直布局都得滿足等式：9個值 (多 left、right 兩個值)
+
+                    - 水平布局：
+
+                        1.水平方向布局等式需要多添加 left 和 right 兩個值。
+                        2.此時規則和之前一樣，只是多添加了兩個值，故瀏覽器自動調整的值(未有auto時)，
+                        由 margin-right 變為調整 right 以滿足等式。
+
+                            left + marhin-left + border-left + padding-left + width + padding-right + border-right + margin-right + right = 包含塊的內容寬度
+
+                        3.當發生過度約束時：
+                            3-1.如果9個值沒有 auto 則自動調整 right值以使等式滿足。
+                            3-2.如果有auto值，則自動調整 auto值以使等式滿足。
+                            3-3.當 left 和 right 都為auto時，則 left變0，調整 right值以滿足等式。
+                            ※ 正常布局時，若 margin-left 和 margin-right 都為 auto 時，則調整為相等值，
+                                與 絕對定位的 left、right 不同。
+
+                        4.當 left 和 right 的默認值未設置時(尤其是right值)，會自動調整這兩值個，left=0、
+                            調整right值以滿足等式。
+
+                        5.可設置auto的值：
+                        left、margin、right。
+
+                    - 垂直布局：
+
+                        1.與絕對定位的水平布局一樣必須要滿足等式；9個值 (變為 top、bottom)
+
+                        2.規則和上述一樣，等式為：
+
+                            top + margin-top + border-top + padding-top + height + padding-bottom + brder-bottom + margin-bottom + bottom = 包含塊的內容高度
+
+                    ※ 公式：常用，須記住！！
+                            {
+                                margin:auto;
+                                top:0; (定位時才有的值)
+                                bottom:0; (定位時才有的值)
+                                left:0; (定位時才有的值)
+                                right:0; (定位時才有的值)
+                            }
+                            → 水平布局時，此時元素的位置在瀏覽器的正中間。
+                            → 絕對布局時，此時元素的位置在包含塊的正中間。
+                            → 這種設置居中方式，只適用於元素的大小(寬高)確定時，若未設置寬高，則要使用其它方式，後補充。
+             */
+
+            .box1{
+                width: 400px;
+                height: 400px;
+                background-color: #bfa;
+                position: relative;
+            }
+
+            /* 開啟絕對定位後，以下的屬性值會使元素位置在包含塊的正中間 */
+            .box2{
+                width: 100px;
+                height: 100px;
+                background-color: blanchedalmond;
+                position: absolute;
+
+                /* 包含塊的正中間 */
+                margin:auto;
+                top:0;
+                bottom:0;
+                left:0;
+                right:0;
+            }
+
+            /* 正常水平布局，以下的屬性會使元素位置在瀏覽器的正中間  */
+            .box3{
+                width: 200px;
+                height: 200px;
+                background-color: cornflowerblue;
+
+                /* 正中間 */
+                margin:auto;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <br />
+        <p>● 絕對位置布局：</p>
+        <br />
+        <div class="box1">
+            <div class="box2"></div>
+        </div>
+        <hr />
+        <br />
+        <p>● 正常水平布局：</p>
+        <br />
+        <div class="box3"></div>
+        <br />
+
+
+
+
+    </body>
+</html>

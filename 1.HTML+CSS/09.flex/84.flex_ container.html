@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>彈性盒(flex)：彈性容器的相關樣式</title>
+        <style>
+
+            *{
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            /*
+                彈性容器的樣式：
+                    1.flex-direction：設置彈性元素的排序方向。
+                    2.flex-wrap：
+                        - 設置彈性元素是否在彈性容器中自動換行。
+                        - 可選值：
+                            2-1.nowrap：默認值，元素不會自動換行。
+                            2-2.wrap：元素沿著輔軸方向自動換行。
+                            2-3.wrap-reverse：元素沿著輔軸反方向換行。
+
+                    ※ flex-flow：為 flex-direction 與 flex-wrap 的簡寫屬性。
+                        - 語法：
+                            flex-flow: wrap row-reverse;
+
+                    3.justify-content：主軸
+                        - 如何分配主軸上的空白空間(元素如何在沿著主軸對齊)
+                        - 下方說明。
+
+                    4.align-items:輔軸對齊
+                        - 元素在輔軸上如何對齊。
+                        - 元素間的關係。
+                        - 下方說明。
+
+                        ※ 元素水平垂直居中：
+                            justify-content:center;
+                            align-items:center;
+
+                        ※ 額外補充一個與align-items有關的「彈性元素的樣式」：
+                            align-self：用來覆蓋當前彈性元素上的align-items。
+
+                    5.align-content：如何分配輔軸上的空白空間
+                        - 下方說明。
+
+
+
+            */
+
+            ul.box1{
+                width: 500px;
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:nowrap;
+                /* flex-flow：為 flex-direction 與 flex-wrap 的簡寫屬性。 */
+                /* flex-flow: wrap column; */
+            }
+
+            ul.box1 li{
+                width: 200px;
+                height: 100px;
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box1 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box1 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box2{
+                width: 500px;
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:wrap;
+            }
+
+            ul.box2 li{
+                width: 200px;
+                height: 100px;
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box2 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box2 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box3{
+                width: 500px;
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:wrap-reverse;
+            }
+
+            ul.box3 li{
+                width: 200px;
+                height: 100px;
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box3 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box3 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box4{
+                width: 500px;
+                height: 200px;
+                border: 5px solid red;
+                display: flex;
+                flex-direction:column;
+                flex-wrap:nowrap;
+            }
+
+            ul.box4 li{
+                width: 200px;
+                height: 100px;
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box4 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box4 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box5{
+                width: 500px;
+                height: 200px;
+                border: 5px solid red;
+                display: flex;
+                flex-direction:column;
+                flex-wrap:wrap;
+            }
+
+            ul.box5 li{
+                width: 200px;
+                height: 100px;
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box5 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box5 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box6{
+                width: 500px;
+                height: 200px;
+                border: 5px solid red;
+                display: flex;
+                flex-direction:column;
+                flex-wrap:wrap-reverse;
+            }
+
+            ul.box6 li{
+                width: 200px;
+                height: 100px;
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box6 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box6 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            /*
+                彈性容器的樣式：
+                    3.justify-content：主軸對齊
+                        - 如何分配主軸上的空白空間。
+                        - 元素如何沿著主軸對齊，會影響到空白空間的分散情況。
+                        - 可選值：
+                            3-1.flex-start：默認值，元素沿著主軸起邊對齊 (元素貼著起邊)。
+                            3-2.flex-end：元素沿著主軸終邊對齊 (元素貼著終邊)。
+                            3-3.center：元素居中對齊。
+                            3-4.space-around：空白分布到元素兩側。
+                            3-5.space-between：空白均勻分布到元素間。
+                            3-6.space-evenly：空白分布到元素單側。
+            */
+            ul.box7{
+                width: 800px;
+                border: 5px solid red;
+                display: flex;
+                justify-content: flex-start;
+            }
+
+            ul.box7 li{
+                width: 200px;
+                height: 100px;
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box7 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box7 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box8{
+                width: 800px;
+                border: 5px solid red;
+                display: flex;
+                justify-content:flex-end;
+            }
+
+            ul.box8 li{
+                width: 200px;
+                height: 100px;
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box8 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box8 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box9{
+                width: 800px;
+                border: 5px solid red;
+                display: flex;
+                justify-content:center;
+            }
+
+            ul.box9 li{
+                width: 200px;
+                height: 100px;
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box9 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box9 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box10{
+                width: 800px;
+                border: 5px solid red;
+                display: flex;
+                justify-content:space-around;
+            }
+
+            ul.box10 li{
+                width: 200px;
+                height: 100px;
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box10 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box10 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box11{
+                width: 800px;
+                border: 5px solid red;
+                display: flex;
+                justify-content:space-between;
+            }
+
+            ul.box11 li{
+                width: 200px;
+                height: 100px;
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box11 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box11 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box12{
+                width: 800px;
+                border: 5px solid red;
+                display: flex;
+                justify-content:space-evenly;
+            }
+
+            ul.box12 li{
+                width: 200px;
+                height: 100px;
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box12 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box12 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            /*
+                彈性容器的樣式：
+                    4.align-items：輔軸對齊
+                        - 彈性元素在輔軸上如何對齊。
+                        - 彈性元素每單行間的關係。
+                        - 可選值：
+                            4-1.stretch：默認值，將彈性元素的長度(拉伸)設置為相同值。
+                            4-2.flew-start：元素不會拉伸，沿著輔軸起邊對齊。
+                            4-3.flew-end：元素不會拉伸，沿著輔軸終點對齊。
+                            4-4.center：元素不會拉伸，居中對齊。
+                            4-5.baseline：元素不會拉伸，(沿著文字)基線對齊。
+
+                    ※ 額外補充一個與align-items有關的「彈性元素的樣式」：
+                            - align-self：用來覆蓋當前彈性元素上的 align-items。
+                            - 可選值與 align-items 一樣。
+            */
+            ul.box13{
+                width: 600px;
+                /* height: 600px; */
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:wrap;
+            }
+
+            ul.box13 li{
+                width: 200px;
+                /* 彈性元素不設高度 */
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box13 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box13 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box13 li:nth-child(4){
+                background-color: pink;
+            }
+
+            ul.box13 li:nth-child(5){
+                background-color: palegoldenrod;
+            }
+
+            ul.box14{
+                width: 600px;
+                height: 600px;
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:wrap;
+                align-items:stretch;
+            }
+
+            ul.box14 li{
+                width: 200px;
+                /* 彈性元素不設高度 */
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box14 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box14 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box14 li:nth-child(4){
+                background-color: pink;
+            }
+
+            ul.box14 li:nth-child(5){
+                background-color: palegoldenrod;
+            }
+
+            ul.box15{
+                width: 600px;
+                height: 600px;
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:wrap;
+                align-items:flex-start;
+            }
+
+            ul.box15 li{
+                width: 200px;
+                /* 彈性元素不設高度 */
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box15 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box15 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box15 li:nth-child(4){
+                background-color: pink;
+            }
+
+            ul.box15 li:nth-child(5){
+                background-color: palegoldenrod;
+            }
+
+            ul.box16{
+                width: 600px;
+                height: 600px;
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:wrap;
+                align-items:flex-end;
+            }
+
+            ul.box16 li{
+                width: 200px;
+                /* 彈性元素不設高度 */
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box16 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box16 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box16 li:nth-child(4){
+                background-color: pink;
+            }
+
+            ul.box16 li:nth-child(5){
+                background-color: palegoldenrod;
+            }
+
+            ul.box17{
+                width: 600px;
+                height: 600px;
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:wrap;
+                align-items:center;
+            }
+
+            ul.box17 li{
+                width: 200px;
+                /* 彈性元素不設高度 */
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box17 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box17 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box17 li:nth-child(4){
+                background-color: pink;
+            }
+
+            ul.box17 li:nth-child(5){
+                background-color: palegoldenrod;
+            }
+
+            ul.box18{
+                width: 600px;
+                height: 600px;
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:wrap;
+                align-items:center;
+            }
+
+            ul.box18 li{
+                width: 200px;
+                /* 彈性元素不設高度 */
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box18 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box18 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box18 li:nth-child(4){
+                background-color: pink;
+            }
+
+            ul.box18 li:nth-child(5){
+                background-color: palegoldenrod;
+            }
+
+            ul.box22{
+                width: 600px;
+                height: 600px;
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:wrap;
+                /* 設置彈性容器沿著輔軸基線對齊 */
+                align-items:flex-start;
+            }
+
+            ul.box22 li{
+                width: 200px;
+                /* 彈性元素不設高度 */
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box22 li:nth-child(2){
+                background-color: orange;
+                /* 另外單獨設置第二個li的彈性元素屬性 algin-self:fiex-end 來覆蓋 彈性容器(父元素)的 align-items:flex-start; */
+                align-self:flex-end;
+            }
+
+            ul.box22 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box22 li:nth-child(4){
+                background-color: pink;
+            }
+
+            /*
+               彈性容器的樣式：
+                    5.align-content：輔軸上的空白空間
+                        - 如何分配輔軸上的空白空間。
+                        - 可選值：
+                            5-1.space-around：空白分布到元素兩側。
+                            5-2.space-between：空白均勻分布到元素間。
+                            5-3.space-evenly：空白分布到元素單側。
+            */
+            ul.box19{
+                width: 600px;
+                height: 600px;
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:wrap;
+                align-content:space-around;
+            }
+
+            ul.box19 li{
+                width: 200px;
+                /* 彈性元素不設高度 */
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box19 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box19 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box19 li:nth-child(4){
+                background-color: pink;
+            }
+
+            ul.box19 li:nth-child(5){
+                background-color: palegoldenrod;
+            }
+
+            ul.box20{
+                width: 600px;
+                height: 600px;
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:wrap;
+                align-content:space-between;
+            }
+
+            ul.box20 li{
+                width: 200px;
+                /* 彈性元素不設高度 */
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box20 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box20 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box20 li:nth-child(4){
+                background-color: pink;
+            }
+
+            ul.box20 li:nth-child(5){
+                background-color: palegoldenrod;
+            }
+
+            ul.box21{
+                width: 600px;
+                height: 600px;
+                border: 5px solid red;
+                display: flex;
+                flex-wrap:wrap;
+                align-content:space-evenly;
+            }
+
+            ul.box21 li{
+                width: 200px;
+                /* 彈性元素不設高度 */
+                line-height: 100px;
+                background-color: #bfa;
+                font-size: 34px;
+                text-align: center;
+                flex-shrink:0;
+            }
+
+            ul.box21 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box21 li:nth-child(3){
+                background-color: skyblue;
+            }
+
+            ul.box21 li:nth-child(4){
+                background-color: pink;
+            }
+
+            ul.box21 li:nth-child(5){
+                background-color: palegoldenrod;
+            }
+
+
+
+        </style>
+    </head>
+    <body>
+
+        <h2>1.彈性容器的樣式：flex-wrap，彈性元素是否在彈性容器中自動換行。</h2>
+        <p>1-1.b1：flex-wrap:nowrap; 不換行，主軸 → ，輔軸 ↓。</p>
+        <ul class="box1">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br />
+        <p>1-2.b2：flex-wrap:wrap; 彈性元素沿著輔軸(↓)方向自動換行。</p>
+        <ul class="box2">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br />
+        <p>1-3.b3：flex-wrap:wrap-reverse; 彈性元素沿著輔軸(↓)的反方向自動換行。</p>
+        <ul class="box3">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br />
+        <p>1-4.b4：flex-wrap:nowrap; 不換行，主軸 ↓ ，輔軸 → 。</p>
+        <ul class="box4">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br /><br /><br /><br /><br /><br />
+        <p>1-5.b5：flex-wrap:wrap; 彈性元素沿著主軸換行，主軸 ↓ ，輔軸 → 。</p>
+        <ul class="box5">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br />
+        <p>1-6.b6：flex-wrap:wrap-reverse; 彈性元素沿著主軸反方向換行，主軸 ↓ ，輔軸 → 。</p>
+        <ul class="box6">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br />
+        <hr />
+        <h2>2.彈性容器的樣式：justity-content，「主軸」上的彈性元素的對齊哪一邊及空白空間如何分散在元素間。</h2>
+        <p>2-1.b7：justify-content: flex-start; 默認值，彈性元素沿著主軸(→)的起點對齊 (貼著起邊)。</p>
+        <ul class="box7">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br>
+        <p>2-2.b8：justify-content: flex-end; 彈性元素沿著主軸(→)的起點對齊 (貼著終邊)。</p>
+        <ul class="box8">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br>
+        <p>2-3.b9：justify-content: center; 彈性元素沿著主軸居中對齊。</p>
+        <ul class="box9">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br>
+        <p>2-4.b10：justify-content: space-around; 彈性容器中的空白沿著主軸(→)分散在彈性元素兩側，故兩個彈性元素之間的空格會較寬。</p>
+        <ul class="box10">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br>
+        <p>2-5.b11：justify-content: space-between; 彈性容器中的空白沿著主軸(→)均勻分散在彈性元素之間。</p>
+        <ul class="box11">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br>
+        <p>2-6.b12：justify-content: space-evenlu; 彈性容器中的空白沿著主軸(→)均勻分散在彈性元素的單側。</p>
+        <ul class="box12">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br>
+        <hr />
+        <h2>3.彈性容器的樣式：align-items，彈性元素在「輔軸」上的對齊方式。</h2>
+        <p>3-1.b13：對照組，彈性容器(父元素 .box13)未設置高度，彈性元素(子元素 .box13 > li)也未設置高度，高度由內容撐開。</p>
+        <ul class="box13">
+            <li>1</li>
+            <li>2
+                <div>2-1</div>
+            </li>
+            <li>3
+                <div>3-1</div>
+                <div>3-2</div>
+            </li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <br>
+        <h2> ※ 彈性容器(父元素)高度:600px，彈性元素(子元素)未設置。</h2>
+        <p>3-2.b14：align-items:stretch; 默認值，將彈性元素在輔軸(↓)中「同一行」的長度設置為相同值。</p>
+        <ul class="box14">
+            <li>1</li>
+            <li>2
+                <div>2-1</div>
+            </li>
+            <li>3
+                <div>3-1</div>
+                <div>3-2</div>
+            </li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <br>
+        <p>3-3.b15：align-items:flex-start; 彈性元素不會拉伸長度，沿著輔軸(↓)起邊對齊。</p>
+        <ul class="box15">
+            <li>1</li>
+            <li>2
+                <div>2-1</div>
+            </li>
+            <li>3
+                <div>3-1</div>
+                <div>3-2</div>
+            </li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <br>
+        <p>3-4.b16：align-items:flex-end; 彈性元素不會拉伸長度，沿著輔軸(↓)終邊對齊。</p>
+        <ul class="box16">
+            <li>1</li>
+            <li>2
+                <div>2-1</div>
+            </li>
+            <li>3
+                <div>3-1</div>
+                <div>3-2</div>
+            </li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <br>
+        <p>3-5.b17：align-items:center; 彈性元素不會拉伸長度，沿著輔軸(↓)居中對齊。</p>
+        <ul class="box17">
+            <li>1</li>
+            <li>2
+                <div>2-1</div>
+            </li>
+            <li>3
+                <div>3-1</div>
+                <div>3-2</div>
+            </li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <br>
+        <p>3-5.b18：align-items:baseline; 彈性元素不會拉伸長度，沿著輔軸(↓)基線對齊。</p>
+        <ul class="box18">
+            <li>1</li>
+            <li>2
+                <div>2-1</div>
+            </li>
+            <li>3
+                <div>3-1</div>
+                <div>3-2</div>
+            </li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <br>
+        <h2> ※ 補充一個與 align-items 相關的「彈性元素樣式」：align-self，用來覆蓋 align-items。</h2>
+        <p>3-6.b22：另設置第二個li的彈性元素樣式 align-self:flex-end; 用來覆蓋彈性容器(align-items:flex-start)，使該彈性元素變為沿著輔軸(↓)終點對齊，其他彈性元素不變。</p>
+        <ul class="box22">
+            <li>1</li>
+            <li>2
+                <div>2-1</div>
+            </li>
+            <li>3
+                <div>3-1</div>
+                <div>3-2</div>
+            </li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <br>
+        <h2>4.彈性容器的樣式：align-content，如何分配輔軸上的空白空間。</h2>
+        <p>4-1.b19：align-content:space-around; 彈性容器中的空白沿著輔軸(↓)分散在彈性元素兩側，故兩個彈性元素之間的空格會較寬。</p>
+        <ul class="box19">
+            <li>1</li>
+            <li>2
+                <div>2-1</div>
+            </li>
+            <li>3
+                <div>3-1</div>
+                <div>3-2</div>
+            </li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <br>
+        <p>4-2.b20：align-content:space-between; 彈性容器中的空白沿著輔軸(↓)均勻分散在彈性元素之間。</p>
+        <ul class="box20">
+            <li>1</li>
+            <li>2
+                <div>2-1</div>
+            </li>
+            <li>3
+                <div>3-1</div>
+                <div>3-2</div>
+            </li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <br>
+        <p>4-3.b21：align-content:space-evenly; 彈性容器中的空白沿著輔軸(↓)均勻分散在彈性元素的單側。</p>
+        <ul class="box21">
+            <li>1</li>
+            <li>2
+                <div>2-1</div>
+            </li>
+            <li>3
+                <div>3-1</div>
+                <div>3-2</div>
+            </li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <br>
+
+    </body>
+</html>

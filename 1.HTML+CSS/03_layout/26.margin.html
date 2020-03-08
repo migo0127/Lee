@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>外邊距 margin</title>
+
+        <style>
+        
+            .inner{
+                width: 100%;
+                height: 100%;
+                background-color:#bfa;
+            }
+
+            .box1{
+                width: 100px;
+                height: 100px;
+                background-color: skyblue;
+                border:10px orange solid;
+                padding:100px;
+
+            /*  
+                4.外邊距(margin)：
+                    - 外邊距不會影響盒子的「可見框」大小，但是會影響盒子的位置。
+                    - 外邊距一個有四個方向：
+                        - margin-top：上外邊距
+                            1.設置一個正值時，元素本身會向下移動。
+                            2.設置一個負值時，元素本身會向上移動。
+                        
+                        - margin-left：左外邊距
+                            1.設置一個正值時，元素本身會向右移動。
+                            2.設置一個負值時，元素本身會向左移動。
+
+                        - margin-bottom：下外邊距
+                            1.設置一個正值時，「下方的其它元素」會向下移動，意似 下方
+                              的元素被向下擠。
+                            2.設置一個負值時，「下方的其它元素」會向上移動，意似 下方
+                              的元素被向上拉(甚至會覆蓋到設定的該元素上)。
+
+                        - margin-right：右外邊距
+                            ※ 默認情況下設置 margin-right 不會產生任何效果，因該值由
+                               瀏覽器自動調整以滿足等式，詳見27.horizontal box layout.html。
+
+                    - 元素在頁面中是按照 自左向右 的順序排序，所以默認情況下如果我們設置
+                      左外邊距和上外邊距會移動元素自身，而設置下外邊距和右外邊距則會移動
+                      其它元素。
+
+                    - margin 會影響到盒子實際占用的空間，即實際占用的空間為可見框大小+不
+                      可見框大小，即外邊框整個大小。
+
+                    - margin的簡寫屬性亦可同時設置四個方向，用法和padding相同。  
+                        - margin:100px 200px 150px 100px;                  
+            */
+                margin:50px 100px -20px 40px;
+
+            }
+
+            .box2{
+                width:320px;
+                height: 320px;
+                background-color: slateblue;
+            }
+        
+        </style>
+        
+    </head>
+
+    <body>
+
+        <div class="box1">
+            <div class="inner"></div>
+        </div>
+
+        <div class="box2"></div>
+
+        
+    </body>
+</html>

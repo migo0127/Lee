@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+    <head>
+        <meta charset="UTF-8">
+        
+        <title>繼承 inherit</title>
+
+        <style>
+        /* 
+        ※  繼承：樣式的繼承，我們為一個元素設置的樣式，同時也會應用(套用)到它的后代元素上。
+
+            繼承是發生在「祖先與后代」之間的。
+
+            繼承的設計是為了方便我們的開發，利用繼承可以將一些「通用」的樣式統一設置
+            到共同的祖先元素上，這樣只需設置一次即可讓所有元素都具有該樣式效果。
+
+            ※ 注意：並不是所有樣式都可以被繼承，有些無法繼承。
+                EX：背景相關的、布局相關的等等這些樣式都不會被繼承。
+                → 背景色初始值為「transparent (透明色)」，故雖然祖先元素應用了背景色，
+                而后代元素看似也套用了，其實不然，是因該預設值為透明色的關係，而非繼承
+                祖先樣式。
+        
+                - 例子：
+                    body{
+                        font-size:20px;
+                    }
+         */
+
+         body{
+            font-size:20px;
+         }
+
+         p{
+             color:blue;
+             background-color:gray;
+         }
+
+         div{
+             color: crimson;
+         }
+        
+        </style>
+
+    </head>
+
+    <body>
+       
+        <p>● 我是P標籤
+            <span>→我是p標籤中的span
+                <em>→我是p-span標籤中的em
+                    <div>→我是p-sp-em標籤中的div</div>
+                </em>
+            </span>
+        </p>
+       
+        <div>● 我是div標籤
+            <span>→我是div中的span
+                <p>→我是d-span中的p標籤
+                    <em>→我是d-p-sp中的em標籤</em>
+                </p>
+            </span>
+        </div>
+
+    </body>
+
+</html>

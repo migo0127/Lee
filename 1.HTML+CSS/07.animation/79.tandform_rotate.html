@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>變形(transform)的旋轉(rotate)</title>
+        <style>
+            /*
+                rotate：通過旋轉可以使元素沿著x y 或 z軸旋轉指定的角度，通常也需設置 perspective。
+                    - 可選值：
+                        1.rotateX()：沿著x軸旋轉，左手定律，大姆指向前(外面)轉。
+                        2.rotateY()：沿著y軸旋轉，左手定律，食指向右轉。
+                        3.rotateZ()：沿著z軸旋轉，左手定律，中心點順時針轉。
+                    - 語法：
+                        transform:rotateX(deg/trun);
+                        transform:rotateY(deg/trun) rotateZ(deg/trun);
+                    ※ deg：表示度，180度、360度等。
+                       turn：表示圈，0.25圈、0.5圈(半圈)、1turn(1圈)等。
+                    ※ rotateX、Y、Z 寫的順序會有不同的效果。
+
+                backface-visibility：指元素的背面是否顯示，即是否透視。
+                    - 可選值：
+                        1.visible：默認值，顯示透視(平面2D效果)。
+                        2.hidden：不顯示透視。
+            */
+            html{
+                perspective:800px;
+            }
+
+            body{
+                background-color: silver;
+            }
+
+            div{
+                width: 200px;
+                height: 200px;
+                margin: 50px 100px;
+            }
+
+            .box1{
+                background-color: #bfa;
+            }
+
+            .box1:hover{
+                transform: rotateX(45deg);
+            }
+
+            .box2{
+                background-color: orange;
+            }
+
+            .box2:hover{
+                transform: rotateY(45deg);
+            }
+
+            .box3{
+                background-color: skyblue;
+
+            }
+
+            .box3:hover{
+                transform: rotateZ(45deg);
+            }
+
+            .box4{
+                background-color: pink;
+
+            }
+
+            .box4:hover{
+                transform: rotateX(45deg) rotateY(45deg);
+            }
+
+            .box5{
+                background-color: yellowgreen;
+
+            }
+
+            .box5:hover{
+                transform: rotateX(45deg) rotateZ(45deg);
+            }
+
+            .box6{
+                background-color: palegoldenrod;
+
+            }
+
+            .box6:hover{
+                transform: rotateY(45deg) rotateZ(45deg);
+            }
+
+            .box7{
+                background-color: tomato;
+
+            }
+
+            .box7:hover{
+                transform: rotateZ(45deg) rotateY(45deg);
+            }
+
+            .box8{
+                background-color: teal;
+
+            }
+
+            .box8:hover{
+                transform: rotateY(180deg);
+            }
+
+            .box9{
+                width: 414px;
+                height: 398px;
+            }
+
+            .box9:hover{
+                transform: rotateY(180deg);
+            }
+
+            .box10{
+                width: 414px;
+                height: 398px;
+
+                /*
+                backface-visibility:背面是否透視，可於此設置，也可於hover設置。
+                backface-visibility:hidden;
+                */
+            }
+
+            .box10:hover{
+                transform: rotateY(180deg);
+                backface-visibility:hidden;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <h2>1.沿著x軸旋轉45度：</h2>
+        <div class="box1">b1：transform: rotateX(45deg);</div>
+        <hr />
+        <h2>2.沿著y軸旋轉45度：</h2>
+        <div class="box2">b2：transform: rotateY(45deg);</div>
+        <hr />
+        <h2>3.沿著z軸旋轉45度：</h2>
+        <div class="box3">b3：transform: rotateZ(45deg);</div>
+        <hr />
+        <h2>4.沿著x軸先旋轉45度、y軸再轉45度：</h2>
+        <div class="box4">b4：transform: rotateX(45deg) rotateY(45deg);</div>
+        <hr />
+        <h2>5.沿著x軸先旋轉45度、z軸再旋轉45度：</h2>
+        <div class="box5">b5：transform: rotateX(45deg) rotateZ(45deg);</div>
+        <hr />
+        <h2>6.沿著y軸先旋轉45度、z軸再旋轉45度：</h2>
+        <div class="box6">b6：transform: rotateY(45deg) rotateZ(45deg);</div>
+        <hr />
+        <h2>7.沿著z軸先旋轉45度、y軸再旋轉45度：</h2>
+        <div class="box7">b7：transform: rotateZ(45deg) rotateY(45deg);</div>
+        <hr />
+        <h2>7.沿著y軸先旋轉180度：即翻成背面</h2>
+        <div class="box8">b8：transform: rotateY(180deg);</div>
+        <hr />
+        <h2>8.續7 → 沿著y軸先旋轉180度：圖片翻成背面的效果，backface-visibility:visible; (默認值，會透視)</h2>
+        <div class="box9"><img src="../source/img/大龙 - 43.jpg"></div>
+        <hr />
+        <h2>9.續8 → 沿著y軸先旋轉180度：圖片翻成背面的效果，設置 backface-visibility:hidden; (不透視)</h2>
+        <div class="box10"><img src="../source/img/大龙 - 43.jpg"></div>
+        <p>※※ backface-visibility：可以拿來設置類似撲克牌翻牌的效果，將圖片的正反面設計為不同圖樣。</p>
+
+    </body>
+</html>

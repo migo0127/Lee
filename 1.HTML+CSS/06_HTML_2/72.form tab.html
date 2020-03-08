@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>表單 form</title>
+    </head>
+    <body>
+
+        <!--
+            表單(form)：
+                - 在現實生活中表單用於提交數據。
+                - 在網頁中也可以使用表單，網頁中的表單用於將本地的數據提交到遠端的服務器，因目前未能連
+                  接服務器，故先創建一個 target.html 來測試數據是否提交成功與查看提交的數據資料(網址)。
+                - 使用 form標籤來創建一個表單。
+         -->
+
+         <!--
+            form的屬性：
+                - action：表單要提交的服務器地址，因目前未能連接服務器，故先創建一個 target.html 來測試
+                數據是否提交成功與查看提交的數據資料(網址中可以查看到資訊)。
+            form的項目(後續在補充)：
+                1.文本框 input type="text"。
+                2.密碼框 input type="password"。
+                3.單選按鈕 input type="radio"。
+                4.多選按鈕 input type="checkbox"。
+                5.下拉式選單 select標籤 > option標籤。
+                6.提交按鈕 input type="submit"。
+          -->
+          <form action="target.html">
+            <!--
+                文本框：
+                ※※ 注意，數據要提交到服務器中，必須要為元素指定一個name屬性，建議寫keyword。
+             -->
+             文本框 <input type="text" name="username">
+             <br /><br />
+             <!--
+                 密碼框：
+                 ※※ 注意，數據要提交到服務器中，必須要為元素指定一個name屬性，建議寫keyword。
+              -->
+             密碼框 <input type="password" name="password">
+             <br /><br />
+             <!--
+                 單選按鈕：
+                    - 將name屬性設置為相同值時，則相同的name屬性值按鈕只能擇其一，若為不同的name屬性值，
+                      則可同時選取。
+                    - 像這種選擇框，必須要指定一個value屬性，value屬性最終會作為用戶填寫的值傳遞給服務器。
+                    - checked：可以將單選按鈕設置為默認選中。
+              -->
+              單選按鈕(同屬性值：性別) <input type="radio" name="gender" value="male">
+              單選按鈕(同屬性值：性別) <input type="radio" name="gender" value="female">
+              <br /><br />
+              單選按鈕(不同屬性值：boy) <input type="radio" name="boy" value="boy" checked>
+              <br /><br />
+              <!--
+                  多選按鈕：
+                    - name屬性值需相同。
+                    - 必須要指定一個value屬性。
+                    - 亦可設置checked。
+               -->
+               多選按鈕(同屬性值：興趣) <input type="checkbox" name="interest" value="music">
+                                       <input type="checkbox" name="interest" value="computer">
+                                       <input type="checkbox" name="interest" value="basketball">
+              <br /><br />
+              <!--
+                  下拉式選單：
+                    - select標籤 > option標籤。
+                    - select標籤必須要指定一個name屬性。
+                    - option標籤必須要指定一個value屬性。
+               -->
+               下拉式選單 <select name="nationality">
+                            <option value="TW">Taiwan</option>
+                            <option value="CN">China</option>
+                            <option value="USA">USA</option>
+                         </select>
+              <br /><br />
+              <!--
+                提交按鈕：
+                    value屬性值可依需求修改要使用的提交名稱。
+               -->
+               <input type="submit" value="提交一下">
+
+          </form>
+
+
+    </body>
+</html>

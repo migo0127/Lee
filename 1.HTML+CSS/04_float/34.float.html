@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>浮動 float</title>
+
+        <link rel="stylesheet" href="../03_layout/css/reset.css">
+
+        <style>
+        
+            .box1{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+
+            /*
+                浮動(float)：通過浮動可以使一個元素向其父元素的左側或右側移動(水平方向)。
+                    - float屬性：用來設置元素的浮動，意似 元素本位於最底層(文檔流)中，透過float屬性
+                      設置後，元素漂浮至上一層並重新排列 (底層→上一層)，但其範圍區仍不會超過其父元素。
+                        - 可選值：
+                            1.none：默認值，元素不浮動。
+                            2.left：元素向左浮動，意似 浮上來後向父元素的左側靠齊。
+                            3. right：元素向右浮動，意似 浮上來後向父元素的右側靠齊。
+                    
+                        ※ 注意：元素設置浮動以後，水平布局的等式便不需要強制成立(100=100 不需成立)，
+                           元素設置浮動後，會完全從文檔流中脫離，不再占用文檔流的位置，所以原本在文檔
+                           流浮動元素下邊還在文檔留中的元素會自動往上移動。
+                           意似 浮動的元素浮上來後，就不會再占用原本的空間，原本下方(後方)的未浮動的元
+                           素會往上移動。
+
+                        - 浮動的特點：
+                            1.浮動元素會完全脫離文檔流，不再占據文檔流中的位置。
+                            2.設置浮動以後元素會向父元素的左側或右側移動。
+                            3.浮動元素默認不會從父元素中移出(不會超出父元素的範圍)。
+                            4.浮動元素向左或向右移動時，不會超過它前邊的其他浮動元素。
+                            5.如果浮動元素的上邊是一個沒有浮動的塊元素，則浮動元素無法上移。
+                            6.浮動元素不會超過它上邊的浮動的兄弟元素，最多最多就是和它一樣高。
+                            7.當浮動元素占滿一整行時會向下一行繼續書寫。
+                            8.浮動元素不會蓋住文字，文字會自動環繞在浮動元素的周圍，所以我們可以利用
+                              浮動來設置文字環繞圖片的效果。
+
+                        - 簡單總結：
+                            浮動目前來講它的主要作用就是讓頁面中的元素可以水平排列，通過浮動可以制作
+                            一些水平方向的布局。
+
+                        ※ 不在文檔流中的元素(即脫離文檔流的元素)其特點詳見 35.docuement float.html
+            */
+            }
+
+            .box1{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+            }
+
+            .box2{
+                width: 200px;
+                height: 200px;
+                background-color: orange;
+            }
+
+            .box3{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box4{
+                width: 250px;
+                height: 250px;
+                background-color: orange;
+            }
+
+            .box5{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box6{
+                width: 200px;
+                height: 200px;
+                background-color: orange;
+                float:left;
+            }
+
+            .box7{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box8{
+                width: 250px;
+                height: 250px;
+                background-color: orange;
+            }
+
+            .box9{
+                width: 200px;
+                height: 200px;
+                background-color: red;
+                float:left;
+            }
+
+            .box10{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box11{
+                width: 250px;
+                height: 250px;
+                background-color: orange;
+            }
+
+            .box12{
+                width: 200px;
+                height: 200px;
+                background-color: red;
+                float:right;
+            }
+
+            .box13{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box14{
+                width: 200px;
+                height: 200px;
+                background-color: orange;
+                float:left;
+            }
+
+            .box15{
+                width: 200px;
+                height: 200px;
+                background-color: red;
+                float:left;
+            }
+
+            .box16{
+                width: 400px;
+                height: 200px;
+                background-color: #bfa;
+                float:left;
+            }
+
+            .box17{
+                width: 400px;
+                height: 200px;
+                background-color: orange;
+                float:left;
+            }
+
+            .box18{
+                width: 200px;
+                height: 200px;
+                background-color: red;
+                float:right;
+            }
+
+            .box19{
+                width: 100px;
+                height: 100px;
+                background-color: orange;
+                float:left;
+            }     
+        </style>
+
+    </head>
+    <body>
+
+        <p>1.未浮動：</p>
+        <br />
+        <div class="box1">Box1</div>
+        <div class="box2">Box2</div>
+        <hr />
+        <p>2.box3浮動向左且脫離文檔流，不再占據位置，box4未脫離文檔流往上移動。</p>
+        <br />
+        <p>像是box3浮在box4的上方。</p>
+        <br />
+        <div class="box3">Box3</div>
+        <div class="box4">Box4</div>
+        <hr />
+        <p>3.box5、box6都向左浮動，兩個box都浮動到上一層，並且不在占據文檔流位置，</p>
+        <br />
+        <p>故透過br標籤間隔下邊第4點，否則仍再文檔流的元素會往上移動</p>
+        <br />
+        <div class="box5">Box5</div>
+        <div class="box6">Box6</div>
+        <br>
+         &nbsp;&nbsp;我還再文檔流中，所以上移動了<br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr />
+        <p>4.box7向左浮動、box8未浮動、box9向左浮動：</p>
+        <br>
+        <p>box9雖然浮動了，但前面的塊元素(box8)未浮動，box8仍就獨占整行，所以box9不會向上移動</p>
+        <br />
+        <div class="box7">Box7</div>
+        <div class="box8">Box8</div>
+        <div class="box9">Box9</div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr />
+        <p>5.box10向左浮動、box11未浮動、box12向右浮動：</p>
+        <br />
+        <p>與前面相同情況，box11未浮動，浮動的box12無法向上移動</p>
+        <br />
+        <div class="box10">Box10</div>
+        <div class="box11">Box11</div>
+        <div class="box12">Box12</div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr />
+        <p>6.box13、box14、box15都向左浮動：</p>
+        <p></p>
+        <br />
+        <div class="box13">Box13</div>
+        <div class="box14">Box14</div>
+        <div class="box15">Box15</div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr />
+        <p>7.box16向左浮動、box17向左浮動、box18向右浮動：</p>
+        <br />
+        <p>當box18靠右浮動後，當頁面縮小到無法融納box16、box17、box18再同一行時，box18都不會上移，</p>
+        <br />
+        <p>因浮動元素不會超過它上邊的浮動的兄弟元素，最多最多就是和它一樣高。</p>
+        <br>
+        <div class="box16">Box16</div>
+        <div class="box17">Box17</div>
+        <div class="box18">Box18</div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr />
+        <p>8.當box19浮動後，浮動元素不會蓋住下邊未浮動的文字，文字會自動環繞在浮動元素的周圍，有環繞效果。</p>
+        <br />
+        <div class="box19">Box19</div>
+        <p>我家的後面有一個很大的園，相傳叫作百草園。現在是早已並1屋子一起賣給朱文公的子孫2了，連那最末次的相見也已經隔了七八年，其中似乎確鑿3只有一些野草；但那時卻是我的樂園。
+            不必說碧綠的菜畦4，光滑的石井欄，高大的皂莢樹5，紫紅的桑椹6；也不必說鳴蟬在樹葉里長吟7，肥胖的黃蜂伏在菜花上，輕捷8的叫天子9（雲雀）忽然從草間直竄向雲霄10里去了。單是周圍的短短的泥牆根一帶，就有無限趣味。油蛉11在這裡低唱，蟋蟀們在這裡彈琴。翻開斷磚來，有時會遇見蜈蚣；還有斑蝥12，倘若13用手指按住它的脊樑，便會拍的一聲，從後竅14噴出一陣煙霧。何首烏15籐和木蓮16籐纏絡17著，木蓮有蓮房18一般的果實，何首烏有臃腫19的根。有人說，何首烏根是有像人形的，吃了便可以成仙，我於是常常拔它起來，牽連不斷地拔起來，也曾因此弄壞了泥牆，卻從來沒有見過有一塊根像人樣。如果不怕刺，還可以摘到覆盆子20，像小珊瑚珠21攢22成的小球，又酸又甜，色味都比桑椹要好得遠。
+            長的草裡是不去的，因為相傳這園裡有一條很大的赤練蛇。
+            長媽媽23曾經講給我一個故事聽：先前，有一個讀書人住在古廟裡用功，晚間，在院子裡納涼24的時候，突然聽到有人在叫他。答應著，四面看時，卻見一個美女的臉露在牆頭上，向他一笑，隱去了。他很高興；但竟給那走來和他夜談的老和尚識破了機關25。說他臉上有些妖氣，一定遇見「美女蛇」了；這是人首蛇身的怪物，能喚人名，倘一答應，夜間便要來吃這人的肉的。他自然嚇得要死，而那老和尚卻道26無妨，給他一個小盒子，說只要放在枕邊，便可高枕而臥27。他雖然照樣辦，卻總是睡不著，——當然睡不著的。到半夜，果然來了，沙沙沙！門外像是風雨聲。他正抖作一團時，卻聽得豁的一聲，一道金光從枕邊飛出，外面便什麼聲音也沒有了，那金光也就飛回來，斂28在盒子裡。後來呢？後來，老和尚說，這是飛蜈蚣，它能吸蛇的腦髓，美女蛇就被它治死了。
+            結末的教訓是：所以倘有陌生的聲音叫你的名字，你萬萬不可答應他。
+            這故事很使我覺得做人之險，夏夜乘涼，往往有些擔心，不敢去看牆上，而且極想得到一盒老和尚那樣的飛蜈蚣。走到百草園的草叢旁邊時，也常常這樣想。但直到現在，總還沒有得到，但也沒有遇見過赤練蛇和美女蛇。叫我名字的陌生聲音自然是常有的，然而都不是美女蛇。
+            冬天的百草園比較的無味；雪一下，可就兩樣了。拍雪人（將自己的全形印在雪上）和塑雪羅漢29需要人們鑒賞30，這是荒園，人跡罕至31，所以不相宜，只好來捕鳥。薄薄的雪，是不行的；總須積雪蓋了地面一兩天，鳥雀們久已無處覓食32的時候才好。掃開一塊雪，露出地面，用一支短棒支起一面大的竹篩來，下面撒些秕谷33，棒上系一條長繩，人遠遠地牽著，看鳥雀下來啄食，走到竹篩底下的時候，將繩子一拉，便罩住了。但所得的是麻雀居多，也有白頰的「張飛鳥34」，性子很躁，養不過夜的。
+            這是閏土的父親所傳授的方法，我卻不大能用。明明見它們進去了，拉了繩，跑去一看，卻什麼都沒有，費了半天力，捉住的不過三四隻。閏土的父親是小半天便能捕獲幾十隻，裝在叉袋35里叫著撞著的。我曾經問他得失的緣由，他只靜靜地笑道：你太性急，來不及等它走到中間去。
+            我不知道為什麼家裡的人要將我送進書塾36里去了，而且還是全城中稱為最嚴厲的書塾。也許是因為拔何首烏毀了泥牆罷，也許是因為將磚頭拋到間壁的梁家去了罷，也許是因為站在石井欄上跳了下來罷……都無從37知道。總而言之：我將不能常到百草園了。Ade38，我的蟋蟀們！Ade，我的覆盆子們和木蓮們！......</p>
+        <hr />
+               
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>vw的適配(轉換為rem)</title>
+        <style>
+
+            /*
+                網頁中字體大小最小是「12px」，不能設置比 12px 還小的字體(除0以外)，如果我們
+                設置了一個小於 12px 的字體，瀏覽器會自動將該字體設置為 12px。
+
+                接續上一章，課堂設計圖為 750px = 100vw
+
+                    0.1333vw = 1px
+
+                    5.333vw = 40px (0.1333*40，放大40倍)
+
+                    此時再透過設置 html 的字體為 5.333vw ，即可是用 rem 來設置其他元素的大小。
+                    ※ 可自行配置要放大多少倍都行，但一定要比12px大，如 50、100都可以，但通常為 40倍。
+
+                    - 1 rem = 1 html的字體大小
+                    - 1 rem = 40px = 5.333vw
+
+                    ※ 京東的html字體即為 5.333vw，可參考看看。
+            */
+
+            html{
+                /*
+                    1rem = 1 html的字體
+                    1 rem = 40px = 5.333vw
+                */
+                font-size: 5.333vw;
+            }
+
+            .box1{
+                width: 1.2rem; /* 48px / 40 = 1.2rem */
+                height: 0.875rem; /* 35px / 40 = 0.875rem */
+                background-color: #bfa;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <!-- 創建一個 48px x 35px  -->
+        <div class="box1"></div>
+
+    </body>
+</html>

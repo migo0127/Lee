@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>長度單位</title>
+
+        <style>
+        /*
+        ※ 長度單位：
+            1.像素：
+                - 屏幕(顯示器)實際上是由一個一個的小方塊(小點點)構成的。
+                - 不同屏幕的像素大小是不同的，像素越小的屏幕顯示的越清晰。
+                - 所以同樣的200px，在不同的設備下顯示效果不一樣。
+
+            2.百分比：
+                - 可以將屬性值設置為相對於其父元素屬性的百分比。
+                    ※ 此處的父元素說法不嚴謹，暫時理解就好，後序教學補充。
+                - 設置百分比可以使子元素跟隨父元素的改變而改變。
+
+            3.em：常用
+                - em：相對單位，每個子元素透過「倍數」乘以父元素的 px 值。
+                - Xem * Xfont-size，若未設定字體大小時，系統默認為 16px。
+                  EX：
+                        父元素 font-size:16px、子元素font-size:1em;
+                        子元素字體大小為 16px*1em = 16px。
+
+                        父元素 font-size:16px、子元素font-size:2em;
+                        子元素字體大小為 16px*2em = 38px。
+
+                - em：會根據字體大小的改變而改變(類似百分比，跟隨父元素字體大小變動)。
+
+            4.rem：常用
+                - rem：相對單位，每個元素透過「倍數」乘以根元素的 px 值。
+                - 未設定字體大小時，系統默認為 16px。
+                  EX：
+                        根元素 font-size:14px、當前元素font-size:1rem
+                        當前元素字體大小為 14px*1rem = 14px
+
+                        根元素 font-size:14px、當前元素font-size:10rem
+                        當前元素字體大小為 14px*10rem = 140px
+         */
+        .div1{
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+        }
+
+        .div2{
+            width: 50%;
+            height: 50%;
+            background-color: crimson;
+        }
+
+        .div3{
+            font-size: 10px;
+            width: 20em;
+            height: 20em;
+            background-color: greenyellow;
+        }
+
+        html{
+            font-size: 15px;
+        }
+
+        .div4{
+            width: 10rem;
+            height: 10rem;
+            background-color: grey;
+        }
+
+
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="div1">
+            <div class="div2"></div>
+        </div>
+
+        <div class="div3">
+            <div class="div4"></div>
+        </div>
+
+    </body>
+</html>

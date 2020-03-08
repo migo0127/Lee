@@ -1,0 +1,320 @@
+// 通常在less中的註釋是使用「//」，但目前未方便與css檔對比，故暫時仍先用/**/來註釋
+
+.box1{
+    color: yellow;
+    /* box1祖先元素，box2是後代元素。*/
+    .box2{
+        color:red;
+    }
+
+    /* box1是父元素，box3是子元素。*/
+    >.box3{
+        color:red;
+    }
+
+    /* &：表示代入外層的父元素。
+        為 box1 設置一個hover時，要使用「&」符號，& 即表示代入外層的父元素。*/
+    &:hover{
+        color:blue;
+    }
+
+    >.box4{
+        color:red;
+
+        &:hover{
+            color:orange;
+        }
+    }
+
+     /* 表示 .box1-list。*/
+     &-list{
+        color: green;
+    }
+
+    /* 表示 div .box1 的寬高背景色。*/
+    div &{
+        background-color: #bfa;
+        width: 200px;
+        height: 100px;
+    }
+
+}
+
+
+/* extend()：擴展，對當前選擇器擴展指定選擇器的樣式，意似 .p1 .p2 有兩個相同樣式，但.p2另多了一個
+   不同樣式實時，可透過此函數為.p2進行擴展。
+
+    - 語法：
+            要擴展的選擇器名:extend(引用的選擇器名){
+                多擴展的屬性值;
+            }
+
+            ※ extend()前要加上「:」。
+
+    例子：
+        .p1{
+            width: 100px;
+            height: 100px;
+        }
+
+        .p2{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+     ※ 以上 .p1、.p2 的寬高相同，但.p2另外多了一個背景色，通常css寫法如下：
+
+        .p1 , .p2{
+            width: 100px;
+            height: 100px;
+        }
+
+        .p2{
+            background-color: red;
+        }
+
+        而使用less的寫法，可使用 extend() 來對p2進行擴展 ↓
+
+        .p1{
+            width: 100px;
+            height: 100px;
+        }
+
+        .p2:extend(.p1){
+            background-color: red;
+        }
+
+     */
+
+.p1{
+    width: 100px;
+    height: 100px;
+}
+
+.p2:extend(.p1){
+    background-color: red;
+}
+
+/*
+    .p5 套用 .p3 > .p4 的寬高，但 .p5 擴展(多)一個背景色。
+
+    CSS寫法：
+
+        .p3 > .p4 , .p5{
+            width: 100px;
+            height: 100px;
+        }
+
+        .p5{
+            background-color: #bfa;
+        }
+
+    ※ extend()寫法 ↓
+
+        .p3{
+        color:red;
+            > .p4{
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        .p5:extend(.p3 > .p4){
+            background-color: #bfa;
+        }
+
+*/
+.p3{
+    color:red;
+        > .p4{
+            width: 100px;
+            height: 100px;
+        }
+}
+
+.p5:extend(.p3 > .p4){
+    background-color: #bfa;
+}
+
+/*
+    mixins(混合函數)：表示直接對指定的樣式進行引用，這裡就相當於 .p7 將 .p6 的樣式進行了覆製，
+    但通常不使用此法，因為代碼未減少，故仍建議使用extend()，可減少代碼行數。
+
+    ※ 引用 mixins 時，()可省略不寫。
+*/
+
+.p6{
+    width: 100px;
+    height: 100px;
+}
+
+.p7{
+    .p6();
+}
+
+/*
+    mixins 的另一個用法，當類類選擇器後邊添加一個小括號()時，實際上就是創建了一個 mixins，
+    如 .p8() 且不會在css檔中看到。
+
+        - 語法：
+            .p8(){
+                width: 100px;
+                height: 100px;
+            }
+
+        ※ 引用 mixins 時，()可省略不寫。
+*/
+.p8(){
+    width: 100px;
+    height: 100px;
+}
+
+.p9{
+    .p8;
+}
+
+/*
+    混合函數(mixins)：通常的使用方式是在混和函數中直接設置變量，再引入變量。
+        - 語法：
+            .test(@變量名1,@變量名2,@變量名3){
+                width: @變量名1;
+                height: @變量名2;
+                border:1px solid @變量名3
+            }
+
+        - 例一：
+            .test(@wid,@hei,@bg-color){
+                width: @wid;
+                height: @hei;
+                border: 1px solid @bg-color;
+            }
+
+            .div{
+                .test(100px, 200px,#bfa);
+            }
+
+*/
+
+.test(@wid,@hei,@bg-color){
+    width: @wid;
+    height: @hei;
+    border: 1px solid @bg-color;
+}
+
+.div{
+    .test(100px, 200px,#bfa);
+}
+
+/*
+    混合函數(mixins)：通常的使用方式是在混和函數中直接設置變量，再引入變量。
+        例二：
+            .test(@wid,@hei,@bg-color){
+                width: @wid;
+                height: @hei;
+                border: 1px solid @bg-color;
+            }
+
+            .div{
+                .test(@bg-color:red,@hei:300px,@wid:200px);
+            }
+*/
+.test(@wid,@hei,@bg-color){
+    width: @wid;
+    height: @hei;
+    border: 1px solid @bg-color;
+}
+
+.div{
+    .test(@bg-color:red,@hei:300px,@wid:200px);
+}
+
+/*
+    混合函數(mixins)：通常的使用方式是在混和函數中直接設置變量，再引入變量。
+        例三：
+            .test(@wid:200px,@hei:100px,@bg-color:blue){
+                width: @wid;
+                height: @hei;
+                border: 1px solid @bg-color;
+            }
+
+            .div{
+                .test();
+            }
+*/
+.test(@wid:200px,@hei:100px,@bg-color:blue){
+    width: @wid;
+    height: @hei;
+    border: 1px solid @bg-color;
+}
+
+.div{
+    .test();
+}
+
+/*
+    average()、darken()：此兩個混和函數與「顏色」相關。
+        average()：與兩個顏色的中間(色)值。
+        darken()：將指定顏色加深 x%。
+*/
+
+/*
+    例子：average()
+            .p10{
+            color: average(red,yellow);
+            }
+
+            ↓ 編譯為css檔
+
+            .p10 {
+                color: #ff8000;
+            }
+
+*/
+.p10{
+    color: average(red,yellow);
+}
+
+/*
+    例子：darken()，執行 less_syntax2.html 看效果。
+
+        html{
+            width: 100%;
+            height: 100%;
+        }
+
+        body:extend(html){
+            background-color: #bfa;
+                &:hover{
+                    background-color: darken(#bfa,20%);
+                }
+        }
+
+            ↓ 編譯為css檔
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            background-color: #bfa;
+        }
+        body:hover {
+            background-color: #69ff44;
+        }
+
+*/
+
+html{
+    width: 100%;
+    height: 100%;
+}
+
+body:extend(html){
+    background-color: #bfa;
+        &:hover{
+            background-color: darken(#bfa,20%);
+        }
+}
+

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>圖標字體 (iconfont)：矢量圖 </title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+
+        <!-- 引入圖標檔案 -->
+        <link rel="stylesheet" href="./fontawesome/css/all.css">
+        <style>
+            li::before{
+                content:"\f1b0";
+                font-family:"Font Awesome 5 Free";
+                font-weight: 900;
+                margin: 0 10px;
+                color:brown;
+            }
+        </style>
+
+    </head>
+    <body>
+        <!--
+            圖標字體 (iconfont)：
+                在網頁中經常需要使用一些小圖標(如座標小圖示)，可以通圖片來引入圖標，但圖片大小
+                本身比較大，且調整圖片尺寸時也比較容易失真，非常不靈活，所以再使用圖標時，我們
+                還可以將圖標直接設置為字體(矢量圖)，字體放大後不會有失真的情況發生，通過link的
+                形式來對字體進行引入，這樣我們就可以通過使用字體的形式來使用圖標。
+
+
+            fontawesome 使用步驟：
+                1.下載：https://fontawesome.com/
+                2.解壓縮。
+                3.將css和webfonts移動到要使用的資料夾(項目)中，此兩個資料夾一定要在一起。
+                4.將 all.css (未壓縮檔案)、 all.min.css(壓縮檔案) 擇一引入(link)，通常用 all.css。
+                5.使用圖標字體 → 通常使用<i></i>，原表示斜體，但目前已不怎麼用。
+                    - 直接通過類名來使用圖標字體
+                    - 語法(3種)：
+
+                        1.通過i標籤+類自行一條一條加 (比較麻煩)
+                            <i class="fas 圖標名(於zeal上")></i>
+                            or
+                            <i class="fab 圖標名(於zeal上")></i>
+                        => fas、fab 為固定名，一定要寫，有時用fas、有時fab，顯示不出來就換另一個。
+
+                        2.通過實體&#x圖標的編碼;來添加圖標
+                            語法：<span class="fas">&#xf0f3;</span>
+
+                        3.通過 ::before 偽元素來設置圖標字體 (一次加入多個)
+                            步驟：
+                                3-1.找到要設置圖標的元素通過::before或::after選中。
+                                3-2.在content中設置字體的編碼。
+                                3-3.設置字體的樣式(從.css → @font-face → font-family: 中找)
+
+                                    fas：
+                                    font-family: 'Font Awesome 5 Free';
+                                    font-weight: 900;
+
+                                    fab：
+                                    font-family:'Font Awesome 5 Brands';
+                                    font-weight: 400;
+
+                                - 語法：
+
+                                    標籤::before{
+                                        content:"\圖標編碼";
+                                        font-family:"上方fas的或fab的字體名";
+                                        font-weight:依據上方.css找到的資訊填入;
+                                    }
+
+                ※ .css 源代碼中已自行使用 @font-face 從 webfont中引入到 .css中。
+
+                還有另一個圖標資料庫：iconfont，為阿里巴巴圖標資料庫，有更多資源，但不確定版權問題，
+                故練習時可使用，但開發時要先與作者確認是否有授權問題，留意！！(要帳號，故尚未使用)
+                阿里巴巴的圖標資料庫引入的類名為 iconfont (即為fas fab)。
+         -->
+
+         <i class="fas fa-map-marker-alt" style="font-size:40px; color:red;"></i>
+         <br />
+         <br />
+         <i class="fab fa-accessible-icon" style="font-size:60px; color:green;"></i>
+         <br />
+         <br />
+         <hr />
+         <span class="fas">&#xf0f3;</span>
+         <br />
+         <br />
+         <hr />
+         <ul>
+             <li>我是誰</li>
+             <li>我再哪</li>
+             <li>我不知道</li>
+             <li>???</li>
+         </ul>
+         <hr />
+
+
+    </body>
+</html>

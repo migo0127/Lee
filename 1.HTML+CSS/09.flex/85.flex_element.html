@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>彈性盒(flex)：彈性元素的相關樣式</title>
+        <style>
+
+            *{
+                margin: 0;
+                padding: 0;
+                list-style:none;
+            }
+
+            /*
+                彈性元素的相關樣式：
+                    1.flex-grow：彈性元素的伸展系數。
+                    2.flex-shrink：彈性元素的收縮(縮減)系數。
+                        - 縮減系數的計算方式比較複雜。
+                        - 縮減多少是根據 縮減系數 和 元素的大小 來計算。
+                    3.flex-basis：指定的是元素在「主軸」上的基礎長度。
+                        - 如果主軸是「橫向 —」，則 該值指定的就是元素的寬度。
+                        - 如果主軸是「縱向｜」，則 該值指定的就是元素的高度。
+                        - 默認值為 auto，表示參考元素自身的寬高。
+                        - 如果傳遞了一個具體的數值，則依 flex-base 的值為準。
+
+                    ※ flex：可以設置以上三個彈性元素(伸展 收縮 基礎長度)的簡寫屬性。
+                        - 語法：
+                            flex:伸展 收縮 基礎長度;
+                            flex: 1 1 100px; → 該彈性元素會 伸展 收縮 長度為100px。
+                        - 可選值：
+                            3-1.flex:伸展 收縮 基礎長度;
+                            3-2.initial：默認值，" flex: 0 1 auto " → 不伸展、收縮、依元素自身寬or高。
+                            3-3.auto：" flex 1 1 auto " → 伸展、收縮、依元素自身寬or高。
+                            3-4.none：" flex 0 0 auto " → 彈性元素沒有彈性，不伸展、不收縮、依元素自身寬or高。
+
+                    4.order：決定彈性元素的排列順序。(有表現-css影響結構-html的情況)
+            */
+
+            ul.box1{
+                width: 800px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+            }
+
+            ul.box1 li{
+                width: 200px;
+                height: 100px;
+                background-color: #bfa;
+                text-align: center;
+                line-height: 100px;
+                font-size: 34px;
+            }
+
+            ul.box1 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box1 li:nth-child(3){
+                background-color:skyblue;
+            }
+
+            ul.box2{
+                width: 800px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+            }
+
+            ul.box2 li{
+                width: 200px;
+                height: 100px;
+                background-color: #bfa;
+                text-align: center;
+                line-height: 100px;
+                font-size: 34px;
+            }
+
+            ul.box2 li:nth-child(2){
+                background-color: orange;
+                /* 另設置 flex-basis */
+                flex-basis:300px;
+            }
+
+            ul.box2 li:nth-child(3){
+                background-color:skyblue;
+            }
+
+            ul.box3{
+                width: 800px;
+                height: 400px;
+                border: 5px solid red;
+                display: flex;
+                flex-direction:column;
+            }
+
+            ul.box3 li{
+                width: 200px;
+                height: 100px;
+                background-color: #bfa;
+                text-align: center;
+                line-height: 100px;
+                font-size: 34px;
+            }
+
+            ul.box3 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box3 li:nth-child(3){
+                background-color:skyblue;
+            }
+
+            ul.box4{
+                width: 800px;
+                height: 400px;
+                border: 5px solid red;
+                display: flex;
+                flex-direction:column;
+            }
+
+            ul.box4 li{
+                width: 200px;
+                height: 100px;
+                background-color: #bfa;
+                text-align: center;
+                line-height: 100px;
+                font-size: 34px;
+            }
+
+            ul.box4 li:nth-child(2){
+                background-color: orange;
+                /* 另設置 flex-basis */
+                flex-basis:300px;
+            }
+
+            ul.box4 li:nth-child(3){
+                background-color:skyblue;
+            }
+
+            ul.box5{
+                width: 800px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+            }
+
+            ul.box5 li{
+                width: 200px;
+                height: 100px;
+                background-color: #bfa;
+                text-align: center;
+                line-height: 100px;
+                font-size: 34px;
+            }
+
+            ul.box5 li:nth-child(2){
+                background-color: orange;
+            }
+
+            ul.box5 li:nth-child(3){
+                background-color:skyblue;
+            }
+
+            ul.box6{
+                width: 800px;
+                height: 100px;
+                border: 5px solid red;
+                display: flex;
+            }
+
+            ul.box6 li{
+                width: 200px;
+                height: 100px;
+                background-color: #bfa;
+                text-align: center;
+                line-height: 100px;
+                font-size: 34px;
+                order:3;
+            }
+
+            ul.box6 li:nth-child(2){
+                background-color: orange;
+                order:1;
+            }
+
+            ul.box6 li:nth-child(3){
+                background-color:skyblue;
+                order:2;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <h2>※ 彈性元素的樣式：對照組，ul 寬：800px、高：100px， li 寬：200px、高：100px。</h2>
+        <ul class="box1">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br >
+        <h2>1.flex-basis：指定的是元素在「主軸」上的基礎長度，ul.box2 li 已設置寬：200px、高：100px。</h2>
+        <p>1-1.b2：主軸(→)，另設置第二個li的 flex-basis：300px; 即為第二個li的寬度由200px變為300px。 </p>
+        <ul class="box2">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br >
+        <h2>※ 彈性元素的樣式：對照組，ul 寬：800px、高：400px， li 寬：200px、高：100px。</h2>
+        <ul class="box3">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br >
+        <h2>※ ul.box3 已設置寬：800px、高：400px，另設 ul.box3 li 寬：200px、高：100px。</h2>
+        <p>2-2.b3：主軸(↓)，另設置第二個li的 flex-basis：200px; 即為第二個li的高度由100px變為200px。 </p>
+        <ul class="box4">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br >
+        <hr />
+        <h2>2.order：決定彈性元素的排列順序。</h2>
+        <p>2-1.b5：未設置order時，對照組。</p>
+        <ul class="box5">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br >
+        <p>2-2.b6：設置彈性元素的 order 樣式，li 依序為 order:3; order:1; order:2;。</p>
+        <ul class="box6">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <br >
+
+    </body>
+</html>

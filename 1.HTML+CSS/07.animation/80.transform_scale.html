@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>變形的縮放(scale)</title>
+        <style>
+
+            /*
+                transdorm:scale()：縮放，對元素進行縮放的函數。
+                    - 可選值：
+                        1.scaleX()：水平方向縮放。
+                        2.scaleY()：垂直方向縮放。
+                        3.scale()：水平、垂直兩方向縮放。
+                        4.scaleZ()：只有在3D情況下才有效的z軸縮放(z軸拉長變短)。
+                    - 語法：
+                        transform:scaleX(2); → 水平放大2倍。
+                        transform:scaleX(0.2); → 水平縮小2倍。
+                        transform:scale(0.2); → 水平垂直都縮小2倍。
+
+                transform-origin：變形的原點坐標。
+                    - 可選值：
+                        1.center：默認值，中心點。
+                        2.px。
+                    - 語法：
+                        transform-origin:center;
+                        transform-origin:20px 30px;
+
+            */
+            .box1{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                margin: 0px 50px;
+                transition:2s;
+            }
+
+            .box1:hover{
+                transform:scaleX(2);
+            }
+
+            .box2{
+                width: 100px;
+                height: 100px;
+                background-color: orange;
+                margin: 0px 50px;
+                transition:2s;
+            }
+
+            .box2:hover{
+                transform:scaleY(.5);
+            }
+
+            .box3{
+                width: 100px;
+                height: 100px;
+                background-color: skyblue;
+                margin: 0px 50px;
+                transition:2s;
+            }
+
+            .box3:hover{
+                transform:scale(1.2);
+            }
+
+            .box4{
+                width: 100px;
+                height: 100px;
+                background-color: pink;
+                margin: 0 50px;
+                transition:2s;
+                transform-origin:0 0;
+            }
+
+            .box4:hover{
+                transform:scale(1.2);
+            }
+
+            .img-wrapper{
+                width: 300px;
+                height: 281.5px;
+                border: 2px black solid;
+                margin: 0px 50px;
+            }
+
+            img{
+                width: 100%;
+                transition:.2s;
+            }
+
+            .img-wrapper:hover img{
+                transform:scale(1.1);
+            }
+
+            .img-wrapper2{
+                width: 300px;
+                height: 281.5px;
+                border: 2px black solid;
+                margin: 0px 50px;
+                overflow: hidden;
+            }
+
+            .img-wrapper2:hover img{
+                transform:scale(1.1);
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <h2>1.水平放大 scaleX(2):</h2>
+        <div class="box1">b1</div>
+        <br />
+        <hr />
+        <h2>2.垂直縮小 scaleY(.5):</h2>
+        <div class="box2">b2</div>
+        <br />
+        <hr />
+        <h2>3.水平垂直放大 scale(1.2):</h2>
+        <div class="box3">b3</div>
+        <br />
+        <hr />
+        <h2>4.水平放大 scaleX(1.2)，並設置 transform-origin:0 0; 此時放大依原點坐標(0,0)為中心點進行放大 </h2>
+        <div class="box4">b4</div>
+        <br />
+        <hr />
+        <h2>5.圖片水平垂直放大 scale(1.1): 此時滑鼠移入時，圖片會放大1.1倍，但會有超出邊框的效果</h2>
+        <div class="img-wrapper">
+            <img src="../source/img/大龙 - 40.jpg" alt="">
+        </div>
+        <br />
+        <hr />
+        <h2>6.圖片水平垂直放大 scale(1.1)，並設置 overflow:hidden; 此時滑鼠移入時，圖片放大1.1倍，超出邊框的部份會隱藏起來</h2>
+        <div class="img-wrapper2">
+            <img src="../source/img/大龙 - 40.jpg" alt="">
+        </div>
+        <br />
+        <hr />
+
+
+    </body>
+</html>

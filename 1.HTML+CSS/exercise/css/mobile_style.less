@@ -1,0 +1,166 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@total-width:750;
+
+
+// 設置根元素
+html{
+    // 設置rem的比值
+    font-style: 100vw/@total-width * 40;
+    background-color: #EFF0F2;
+}
+
+// 統一的樣式
+.w{
+    width: 693/40rem;
+    margin:0 auto;
+    font-family: sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+.top-bar:extend(.w){
+    display: flex;
+    // 設置高度
+    height: 175/40rem;
+    line-height: 175/40rem;
+    // 設置垂直居中
+    align-items:center;
+    // 設置空白空間分散
+    justify-content: space-between;
+
+    a{
+        color:#24253d;
+        font-size: 50/40rem;
+
+        i{
+            color:#999;
+            font-size: 30/40rem;
+        }
+    }
+}
+
+// 設置banner
+.banner:extend(.w){
+    img{
+        width: 100%;
+    }
+}
+
+// 設置main
+.main-bar:extend(.w){
+    height: 329/40rem;
+    display: flex;
+    // 設置換行
+    flex-flow:row wrap;
+    justify-content: space-between;
+    align-content: space-evenly;
+
+    a{
+        width: 327/40rem;
+        height: 104/40rem;
+        line-height: 104/40rem;
+        border-radius: 12/40rem;
+        color:#fff;
+        font-size: 34/40rem;
+    }
+
+    i{
+        margin: 0 16/40rem 0 36/40rem;
+    }
+
+    .Mcourses{
+        background-color: #f97053;
+    }
+
+    .star{
+        background-color: #cd6efe;
+    }
+
+    .sub{
+        background-color: #fe4479;
+    }
+
+    .download{
+        background-color: #1bc4fb;
+    }
+}
+
+.course-wrapper:extend(.w){
+    margin-top:40/40rem;
+}
+
+.Lcourse-bar{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40/40rem;
+
+    .Lcourse{
+        font-size: 40/40rem;
+        color:#24253d;
+
+        &::before{
+            content:"l";
+            color:#3a84ff;
+            font-size: 40/40rem;
+            padding-right: 10/40rem;
+        }
+    }
+
+    a{
+        font-size: 30/40rem;
+        color:#656565;
+    }
+}
+
+.cover-wrapper{
+    width: 720/40rem;
+    display: flex;
+    overflow: auto;
+}
+
+.cover-bar{
+    width: 290/40rem;
+    height: 338/40rem;
+    padding: 0 22/40rem;
+    background-color: #fff;
+    box-shadow: 0 0 4/40rem rgba(0,0,0,0.3);
+    border-radius: 10/40rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    margin-right: 20/40rem;
+    flex:none;
+
+    img{
+        width: 100%;
+        vertical-align: top;
+    }
+
+    .title{
+        font-size: 28/40rem;
+        color:#24253d;
+    }
+
+    .user-bar{
+        display: flex;
+        align-items: center;
+    }
+
+    .user-phto{
+        width: 46/40rem;
+        height: 46/40rem;
+    }
+
+    .nikename{
+        font-size: 26/40rem;
+        color:#969393;
+        margin-left: 16/40rem;
+    }
+}

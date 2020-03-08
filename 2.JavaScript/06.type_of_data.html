@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數據類型</title>
+    <script>
+
+        /*
+            數據類型：指的就是字面量的類型。
+                - 在JS中一共有「六種」數據類型(字母開頭大寫)：
+                    1.String：字符串。
+                    2.Number：數值。
+                    3.Boolean：布爾值。
+                    4.Null：空值。
+                    5.Undefined：未定義。
+                    6.Object：對象。
+
+                - 其中 String、Number、Boolean、Null、Undefined 屬於「基本數據類型」，
+                  而 Object 屬於「引用數據類型」。
+
+            1.String 字符串：
+                - 在JS中字符串需要使用引號引起來。
+                - 使用雙引號或單引號都可以，但不能混著用或相同引號嵌套使用。
+
+                    var str = "我說："今天天氣真不錯！"";  (X)
+                    var str = "我說：今天天氣真不錯！' (X)
+                    var str = "我說：'今天天氣真不錯！'" (O)
+
+                - 在字符串中，我們可以使用「\」作為轉義字符，當表示一些特殊符號時，
+                  可以使用「\」進行轉義。
+                  - 例如：
+                            \" 表示"
+                            \' 表示'
+                            \n 表示換行
+                            \t 表示TAB(制表符)
+                            \\ 表示\
+        */
+
+        var str = "\\\\";
+
+        // 輸出字面量(字符串) => str
+        alert("str");
+
+        //輸出變量str的賦值 => \\
+        alert(str);
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

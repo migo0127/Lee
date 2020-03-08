@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>w3c水平導航條練習</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+
+            /* 老師的這個作法是將w3c的水平列表各小框框大小一致(利用padding)，但實際網頁上的是不同大小 */
+
+            .menue{
+                width: 1210px;
+                height: 48px;
+                background-color: #E8E7E3;
+            }
+
+            .menue a{
+                /* 將a轉換為塊元素，可應用寬高，將超連接應用到整個框框中，點框邊也有作用 */
+                display: block;
+                font-size: 14px;
+                color: #7A7979;
+                line-height: 48px;
+                text-decoration: none;
+
+                /* 將文字分散在列表中 */
+                padding:0 49px 0 50px;
+                float: left;                
+            }
+
+            .menue a:last-child{
+                /* 作微調，使a超連接的背景色可以與menue背景色大小一致 */
+                padding:0 52px 0 51px;
+            }
+
+            .menue a:hover{
+                color:#E2E1DD;
+                background-color: #3F3F3F;
+            }
+        
+ 
+        </style>
+
+    </head>
+    <body>
+
+        <nav class="menue">
+            <a href="https://www.youtube.com/?gl=TW&hl=zh-TW">HTML/CSS</a>
+            <a href="javasrcipt:;">Browser Side</a>
+            <a href="javasrcipt:;">Server Side</a>
+            <a href="javasrcipt:;">Programming</a>
+            <a href="javasrcipt:;">XML</a>
+            <a href="javasrcipt:;">Web Building</a>
+            <a href="javasrcipt:;">Reference</a>
+        </nav>
+        
+    </body>
+</html>

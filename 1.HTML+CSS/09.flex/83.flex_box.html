@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>flex_box：彈性盒、伸縮盒</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+
+            /*
+                flex(彈性盒、伸縮盒)：
+                    - 是CSS中的又一種布局手段，它主要用來代替浮動(float)來完成頁面的布局。
+                    - flex可以使元素具有彈性，讓元素可以跟隨頁面大小的改變而改變。
+                    - flex主要分為兩部份：
+                        1.彈性容器。
+                        2.彈性元素。
+
+                            - 彈性容器：
+                                - 要使用彈性盒，必須要先將一個元素設置為彈性容器。
+                                - 我們通過 display 來設置彈性容器。
+                                    1.display:flex 設置為塊級彈性容器(最常用)。
+                                    2.display:inline-flex 設置為行內彈性容器。
+
+                                -彈性容器的樣式：(後再補充其他樣式)
+                                    flex-direction：指定容器中彈性元素的排列方式。
+                                        - 主軸：彈性元素的排列方向稱為主軸。
+                                        - 輔軸：與主軸垂直方向的稱為輔軸。
+                                        - 可選值：
+                                            1.row：默認值，彈性元素在容器中水平排列(左向右，似 float:left 排序)。
+                                                - 主軸：自左向右。
+                                            2.row-reverse：彈性元素在容器中反向水平排列(右向左，似 float:right 排序)。
+                                                - 主軸：自右向左。
+                                            3.column：彈性元素縱向排列 (自上向下)。
+                                                - 主軸：自上向下。
+                                            4.coiumn-reverse：彈性元素縱向排列 (自下向上)。
+                                                - 主軸：自下向上。
+
+                            - 彈性元素：
+                                - 彈性容器的直接子元素(不含後代元素)就是彈性元素(彈性項)。
+                                - 一個元素可以同時是彈性容器和彈性元素。
+                                - 彈性元素的樣式：(後再補充其他樣式)
+                                    1.flex-grow：指定彈性元素的(寬度)伸展系數。
+                                        - 當父元素有多餘空間時，子元素如何伸展。
+                                        - 父元素剩餘的空間，會按照比例進行分配。
+                                        - 語法：
+                                            flex-grow:0; (默認值，不伸展)
+                                            flex-grow:1; (彈性元素依父元素剩餘的空間比例伸縮)
+
+                                    2.flex-shrink：指定彈性元素的(寬度)收縮系數。
+                                        - 當父元素中的空間不足以容納所有子元素時，如何對子元素進行收縮。
+                                        - 語法：
+                                            flex-shrink:1; (默認值，收縮，依 縮減系數及元素大小 來計算 )。
+                                            flex-shrink:0; (不收縮)。
+
+                                    ※ 彈性元素的屬性默認值：0不伸、1收縮。
+
+                    ※ 當設置彈性盒布局後，彈性容器的大小(寬高)會直接影響彈性元素大小，就算彈性元素
+                       有另外設置寬高，若彈性容器寬高小餘彈性元素寬高，而又沒有另設置彈性元素的屬性
+                       (伸展或收縮)時，彈性元素會忽略自身大小，依彈性容器大小比例收縮。
+            */
+
+            ul{
+                width: 800px;
+                border: 5px solid red;
+
+                /* 將ul設置為彈性容器，此時所以的直接子元素li，就是彈性元素 */
+                display:flex;
+
+                /* 設置彈性容器中的彈性元速排列方式 */
+                /* flex-direction:row-reverse; */
+                /* flex-direction:column; */
+                /* flex-direction:column-reverse; */
+                flex-direction:row;
+            }
+
+            li{
+                font-size: 30px;
+                width: 200px;
+                height: 100px;
+                background-color: #bfa;
+                text-align: center;
+                line-height: 100px;
+                /* 設置彈性元素伸展系數，默認值 0 ，不伸展 */
+                /* flex-grow: 0; */
+                /* flex-grow: 1; */
+                /* 設置彈性元素收縮系數，默認值 1 ，收縮 */
+                /* flex-shrink: 1; */
+                /* flex-shrink: 0; */
+            }
+
+            li:nth-child(2){
+                background-color: orange;
+            }
+
+            li:nth-child(3){
+                background-color: skyblue;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+
+    </body>
+</html>

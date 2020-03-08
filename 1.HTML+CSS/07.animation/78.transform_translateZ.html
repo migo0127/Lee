@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>transform：translateZ()，Z軸的變形，遠小近大的效果</title>
+        <style>
+            /*
+                transform：translateZ()，未旋轉方向的情況下
+                    - z軸的平移表示調整元素在z軸的位置，正常情況下就是調整元素和人眼之間的距離，
+                      距離越大，元素離人越近。
+                    - z軸平移屬於「立體效果(近大遠小)」，默認情況下網頁是不支持透視，如果需要看
+                      見z軸的效果，必須要設置網頁的視距 perspective。
+                      ※ 視距(perspective)：通常設置在html，600~1200px間效果最好，不可太小。
+            */
+            html{
+                /* 設置網頁的視距 perspective */
+                perspective:800px;
+            }
+
+            body{
+                border: 10px black solid;
+
+                /* 此時body的默認背景區塊為整個html(根元素)，故背景色非body的真實寬高 */
+                background-color: silver;
+            }
+
+            .box1{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+                margin: 200px auto;
+            }
+
+            /* 設置box1在滑鼠移入後，z軸的變形效果，z軸的效果需先設置html的 perspective */
+            body:hover .box1{
+                transform: translateZ(300px);
+            }
+
+            .box2{
+                width: 200px;
+                height: 200px;
+                background-color: orange;
+                margin: 100px auto;
+            }
+
+            body:hover .box2{
+                transform: translateZ(-100px);
+            }
+
+
+        </style>
+
+    </head>
+    <body>
+        <h2>b1：z軸拉近300px，故視距變近，元素變大(近大遠小)。</h2>
+        <div class="box1">b1：transform: translateZ(300px)</div>
+        <hr />
+        <h2>b2：z軸拉遠-100px，故視距變遠，元素變小(近大遠小)。</h2>
+        <div class="box2">b2：transform: translateZ(-100px)</div>
+
+    </body>
+</html>

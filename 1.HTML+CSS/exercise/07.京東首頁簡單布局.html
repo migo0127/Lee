@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>京東首頁簡單布局</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+
+            body{
+                background-color: rgb(227, 228, 229);
+            }
+
+            main,footer{
+                width: 1190px;
+                margin:0 auto;
+                overflow: hidden;
+            }
+
+            .header{
+                width: 1190px;
+                height: 30px;
+                border:0.994px solid rgb(221, 221, 221);
+                margin: 0 270px;
+                margin: 0 auto;
+            }
+
+            .header div{
+                float: left;
+                line-height: 30px;
+                font-size: 2px;
+                color: rgb(153, 153, 153);
+            }
+
+            .header a{
+                text-decoration: none;
+                font-size: 12px;
+                color: rgb(153, 153, 153);
+                padding:0 7px 0;
+            }
+
+            .top3 > a{
+                color: rgb(241, 2, 21);
+            }
+
+            .top11 > a{
+                color: rgb(241, 2, 21);
+            }
+
+            .top1 a:first-of-type{
+                padding-right:450px;
+            }
+
+
+            .header a:hover{
+                color: rgb(241, 2, 21);
+            }
+
+            .search{
+                width: 1190px;
+                height:140px;
+                margin:0 auto;
+                background-color: rgb(255, 255, 255);
+            }
+
+            .search > .left-phto{
+                margin-top: 10px;
+                float: left;
+
+            }
+
+            .search > .center-phto{
+                box-sizing: border-box;
+                padding-top:30px;
+                padding-left: 70px;
+                float: left;
+            }
+
+            .search .car{
+                width: 130px;
+                height: 33.891px;
+                text-align: center;
+                line-height: 33.991px;
+                margin-top:30px;
+                margin-left: 16px;
+                border:1px solid  rgb(238, 238, 238);
+                float: left;
+            }
+
+            .search .car a{
+                text-decoration: none;
+                font-size: 12px;
+                color: rgb(241, 2, 21);
+            }
+
+            .search .car:hover{
+                border:1px solid rgb(241, 2, 21);
+            }
+
+
+            .search > .right-phto{
+                margin-top: 10px;
+                margin-left:30px;
+                float:left;
+            }
+
+            .search > .hot{
+                margin-top:-63px;
+                margin-left: 262px;
+                padding:0 20px 0 0;
+                float: left;
+            }
+
+            .hot a{
+                font-size: 12px;
+                color: rgb(153, 153, 153);
+                text-decoration: none;
+            }
+
+            .hot span{
+                padding-right: 6px;
+            }
+
+            .hot .hot1{
+                color:rgb(241, 2, 21);
+            }
+
+            .hot a:hover{
+                color:rgb(241, 2, 21);
+            }
+
+            .search .search-bot{
+                margin-top: 9px;
+                margin-left: -59px;
+                float: left;
+            }
+
+            .search-bot span{
+                display: block;
+                padding:11px;
+                float: left;
+            }
+
+            .search-bot a{
+                font-size: 15px;
+                text-decoration: none;
+                color:rgb(51, 51, 51);
+            }
+
+            .bot1 a{
+                color:rgb(241, 2, 21);
+                font-weight: bold;
+            }
+
+            .bot2 a{
+                color:rgb(241, 2, 21);
+                font-weight: bold;
+            }
+
+            main{
+                height: 480px;
+                background-color:rgb(244, 244, 244);
+                margin-bottom: 30px;
+            }
+
+            main .bottom-phto{
+                display: block;
+                width: 1950px;
+                height: 40px;
+                margin-left: -360px;
+                margin-top: -500px;
+                float: left;
+            }
+
+            article,aside{
+                float: left;
+            }
+
+            .font-list{
+                width: 190px;
+                height: 450px;
+                background-color: wheat;
+                padding-top: 10px;
+                margin-top:1px;
+                margin-right: 10px;
+                float: left;
+            }
+
+            .font-list{
+                width: 190px;
+                height: 450px;
+                background-color:#fefefe;
+                padding:10px 0px;
+                margin-top:10px;
+                overflow: hidden;
+            }
+
+            .font-list li{
+                height: 25px;
+                font-size: 14px;
+
+                /* 設置垂直居中 */
+                line-height:25px;
+                padding-left:18px;
+            }
+
+            .font-list li:hover{
+                background-color:#d9d9d9;
+            }
+
+            .font-list a{
+                color:#333;
+                text-decoration: none;
+            }
+
+            .font-list a:hover{
+                color:#C81623;
+            }
+
+            .font-list span{
+                font-size: 12px;
+                padding:0 2px;
+            }
+
+
+            article{
+                width: 790px;
+                height: 480px;
+                background-color:rgb(244, 244, 244);
+                margin-right:10px;
+            }
+
+            article img{
+                margin-top: 10px;
+                margin-left: 5px;
+                margin-bottom: -2px;
+            }
+
+            article .b-img{
+                margin-top: 10px;
+                float: left;
+            }
+
+            aside{
+                width: 190px;
+                height: 480px;
+                background-color: rgb(244, 244, 244);
+            }
+
+            .login{
+                height: 102px;
+                background-color: rgb(255, 255, 255);
+                margin-top: 10px;
+                border-bottom: 1px solid rgba(227, 228, 229,0.5);
+
+            }
+
+            .login .in-phto{
+                margin-top: 13px;
+                margin-left: 13px;
+                float: left;
+            }
+            .login a{
+                font-size: 12px;
+                text-decoration: none;
+            }
+
+            .login a:hover{
+                color:rgb(241, 2, 21)
+            }
+
+            .text1{
+                display: block;
+                padding-top:20px;
+                padding-left: 73px;
+
+                color:rgb(102,102,102);
+            }
+
+            .text2{
+                padding-left: 6px;
+                padding-right: 5px;
+                color:rgb(102,102,102);
+            }
+
+            .test3{
+                font-size: 1px;
+                color:rgb(102,102,102);
+            }
+
+            .text4{
+                padding-left: 5px;
+                color:rgb(102,102,102);
+            }
+
+            .text5{
+                display: block;
+                width: 70px;
+                height: 25px;
+                font-size: 12px;
+                color: rgb(244, 244, 244);
+                background-color: rgb(225, 37, 27);
+                text-align: center;
+                line-height: 25px;
+                margin-top: 15px;
+                margin-left: -53px;
+                border-radius:13px;
+                float: left;
+            }
+
+            .text6{
+                display: block;
+                width: 70px;
+                height: 25px;
+                font-size: 12px;
+                color: rgb(229, 215, 144 );
+                background-color: rgb(54, 54, 52);
+                text-align: center;
+                line-height: 25px;
+                margin-top: 15px;
+                margin-left: 12px;
+                border-radius:13px;
+                float: left;
+            }
+
+            .text5:hover{
+                color:rgb(102,102,102);
+            }
+
+            .news{
+                height: 130px;
+                background-color: rgb(255, 255, 255);
+                border-bottom: 1px rgba(102,102,102,0.0.5) solid;
+            }
+
+            .news div{
+                float: left;
+            }
+
+            .news h3{
+                color:rgb(51, 51, 51);
+                font-size: 14px;
+                font-weight: bold;
+                padding-top: 5px;
+                padding-left: 8px;
+                padding-bottom: 10px;
+                float: left;
+
+            }
+
+            .news .news-mo{
+                font-size: 12px;
+                color:rgb(102,102,102);
+                padding-top: 5px;
+                padding-left: 72px;
+                padding-bottom: 10px;
+                float: left;
+            }
+
+            .news a{
+                text-decoration: none;
+                color:rgb(102,102,102);
+                font-size: 13px;
+            }
+
+            .news a:hover{
+                color:rgb(225, 37, 27);
+            }
+
+            .news .s1{
+                display: block;
+                width: 35px;
+                height:16px;
+                font-size: 12px;
+                line-height: 16px;
+                text-align:center;
+                color:rgb(225, 37, 27);
+                background-color: rgba(225,37,27,.08);
+                margin-left: 8px;
+                margin-right: 6px;
+                margin-bottom: 5px;
+                float: left;
+            }
+
+            .news .s2{
+                display: block;
+                width: 35px;
+                height:16px;
+                font-size: 12px;
+                line-height: 16px;
+                text-align:center;
+                color:rgb(225, 37, 27);
+                background-color: rgba(225,37,27,.08);
+                margin-left: 8px;
+                margin-right: 6px;
+                margin-bottom: 5px;
+                float: left;
+            }
+
+            .news .s3{
+                display: block;
+                width: 35px;
+                height:16px;
+                font-size: 12px;
+                line-height: 16px;
+                text-align:center;
+                color:rgb(225, 37, 27);
+                background-color: rgba(225,37,27,.08);
+                margin-left: 8px;
+                margin-right: 6px;
+                margin-bottom: 5px;
+                float: left;
+            }
+
+            .news .s4{
+                display: block;
+                width: 35px;
+                height:16px;
+                font-size: 12px;
+                line-height: 16px;
+                text-align:center;
+                color:rgb(225, 37, 27);
+                background-color: rgba(225,37,27,.08);
+                margin-left: 8px;
+                margin-right: 6px;
+                margin-bottom: 5px;
+                float: left;
+            }
+
+            .news .s1-1{
+                display: block;
+                padding-top: -4px;
+                float: left;
+            }
+
+            .news .s2-1{
+                display: block;
+                padding-top: -4px;
+                float: left;
+            }
+
+            .news .s3-1{
+                display: block;
+                padding-top: -4px;
+                float: left;
+            }
+
+            .news .s4-1{
+                display: block;
+                padding-top: -4px;
+                float: left;
+            }
+
+            .live1{
+                height: 30px;
+                background-color: rgb(255, 255, 255);
+            }
+
+            .live1 a{
+                display: block;
+                width: 62.9993px;
+                height: 30px;
+                font-size: 12px;
+                color:rgb(102, 102, 102);
+                float: left;
+                line-height: 30px;
+                text-align: center;
+                text-decoration: none;
+            }
+
+            .live1 a:hover{
+                color:rgb(225, 37, 27);
+                border-bottom:1px rgba(225, 37, 27,0.5) solid;
+            }
+
+            .live2{
+                height: 205.994px;
+                background-color: rgb(255, 255, 255);
+            }
+
+            .live2 a{
+                display: block;
+                font-size: 12px;
+                color:rgb(102, 102, 102);
+                float: left;
+                line-height: 30px;
+                text-align: center;
+                text-decoration: none;
+                margin-left: 10px;
+                margin-bottom: 5px;
+            }
+
+            .live2 a:hover{
+                color:rgb(225, 37, 27);
+            }
+
+            .live2 .l2-2{
+                color: rgb(225, 37, 27);
+            }
+
+            .live2 .l2-5{
+                display: block;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                text-align: center;
+                color:rgb(102, 102, 102);
+                font-size: 13px;
+                margin-top: 20px;
+                margin-left: 80px;
+            }
+
+            .live2 .l2-5:hover{
+                color: #fefefe;
+                background-color: rgb(225, 37, 27);
+                border-radius: 50%;
+            }
+
+            footer{
+                height: 260px;
+                background-color: rgb(244, 244, 244);
+                margin-bottom: 20px;
+            }
+
+            footer a{
+                float: left;
+            }
+
+            footer a:hover{
+                background-color: rgba(255, 255, 255, 0.4);
+            }
+
+
+            footer .last{
+                width: 190px;
+                height: 260px;
+                padding:10px;
+                background-color: rgb(254, 254, 254);
+                box-sizing: border-box;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <!-- 設置頭部1、2 -->
+        <header class="header">
+            <!-- 設置上條列 -->
+            <div class="top1"><a href="#">台灣</a></div>
+            <div class="top2"><a href="https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2Findex.html">你好,請登錄</a></div>
+            <div class="top3"><a href="#">免費註冊</a></div>
+            <div class="top4">｜</div>
+            <div class="top5"><a href="#">我的訂單</a></div>
+            <div class="top4">｜</div>
+            <div class="top7"><a href="#">我的京東</a></div>
+            <div class="top4">｜</div>
+            <div class="top9"><a href="#">京東會員</a></div>
+            <div class="top4">｜</div>
+            <div class="top11"><a href="#">企業採購</a></div>
+            <div class="top4">｜</div>
+            <div class="top13"><a href="#">客戶服務</a></div>
+            <div class="top4">｜</div>
+            <div class="top15"><a href="#">網站導覽</a></div>
+            <div class="top4">｜</div>
+            <div class="top17"><a href="#">手機京東</a></div>
+        </header>
+        <header class="search">
+            <!-- 左側圖片區 -->
+            <div class="left-phto"><a href="#" target="_block"><img src="./img/07/07-2.搜索條左側小圖.jpg" alt="京東" width="190px" height="120px" /></a></div>
+
+            <!-- 搜索條 -->
+            <div class="center-phto"><img src="./img/07/07-1.搜索條.jpg" alt="京東搜索條" width="549.97px" height="35.97px"/></div>
+
+            <!-- 搜索條右側小區塊(我的購物車) -->
+            <div class="car"><a href="#">我的購物車</a></div>
+
+            <!-- 搜索條最右側小圖片 -->
+            <div class="right-phto"><a href="#"><img src="./img/07/07-3.搜索條右側小圖.jpg" alt="滿199減100" width="190px" height="120px" /></a></div>
+
+            <!-- 搜索條下方快捷區 -->
+            <span class="hot">
+                <span ><a class="hot1" href="#">家裝年貨節</a></span>
+                <span class="hot2"><a href="#">手機狂歡</a></span>
+                <span class="hot3"><a href="#">5折神券</a></span>
+                <span class="hot4"><a href="#">每100-50</a></span>
+                <span class="hot5"><a href="#">領券5折</a></span>
+                <span class="hot6"><a href="#">每400-50</a></span>
+                <span class="hot7"><a href="#">年貨節</a></span>
+                <span class="hot8"><a href="#">品質家具</a></span>
+                <span class="hot9"><a href="#">家裝建材</a></span>
+            </div>
+
+
+            <!-- 搜索條下方導覽 -->
+                <nav class="search-bot">
+                    <span class="bot1"><a href="https://miaosha.jd.com/">秒殺</a></span><span class="bot2"><a href="#">優惠券</a></span><span class="bot3"><a href="#">PLUS會員</a></span><span class="bot4"><a href="#">品牌閃購</a></span><span class="bot5"><a href="#">拍賣</a></span><span class="bot6"><a href="#">京東時尚</a></span><span class="bot7"><a href="#">京東超市</a></span><span class="bot8"><a href="#">京東生鮮</a></span><span class="bot9"><a href="#">京東國際</a></span><span class="bot10"><a href="#">京東金融</a></span>
+                </nav>
+            </div>
+
+        </header>
+
+        <!-- 設置主體 -->
+        <main>
+            <!-- 設置左側導航條 -->
+            <ul class="font-list">
+                <li>
+                    <a href="javascript:;" target="_block">家用电器</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">手机<span>/</span><a href="javascript:;" target="_block">运营商<span>/</span><a href="javascript:;" target="_block">手机数码</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">电脑<span>/</span><a href="javascript:;" target="_block">办公</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">家居<span>/</span><a href="javascript:;" target="_block">家具<span>/</span><a href="javascript:;" target="_block">家装<span>/</span><a href="javascript:;" target="_block">厨具</a>
+
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">男装<span>/</span><a href="javascript:;" target="_block">女装<span>/</span><a href="javascript:;" target="_block">童装<span>/</span><a href="javascript:;" target="_block">内衣</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">美妆<span>/</span><a href="javascript:;" target="_block">个护清洁<span>/</span><a href="javascript:;" target="_block">宠物</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">女鞋<span>/</span><a href="javascript:;" target="_block">箱包<span>/</span><a href="javascript:;" target="_block">钟表<span>/</span><a href="javascript:;" target="_block">珠宝</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">男鞋<span>/</span><a href="javascript:;" target="_block">运动<span>/</span><a href="javascript:;" target="_block">户外</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">房产<span>/</span><a href="javascript:;" target="_block">汽车<span>/</span><a href="javascript:;" target="_block">汽车用品</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">母婴<span>/</span><a href="javascript:;" target="_block">玩具乐器</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">食品<span>/</span><a href="javascript:;" target="_block">酒类<span>/</span><a href="javascript:;" target="_block">生鲜<span>/</span><a href="javascript:;" target="_block">特产</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">艺术<span>/</span><a href="javascript:;" target="_block">礼品鲜花<span>/</span><a href="javascript:;" target="_block">农资绿植</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">医药保健<span>/</span><a href="javascript:;" target="_block">计生情趣</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">图书<span>/</span><a href="javascript:;" target="_block">文娱<span>/</span><a href="javascript:;" target="_block">教育<span>/</span><a href="javascript:;" target="_block">电子书</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">机票<span>/</span><a href="javascript:;" target="_block">酒店<span>/</span><a href="javascript:;" target="_block">旅游<span>/</span><a href="javascript:;" target="_block">生活</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">理财<span>/</span><a href="javascript:;" target="_block">众筹<span>/</span><a href="javascript:;" target="_block">白条<span>/</span><a href="javascript:;" target="_block">保险</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">安装<span>/</span><a href="javascript:;" target="_block">维修<span>/</span><a href="javascript:;" target="_block">清洗<span>/</span><a href="javascript:;" target="_block">二手</a>
+                </li>
+                <li>
+                    <a href="javascript:;" target="_block">工业品</a>
+                </li>
+            </ul>
+
+            <!-- 設置廣告區塊 -->
+            <article>
+                <a class="art-big" href="#"><img class="b-img" src="./img/07/07-4.main大廣告區.jpg" alt="廣告" width="590px" height="470px"></a><a  href="#"><img class="s-img1" src="./img/02/2-4.京東圖片列表.webp" alt="主體小圖1" width="190px" height="150px" /></a><a href="#"><img class="s-img2" src="./img/02/2-5.京東圖片列表.webp" alt="主體小圖2" width="190px" height="150px" /></a><a href="#"><img class="s-img3" src="./img/02/2-2.京東圖片列表.webp" alt="主體小圖3" width="190px" height="150px" /></a>
+            </article>
+
+            <!-- 設置最右側登入區 -->
+            <aside >
+                <!-- 登入小區塊 -->
+                <div class="login">
+                    <div>
+                        <a href="#"><img class="in-phto" src="./img/07/07-4.登入頭像.jpg" alt="頭像" width="54px" height="43px"></a>
+                    </div>
+                    <div class="in-text1">
+                        <a class="text1" href="#">Hi~歡迎逛京東！</a>
+                    </div>
+                    <div>
+                        <a class="text2" href="#">登錄</a><span class="text3">❘</span><a class="text4" href="#">註冊</a>
+                    </div>
+                    <div class="in-test2">
+                        <a class="text5" href="#" >新人福利</a><a class="text6" href="#" >PULS會員</a>
+                    </div>
+                </div>
+
+                <!-- 快報小區塊 -->
+                <div class="news">
+                    <h3>京東快報</h3>
+                    <div class="news-mo">更多 &gt;</div>
+                    <div class="mo1"><a href="#"><span class="s1">最新</span><span class="s1-1">iphone 11買早了</span></a></div>
+                    <div class="mo2"><a href="#"><span class="s2">熱門</span><span class="s2-1">我是誰我不知道</span></a></div>
+                    <div class="mo3"><a href="#"><span class="s3">推薦</span><span class="s3-1">我再那?我再幹什麼?</span></a></div>
+                    <div class="mo4"> <a href="#"><span class="s4">熱議</span><span class="s4-1">睡睡睡睡睡...</span></a></div>
+                </div>
+
+                <!-- 生活小塊1 -->
+                <div class="live1">
+                    <a href="https://chongzhi.jd.com/">話費</a>
+                    <a href="#">機票</a>
+                    <a href="#">酒店</a>
+                </div>
+                <div class="live2">
+                    <a class="l2-1" href="#">國內/港澳台</a>
+                    <a class="l2-2" href="#">促銷活動</a>
+                    <a class="l2-3" href="#"><img src="./img/07/07-5.生活小圖.jpg" alt="三亞酒店" width="75px" height="95.994px" /></a>
+                    <a class="l2-4" href="#"><img src="./img/07/07-6.生活小圖.jpg" alt="親子度假" width="75px" height="95.994px" /></a>
+                    <a class="l2-5" href="#">X</a>
+                </div  >
+
+            </aside>
+
+        </main>
+
+        <!-- 設置底部 -->
+        <footer>
+            <div><a href="https://miaosha.jd.com/" target="_block"><img src="./img/07/7-7.底部1.jpg" alt="京東秒殺倒數" width="200px" height="260px" /></a></div>
+            <div><a href="#"><img src="./img/07/7-7.底部2.jpg" alt="翡翠,玉石" width="200px" height="260px" /></a></div>
+            <div><a href="#"><img src="./img/07/7-7.底部3.jpg" alt="棉服" width="200px" height="260px" /></a></div>
+            <div><a href="#"><img src="./img/07/7-7.底部4.jpg" alt="零食" width="200px" height="260px" /></a></div>
+            <div><a href="#"><img src="./img/07/7-7.底部5.jpg" alt="牛仔褲" width="200px" height="260px" /></a></div>
+            <div><a href="#"><img class="last" src="./img/07/7-7.底部6.jpg" alt="輪播商品" width="170px" height="240px" /></a></div>
+        </footer>
+
+    </body>
+</html>

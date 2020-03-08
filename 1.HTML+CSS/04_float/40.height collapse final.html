@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>高度塌陷：最好的解決方式 ::after </title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+
+            .box1{
+                border:5px red solid;
+            }
+
+            .box2{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            /*
+                ※HTML處理CSS的問題(高度塌陷)：
+                新增一個div.box3 空值(HTML範圍)，再使用 clear屬性來清除浮動影響。
+
+                CCS問題應由CSS處理，不該透過HTML解決，故此方式盡量少用為妥，下方有CSS處理方式。
+            */
+
+            .box3{
+                clear:both;
+            }
+
+            .box4{
+                border:5px red solid;
+            }
+
+            .box5{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            .box4::after{
+                content:"";
+                clear:both;
+            }
+
+            .box6{
+                border:5px red solid;
+            }
+
+            .box7{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            /*
+                ※ CSS處理CSS的問題：
+                利用::after來撐起父元素高度，::after為行內元素，故須轉換成 塊元素，亦可使用table，後續教學補充table。
+            */
+            .box6::after{
+                /* 設置一個空值 */
+                content:"";
+
+                /* 轉換為 塊元素 */
+                display: block;
+
+                /* 清除浮動的影響 */
+                clear:both;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <br />
+        <p>1.當box2浮動後，父元素高度塌陷時，可以增加一個box3，並讓box3使用clear來清除box2浮動的影響，這樣box3就可以撐起父元素的高度，也可以隨著box2的高度改變，跟著改變高度</p>
+        <br />
+        <p>※※ 但透過添加div.box3的方式來處理高度塌陷，其實是利用html標籤來處理CSS發生的問題，仍有不妥之處，故盡量少用。</p>
+        <br />
+        <div class="box1">
+            <div class="box2">我是box2</div>
+            <div class="box3">我是box3 (應輸入空值，此處先寫上文字，以方便查看)</div>
+        </div>
+        <br />
+        <hr />
+        <br />
+        <p>2.利用CSS標籤來處理高度塌陷的方式，最好的解決方案：「::after」</p>
+        <br />
+        <p>※※ 其原理與上方一樣，但不須憑空新增div.box3(html標籤)空值，而是直接對box1使用 ::after 的方式來處理。</p>
+        <br />
+        <p>ps.注意：「::after」添加的是『行內元素』，故須另外轉換為『塊元素』(display:block)，才能撐起父元素的高度，，亦可使用table，後續教學補充table！！</p>
+        <br />
+        <br />
+        <p>↓ 使用::after 處理高度塌陷問題，但未轉換成塊元素的情況：仍無法撐起父元素高度！</p>
+        <br />
+        <div class="box4">
+            <div class="box5">我是box2</div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <p>↓ 使用::after 處理高度塌陷問題，並有轉換成塊元素(display:block)的情況：可以撐起父元素高度！</p>
+        <br />
+        <div class="box6">
+            <div class="box7">我是box2</div>
+        </div>
+        <br />
+        <hr />
+    </body>
+</html>

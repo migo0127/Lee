@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>強制轉換(coercion)：Number</title>
+    <script>
+
+        /*
+            強制轉換(coercion)：Number
+                - 方法一：Number()函數，與String()用法一樣，需有一個變量來保存返回的值。
+                    - 字符串 --> 數值：
+                        1. 如果是「純數字」的字符串，則會直接將其轉換為數值。
+                        2.如果該字符串含有非數字的內容，則轉換為NaN。
+                        3.如果字符串是一個空串""或是一個全是空格"    "的字符串時，則轉換為數值 0 。
+
+                    - 布爾值 --> 數值：
+                        true 轉換為數值 1。
+                        false 轉換為數值 0。
+
+                    - null --> 數值：
+                        null(空值) 轉換為數值 0。
+
+                    - undefined --> 數值：
+                        undefined 轉換為 NaN。
+
+                - 方法二：限含有其他非數值的字符串使用
+                    - 這種方式專門用來對付含有其他非數值的字符串。
+                    - parseInt()函數：依序將字符串中有效的整數內容取出來，當碰
+                      非有效的整數後，停止獲取。
+                    - parseFloat()函數：依序將字符串中有效的小數點內容取出來，
+                      當碰非有效的小數點後，停止獲取。
+                    - 如果對「非String」使用parseInt()或parseFloat()時，它會先
+                      將其轉換為String，再進行操作。
+
+                ※ parse：解析。
+        */
+
+        // 方法一：Number()函數
+        var a = 123;
+        console.log(typeof a);
+        console.log(a);
+
+        // Number()函數：純數字的字符串
+        var b = "456";
+        b = Number(b);
+        console.log(typeof b);
+        console.log(b);
+
+        // Number()函數：含有非數字的字符串
+        var c = "12f3";
+        c = Number(c);
+        console.log(typeof c);
+        console.log(c);
+
+        // Number()函數：字符串為""或"   "時
+        var d = "";
+        d = Number(d);
+        console.log(typeof d);
+        console.log(d);
+
+        var e = "     ";
+        e = Number(e);
+        console.log(typeof e);
+        console.log(e);
+
+
+        // Number()函數：為Boolean值時
+        var f = true;
+        f = Number(f);
+        console.log(typeof f);
+        console.log(f);
+
+        var g = false;
+        g = Number(g);
+        console.log(typeof g);
+        console.log(g);
+
+        // Number()函數：為 null(空值)時
+        var h = null;
+        h = Number(h);
+        console.log(typeof h);
+        console.log(h);
+
+        // Number()函數：為 undefined時
+        var i = undefined;
+        i = Number(i);
+        console.log(typeof i);
+        console.log(i);
+
+        // 方法二：限含有其他非數值的字符串使用
+        var j = "123px";
+        j = Number(j);
+        console.log(typeof j);
+        console.log(j);
+
+        // parseInt()函數：從字符串中依序取出有效整數，直到非有效整數後停止。
+        var k = "456px";
+        k = parseInt(k);
+        console.log(typeof k);
+        console.log(k);
+
+        var l = "12ab3";
+        l = parseInt(l);
+        console.log(typeof l);
+        console.log(l);
+
+        var m = "a12b3";
+        m = parseInt(m);
+        console.log(typeof m);
+        console.log(m);
+
+        var n = " 123b";
+        n = parseInt(n);
+        console.log(typeof n);
+        console.log(n);
+
+        var o = " 45 6b";
+        o = parseInt(o);
+        console.log(typeof o);
+        console.log(o);
+
+        // parseFloat()函數：從字符串中依序取出有效小數位，直到非有效小數位後停止。
+        var p = "123.45px";
+        p = parseFloat(p);
+        console.log(typeof p);
+        console.log(p);
+
+        var q = ".67.89px";
+        q = parseFloat(q);
+        console.log(typeof q);
+        console.log(q);
+
+        var r = "0.11 22px";
+        r = parseFloat(r);
+        console.log(typeof r);
+        console.log(r);
+
+        // parseInt()函數：Boolean值時
+        var s = true;
+        s = parseInt(s);
+        console.log(typeof s);
+        console.log(s);
+
+        // parseFloat()函數：Boolean值時
+        var t = false;
+        t = parseFloat(t);
+        console.log(typeof t);
+        console.log(t);
+
+        // parseInt()函數或parseFloat()：null(空值)時
+        var u = null;
+        u = parseInt(u);
+        console.log(typeof u);
+        console.log(u);
+
+        //parseInt()函數或parseFloat()：undefined時
+        var v = undefined;
+        v = parseInt(v);
+        console.log(typeof v);
+        console.log(v);
+
+        console
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

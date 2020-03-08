@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>奔跑少年的動畫效果</title>
+    <style>
+
+        .box1{
+            width: 256px;
+            height: 256px;
+            margin: 10px auto;
+            background-image: url(./img/19/bg2.png);
+            animation: run 1s steps(6) infinite;
+        }
+
+        /* 創建關鍵幀 */
+        @keyframes run{
+            from{
+                background-position: 0 0;
+            }
+            to{
+                background-position: -1536px 0;
+                /* 1536px是整個圖片的寬度，因背景圖片未設置時默認為平鋪，所以當定位位置設置
+                   為與圖片大小同寬時，會接續到第一個動作的圖片(平鋪的關係)，故此時再設置
+                   .box1的steps()時，也要多留意。
+                */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="box1"></div>
+
+</body>
+</html>

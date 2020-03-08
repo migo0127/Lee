@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>輪廓、陰影、圓角</title>
+
+        <link rel="stylesheet" href="../03_layout/css/reset.css">
+
+        <style>
+            .box1{
+                width: 200px; 
+                height: 200px;
+                background-color: #bfa;
+                
+                /* 邊距是會影響盒子的可見框大小 */
+                border:10px red solid;
+
+            }
+
+            .box2{
+                width: 200px; 
+                height: 200px;
+                background-color: #bfa;
+
+                /* 
+                    輪廓 (outline)：
+                    - 用來設置元素的輪廓線，用法和boeder一樣，通常搭配:hover使用。
+                    - 輪廓和邊框不同的點就是 → 輪廓不會影響到可見框的大小。
+                */
+                outline:10px black solid;
+            }
+
+            .box3{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+
+                /* 
+                    陰影 (box-shadow)：用來設置元素的陰影效果，陰影不會影響頁面布局。
+                        - 語法： box-shadow:10px 30px 20px orange; 
+                        - 第一個值：水平偏移，設置陰影的水平位置，正值向右移，負值向左移。
+                        - 第二個值：垂直偏移，設置陰影的垂直位置，正值向下移，負向上移。
+                        - 第三個值：模擬半徑，值越大越模糊。
+                        - 第四個值：陰影顏色，通常會加上 不透明值。
+                */
+                box-shadow: 10px 30px 3px orange;
+                /* box-shadow:10px 20px 50px rgba(0, 0, 0, 0.3); */
+            }
+
+            .box4{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+
+                /* 圓角 (border-radius)：用來設置圓角，圓角設置圓的半徑大小 */
+                border-radius:30px;
+
+                /* 四個角可以各別指定設定不同的值 */
+                /* border-top-left-radius:20px; */
+                /* border-top-right-radius:50px; */
+                /* border-bottom-right-radius:40px; */
+                /* border-tottom-left-radius:10px; */
+
+                /* 簡寫屬性：從 左上 → 右上 → 右下 → 左下，順時針依序 ↓ 
+                   border-radius:10px 10px 10px 10px; */
+
+                /* 三個值：左上 → 右上左下 → 右下，對角線一組↓
+                   border-radius:10px 10px 10px; */
+
+                /* 兩個值 ：左上右下 → 右上左下，對角線一組↓
+                   border-radius:10px 10px; */
+
+                /* 使用「/」隔開設置不同值時，則為計算兩次圓半徑 => 橢圓型。
+                   第一個值：先量水平線左往右10px處為第一個圓半徑；
+                   第二個值：再量垂直線上至下50px處為第二個圓半徑；
+                   => 最終框邊的兩個點相連接起來變成一個橢圓形半徑。
+                   border-radius:10px/50px; 
+                 */
+
+                 /* 
+                   圓型：將值設置成 50%。                   
+                   border-radius:50%; 
+                 */
+            }
+
+            .box5{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+                /* border-radius: 30px/100px; */
+                /* 僅能簡寫一個值 或 四個值中一個橢圓值 */
+                border-radius:30px/200px 50px 50px 50px;
+               }
+
+            .box6{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+                border-radius:50%;
+            }
+        
+        </style>
+
+    </head>
+    <body>
+
+        <h2>● border vs outline：</h2>
+        <br />
+        <p>1.border：</p>
+        <div class="box1"></div>     
+        <span>我被上面的元素往下擠了!!</span>
+        <br>
+        <br>
+        <p>2.outline：</p>
+        <br>
+        <div class="box2"></div>     
+        <span>我沒有被上面的元素往下擠，但我被覆蓋了</span>
+        <hr />
+        <p>3.box-shadow：</p>
+        <div class="box3"></div>     
+        <span>我沒有被上面的元素往下擠，但我也被覆蓋了</span>
+        <hr />
+        <p>4.boder-radius：圓型</p>
+        <div class="box4"></div>     
+        <span>我有被上面的元素往下擠嗎？</span>
+        <hr />
+        <p>4-1.boder-radius：橢圓型</p>
+        <div class="box5"></div>     
+        <span>我有被上面的元素往下擠嗎？</span>
+        <hr />
+        <p>4-2.boder-radius：圓型</p>
+        <div class="box6"></div>     
+        <span>我有被上面的元素往下擠嗎？</span>
+        <hr />
+
+    </body>
+</html>

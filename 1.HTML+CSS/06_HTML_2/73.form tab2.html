@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>表單 form：補充</title>
+</head>
+<body>
+
+    <!--
+        autocomplete="off/on"：自動開啟/關閉輸入過的資訊。
+
+     -->
+    <form action="target.html" autocomplete="off">
+
+        <input type="text" name="usermane" >
+        <br /><br />
+
+        <!--
+            readonly：將表單項設置為只可看，不可修改，數據會提交。
+            disabled：將表單項設置為禁用，數據不會提交。
+            autofocus：設置表單項自動獲取焦點，意似 刷新網頁後鼠標都會優先選取此框。
+         -->
+        <input type="text" name="usermane" value="hello" readonly >
+        <br /><br />
+        <input type="text" name="usermane" value="NoNo" disabled >
+        <br /><br />
+        <input type="text" name="usermane" value="foucs" autofocus >
+        <br /><br />
+
+        <!--
+            選擇調色盤：type="color"，因有些瀏覽器不支援，故用的比較少。
+        -->
+        color <input type="color">3
+        <br /><br />
+
+        <!--
+            email輸入框：type="email"，但因不同瀏覽器會顯示不同的提示，故也較少用。
+         -->
+         email <input type="email">
+         <br /><br />
+
+        <!-- 提交按鈕：點擊後自動提交至設置的服務器 -->
+        <input type="submit">
+        <!-- 重置按紐 -->
+        <input type="reset">
+        <!-- 普通的按鈕：點擊後不會有任何效果，可透過js進行操作，最常用到 -->
+        <input type="button" value="按鈕">
+        <br /><br />
+
+        <!--
+            input標籤 與 button標籤 差別：
+            1.input標籤為自結束標籤，button標籤為成對標籤。
+            2.button標籤較常使用。
+            3.其他無差別。
+        -->
+        <button type="submit">提交</button>
+        <button type="reset">重置</button>
+        <button type="button">按鈕</button>
+        <br /><br />
+
+
+
+    </form>
+
+</body>
+</html>

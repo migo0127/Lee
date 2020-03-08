@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>Document</title>
+
+        <style>
+            .box1{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                padding:10px;
+                border:10px red solid;
+
+                /* 
+                    - 默認情況下，盒子的可見框的大小由「內容區、內邊距、邊框」共同決定。
+                    - box-sizing：用來設置盒子尺寸的計算方式 (設置width和height的作用)
+                        - 可選值：
+                            1.content-box：為默認值，width和height來設置「內容區的大小」，
+                            外邊距及邊框另外加總計算。
+                                EX：
+                                    width:100px;
+                                    height: 100px;
+                                    padding:10px;
+                                    border:10px red solid;
+                                => 盒子的可見框大小為 100+10+10+10+10 = 140*140。
+                                ※ 內邊距及邊框會往外擴。
+                            
+                            2.border-box：寬度和高度用來設置整個盒子可見框的大小。
+                                          width和height指的是『內容區+內邊距+邊框」的大小，
+                                          其總合就是可見框大小。
+                                EX：
+                                    width:100px;
+                                    height: 100px;
+                                    padding:10px;
+                                    border:10px red solid;
+                                => 盒子的可見框大小為 100*100。
+                                ※ 內邊距及邊框會往內擠，留意「不包含 外邊距」。
+
+                */
+
+                /* box-sizing: content-box; */
+                box-sizing: border-box;
+            }
+        
+        </style>
+        
+    </head>
+    <body>
+        
+        <div class="box1"></div>
+
+    </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>響應式布局：媒體特性</title>
+        <style>
+
+            /*
+                響應式布局：
+                    - 語法：
+
+                        @media 查詢規則{}
+
+                            1.查詢規則 - 媒體類型(設備類型)：上一篇。
+                            2.查詢規則 - 媒體特性：
+                                2-1.width：視口的寬度(通常只設這個)。
+                                    - min-width：視口的最小寬度 (視口大於指定寬度時生效)。
+                                    - max-width：視口的最大寬度 (視口小於指定寬度時生效)。
+                                2-2.height：視口的高度 (通常不設定)。
+
+                                    - 例一：當視口大於 500px 時，背景顏色生效。
+
+                                        @media only screen (min-width:500px){
+                                            body{
+                                                background:#bfa;
+                                            }
+                                        }
+
+                                    - 例一：當視口小於 500px 時，背景顏色生效。
+
+                                        @media only screen (max-width:500px){
+                                            body{
+                                                background:#bfa;
+                                            }
+                                        }
+
+                            - 樣式切換的分界點，我們稱其為「斷點」，也就是網頁的樣式會在這個點時發生變化。
+                            - 一般比較常用的斷點：
+
+                                1.小於 768px：超小屏幕 max-width = 768px
+                                2.大於 768px：小屏幕   min-width = 768px
+                                3.大於 992px：中屏幕   min-width = 992px
+                                4.大於1200px：大屏幕   min-width = 1200px
+
+                                - 連接語：
+                                    1.「,」：或。
+                                    2.「and」：且。
+                                    3.「only」：只有。
+                                    4.「not」：除了。
+
+                                - 完整語法：
+
+                                        例一：只有屏幕且大於500px及小於700px時生效。
+
+                                            @media only screen and (min-width:500px) and (max-width:700px){
+                                                body{
+                                                    background:#bfa;
+                                                }
+                                            }
+
+                                        例一：屏幕且 除了 大於500px及小於700px 外 生效。
+
+                                            @media not screen and (min-width:500px) and (max-width:700px){
+                                                body{
+                                                    background:#bfa;
+                                                }
+                                            }
+            */
+            /* @media only screen and (min-width:500px) and (max-width:700px){
+                body{
+                    background-color:#bfa;
+                }
+            } */
+
+            @media not screen and (min-width:500px) and (max-width:700px){
+                                            body{
+                                                background:#bfa;
+                                            }
+                                        }
+
+        </style>
+
+    </head>
+    <body>
+
+    </body>
+</html>

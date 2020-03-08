@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>定位(position)：固定定位(fixed)</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+            /*
+                固定定位(fixed)：
+                    - 將position屬性設置為fixed則開啟了元素的固定定位。
+                    - 固定定位也是一種絕對定位，所以固定定位的大部份特點都和絕對定位一樣。
+                        相同特點：
+                            1.開啟固定定位的元素會脫離文檔流。
+                            2.開啟固定定位的元素會改變性質，行內變塊，塊的寬高由內容撐開。
+                            3.開啟固定定位會使元素提升一個層級。
+                            4.開啟固定定位的元素若未設置偏移量，則元素的位置不會改變。
+
+                        不同特點：
+                            - 開啟固定定位的元素，永遠參照瀏覽器的視口(視窗的可見框)進行定位，不受其他
+                              元素是否有設置定位影響，其定位位置(0,0)永遠依視窗的左上為初始座標。
+                              固定定位的元素不會隨著網頁的滾動軸滾動，意似 excel的被凍結的視窗區塊。
+                              EX：奇摩的上方搜尋輸入區，永遠固定在該位置，不會隨著網頁上下移動改變位置，
+                                  可滑動頁面了解一下。
+
+                            - 視口：意似 網頁的最左上方為其定位位置(0,0)所在之處。
+
+                        ※※布局的等式：
+
+                                left +margin-left + padding-left + width +  padding-right + margin-right + right = 視口寬度
+            */
+
+
+            .box1{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+            }
+
+            .box2{
+                width: 300px;
+                height: 300px;
+                background-color: blanchedalmond;
+            }
+
+            .box3{
+                width: 200px;
+                height: 200px;
+                background-color: skyblue;
+
+                /* 固定定位不受其他元素有無設置定位而影響 */
+                position:relative;
+            }
+
+            .box4{
+                width: 100px;
+                height: 100px;
+                background-color: yellow;
+                position:fixed;
+                top:0;
+                left:0;
+            }
+
+            .box5{
+                width: 100px;
+                height: 100px;background-color: tomato;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <div class="box1">1</div>
+
+        <div class="box2">2
+            <div class="box3">3
+                <div class="box4">4</div>
+            </div>
+        </div>
+
+        <div class="box5">5</div>
+
+    </body>
+</html>

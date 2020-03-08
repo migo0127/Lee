@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>BFC的前兩種特點演示</title>
+        <link rel="stylesheet" href="../source/css/reset.css">
+        <style>
+            /* - 元素開啟BFC後的特點：
+                有多種方式，以下演示 float、display:inline-block、overflow:hidden or auto。
+
+                1.開啟BFC的元素不會被浮動元素覆蓋。
+
+                2.開啟BFC的元素，其子元素與父元素的外邊距不會重疊，意即子元素的外邊距不會
+                  在「傳遞」給父元素，意似 將父子元素隔開，使其不再相鄰(但仍是垂直的)。
+                ※原父子元素外邊距若重疊，則子元素的外邊距設置會「傳遞」給父元素，詳見29.margin collapse.html。
+
+                3.開啟BFC的父元素可以包含浮動的子元素。
+
+                ※ 以下演示第1點與第2點特性。
+            */
+
+
+
+            .box1{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+            }
+
+            .box2{
+                width: 200px;
+                height: 200px;
+                background-color: yellow;
+            }
+
+            .box3{
+                width: 100px;
+                height: 100px;
+                background-color: #bfa;
+                float: left;
+
+            }
+
+            .box4{
+                width: 200px;
+                height: 200px;
+                background-color: yellow;
+                overflow: auto;
+            }
+
+            .box5{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+            }
+
+            .box6{
+                width: 100px;
+                height: 100px;
+                background-color: yellow;
+                margin-top:50px;
+            }
+
+            .box7{
+                width: 200px;
+                height: 200px;
+                background-color: #bfa;
+                overflow: auto;
+            }
+
+            .box8{
+                width: 100px;
+                height: 100px;
+                background-color: yellow;
+                margin-top:50px;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <br />
+        <p>1.原本上邊元素浮動後，下邊元素會往上移，並且遭到上方元素覆蓋住：</p>
+        <br />
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <br />
+        <p>→ 下邊元素應用BFC後，就不會被覆蓋住</p>
+        <br />
+        <div class="box3"></div>
+        <div class="box4"></div>
+        <hr />
+        <p>2.原本父子元素的「外邊距」會發生重疊現象，子元素的值會傳遞給父元素，即子元素的外邊距移動時，父元素會跟著移動。</p>
+        <br />
+        <p>此時子元素設置 margin-top:50px; 父元素亦跟著往下移動50px，此即父子元素的外邊距重疊(折疊)現象。</p>
+        <br />
+        <div class="box5">
+            <div class="box6"></div>
+        </div>
+        <br />
+        <p>→ 將父元素開啟BFC時，父子元素的外邊距就會分離，子元素不再「傳遞」值給父元素，僅會移動自身。</p>
+        <br />
+        <div class="box7">
+            <div class="box8"></div>
+        </div>
+        <br />
+        <hr />
+    </body>
+</html>
