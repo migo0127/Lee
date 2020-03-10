@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unicode轉義方式</title>
+    <script>
+        /*
+            1.在JS中，字符串若要輸入Unicode編碼的符號，方式為
+                \u四位編碼(十六進位)
+            2.在HTML網頁中使用Unicode的方式為
+                &#編號(10進位);
+        */
+       console.log("\u2620");
+       console.log("\u2680");
+
+    </script>
+</head>
+<body>
+
+    <!--
+        在HTML網頁中使用Unicode的方式為
+        &#編號(10進位);
+     -->
+     <!-- 骷髏頭編號十六進位為 2620，十進位為 9760 -->
+     <h1>&#9760;</h1>
+     <h1>&#9856;</h1>
+
+</body>
+</html>

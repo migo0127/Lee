@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比較運算子</title>
+    <script>
+
+        /*
+            比較運算子：返回Boolean
+                - 8種：
+                    1.「==」：等於，數值相同時回傳True，反之false。
+                    2.「!=」：不等於，數值不相同時回傳True，反之false。
+                        - 例：
+                            var a = 5;
+                            a = a != 5;
+                            console.log("a = "+a); => "a = false"
+
+                    3.「===」：嚴格等於，數值與型態都相同時回傳ture，反之false。
+                        - 例：
+                            var a = "5";
+                            a = a === 5;
+                            console.log("a = "+a); => "a = false"
+
+                    4.「!==」：嚴格不等於，數值與型態都不相同時回傳true，反之false。
+                        - 例：
+                            var a = 6;
+                            a = a !== 5;
+                            console.log("a = "+a); => true
+
+                            var a = 5;
+                            a = a !== 5;
+                            console.log("a = "+a); => false
+
+                            var a = "5";
+                            a = a !== 5;
+                            console.log("a = "+a); => true
+                    5.「>」：大於，若符號左側的值大於右側的值回傳true，反之false。
+                    6.「>=」：大於或等於，符號左側的值「大於」或「等於」右側的值回傳true，反之false。
+                    7.「<」：小於，若符號左側的值小於右側的值回傳true，反之false。
+                    8.「<=」：小於或等於，符號左側的值「小於」或「等於」右側的值回傳true，反之false。
+                - 比較方式：
+                    1.數值(Number)類型：返回Boolean
+                        - 可以比較兩個值之間的大小關係，如果關係成立，會返回True，不成立返回false。
+                    2.任何數值與「NaN」做比較都是「false」。
+                        - 例：
+                            var a = 2 > NaN;
+                            console.log(a); => false
+
+                            var a = "你好" > NaN;
+                            console.log(a); => false
+
+                            var a = true > NaN;
+                            console.log(a); => false
+
+                    3.非數值類型：返回Boolean
+                        - 對「非數值類型」進行比較時，會將其轉換為數字再進行比較。
+                        ※※注意：
+                            - 如果符號兩側的值都是「字符串」時，則不會將其轉換為數字進行比較，而
+                              是會分別比較「字符串的Unicode編碼號」。
+                            - 比較兩個字符串編碼時，是依續第一位數比較第一位數，如果兩位一樣，則
+                              比較第二位數，若一側沒有第二位數，就是較小的編碼，所以可以借用它來
+                              對英文進行排序，中文也有編碼可比較，但不適合用來做排序。
+                                - 例：
+                                    var result = "a" > "b"; // a編碼號0061、b為0062
+                                    console.log("result = "+result); => false;
+
+                                    ※ 先比第一位 1 vs 2 ，左側較小，不用在比下一位
+                                    var result = "123" < "2";
+                                    console.log("result = "+result); => true;
+
+                                    ※ 先比第一位 1 vs 1，相同，進行第二位 2 vs 3比較，左側較
+                                       小，不用在比下一位。
+                                    var result = "123" > "132";
+                                    console.log("result = "+result); => false;
+        */
+
+       var a = 6;
+       a = a !== 6;
+       console.log("a = "+a);
+
+       var b = "123" > "132";
+       console.log("b = "+b);
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
