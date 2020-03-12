@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關係運算子</title>
+    <script>
+
+        /*
+            關係運算子：返回Boolean
+                - 4種：
+                    1.「==」：會自動轉換
+                        - 等於，數值相同時回傳True，反之false。
+                        - 使用「==」來比較兩個值時，如果值的類型不同時，會自動進行
+                          類型的轉換(轉換規則不一定，但多數轉為Number)，將其轉換為
+                          相同的類型後再做比較。
+                            - 例：
+                                console.log(3 == 3); => true
+                                console.log("1" == true); => true
+                                console.log(true == "hellow"); => false
+                                console.log(null == 0); => false
+
+                        - undefined 衍生自 null，所以這兩個值做相等判斷時，會返回
+                          true。
+                            - 例：
+                                console.log(null == undefined); => true
+
+                        - NaN 不和任何值相等，包括它自己，返回false。
+                            - 例：
+                                console.log(NaN == NaN); => false
+                            ※ 故若要判斷一個值是否為NaN，可使用 isNaN()函數。
+                                - 例：
+                                    var a = NaN;
+                                    console.log(isNaN(a)); => true
+
+                    2.「!=」：會自動轉換
+                        - 不等於，數值不相同時回傳True，反之false。
+                        - 不相等也會對不相同的類型變數進行自動的類型轉換，如果轉換
+                          後相等它業會反回false，反之true。
+                            - 例：
+                                var a = 5;
+                                a = a != 5;
+                                console.log("a = "+a); => "a = false"
+
+                                console.log(null != undefined); => false
+                                console.log(3 != "3"); => false
+                                console.log("hello" != 1); => true
+                                console.log(NaN != 1); => true
+                                console.log(NaN != NaN); => true
+
+                    3.「===」：不會做自動轉換
+                        - 嚴格等於，用來判斷兩個值是否全等。
+                        - 當不同類型時，它不會做自動轉換，如果兩個值的，類型相同時
+                          回傳ture，反之false。
+                            - 例：
+                                var a = "5";
+                                a = a === 5;
+                                console.log("a = "+a); => "a = false"
+
+                    4.「!==」：不會做自動轉換
+                        - 嚴格不等於，用來判斷兩個值是否不全等，和不等類似。
+                        - 不同類型做判斷時，它不會做自動的類型轉換，不相同時回傳
+                          true，反之false。
+                            - 例：
+                                var a = 6;
+                                a = a !== 5;
+                                console.log("a = "+a); => true
+
+                                var a = 5;
+                                a = a !== 5;
+                                console.log("a = "+a); => false
+
+                                var a = "5";
+                                a = a !== 5;
+                                console.log("a = "+a); => true
+        */
+        console.log("hello" != 1);
+        console.log(null != undefined);
+        console.log(NaN != 1);
+        console.log(NaN != NaN);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

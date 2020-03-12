@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>if語句練習3</title>
+    <script>
+
+        /*
+            編寫程序，由鍵盤輸入三個整數分別存入變量num1、num2、num3，
+            對它們進行排序，並且由小到大輸出。
+
+
+            prompt()函數：
+                prompt()可以彈出一個提示框，該提示框中會帶有一個文本框，
+                用戶可以在文本框中輸入一段內容，該函數需要一個字符串作為
+                參數，該字符串將會作為提示框的提示文字。
+
+                用戶輸入的內容將會作為函數的返回值返回，可以定義一個變量
+                來接收該輸入的內容。
+
+                ※※ prompt()函數返回的值是String類型，故若需要的為Number
+                進行比大小時，可再prompt()前加上+，使其強制轉換為Number即可。
+        */
+
+        var num1 = +prompt("請任意輸入一個整數：");
+        var num2 = +prompt("請任意輸入一個整數：");
+        var num3 = +prompt("請任意輸入一個整數：");
+
+        // 找到三個數中最小的數
+        if(num1< num2 && num1 < num3){
+            // num1最小，比較num2和num3
+            if(num2 < num3){
+                // num1 num2 num3
+                console.log(num1,num2,num3);
+            }else{
+                // num1 num3 num2
+                console.log(num1,num3,num2)
+            }
+        }else if(num2 < num1 && num2 < num3){
+            // num2最小，比較num1和num3
+            if(num1 < num3){
+                // num2 num1 num3
+                console.log(num2,num1,num3)
+            }else{
+                // num2 num3 num1
+                console.log(num2,num3,num1)
+            }
+        }else{
+            // num3最小
+            if(num1 < num2){
+                // num3,num1,num2
+                console.log(num3,num1,num2);
+            }else{
+                // num3,num2,num1
+                console.log(num3,num2,num1);
+            }
+        }
+
+        // if((num1 < num2) && (num1 < num3) && (num2 < num3)){
+        //     console.log("您輸入的數字由大到小為："+num1,num2,num3);
+        // }else if((num1 < num2) && (num1 < num3) && (num3 < num2)){
+        //     console.log("您輸入的數字由大到小為："+num1,num3,num2);
+        // }else if((num1 < num3) && (num1 < num2) && (num3 < num2)){
+        //     console.log("您輸入的數字由大到小為："+num1,num3,num2);
+        // }else if((num1 < num3) && (num1 < num2) && (num2 < num3)){
+        //     console.log("您輸入的數字由大到小為："+num1,num2,num3);
+        // }else if((num2 < num3) && (num2 < num1) && (num3 < num1)){
+        //     console.log("您輸入的數字由大到小為："+num2,num3,num1);
+        // }else if((num2 < num3) && (num2 < num1) && (num1 < num3)){
+        //     console.log("您輸入的數字由大到小為："+num2,num1,num3);
+        // }else if((num2 < num1) && (num2 < num3) && (num1 < num3)){
+        //     console.log("您輸入的數字由大到小為："+num2,num1,num3);
+        // }else if((num2 < num1) && (num2 < num3) && (num3 < num1)){
+        //     console.log("您輸入的數字由大到小為："+num2,num3,num1);
+        // }else if((num3 < num1) && (num3 < num2) && (num1 < num2)){
+        //     console.log("您輸入的數字由大到小為："+num3,num1,num2);
+        // }else if((num3 < num1) && (num3 < num2) && (num2 < num1)){
+        //     console.log("您輸入的數字由大到小為："+num3,num2,num1);
+        // }else if((num3 < num2) && (num3 < num1) && (num2 < num1)){
+        //     console.log("您輸入的數字由大到小為："+num3,num2,num1);
+        // }else{
+        //     console.log("您輸入的數字由大到小為："+num3,num1,num2);
+        // }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

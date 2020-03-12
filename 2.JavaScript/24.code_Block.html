@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代碼塊(Code Block)</title>
+    <script>
+
+        /*
+            語句：
+                - 我們的程式是由一條一條語句構成的，語句是按照自上往下的順序一條一
+                  條執行的。
+                - 在JS中可以使用{}來為語句進行分組。
+            代碼塊：
+                - 在JS中可以使用{}來為語句進行分組，同一個{}中的語句稱為一組語句，
+                  它們要就一起執行，不就都不執行。
+                - 一個{}中的語句也稱為一個代碼塊，在代碼塊的後邊「不需要在寫;」了！
+                    - 例：
+                        alert("hello"); => 為一條語句
+
+                        {
+                            alert("World");
+                            console.log("你好");
+                            document.write("歡迎");
+                        }
+                        => 為一個代碼塊
+
+                ※※ JS中的代碼塊「只具有分組的作用」，沒有其他的用途。
+                    - 例：
+                        {
+                            var a = 10;
+                            alert("World");
+                            console.log("你好");
+                            document.write("歡迎");
+                        }
+
+                        console.log(a); => 10
+                        {}僅有分組作用，無其他用途，故在{}內的變量，外部仍可使用。
+         */
+        {
+            var a = 10;
+            alert("World");
+            console.log("你好");
+            document.write("歡迎");
+        }
+        console.log(a); // 10
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

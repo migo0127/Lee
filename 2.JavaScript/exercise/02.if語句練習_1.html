@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>if語句練習1</title>
+    <script>
+
+        /*
+            從鍵盤輸入小明的期末成績：
+            當成績為100時，"獎勵一台BMW"，
+            當成績為[80-99]時，"獎勵一台iphone15s"，
+            當成績為[60-80]時，"獎勵一本參考書"，
+            其他時，什麼獎勵也沒有。
+        */
+
+        /*
+            prompt()函數：
+                prompt()可以彈出一個提示框，該提示框中會帶有一個文本框，
+                用戶可以在文本框中輸入一段內容，該函數需要一個字符串作為
+                參數，該字符串將會作為提示框的提示文字。
+
+                用戶輸入的內容將會作為函數的返回值返回，可以定義一個變量
+                來接收該輸入的內容。
+
+                ※※ prompt()函數返回的值是String類型，故若需要的為Number
+                進行比大小時，可再prompt()前加上+，使其強制轉換為Number即可。
+        */
+        var score = prompt("請輸入小明的期末成績(0-100)：");
+
+
+        if(score > 100 || score < 0 || isNaN(score)){
+            console.log("眼瞎啦？？ 輸入成績(0-100)");
+        }else if(score == 100){
+            console.log("獎勵一台BMW");
+        }else if(score >= 80 ){
+            console.log("獎勵一台iphone15s");
+        }else if(score >= 60 ){
+            console.log("獎勵一本參考書");
+        }
+        else{
+            console.log("什麼獎勵也沒有");
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

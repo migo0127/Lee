@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>流程控制語句：if判斷語句</title>
+    <script>
+
+        /*
+            控制語句的分類：重要！！！
+                    1.條件判斷語句：
+                        if語句 / if..else語句  / if...else if...else語句。
+                    2.條件分支語句：
+                    3.循環語句：
+
+            1.條件判斷語句：
+                if語句  /  if..else語句  / if...else if...else語句
+             1-1.語法一：if語句
+
+                if(條件表達式){
+                    語句...;
+                }
+
+                - if語句在執行時，會先對條件表達式進行求值(true/false)判斷，
+                如果條件表達式的值為true，則執行if後的語句。
+                如果條件表達式的值為false，則不執行if後的語句。
+
+                - if語句只能控制緊隨其後的那個語句，如果要控制多條語句，可以
+                將這些語句統一放到{代碼塊}中，true則一起執行，false都不執行。
+
+                - if語句後的代碼塊不是必須的，但在開發中盡量寫{}，較好閱讀。
+                    - 例：
+
+                        if(true){
+                            console.log("true"); => 執行
+                        }
+
+                        if(false){
+                            console.log("false"); => 不執行
+                        }
+
+                    - 例：
+                        var a = 10;
+                        if(a > 10){
+                            console.log("a大於10");
+                        }
+
+                        var a = 10;
+                        if (a >= 10){
+                            console.log("a可能大於10");
+                            console.log("或a等於10");
+                        }
+                        => if若成立(true)則會執行{代碼塊}中所有的語句。
+
+                        var a = 15;
+                        if(a > 10 && a < 20){
+                            console.log("a大於10，但小於20"); => 執行
+                        }
+                    ※※ 「&&」：且(與)，當兩邊都true時，才會執行後面的語句。
+
+            1-2.語法二：if..else語句
+
+                if(條件表演式){
+                    語句...;
+                }else{
+                    語句..;
+                }
+
+                - if...else語句：如果...否則
+                    - 當該語句執行時，會先對if後條件表達式進行求值判斷，
+                      如果該值為true，則會執行if後的語句。
+                      如果該值為false，則會執行else後的語句。
+                        - 例：
+                            var a = 20;
+                            if(a > 30){
+                                console.log("a大於30");
+                            }else{
+                                consloe.log("a小於30");
+                            }
+                            => 執行 else
+
+            1-3.語法三：if...else if...else語句。
+
+                if(條件表達式){
+                    語句...;
+                }else if{
+                    語句...;
+                }else if{
+                    語句...;
+                }else{
+                    語句...;
+                }
+
+                - 當該語句執行時，會從上到下依次對條件表達式進行求值，
+                  如果值為true，則會執行當前的語句。
+                  如果值為false，則會繼續向下判斷。
+                  如果所有的條件都不滿足，則執行最後一個else後的語句，
+                  此語句(if...else if...else)中，只會有一個代碼塊被執
+                  行，一旦代碼塊執行，則直接結束語句，不在執行。
+                    - 例：
+                        var age = 21;
+
+                        if(age > 80){
+                            alert("您退休好久囉~~");
+                        }else if(age > 60){
+                            alert("您已經退休了~~");
+                        }else if(agr > 30){
+                            alert("您已經中年了~~");
+                        }else if(age > 18){
+                            alert("您已經成年了~~");
+                        }else{
+                            alert("你還是個小孩~~");
+                        }
+                        => 執行 "您已經成年了~~"
+
+        */
+        var age = 21;
+
+        if(age > 80){
+            alert("您退休好久囉~~");
+        }else if(age > 60){
+            alert("您已經退休了~~");
+        }else if(age > 30){
+            alert("您已經中年了~~");
+        }else if(age > 18){
+            alert("您已經成年了~~");
+        }else{
+            alert("你還是個小孩~~");
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

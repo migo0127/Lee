@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>條件運算子(Conditional Operator)</title>
+    <script>
+
+        /*
+            條件運算子(Conditional Ooperatot)：
+                - 也叫做 三元運算子。
+                - 語法：
+
+                    條件表達式(判斷Boolean)?語句1:語句2;
+                        true/false ?        true:false;
+
+                - 執行的流程：
+                     - 條件運算子在執行時，首先對條件表達式進行求值(true/false)，
+                       如果該值為true，則執行語句1，並返回執行結果；如果該值為
+                       false，則執行語句2，並返回執行結果。
+                        - 例：
+                            true?alert("語句1"):alert("語句2"); => 語句1
+                            false?alert("語句1"):alert("語句2"); => 語句2
+
+                        - 例
+                            var a = 10;
+                            var b = 20;
+                            max = a > b ? a : b; => 回傳b => 20
+
+                        - 例：
+                            var a = 10;
+                            var b = 20;
+                            var c = 30;
+
+                            max = a > b ? a : b;
+                            max = max > c ? max : c; => 回傳c => 30
+                                    || 以上兩個條件式合併為一個的寫法，三元套三元
+                            max = a > b ? a > c ? a : c : b > c ? b : c;
+                                    || 但此法不推薦使用，閱讀不方便
+                            max = a > b ? (a : c ? a : c) : (b > c ? b : c);
+                                條件表達式      語句1            語句2
+
+                    - 如果條件表達式的求值結果為「非布爾值」時，會先將其轉換為布爾
+                      值，再進行運算。
+                        - 例：
+                            "hello"? alert("語句1"):alert("語句2");
+
+
+
+
+        */
+        var a = 10;
+        var b = 20;
+        max = a > b ? a : b;
+        console.log("max = "+max);
+
+        "hello"? alert("語句1"):alert("語句2");
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
