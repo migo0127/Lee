@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>改善計算效率方式2：Math.sqrt()</title>
+    <script>
+        /*
+            改善下方算式的計算效率，以提高效能，可使用兩種方式：
+            1.當i進入if判斷式時即表示該值是可以被整除，就不會是質數，所以可以
+              直接使用break跳出，不用在一個一個j++的重覆確認。
+
+            2.i的值若為97，若寫為j<i，即表是要從2~96一個一個循環檢查，直到碰到
+              一個數可以整除該值時，才會break，但97前的96、95、94...基本不可能
+              整除i，所以只需要找到97的因數重覆的數字，依該數字做為最後整除的值
+              即可。
+                - 例：
+                    36的因數有：
+                        1 36
+                        2 18
+                        3 12
+                        4 9
+                        6 6
+                    => 6即為36最後的因數，因後方就會重覆 9 4...，所以36只需整除
+                       到6即可，後續的不需要在重覆計算，浪費效率，所以要使用36
+                       的開根號做為範為來計算。
+
+                - 語法：開根號 4的開根號2  16的開根號4
+
+                    Math.sqrt();
+        */
+
+        // 打印出1-100之間所有的質數
+
+        //未做任何效率改善
+        console.time("無效率改善：");
+
+        for(var i = 2; i <= 10000; i++){
+            var flag = true;
+            for(var j = 2; j < i ; j++){
+                if(i%j == 0){
+                   flag = false;
+                }
+            }
+            if(flag){
+                document.write(i);
+            }
+        }
+
+        console.timeEnd("無效率改善：");
+
+        // 使用break來使i被一個整除後立即跳出，不需在循環執行
+        console.time("效率改善 break：");
+
+        for(var i = 2; i <= 10000; i++){
+            var flag = true;
+            for(var j = 2; j < i ; j++){
+                if(i%j == 0){
+                   flag = false;
+                   break;
+                }
+            }
+            if(flag){
+                document.write(i);
+            }
+        }
+
+        console.timeEnd("效率改善 break：");
+
+        // 使用break與Math.sqrt()，使i僅能整除到最後不重覆的因數及被一個值整除後
+        // 即跳出。
+        console.time("效率改善 break & Math.sqrt：");
+
+        for(var i = 2; i <= 10000; i++){
+            var flag = true;
+            for(var j = 2; j < Math.sqrt(i) ; j++){
+                if(i%j == 0){
+                   flag = false;
+                   break;
+                }
+            }
+            if(flag){
+                document.write(i);
+            }
+        }
+
+        console.timeEnd("效率改善 break & Math.sqrt：");
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

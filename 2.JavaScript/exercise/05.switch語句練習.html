@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>switch語句練習1</title>
+    <script>
+        /*
+            對於成績大於60分的輸出"合格，低於60分的輸出"不合格"。
+        */
+        // prompt()的返回值為"字符串"，若要接收的值為Number，需使用正數(+)轉換。
+        var scorce = +prompt("請輸入您的成績(0-100)：");
+
+        switch(true){
+            case scorce > 100:
+                console.log("你咋不上天呢？");
+                break;
+            case scorce >= 60:
+                console.log("合格");
+                break;
+            default:
+                console.log("不合格");
+                break;
+        }
+        /*
+            當輸入的分數為case的範圍時，即與switch的條件表達式成立(true)，故執行
+            當前符合的case語句。
+
+            當輸入的分數超過case的範圍時，即switch的條件表示式不成立，故執行default語句。
+
+         */
+
+         /*
+            在比較分數類時，若將switch的條件表達式寫為scorce，則case的表達式需要明確的
+            指定值才能與switch的條件表達式相等，故無法使用區間的方式處理。
+                - 例一：
+                    switch(scorce){
+                        case 100:
+                        case 99:
+                        case 98:
+                        case 96:
+                           ...
+                        case 60:
+                            console.log("合格");
+                            break;
+                        default:
+                            console.log("不合格");
+                            break;
+                    }
+
+                - 例二：將分數除10並取整數，再比對除後的個位數即可。
+                    switch(parseInt(scorce/10)){
+                        case 10:
+                        case 9:
+                        case 8:
+                        case 7:
+                        case 6:
+                            console.log("合格");
+                            break;
+                        default:
+                            console.log("不合格");
+                            break;
+         */
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>break & continue</title>
+    <script>
+        /*
+            break：
+                - 可以用來退出switch和循環語句。
+                - 不可單獨使用在if語句中，但若if語句套在循環語句中即可使用。
+                - 全部退出。
+
+                    - 例：
+                        for( i=0 ; i<5 ; i++){
+                            if(i == 2){
+                                break;
+                            }
+                            document.write(i+"<br />");
+                        }
+                        => 此時的break是影響著for循環，而非if語句，if僅提供指
+                           定條件達成break起動，故再i==2時，即會結束整個for循環。
+                        => document.write(i+"<br />"); => 0 1
+
+                - 僅對離最近的switch和循環語句起作用。
+                    - 例：
+                        for( i=0 ; i<3 ; i++){
+                            for(j=0 ; j<2 ; j++){
+                                if(j==1){
+                                    break;
+                                }
+                                console.log("內->"+j);
+                            }
+                            console.log("外-->"+i);
+                        }
+                        => 此時的break影響的是離的最近的內部for，當內部for的指定
+                           條件(if)達成時，break將會退出整個內部for，但外部for不
+                           受影響，仍會執行完全部。
+                        => 外部將執行完3次，內部僅會重覆執行3次j=0。
+
+
+            cintinue：
+                - 可以用來退出當前指定條件的循環語句(不可使用在switch)。
+                - 不可單獨使用在if語句中，但若if語句套在循環語句中即可使用。
+                - 僅會退出指定條件的循環語句(即不執行該條件，但仍會繼續執行後續
+                  其它條件)，但若未給予指定條件，而直接寫continue，其效果等同於
+                  break，為整個循環全部退出。
+                  - 僅對離最近的循環語句起作用。
+                    - 例：
+                        for(i=0 ; i<5 ; i++){
+                            console.log("外部-->"+i)
+                            for(j=0 ; j<4 ; j++){
+                                if(j==2){
+                                    continue;
+                                }
+                            console.log("內部->"+j)
+                            }
+                        }
+                        => 此時外部for不受影響，continue僅會影響內部for，並於達
+                           到指定條件(j==2)，會退出此次循環，再接續j=3的後續循環
+                           ，而不會跳出整個內部for，與break不同。
+                        => 外部for會執行5次，內部for會執行12次(扣除每次j==2)。
+
+            ※ 可以為循環語句創建一個label(標籤)，即類似類名，用來標識當前的循環。
+                - 語法：
+                    label(自取):循環語句
+                - 若要使用break或continue來結束指定的循環，而不是最近的循環時，即
+                  可再 break或continue 後面跟著該創建的label標籤名。
+                    - 例：
+                        outer:
+                        for(i=0 ; i<5 ; i++){
+                            console.log("@外->"+i);
+                            for(j=0 ; j<3 ; j++){
+                                break outer;
+                                console.log("@內-->"+j);
+                            }
+                        }
+                        => 此時break有指定停止outer這整個循環，會全部退出，
+                           僅會輸出一次，而不再是退出離最近的循環。
+
+                    - 例：
+                        outer2:
+                        for(i=0 ; i<5 ; i++){
+                            for(j=0 ; j<3 ; j++){
+                                if(j==2){
+                                    continue outer2;
+                                    onsole.log("@@内-->"+j);
+                                }
+                            }
+                            console.log("@@外"+i);
+                        }
+                        => 此時continue有指定停止外部for，故再循環至內部j==2時，
+                           就會停止全部循環。
+
+        */
+        for( i=0 ; i<5 ; i++){
+            if(i == 2){
+                break;
+            }
+            console.log(i);
+        }
+
+        // break
+        for( i=0 ; i<3 ; i++){
+            console.log("外-->"+i);
+            for(j=0 ; j<2 ; j++){
+                if(j==1){
+                    break;
+                }
+                console.log("內->"+j);
+            }
+        }
+
+        // continue
+        for(i=0 ; i<5 ; i++){
+            console.log("外部-->"+i)
+            for(j=0 ; j<4 ; j++){
+                if(j==2){
+                    continue;
+                }
+            console.log("內部->"+j)
+            }
+        }
+
+        // break指定
+        outer:
+        for(i=0 ; i<5 ; i++){
+            console.log("@外->"+i);
+            for(j=0 ; j<3 ; j++){
+                break outer;
+                console.log("@內-->"+j);
+            }
+        }
+
+        // contiune指定
+        outer2:
+        for(i=0 ; i<5 ; i++){
+            for(j=0 ; j<3 ; j++){
+                if(j==2){
+                    continue outer2;
+                    onsole.log("@@内-->"+j);
+                }
+            }
+            console.log("@@外"+i);
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

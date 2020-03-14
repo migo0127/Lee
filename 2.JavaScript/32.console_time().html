@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計算程式執行效率：console.time()</title>
+    <script>
+        /*
+            計算程式執行效率：console.time()
+                - 測試如下的性能時，在程序執行前，開啟計時器。
+                - 語法：
+                    啟：
+                    console.time("自取計時器名字");
+
+                        要計算的程式代碼區域
+
+                    迄：
+                    console.timeEnd("自取計時器名字");
+
+                - console.time()可以用來開啟一個計時器，它需要一個字符串作為
+                  參數(名稱)，這個字符串將會作為計時器的標識。
+
+        */
+
+        // 測試計算質數沒有加上break時的效率
+        console.time("沒有break");
+
+        for(var i = 2; i <= 10000; i++){
+            var flag = true;
+            for(var j = 2; j < i ; j++){
+                if(i%j == 0){
+                   flag = false;
+                //    break; // 不開啟break時測試程式計算效率
+                }
+            }
+            // if(flag){
+            //     document.write(i);
+            // }
+            // 輸出(打印)先不納入計算，僅單存計算判斷是否為質數↑
+        }
+
+        console.timeEnd("沒有break");
+
+
+        // 測試計算質數有加上break時的效率
+        console.time("有break");
+
+        for(var i = 2; i <= 10000; i++){
+            var flag = true;
+            for(var j = 2; j < i ; j++){
+                if(i%j == 0){
+                   flag = false;
+                   break; // 開啟break時測試程式計算效率
+                }
+            }
+            // if(flag){
+            //     document.write(i);
+            // }
+            // 輸出(打印)先不納入計算，僅單存計算判斷是否為質數↑
+        }
+
+        console.timeEnd("有break");
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

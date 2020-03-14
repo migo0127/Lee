@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>條件分支語句：switch分支語句</title>
+    <script>
+
+        /*
+            條件分支語句也叫switch語句。
+                - 語法：
+                    switch(條件表達式){
+                        case 表達式:
+                            語句...;
+                            break;
+                        case 表達式:
+                            語句...;
+                            break;
+                        default:
+                            語句...;
+                            break;
+                    }
+
+                - 執行流程：
+                    switch...case...語句：在執行時會依次將case後的表達式的值和
+                    switch後的條件表達式的值進行全等比較。
+
+                    如果比較結果為 true，則從當前case處開始執行代碼，當前case後
+                      的所有代碼都會執行，故可以在case後邊加上一個break，這樣可以
+                      確保只會執行當前case後的語句，而不會執行後面其他case的語句。
+
+                    如果比較結果為 false，則會繼續向下比較。
+
+                    如果所有的比較結果都為false，則只執行default後的語句。
+                        - 例一：未有break的情況
+
+                        var num = 2;
+
+                        switch(num){
+                            case 1:
+                                console.log("壹");
+                            case 2:
+                                console.log("貳");
+                            case 3:
+                                console.log("參");
+                            case "hello":
+                                console.log("Hello");
+                            default:
+                                console.log("???");
+                        }
+                        => 當num = 2 時，程式會從 case 2 開始執行，並輸出
+                        含 case 2 以下的所有語句。
+                        => 輸出結果："貳" "參" "Hello" "???"
+
+                        - 例二：加入 break
+
+                        var num = 2;
+
+                        switch(num){
+                            case 1:
+                                console.log("壹");
+                                break;
+                            case 2:
+                                console.log("貳");
+                                break;
+                            case 3:
+                                console.log("參");
+                                break;
+                            case "hello":
+                                console.log("Hello");
+                                break;
+                            default:
+                                console.log("???");
+                                break;
+                        }
+                        => 加入break後，程式在執行case後的語句後，碰到break
+                        就會執行退出switch語句的功能，結束switch語句。
+                        => 輸出 "貳"
+
+                - switch語句和if語句的功實際上有重覆，使用switch可以實現if的功能，
+                  同樣使用if也可以實現switch的功能，故可以根據自己的習慣選擇，實
+                  務上if語句使用的比較多。
+        */
+        var num = 2;
+
+            switch(num){
+                case 1:
+                    console.log("壹");
+                case 2:
+                    console.log("貳");
+                case 3:
+                    console.log("參");
+                case "hello":
+                    console.log("Hello");
+                default:
+                    console.log("???");
+        }
+
+        switch(num){
+            case 1:
+                console.log("一");
+                break;
+            case 2:
+                console.log("二");
+                break;
+            case 3:
+                console.log("三");
+            default:
+                console.log("什麼東西?");
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for語句練習3</title>
+    <script>
+        /*
+            在頁面中接收一個用戶輸入的數字，並判斷該數是否為質數。
+                質數：只能被1和它自身整除的數，1不是質數也不是合數，質數必須是大
+                於1的自然數。
+        */
+        var num = prompt("請任何輸入一個大於1的整數：");
+
+        if(num <= 1){
+            alert("請重新輸入大於1的整數：");
+        }else{
+
+            // 默認當前num是質數
+            var flag = true;
+
+            //獲取2-num之間的質數
+            for(i = 2; i < num ; i++){
+                if(num%i == 0 ){
+                    // 如果num能被i整除，則說明num一定不是質數
+                    flag = false;
+
+                    /* 一旦進入此if的語句，即証明num不可能是質數，此時再循環執行
+                       已經沒有任何意義，故可以使用break來結果此循環，返回外部，
+                       以便提升運算效能。
+                    */
+                    break;
+                }
+            }
+
+            // 如果num是質數則出輸
+            if(flag){
+                console.log(num+"是質數");
+            }else{
+                console.log(num+"不是質數");
+            }
+        }
+
+
+
+        num%1 == 0 && num%(num-1) == 0 && num%num == 0
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

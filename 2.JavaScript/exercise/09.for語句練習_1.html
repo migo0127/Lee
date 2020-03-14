@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for語句練習</title>
+    <script>
+    /* 打印1-100之間所有奇數之和 */
+    var sum = 0;
+
+    for(var i = 1; i <= 100 ; i++){
+        if(i%2 != 0){
+            sum = sum + i;
+        }
+    }
+    console.log("1-100之間所有奇數之和："+sum);
+
+
+    /* 打印1-100之間所有偶數之和 */
+
+    for(var i = 1,sum2 = 0; i <= 100; i++ ){
+        if(i%2 == 0){
+            sum2 = sum2 + i;
+        }
+    }
+    console.log("1-100之間所有偶數之和："+sum);
+
+
+    // 打印1-100之間所有7的倍數個個數及總和
+    var sum = 0;
+    var count = 0;
+
+    for(var i = 1; i <= 100 ; i++){
+        if(i%7 == 0){
+            console.log("7的倍數的數有："+i);
+            sum = sum + i;
+            count++;
+        }
+    }
+    console.log("1-100之間所有7的倍數之和："+sum);
+    console.log("1-100之間所有7的倍數次數有："+count);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

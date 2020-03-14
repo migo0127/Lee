@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>while語句練習_1</title>
+    <script>
+        /*
+            假設投資的幾年利率為5%，試求從1000塊增長到5000塊，需要
+            花多少年？
+        */
+
+        var count = 0;
+        var money = 1000;
+
+        while(money < 5000){
+            money *= 1.05;
+            count++;
+        }
+
+        document.write("一共需要"+count+"年");
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

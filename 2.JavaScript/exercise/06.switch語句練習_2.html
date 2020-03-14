@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>switch語句練習2</title>
+    <script>
+        /*
+            從鍵盤接收整數參數，如果該數為1-7，打印時對應興期，否則打印非法參數。
+        */
+        // prompt()的返回值為"字符串"，若要接收的值為Number，需使用正數(+)轉換。
+        var week = +prompt("請任意輸入一個整數(1-7)：");
+
+        switch(week){
+            case 1:
+                console.log("星期一");
+                break;
+            case 2:
+                console.log("星期二");
+                break;
+            case 3:
+                console.log("星期三");
+                break;
+            case 4:
+                console.log("星期四");
+                break;
+            case 5:
+                console.log("星期五");
+                break;
+            case 6:
+                console.log("星期六");
+                break;
+            case 7:
+                console.log("星期日");
+                break;
+            default:
+                console.log("泥素不素傻？");
+                break;
+        }
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

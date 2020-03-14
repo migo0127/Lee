@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>obj[]、屬性名、屬性值</title>
+    <script>
+        /*
+            向物件中添加屬性：2種方式
+                1.obj.屬性名：寫死。
+                2.obj["屬性名(字符串)"]：此方式較為常用，可搭配變量使用。
+
+            屬性名(Attributes name)：
+                - 物件的屬性名不強制要求遵守標識符規範(字母、數字、_、$，不可
+                  數字開頭..)，什麼亂七八遭的名字都可以使用。
+                - 但我們使用時還是盡量按照標識符的規範去做。
+                - 如要使用「特殊的屬性名」，不能採用「物件.屬性名」(X)的方式，
+                  需要使用「物件[""]」的方式來操作，且讀取時亦需使用「物件[""]」。
+                - 語法：
+                    物件["屬性名(字符串)"] = 屬性值;
+
+                    - 例：
+                        var obj = new Object();
+                        obj.123 = 789;
+                        console.log(obj.123); => 為特殊屬性名，會報錯。
+
+                        obj["456"] = 456;
+                        console.log(obj["456"]); => 456
+                    ※使用「物件[""]的方式添加屬性，較靈活，[]中可直接傳遞
+                      一個變量，這樣變量值是多少，就會讀取那個屬性，實務上
+                      常用此方式。
+                       - 例：
+                        obj["身高"] = 177;
+                        var hei = "身高";
+                        console.log(obj[hei]); => 177
+                        console.log(hei);
+                        => 此時hei不是物件的值，而是變量的值 "身高"，需留意！！
+        */
+        var obj = new Object();
+        // obj.123 = 789; // 使用「物件.屬性名」的方式創建特殊屬性名時會報錯
+        // console.log(obj.123);
+        obj["456"] = 456; // 使用「物件[""]」方式
+        console.log(["456"]); // 456
+
+        // 使用「物件[""]的方式添加屬性，還可以搭變量使用，較靈活
+        obj["test"] = 123;
+        var a = "test";
+        console.log(obj[a]); // 123
+
+        obj["身高"] = 177;
+        var hei = "身高";
+        console.log(obj[hei]); // 177
+        console.log(hei); // "身高"
+
+        /*
+            屬性值：
+                - JS物件的屬性值可以是任意的數據類型，甚至也可以是一個物件。
+                    - 例：
+                        obj["test"] = true;
+                        console.log(obj["test"]); => "true"
+
+                        obj["test1"] = null;
+                        console.log(obj["test1"]); => "null"
+
+                        obj["test2"] = undefined;
+                        console.log(obj["test2"]); => "undefined"
+
+                        var obj2 = new Object();
+                        obj["obj2"] = "三星堆";
+                        console.log("obj2");
+
+                        obj["test"] = "obj2";
+                        console.log("test");
+
+            in 運算符：
+                - 通過in運算符可以檢查一個物件中是否含有指定的屬性，
+                  如果有返回true，如果沒有返回false。
+                - 語法：
+                    "屬性名" in 物件;
+
+                    - 例：
+                        console.log("test2" in obj); => true
+
+        */
+
+        obj["test"] = true;
+        console.log(obj["test"]); // true
+        console.log(typeof ["test1"]); // "object"
+
+        obj["test1"] = null;
+        console.log(obj["test1"]); // null
+
+        obj["test2"] = undefined;
+        console.log(obj["test2"]); // undefined
+
+
+        var obj2 = new Object();
+        obj2["name"] = "三星堆";
+        console.log(obj2["name"]); // 三星堆
+
+        // 物件賦值給變量
+        var n = "name";
+        console.log(obj2[n]); // 三星堆
+        console.log(n); // "name"
+
+        obj["test"] = obj2;  // 賦予obj2的物件給test
+        console.log(obj); // Object { 456: 456, test: "三星堆", "身高": 177, test1: null, test2: undefined }
+        console.log(obj["test"]); // 三星堆
+
+        obj["test"] = "name";  // 直接修改屬性值值
+        console.log(obj["test"]);   // name
+
+        var test3 = new Object();
+        test3.age = 21;
+        test3.name = "随便";
+        console.log(test3.age); //21
+
+        var test4 = new Object();
+        test4.age = test3;
+        console.log(test4); // Object { age: {age: 21, name: "随便"} }
+        console.log(test4.age.name); // "随便"
+
+        // 檢查obj中是否含有test2屬性
+        console.log("test2" in obj); // true
+        console.log("test3" in obj); // false
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

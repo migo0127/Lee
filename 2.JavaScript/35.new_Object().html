@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>創建物件：new Object()</title>
+    <script>
+        /*
+            創建物件(Object)：
+                - 使用new關鍵字調用的函數，是構造函數constructor，構造函數是
+                  專門用來創建物件的函數。
+                - 使用typeof檢查一個物件時，會返回object。
+                    - 例：
+                        var obj = new Object();
+                        console.log(obj); =>  目前為空物件
+                        console.log(typeof obj); => 返回"object"
+
+                - 在物件中保存的值稱為「屬性」(Attributes)。
+
+                - 新增：向物件添加屬性。
+                    - 語法：
+                        物件.屬性名 = 屬性值;
+
+                    - 例：
+                        向obj中添加一個name屬性
+                            obj.name = "孫悟空";
+                        向obj中添加一個gender屬性
+                            obj.gender = "男";
+                        向obj中添加一個age屬性
+                         obj.age = 18;
+
+                        console.log(obj);
+                        => Object { name: "孫悟空", gender: "男", age: 18 }。
+
+                - 讀取：讀取物件中的屬性。
+                    - 語法：
+                        物件.屬性名
+
+                    - 例：
+                        console.log(obj.age);
+                        console.log(obj.name);
+                        console.log(obj.gender);
+
+                    ※ 如果讀取物件中沒有的屬性，不會報錯，而是會返回"undefined"！
+
+                - 修改：修改物件的屬性值。
+                    - 語法：
+                        物件.屬性名 = 屬性值; (其實就是再次賦值覆蓋，與變量相同)
+
+                    - 例：
+                        obj.name = "光頭強";
+                        console.log(obj.name); => "光頭強"
+
+                - 刪除：刪除物件的屬性。
+                    - 語法：
+                        delete 物件.屬性名
+
+                    - 例：
+                        delete obj.name;
+                        console.log(obj.name); => "undefined"
+
+        */
+        var obj = new Object();
+        console.log(obj); // 目前為空物件
+        console.log(typeof obj); // 返回"object"
+
+        // 新增：
+        // 向obj中添加一個name屬性
+            obj.name = "孫悟空";
+        //向obj中添加一個gender屬性
+            obj.gender = "男";
+        //向obj中添加一個age屬性
+            obj.age = 18;
+
+        console.log(obj); // Object { name: "孫悟空", gender: "男", age: 18 }
+
+        // 讀取：讀取物件中的屬性
+        console.log(obj.age); // 18
+        console.log(obj.name); // "孫悟空"
+        console.log(obj.gender); // "男"
+
+        // 如果讀取物件中沒有的屬性，不會報錯，而是會返回"undefined"！
+        console.log(obj.height);  // undefined
+
+        // 修改：就是再次賦值一次做覆蓋，與變量相同意思
+        obj.name = "光頭強";
+        console.log(obj.name); //"光頭強"
+
+        // 刪除：刪除物件的屬性
+        delete obj.name;
+        console.log(obj.name); // undefined
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

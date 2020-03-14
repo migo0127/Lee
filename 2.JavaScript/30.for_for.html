@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嵌套的for循環語句</title>
+    <script>
+        /*
+        通過程序，在頁面中輸出如下的圖形：
+            - 圖一：
+                **
+                **
+                **
+                **
+                **
+
+                - 通過一個for循環來輸出。
+                - 外部for：
+                    - 外部for循環幾次，圖形的高度就是多少。
+                    - 它可以用來控制圖形的高度。
+
+                - 內部for：
+                    - 內部for循環幾次，圖形的寬度就是多少。
+                    - 它可以用來控制圖形的寬度。
+
+                ※※ 外部for循環 1 次，內部for就循環 2 次，故整個for執行完畢時，
+                     外部for循環 5 次，內部for循環 10 次。
+
+        */
+
+        for(var i = 0 ; i < 5 ; i++){  // i < 5 => 高度 = 5 (i從0開始，0~4)
+            for(var j = 0 ; j < 2 ; j++){  // j < 2 => 寬 = 2 (j從0開始，0~1)
+                document.write("*");
+            }
+            document.write("<br />"); // 當內部循環5次結束，回到外部循環時換行。
+        }
+
+        document.write("<br />"); // 單純隔開圖一圖二
+        /*
+            - 圖二：
+                *****
+                *****
+                *****
+                *****
+                *****
+         */
+
+         for(var i = 0; i < 5 ; i++){
+             for(j = 0; j < 5 ; j++){
+                document.write("*");
+             }
+             document.write("<br />");
+         }
+
+        document.write("<br />"); // 單純隔開圖二圖三
+
+        /*
+            - 圖三：
+                *     第一行寬j<1  外for執行1次  i=0
+                **    第二行寬j<2  外for執行2次  i=1
+                ***   第三行寬j<3  外for執行3次  i=2
+                ****  第四行寬j<4  外for執行4次  i=3
+                ***** 第五行寬j<5  外for執行5次  i=4
+                => 高度(外部for)不變，只有寬度(內部for)變化，且外部for的i值，與
+                寬度差1，故可利用i+1來控制第幾行寬度。
+        */
+
+         for(var i = 0; i < 5 ; i++){
+             for(var j = 0; j < i+1; j++){
+                document.write("*");
+             }
+             document.write("<br />");
+         }
+
+        document.write("<br />"); // 單純隔開圖三圖四
+
+        /*
+            - 圖四：
+                    *****
+                    ****
+                    ***
+                    **
+                    *
+        */
+
+        for(var i = 0 ; i < 5 ; i++){
+            for(var j = 0 ; j < 5-i ; j++){
+                document.write("*");
+            }
+            document.write("<br />");
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
