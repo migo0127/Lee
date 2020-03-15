@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>實參(陸)、引數(台)</title>
+    <script>
+        /*
+            實參：
+                - 可以是任何的數據類型，也可以是一個物件。
+                - 當我們的參數過多時，可以將參數封裝到一個物件中，然後透過
+                  物件傳遞。
+                    - 例：
+                        function dL(a){
+                            console.log(a.name,a.age,a.hobbe,a.gender);
+                        }
+
+                        var obj = {
+                            name:"DL",
+                            age:18,
+                            gender:"男",
+                            hobbe:"musical"
+                        }
+                        dL(obj)
+
+
+                - 可以是一個物件，也可以是一個函數。
+                    - 例：
+                        function dL(a){
+                            console.log(a);
+                        }
+
+                        function ayg(b){
+                            console.log(b.name,b.age,b.hobbe,b.gender);
+                        }
+
+                        var obj2 = {
+                            name:"ayg",
+                            age:22;
+                            gender:"男",
+                            hobby:"musical,sing"
+                        }
+
+                        ayg(obj2);
+
+                        dL(ayg);
+
+                    - 例：
+                        function round(r){
+                            return 3.14*r *r;
+                        }
+
+                        var result = round(10);
+                        console.log(result);
+
+                        // 函數物件，相當於直接使用函數物件。
+                        dL(round);
+                        => function round(r){
+                                return 3.14*r *r;
+                            }
+
+                        // 調用函數，相當於使用該函數的返回值。
+                        dL(round(10));  => 314
+
+                    - round：
+                        - 函數物件。
+                        - 相當於直接使用函數物件。
+
+                    - round()：
+                        - 調用函數。
+                        - 相當於使用該函數的返回值。
+        */
+
+        // 當參數過多時，可以將參數封裝到一個物件中，再透過物件傳遞。
+        function dL(a){
+            // var a = obj;
+            console.log(a.name,a.age,a.hobbe,a.gender);
+        }
+
+        var obj = {
+            name:"DL",
+            age:18,
+            gender:"男",
+            hobbe:"musical"
+        }
+
+        dL(obj);
+
+
+
+
+        function dL(a){
+            console.log(a);
+        }
+
+        function ayg(b){
+            console.log(b.name,b.age,b.hobby,b.gender);
+        }
+
+        var obj2 = {
+            name:"ayg",
+            age:22,
+            gender:"男",
+            hobby:"musical,sing"
+        }
+
+        ayg(obj2);
+
+
+        // 參數也可以是一個函數物件、調用函數
+        function dL(a){
+            console.log(a);
+        }
+
+        function round(r){
+            return 3.14*r *r;
+        }
+
+        var result = round(10);
+        console.log(result);
+
+        // 函數物件
+        dL(round);
+        // 將round的函數物件，再代入到dL()函數中
+
+        // 調用函數
+        dL(round(10));
+        // 將round(10)的返回值314，再代入到dL()函數中
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

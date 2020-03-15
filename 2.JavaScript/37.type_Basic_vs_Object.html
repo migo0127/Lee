@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本數據類型 vs 引用(複合)數據類型(Object)</title>
+    <script>
+        /*
+            一、基本數據類型：
+                    String、Number、Boolean、Null、Undefined。
+
+            二、引用(複合)數據類型：
+                    Object。
+
+            三、數據類型保存方式：
+                - JS中的「變量」都是保存到stack(棧內存(陸)、靜態記憶體)中的。
+
+                    - 基本數據類型：基本數據類型的值是直接存在stack中，值與值
+                      之間是獨立存在的，修改一個保存基本數據的變量值是不會影響
+                      其它變量的值。
+
+                        ※※ 搭配圖示看：
+                        E:\Programming\Front-end engineer\Lee\2.JavaScript\img\37.type_Basic_vs_Object\basic.jpg
+
+                        - 例：
+                            var a = 123;
+                            var b = a;
+
+                            console.log(a); => 123
+                            console.log(b); => 123
+                                ↓
+                            a++;
+
+                            console.log(a); => 124
+                            console.log(b); => 123
+                                ↓
+                            var b = null;
+
+                            console.log(a); => 124
+                            console.log(b); => null
+
+
+                    - 引用(複合)數據類型：
+                        物件是保存到Heap(堆內存(陸)、動態記憶體)中的，每創建一個新
+                        的物件，就會在heap中開闢出一個新的空間，而變量(stack)保存
+                        的是「物件的heap地址(物件的引用)」，如果兩個變量保存的是同
+                        一個物件地址，當通過一個變量修改屬性時，因指向的是同一個物
+                        件地址，所以另一個也會受到影響。
+
+                        變量的值是存儲物件的唯一地址，再透過調用的方式，從該地址
+                        中調用出屬性名對應的屬性值。
+
+                        ※※ 搭配圖示看：
+                        E:\Programming\Front-end engineer\Lee\2.JavaScript\img\37.type_Basic_vs_Object\Object.jpg
+
+                        - 例：
+                            var obj = new Object();
+                            obj.name = "swk";
+                            var obj2 = obj;
+
+                            console.log(obj.name); => "swk"
+                            console.log(obj2.name); => "swk"
+                                ↓
+                            obj.name = "zbj";
+                            console.log(obj.name); => "zbj"
+                            console.log(obj2.name); => "zbj"
+                                ↓
+                            obj2 = "null";
+                            => 此時重新賦值obj2的屬性值時，obj2就不再指向obj的地址
+
+                            console.log(obj.name); => "skw"
+                            console.log(obj2.name); => "undefined"
+                            console.log(obj2); => "null"
+
+                    - ==：
+
+                        - 例：基本數據型態
+                            var c = 123;
+                            var d = 123;
+
+                            console.log(c == d); => true
+
+                        - 例：引用(複合)數據型態：
+
+                            ※※ 搭配圖示看：
+                            E:\Programming\Front-end engineer\Lee\2.JavaScript\img\37.type_Basic_vs_Object\Object2.jpg
+
+                            var obj3 = new Object();
+                            var obj4 = new Object();
+                            obj3.name = "shs";
+                            obj4.name = "shs";
+
+                            console.log(obj3.nane == obj4.name);
+
+        */
+
+        /*
+        基本數據類型：
+            保存基本數據類型的變量是各自獨立保存的，所以就算先前有賦值給
+            另一個變量，再修改其中一個的值也不會影響另一個。
+        */
+        var a = 123;
+        var b = a;
+
+        console.log(a); // 123
+        console.log(b); // 123
+
+        a++;
+
+        console.log(a); // 124
+        console.log(b); // 123
+
+        var b = null;
+
+        console.log(a); // 124
+        console.log(b); // null
+
+        /*
+        引用(複合)數據類型：
+            Object(物件)是在heap中開闢一個新空間來儲存屬性，該空間會產生一個
+            「唯一地址」，變量存儲的是此物件的「唯一地址」，而不是屬性值，故
+            當其中一個變量賦值給另一個變量時，相當於將本身的唯一地址賦值給另
+            一個變量，此時兩個變量的值是指相同一個「唯一地址」，就會產生聯動，
+            當修改其中一個變量的屬性值時，另一個也會被影響。
+        */
+        var obj = new Object();
+        obj.name = "swk";
+        // obj2是變量，不是物件
+        var obj2 = obj;
+        // 此時obj將自己的唯一地址賦值給obj2，兩個都指向同一個地址
+
+        console.log(obj.name); // "swk"
+        console.log(obj2.name); // "swk"
+
+        obj2.name = "zbj";
+
+        console.log(obj.name); // "zbj"
+        console.log(obj2.name); // "zbj"
+
+        obj.name = "skw";
+
+        console.log(obj.name); // "skw"
+        console.log(obj2.name); // "skw"
+
+        obj2 = "null"; // 此時重新賦值obj2的屬性值時，obj2就不再指向obj的地址
+
+        console.log(obj.name); // "skw"
+        console.log(obj2); // "null"
+
+        // ==：
+        // 基本數據類型：
+        var c = 123;
+        var d = 123;
+
+        console.log(c == d); // true
+
+        // 引用(複合)數據類型：
+        var obj3 = new Object();
+        // obj3在heap中開闢一個新空間，有自己的唯一地址
+
+        var obj4 = new Object();
+        // obj4也再heap中開闢一個新空間，也有自己的唯一地址
+
+        obj3.name = "shs";
+        console.log(obj3.name); // "shs" 從地址中調用出name對應的屬性值
+        // 此時obj3的屬性值存儲的是自已的 物件地址，不是實際內容"shs"
+
+        obj4.name = "shs";
+        console.log(obj4.name); // "shs" 從地址中調用出name對應的屬性值
+        // 此時obj4的屬性值存儲的是自已的 物件地址，不是實際內容"shs"
+
+        console.log(obj3 == obj4); // false
+        // 故兩者比較的其實是各自指向的「物件地址」，所以是 false
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

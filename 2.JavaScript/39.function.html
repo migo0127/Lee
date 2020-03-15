@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函數：Function()</title>
+    <script>
+        /*
+            函數(Function)：
+                - 函數也是一個物件。
+                - 函數中可以封裝(保存)一些功能(代碼)，在需要時可以執行這些
+                  功能(代碼)。
+                - 函數中可以封裝(保存)一些代碼再需要的時候調用。
+                - 函數物件具有所有普通物件的功能，即亦可新增、添加、修改、刪除。
+                - 使用typeof檢查一個函數物件時，會返回 function。
+                - 創見一個函數物件：3種方式
+                    1.構造函數：new關鍵字，不常使用
+                        - 可以將要封裝的代碼以「字符串」的形式回傳給構造函數。
+                        - 語法：
+                            var fun = new Funtion();
+
+                    2.函數聲明：實務上常用
+                        - 語法：
+                            function 函數名 ([形參1,形參2...,形參N]){
+                                語句...;
+                            }
+                        =>[形參1,..,行參N]可以不寫。
+
+                    3.函數表達式：實務上常用
+                            var 函數名 = function([形參1,形參2...,形參N]){
+                                語句...;
+                            };
+                        => 函數表達式就是將 匿名函數賦值給一個變量，所以{}後要
+                           加上一個「;」，如同聲明變量一樣。
+
+                    - 封裝到函數中的代碼不會立即執行，函數中的代碼只有在函數調用
+                      的時候執行。
+                    - 當調用函數時，函數中封裝的代碼會按照順序執行。
+
+                        - 例一：構造函數
+                            var fun = new Funtion("console.log('構造函數');");
+                            console.log(fun);
+                            => anonymous ("console.log('構造函數');")
+                            => 此沒有執行函數中封裝的代碼。
+
+                            fun();
+                            => 只有使用調用函數的方式，才會執行封裝的代碼。
+                            => '構造函數'
+
+                        - 例二：函數聲明
+                            function fun2(){
+                                console.log("函數聲明");
+                            }
+
+                        - 例三：函數表達式
+                            var fun3 = function(){
+                                 console.log("函數聲明");
+                            };
+
+                        ※ 函數聲明與函數表達式在實務上最常使用，兩者僅
+                           差別在：
+                            - 函數聲名：
+                                是直接聲明一個fintion+函數名(){}。
+                                - 例：
+                                    function fa(){
+                                        語句...;
+                                    }
+                            - 函數表達式：
+                                是先聲明一個變量，在將「匿名函數funtion(){}」
+                                賦值給變量，就像聲明變量一樣，只是值是函數。
+                                - 例：
+                                    var fa = function(){
+                                        語句...;
+                                    };
+                                        || 聲明變量的結構
+                                    var a = 123;
+
+                                => 函數聲名的函數名 fa 在函數表達式中等同於 變量名。
+                                => 而函數表達式就如同變量一般，所以結尾要加上「;」。
+
+        */
+
+        // 構造涵數：
+        var fun = new Function("console.log('構造函數');");
+        console.log(fun); // anonymous ("console.log('構造函數');")
+                          // 沒有執行函數中封裝的代碼。
+        fun(); // 只有使用調用函數的方式，才會執行封裝的代碼 => '構造函數'
+
+        console.log(typeof fun); // "function"
+
+
+
+        // 函數聲明：
+        function fun2(){
+            console.log("函數聲明");
+            document.write("函數聲明");
+        }
+
+        console.log(fun2);
+        // fun2(){console.log("函數聲明"); document.write("函數聲明");}
+
+        fun2(); //調用函數 =>  "函數聲明"
+
+        console.log(typeof fun); // "function"
+
+
+
+        // 函數表達式：匿名函數
+        var fun3 = function(){
+            console.log("函數表達式");
+            document.write("函數表達式");
+        };
+
+        console.log(fun3);
+        // 匿名函數 => (){console.log("函數表達式");document.write("函數表達式");}
+
+        fun3(); //調用函數 =>  "函數表達式"
+
+        console.log(typeof fun); // "function"
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

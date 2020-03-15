@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>function()練習題_1</title>
+    <script>
+        /*
+            定義一個函數，判斷一個數字是否為偶數如果是返回true，返之fasle。
+        */
+
+        // 方法一：
+            function iseven(num){
+                if(num%2 == 0){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+            var result = iseven(3);
+            console.log(result);
+
+        // 方法二：
+            function iseven2(num){
+                return num%2 == 0;
+                // return (num%2 == 0) 就是一個式子，是就返true，反之 false。
+                // j如：console.log( num%2 == 0 );
+            }
+
+            var result2 = iseven2(5);
+            console.log(result2);
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

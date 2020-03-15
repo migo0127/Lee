@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>return補充_2</title>
+    <script>
+        /*
+            return vs break vs continue：
+                - return：
+                    若return後面沒有跟隨一個 值/變量時，return將「結束整個函數」。
+                - break：
+                    break若沒有指定循環，將「結束離的最近的整個循環」。
+                - continue：
+                    continue若沒有指定循環，將「跳過當次符合條件的循環執行」，並
+                    繼續執行後面的循環。
+        */
+        function fun(){
+            console.log("○ fun函數開始執行~~");
+            for( i=0 ; i<5 ; i++){
+                if(i==2){
+                    // return：結束整個函數
+                    return;
+                }
+                console.log(i);
+            }
+            console.log("● fun函數結束執行！！");
+        }
+
+        fun();
+
+        function fun2(){
+            console.log("○ fun2函數開始執行~~");
+            for( i=0 ; i<5 ; i++){
+                if(i==2){
+                    //break：結束最近的循環
+                    break;
+                }
+                console.log(i);
+            }
+            console.log("● fun2函數結束執行！！");
+        }
+
+        fun2();
+
+        function fun3(){
+            console.log("○ fun2函數開始執行~~");
+            for( i=0 ; i<5 ; i++){
+                if(i==2){
+                    //continue：跳出符合條件(i==2)的該次循環，在接續後面的循環
+                    continue;
+                }
+                console.log(i);
+            }
+            console.log("● fun2函數結束執行！！");
+        }
+
+        fun3();
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

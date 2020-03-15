@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函數的參數</title>
+    <script>
+        /*
+            函數的參數：
+                - 可以在函數的()中來指定一個或多個形參(形式參數(陸)、參數(台))，
+                  多個形參之間使用「,」隔開，聲明形參就相當於在函數內部聲明了對
+                  應的變量，但並不賦值。
+                - 在調用函數時，可以在()中指定實參(實際參數(陸)、引數(台))，實
+                  參將會賦值給函數中對應的形參。
+
+                    - 例：定義一個用來求兩個數之和的函數
+
+                        function sum(a,b){
+                            console.log(a+b);
+                        }
+
+                        sum(1,2); => 3
+                        sum(123,456) => 579
+
+                - 調用函數時解析器不會檢查實參的數據類型，所以要注意是否
+                    有可能會接收到非法的實參(後續補充)，如果有可以則需要對
+                    參數進行類型的檢查(後續補充)。
+                - 函數的實參可以是任意的數據類型(後續補充)。
+                    - 例：
+                        function sum(a,b){
+                            console.log(a+b);
+                        }
+
+                        sum(123,"hello"); => "123hello"
+                        sum(123,true); => 124
+
+                - 調用函數時，解析器也不會檢查實參的數量。
+                    - 多餘的實參不會被賦值。
+                    - 實參數量少於形參數量時，沒有對應實參的形參會是「undefined」
+                        - 例：
+                            function sum(a,b){
+                                console.log(a+b);
+                            }
+
+                            sum(12,10,"hello",true); => 22
+
+        */
+        function sum(a,b){
+            console.log(a+b);
+        }
+
+        sum(1,2); // 3
+        sum(123,456) // 579
+        sum(true,1) // 2
+
+        // 調用函數時解析器不會檢查實參的數據類型
+        sum(123,"hello"); // "123hello"
+        sum(true,10) // 11
+
+        // 多餘的實參不會被賦值
+        sum(12,10,"hello",true); // 22
+
+
+        //實參數量少於形參數量時，沒有對應實參的形參會是「undefined」
+        function sum2(a,b){
+            console.log(a); // 20
+            console.log(b); // undefined
+            console.log(a+b); // 20 + undefined => NaN
+        }
+
+        sum2(20); // NaN
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

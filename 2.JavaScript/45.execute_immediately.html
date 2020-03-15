@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>立即執行函數</title>
+    <script>
+        /*
+            立即執行函數：
+                - 函數定義完後立即被調用，這種函數叫做立即執行函數。
+                - 通常使用在「匿名函數」。
+                - 立即執行函數往往只會執行一次。
+                    - 例：匿名函數此寫法會報錯，因為沒有賦值給變量
+                        function(){
+                            console.log("測試一");
+                        }
+
+                    ※ 若要使上面沒有賦值給變量的匿名函數不報錯，可
+                       已將匿名函數包括在()裡來作用。
+
+                        (function(){
+                            console.log("測試一");
+                        })
+
+                    ※ 確認匿名函數不報錯後，要使其可以立即執行，可
+                       已在()後面加上調用函數();即可被執行。
+
+                       (function(){
+                            console.log("測試一");
+                        })();
+
+
+                        (function(a,b){
+                            console.log(a+b);
+                        })(123,456);
+
+        */
+
+        // 此寫法()的匿名函數不會被報錯：
+        // (function(){
+        //     alert("測試一");
+        // })
+
+
+        // 使匿名函數立即被調用
+        // (function(){
+        //     alert("測試二");
+        // })();
+
+
+        // 亦可輸入參數進行計算
+        (function(a,b){
+            console.log(a+b);
+        })(123,456);
+
+
+        // 實際上其他的函數也可直接在()後加上();來調用函數，只是此寫法沒意義
+        (function fun(a,b){
+            console.log(a*b);
+        })(5,5);
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

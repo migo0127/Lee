@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>return</title>
+    <script>
+        /*
+            return(返回值)：
+                - 可以使用 reture 來設置函數的返回值。
+                - 語法：
+                    trturn 值/變量名..;
+
+                - return後的值將會作為函數的執行結果返回，可以定義一個變量
+                  來接收該結果。
+                - 在函數中return後的語句都不會被執行，類似於break，會結束整個函數。
+                - 如果return語句後不跟任何的值/變量，就相當於返回一個undefined
+                  ，如果函數中不寫return，則也會返回 undefined。
+
+                    - 例：創建一個函數，用來計算三個數之和
+                        function sum(a,b,c){
+
+                            var d = a + b + c;
+
+                            return d;
+                        }
+
+                        sum(1,2,3);
+                        => 此時沒有創建一個變量來接收返回的結果(d)的值
+
+                        var result = sum(1,2,3); // 6
+                        => 調用函數sum()，並同是將返回值賦值給變量 result。
+
+
+        */
+        function sum(a,b,c){
+
+            var d = a + b + c;
+
+            return d;
+        }
+
+        sum(1,2,3);
+        // 此時只是將實參的值對應給形參，但沒有創建一個變量接收返回值
+        console.log(sum);
+        // 故sum是表示整個function sum(){}
+
+        var result = sum(1,2,3);
+        // 調用函數sum()，並同是將返回值賦值給變量 result。
+        console.log(result); // 6
+
+
+        // 直接使用return返回計算結果
+        function sum(a,b,c){
+            return a+b+c;
+        }
+
+        var result2 = sum(1,1,1);
+        console.log(result2); // 3
+
+
+        function sum2(a,b,c){
+            var d = a + b + c;
+            // 沒有設 retrun 將返回 undefined
+        }
+
+        var result2 = sum2(4,5,6);
+        console.log(result2); // undefined
+
+
+
+        function sum3(a,b,c){
+            var d = a + b + c;
+            return;
+            // 設 retrun，但 retrun 後面沒有跟值/變量，也會返回 undefined
+        }
+
+        var result2 = sum3(4,5,6);
+        console.log(result2); // undefined
+
+
+        function sum4(a,b,c){
+            var d = a + b + c;
+            return d;
+            // return後的語句不會被執行
+            alert("你看我執不執行?");
+        }
+
+        var result2 = sum4(4,5,6);
+        console.log(result2); // 15
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

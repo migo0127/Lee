@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物件字面量</title>
+    <script>
+        /*
+            創建一個物件的兩種方式：
+                1.new Object()：寫死。
+                    - 例：
+                        var obj = new Object();
+                2.物件字面量({})：
+                    - 使用物件字面量來創建物件時，可以同值指定物件中的屬性。
+                    - 此方式較為靈活。
+                    - 物件字面量的屬性名可以家引號也可以不加，建議不加，但若
+                      是要創建「特殊屬性名」時，必須要加。
+                    - 語法：
+
+                        var obj = {屬性名:屬性值,屬性名:屬性值,屬性名:屬性值};
+
+                    - 屬性名和屬性值是一組一組的名值對結構，名和值之間使用「:」
+                      連接，多個名值對之間使用「,」隔開，如果一個屬性之後沒有其
+                      它屬性了，就不要在寫「,」。
+                        - 例：
+                            var obj = {
+                                name:"孫悟空",
+                                age:18 ,
+                                gender:"男",
+                                "%&@*()&":177  => 特殊屬性名，必須加引號
+                                }
+
+
+
+
+        */
+        var obj = {
+            name:"光頭強",
+            age:18 ,
+            gender:"男",
+            // 特殊屬性名，必須加引號
+            "%&@*()&":177
+            }
+
+            console.log(obj);
+            console.log(typeof obj);
+
+            var obj2 = {
+                name:"三星堆",
+                age:28,
+                gender:"謎樣",
+                test:{name:"金城伍"}
+            }
+
+            console.log(obj2);
+            console.log(obj2.test);
+            console.log(typeof obj2);
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
