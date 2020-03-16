@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for...in：枚舉(走訪)物件中的屬性</title>
+    <script>
+        /*
+            for...in：
+                - 枚舉物件中的屬性。
+                - 意似 查看某物件中所含有的屬性(屬性名&屬性值)。
+                - 語法：
+
+                    fon(var 變量 in 物件){
+                        語句...;
+                    }
+
+                - for...in語句：
+                    - 物件中有幾個屬性，循環體就會執行幾次。
+                    - 每執行時，會將物件中的屬性名依次賦值給變量。
+                        - 例：
+                            var obj = {
+                                name:"三星堆",
+                                age:18,
+                                gender:"男",
+                                height:187,
+                                address:"上海",
+                            }
+
+                            for(var a in obj){
+                                console.log("hello");
+                            }
+                            => 此時obj中有5個屬性，故會執行5次循環，印出5次"hello"
+
+                            for(var a in obj){
+                                console.log("屬性名"+a);
+                            }
+                            => 每循環一次，就會將obj內的屬性名依次賦值給變量a，
+                               所以每循環一次印一次，將依序印出obj含有的屬性名。
+
+                            for(var a in obj){
+                                console.log("屬性名"+a);
+                                console.log("屬性值"+obj[a]);
+                            }
+                            => 因每次循環就會依序將obj內的屬性名賦值給a，所以可以
+                               透過obj[a]將屬性值取出來。
+                               ※ 此法就是物件賦值給變量的情況(如下)。
+                                    var a = "name";
+                                    console.log(obj[a]);
+
+        */
+
+        var obj = {
+            name:"三星堆",
+            age:18,
+            gender:"男",
+            height:187,
+            address:"上海",
+        }
+
+        for(var a in obj){
+            console.log("hello");
+        }
+
+        var obj = {
+            name:"三星堆",
+            age:18,
+            gender:"男",
+            height:187,
+            address:"上海",
+        }
+
+        for(var a in obj){
+            console.log(a);
+        }
+
+
+        for(var a in obj){
+            console.log("屬性名："+a);
+            console.log("屬性值："+obj[a]);
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

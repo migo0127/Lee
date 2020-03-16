@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>調用物件的方法(method)</title>
+    <script>
+        /*
+            物件的屬性值可以是任何的數據類型，也可以是個函數。
+
+            函數也可以稱為物件的屬性：
+                - 如果一個函數作為一個物件的屬性保存，那麼我們稱這個函數
+                  是這個物件的方法(method)。
+                - 調用函數就是調用物件的方法(method)。
+                - 但是它只是名稱上的區別，沒有其它的意思。
+                    - 例：
+                        var obj = {
+                            name:"三星堆",
+                            age:18,
+                            var fun : function(){
+                                console.log(obj.name);
+                            }
+                        }
+
+                        console.log(fun);
+                        => 調用函數物件
+
+                        obj.fun();
+                        => 調用函數 == 調用obj物件的方法 => "三星堆"
+
+                    - 例：調用OO的xx方法 => OO.函數
+                        "hello".toString() => 調用"hello"的toString()方法
+                        console.log() => 調用console的log() 方法
+                        document.write() => 調用document的write()方法
+
+
+        */
+        var obj = {
+            name:"三星堆",
+            age:18,
+            fun:function(){
+                console.log(obj.name);
+            }
+        }
+
+        console.log(obj.fun);  // 調用物件
+
+        console.log(obj.name);
+
+        obj.fun();  // 調用obj的fun()方法(調用fun函數)
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

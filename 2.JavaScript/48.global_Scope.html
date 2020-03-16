@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局作用域：Global Scope</title>
+    <script>
+        /*
+            作用域(區域、範圍)：
+                - 作用域是指一個變量的作用範圍。
+                - 在JS中一共有兩種作用域：
+                    1.全局作用域(Global scope)：
+                        - 直接編寫在script標籤中的JS代碼，都在全局作用域內。
+                        - 全局作用域在瀏覽器頁面打開時創建，瀏覽器頁面關閉時銷毀。
+                        - 在全局作用域中有一個全局物件「window」，它代表的是一個
+                          瀏覽器的窗口，它由瀏覽器創建，我們可以直接使用。
+                            - 例：
+                                console.log(typeof window); => object
+
+                                var a = "三星堆";
+                                var b ;
+                                console.log(window.a);  // 三星堆"
+                                console.log(window.b); // "undefined"
+
+                        - 在全局作用域中：
+                            創建的「變量」都會作為window物件的屬性保存著。
+                            創建的「函數」都會作為window物件的方法保存著。
+                                - 例：
+                                    var a = 123;
+                                    console.log(window.a); // 123
+
+                                    function fun(){
+                                        console.log("hello");
+                                    }
+
+                                    fun(); // "hello"
+                                    window.fun();
+                                    // "hello"，調用window的fun()方法
+
+                                    ※ 上面的變量與函數即都在window物件中儲存著，
+                                       而window是由瀏覽器創建的。
+
+                                    var window ={
+                                        a:123
+                                        fun:function(){
+                                        console.log("hello");
+                                        }
+                                    }
+                            - 全局作用域的變量都是全局變量，在頁面的任意的部份
+                              都可以訪問得到。
+
+                    2.函數作用域(後補充)。
+
+        */
+        console.log(typeof window); // object
+
+        var a = "三星堆";
+        console.log(window.a); // "三星堆"
+        console.log(window.b); // "undefined"
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

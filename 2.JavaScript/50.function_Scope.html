@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函數作用域：Function Scope</title>
+    <script>
+        /*
+            函數作用域(function scope)：
+                - 調用函數時創建函數作用域，函數執行完畢後，函數作用域銷毀。
+                - 每調用一次函數就會創建一個新的函數作用域，它們之間是相互獨
+                  力的。
+                    - 例：
+                        function fun(){
+                            console.log("函數作用域");
+                        }
+
+                        fun(); // 調用函數，創建一個函數作用域，執行完銷毀
+                        fun(); // 調用函數，創建另一個函數作用域，執行完銷毀
+                        fun(); // 調用函數，再創建另一個函數作用域，執行完銷毀
+
+                - 在函數作用域中可以訪問到全局作用域的變量。
+                - 在全局作用域中無法訪問到函數作用域的變量。
+                    - 例：
+                        var a = 10;
+                        function fun1(){
+                            var b = 50;
+                            console.log(a); // 10
+                        }
+
+                        console.log(b);
+                        // b is not defined，無法訪問到函數作用域的變量。
+
+                - 當在函數作用域操作一個變量時，它會先在自身作用域中尋找，如果
+                  有就直接使用，如果沒有則向上一級作用域中尋找，直到找到全局作
+                  用域，如果全局作用域中依然沒有找到，則會報錯。
+                    - 例：
+                        var a = 10;
+
+                        function fun2(){
+                            var a = "我是fun2的a";
+                                function fun3(){
+                                    console.log(a);  // "我是fun2的a"
+                                }
+                        }
+
+                - 在函數中要訪問全局變量可以使用window物件。
+                    - 例：
+                        var a = 10;
+
+                        function fun2(){
+                            var a = "20";
+                                function fun3(){
+                                    console.log(window.a);  // 10
+                                }
+                        }
+
+                - 在函數作用域中也有聲明提前的特性，大致上與全局聲明提前一樣。
+                    - 使用var關鍵字聲明的變量，會在函數中所有的代碼執行之前先
+                      被聲明。
+                    - 函數聲明也會再函數中所有的代碼執行之前被聲明。
+                    - 在函術中，不使用var關鍵字聲明的變量都會變成「全局變量」！！
+                        - 例：
+                            var c = 50;
+                            function fun6(){
+                                console.log(c);  // 100
+                                c = 100;  // 相當於 window.c = 100;
+                                d = 20; // 相當於 window.d = 100;
+                            }
+
+                            fun6();
+
+                            console.log(d); // 20
+
+                    - 函數中定義形參就相當於在函數作用域中聲明了變量。
+                        - 例：
+                            var f = 30;
+                            function fun7(f){
+                                console.log(f);  // "undefined"
+                            }
+
+                            fun7();
+        */
+
+        // 在函數作用域中可以訪問到全局作用域的變量。
+        // 在全局作用域中無法訪問到函數作用域的變量。
+        var a = 10;
+        function fun1(){
+            var b = 50;
+            console.log(a); // 10，可以訪問到全局作用域的變量。
+        }
+
+        fun1();
+
+        // console.log(b); // is not defined，無法訪問到函數作用域的變量。
+
+
+        var a = 10;
+        function fun2(){
+            var a = "我是fun2的a";
+            function fun3(){
+                console.log(a);  // "我是fun2的a"
+            }
+    }
+
+        fun2();
+
+        // 函數中要訪問全局變量可以使用window物件
+        var a = 10;
+
+        function fun4(){
+            var a = 20;
+                function fun5(){
+                    console.log(window.a);  // 10
+                }
+        }
+
+        // 在函術中，不使用var關鍵字聲明的變量都會變成「全局變量」！！
+        var c = 50;
+        function fun6(){
+            console.log(c);  // 50
+            c = 100;  // 相當於 window.c = 100;
+            console.log(c); // 100
+            d = 20; // 相當於 window.d = 100;
+        }
+
+        fun6();
+
+        console.log(d); // 20
+
+
+
+        // 函數中定義形參就相當於在函數作用域中聲明了變量。
+        var f = 30;
+        function fun7(f){
+            console.log(f);  // "undefined"
+        }
+
+        fun7();
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

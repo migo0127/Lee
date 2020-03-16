@@ -6,9 +6,10 @@
     <title>obj[]、屬性名、屬性值</title>
     <script>
         /*
-            向物件中添加屬性：2種方式
+            向物件中添加屬性：.3種方式
                 1.obj.屬性名：寫死。
                 2.obj["屬性名(字符串)"]：此方式較為常用，可搭配變量使用。
+                3.var obj = {} ，字面量物件，最常用。
 
             屬性名(Attributes name)：
                 - 物件的屬性名不強制要求遵守標識符規範(字母、數字、_、$，不可
@@ -67,10 +68,10 @@
 
                         var obj2 = new Object();
                         obj["obj2"] = "三星堆";
-                        console.log("obj2");
+                        console.log(obj["obj2"] ); // "undefined"
 
                         obj["test"] = "obj2";
-                        console.log("test");
+                        console.log(obj["test"] ); // "obj2"
 
             in 運算符：
                 - 通過in運算符可以檢查一個物件中是否含有指定的屬性，
@@ -123,6 +124,13 @@
         // 檢查obj中是否含有test2屬性
         console.log("test2" in obj); // true
         console.log("test3" in obj); // false
+
+        var obj3 = new Object();
+        obj["obj3"] = "三星堆";
+        console.log(obj["obj2"] ); // undefined
+
+        obj["test"] = "obj3";
+        console.log(obj["test"] ); // "obj3"
 
     </script>
 </head>

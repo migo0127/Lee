@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聲明提前：hoisting</title>
+    <script>
+        /*
+            ※※ 配合圖片說明：
+            E:\Programming\Front-end engineer\Lee\2.JavaScript\img\49.hoisting\Hoisting.jpg
+
+            1.變量的聲明提前：
+                - 使用「var」關鍵字聲明的變量，會在所有的代碼執行之前先被
+                  聲明好(但不會賦值)，只有到代碼執行到該行時，才會被賦值。
+                - 但是如果聲明變量時不是用var關鍵字，則變量不會被聲明提前。
+
+                    ※ 補充說明：
+                        undefined  vs is not defined
+
+                        undefined：表示該值已被創建，但是給予沒有定義。
+                            ex： var a;
+                            => 已創建變量a，但未定義a的賦值。
+
+                        not undefined：表示在整個JS中不存在這個定義。
+
+                    - 例：使用var關鍵字
+                        console.log("a = "+a);  // "undefined"
+
+                        var a = 123;
+
+                        => 此時該 var a; 會先被聲明提前(就是會自動於code最
+                           上方先做變量的聲明，表示變量a已創建)，但是 = 123
+                           的賦值要等到瀏覽器執行到該行時才會進行賦值，所以
+                           依此例的情況，var a 會先聲明提前(表示創建好變量a)
+                           ，所以在console.log("a = "+a);時只會出現 undefined
+                           ，變量a未定義，因為賦值的動作是在後面。
+
+                    - 例：未使用var關鍵字
+                        console.log("b ="+b);
+
+                        b = 123;
+
+                    => 此時 b 沒有使用關鍵字var做變量聲名，所以不會被聲明提前，故
+                       使用console.log("b ="+b); 會出現 is not defined，b不存在。
+        */
+
+        // 變量的聲明提前(hoisting)
+        // 聲明提前：使用var關鍵字
+        console.log("a = "+a);  // "a = undefined"
+
+        var a = 123;
+
+
+        // 未用var關鍵字，不會被聲明提前
+        // console.log("b ="+b);
+
+        // b = 123; // b is not defined
+
+        /*
+            2.函數的聲明提前：
+                2-1.使用「函數聲明」所創建的函數 function 函數名(){}，它會在所有的
+                  代碼執行之前就先被創建(與變量的var提前聲明一樣)，所以我們可以
+                  在函數聲明前來調用。
+                    - 例：
+                        fun();
+
+                        function fun(){
+                            console.log("我是一個聲明函數");
+                        }
+
+                        => 此時使用「函數聲明」創建的函數會整個被提先聲明，
+                           相當於整個function都被提到code執行前先聲明好，所
+                           以看似function fun(){} 是在 調用函數fun() 後面，
+                           但實際上瀏覽器已經在最早先聲明好 function fun(){}，
+                           所以仍可以使用fun()調用函數來執行。
+
+                2-2.使用「函數表達式」所創建的函數 var fun = function(){}，不會
+                    被提前聲明，所以不能在聲明前被調用。
+                    - 例：
+                        fun1();
+
+                        var fun1 = function(){
+                            console.log("我是函數表達式");
+                        }
+                    => 此時只有 var fun1 的關鍵字變量有被提前聲明，但後面的
+                       函數賦值要等到執行到該行時才會進行，所以在「函數表達
+                       式」前調用fun1();，會出現 fun1 is not a function的情
+                       況，如同變量的var關鍵字聲明一樣，var fun1已創建，但尚
+                       未賦值，所以瀏覽器會認為var fun1並不是一個function。
+        */
+
+        // 「函數聲明」：會先被聲明提前
+        fun(); // "我是一個聲明函數"
+
+        function fun(){
+            console.log("我是一個函數聲明");
+        }
+
+        /*
+        「函數表達式」：只有前面的var fun1 變量會被提前，但賦值要
+          等到執行到該行時才會進行。
+        */
+        fun1();  // fun1 is not a function
+
+        var fun1 = function(){
+            console.log("我是函數表達式");
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
