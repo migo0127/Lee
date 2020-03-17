@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>構造函數的修改_1</title>
+    <script>
+        /*
+            構造函數的修改_1：
+                - 創建一個Person構造函數，在Person構造函數中，為每一個物件都添加
+                  了一個sayName方法，目前我們的方法就是在構造函數內部創建的，也
+                  就是說構造函數每執行一次就會創建一個新的sayName方法，所以實例
+                  的syaName都是唯一的，不相同的。
+                  
+                - 這樣就導致了構造函數執行一次就會創建一個新的方法，執行10000次
+                  就創建10000個新的方法，且這10000次的執行方法都是一模一樣的，
+                  暫用空間，完全沒必要，完全可以使所有的物件共享同一個方法，提
+                  高效率，也不會影響輸出結果。
+
+                    - 例：原本的構建函數中的sayName
+                        function Person(name,age){
+                            this.name = name;
+                            this.age = age;
+                            this.sayName = function(){
+                                console.log("你好，我是"+this.name);
+                            }
+                        }
+
+                        var per1 = new Person("三星堆",5300);
+                        per1.sayName();
+
+                        var per2 = new Person("光頭強",18);
+                        per2.sayName();
+
+
+                                ↓ 修改後，將sayName指向全局的fun
+                        function Person(name,age){
+                            this.name = name;
+                            this.age = age;
+                            this.sayName = fun;
+                        }
+
+                        function fun(){
+                             console.log("你好，我是"+this.name);
+                        }
+
+                        var per1 = new Person("三星堆",5300);
+                        per1.sayName();
+
+                        var per2 = new Person("光頭強",18);
+                        per2.sayName();
+
+        */
+
+        // 原本的構造函數：
+        function Person(name,age){
+            this.name = name;
+            this.age = age;
+            this.sayName = function(){
+                console.log("你好，我是"+this.name);
+            }
+        }
+
+        var per1 = new Person("三星堆",5300);
+        per1.sayName();
+
+        var per2 = new Person("光頭強",18);
+        per2.sayName();
+
+        console.log(per1.sayName == per2.sayName);
+        // false，因函數內每執行一次都是不同的，都是唯一的
+
+
+        //修改後
+        function Person1(name,age){
+            this.name = name;
+            this.age = age;
+            this.sayName = fun;
+        }
+
+        function fun(){
+                console.log("你好，我是"+this.name);
+        }
+
+        var per1 = new Person1("三星堆",5300);
+        per1.sayName();
+
+        var per2 = new Person1("光頭強",18);
+        per2.sayName();
+
+        console.log(per1.sayName == per2.sayName);
+        // true，改寫在全局中共享同一種方式，但不會影響輸出結果，可提高效率
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this</title>
+    <script>
+        /*
+            解析器(瀏覽器)在調用函數時，每次都會向函數內部傳遞進一個隱含的參數，
+            這個隱含的參數就是「this」，this指向的是一個物件，這個物件我們稱為涵
+            數執行的上下文物件，根據函數的調用方式的不同，this會指向不同的物件：
+                1.以函數的形式調用時，this永遠都是window。
+                2.以方法的形式調用時，this就是調用方法的那個物件。
+                    - 例一：
+                        function fun(){
+                            console.log(this);
+                            // 此時的this是指向windows物件
+                        }
+
+                        fun();
+
+                    - 例二：
+                        function fun2(){
+                            console.log(this.name);
+                        }
+
+                        var obj = {
+                            name:"三星堆",
+                            a:fun2   // 變量a的賦值為fun函數物件
+                        }
+
+                        console.log(obj.name);
+                        fun2();
+        */
+
+        // 以函數的形式調用函數，此時this指向的物件是window
+        function fun(){
+            console.log(this);
+            // Window {parent: Window, opener: null, top: Window, …}
+        }
+
+        fun();
+
+        // 以物件obj的形式調用函數，此時this指向的物件是obj
+        function fun2(){
+            console.log(this.name);
+            // this.name == obj.name => "三星堆"
+            console.log(this.age);
+            // this.age == obj.age => 18
+        }
+
+        var obj = {
+            name:"三星堆",
+            age:18,
+            a:fun2   // 變量a的賦值為fun函數物件
+        }
+
+        console.log(obj.a == fun2); // true
+        console.log(obj.name); // "三星堆"
+        obj.a(); // boj.a() == fun2() 用物件的方式調用函數
+
+
+        // 差別
+        function fun3(){
+            console.log(this.name);
+        }
+
+
+        var obj = {
+            name:"三星堆",
+            age:18,
+            a:fun3
+        }
+
+        var obj2 = {
+            name:"光頭強",
+            age:28,
+            b:fun3
+        }
+
+        var name = "全局變量name";
+
+        // 以函數形式調用，this為window
+        fun3(); // window.name => "全局變量name"
+
+        // 以物件obj形式調用，this為obj
+        obj.a();  // obj.name => "三星堆"
+
+        // 以物件obj2形式調用，this為obj2
+        obj2.b(); // obj.name => "光頭強"
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

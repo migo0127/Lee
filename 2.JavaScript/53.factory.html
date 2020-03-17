@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工廠創建方法：批次創建物件</title>
+    <script>
+        /*
+            工廠方式創建物件：
+                - 通過此方法可以大批量的創建物件。
+                - 但因是使用new Object() 構造物件的方式，會使輸出時都統一名稱
+                  Object{}，不好辨識。
+                - 語法：
+                    function 函數名(形參1,...){
+                        var obj = new Object();
+
+                        obj.xxx = 形參1;
+                        obj.xxx = 形參2;
+                        obj.xxx = 形參3;
+
+                        return obj;
+                    }
+
+                    - 例：
+                        function createPerson(name,age,gender){
+                            // 構造物件創建一個空物件
+                            var obj = new Object();
+
+                            // 新增屬性，並設置所要賦的值為function的形參
+                            obj.name = name;
+                            obj.age = age;
+                            obj.gender = gender;
+                            obj.fun = function(){
+                                console.log(this.name);
+                            }
+
+                            // 回傳創建好並賦值的物件
+                            return obj;
+                        }
+
+                        var a = createPerson("光頭強",18,"男");
+                        var b = createPerson("三星堆",5300,"謎樣");
+                        var c = createPerson("DL",29,"男");
+
+                        console.log(a);
+                        console.log(b);
+                        console.log(c);
+
+        */
+    function createPerson(name,age,gender){
+        // 創建一個空物件，下面新增屬性
+        var obj = new Object();
+
+        // 新增屬性，並設置所要賦的值為function的形參
+        obj.name = name;
+        obj.age = age;
+        obj.gender = gender;
+        obj.fun = function(){
+            console.log(this.name);
+        }
+
+        // 將新的賦值好的物件回傳
+        return obj;  // var = obj;
+    }
+
+    var a = createPerson("光頭強",18,"男");
+    var b = createPerson("三星堆",5300,"謎樣");
+    var c = createPerson("DL",29,"男");
+
+    console.log(a);
+    // Object { name: "光頭強", age: 18, gender: "男", fun: fun() }
+    console.log(a.age); //18
+    a.fun(); // "光頭強"
+
+
+    console.log(b);
+    //Object { name: "三星堆", age: 5300, gender: "謎樣", fun: fun() }
+    console.log(b.gender); // "謎樣"
+    b.fun(); // "三星堆"
+
+    console.log(c);
+    //Object { name: "DL", age: 29, gender: "男", fun: fun() }
+    console.log(c.age); // 29
+    c.fun(); // "DL"
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

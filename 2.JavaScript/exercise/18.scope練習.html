@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作用域練習</title>
+    <script>
+        /*
+            練習一：
+                var a = 123;
+                function fun(){
+                    console.log(a);
+                }
+
+                fun();  // 123
+
+            練習二：
+                var a = 123;
+                function fun1(){
+                    console.log(a);  // undefined
+                    var a = 456;
+                }
+
+                fun();
+                alert(a); // 123
+
+        */
+        var a = 123;
+        function fun1(){
+            console.log(a);  // undefined
+            var a = 456;
+        }
+
+        fun1();
+        console.log(a); // 123
+
+        /*
+            練習三：
+                var a = 123;
+                function fun2(){
+                    console.log(a);  // 123
+                    a = 456;
+                }
+
+                fun2();
+
+        */
+        var a = 123;
+        function fun2(){
+            console.log(a);  // 123
+            a = 456;
+        }
+
+        fun2();
+
+        /*
+            練習四：
+                var a = 123;
+                function fun3(){
+                    console.log(a);  // 123
+                    a = 456;
+                }
+
+                fun3();
+                console.log(a);  // 456
+         */
+
+         var a = 123;
+        function fun3(){
+            console.log(a);  // 123
+            a = 456;
+        }
+
+        fun3();
+        console.log(a);  // 456
+
+    </script>
+    
+</head>
+<body>
+
+</body>
+</html>

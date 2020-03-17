@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this補充</title>
+    <script>
+
+
+        // 例一：寫死，沒有this
+        var name = "全局";
+
+        function fun(){
+            console.log(name);
+            // 寫死，沒有this
+        }
+
+        var obj = {
+            name:"三星堆",
+            a:fun
+        }
+
+        var obj2 = {
+            name:"光頭強",
+            a:fun
+        }
+
+        fun();  // "全局"
+        obj.a(); // "全局"
+        obj2.a(); // "全局"
+
+
+
+        // 例二：使用this，靈活
+        var name = "例二的全局";
+
+        function fun2(){
+            console.log(this.name);
+            // 有this
+        }
+
+        var obj3 = {
+            name:"三星堆",
+            b:fun2
+        }
+
+        var obj4 = {
+            name:"光頭強",
+            b:fun2
+        }
+
+        fun2(); // "例二的全局"
+        obj3.b(); // "三星堆"
+        obj4.b(); // "光頭強"
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

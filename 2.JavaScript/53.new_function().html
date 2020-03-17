@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>構造函數：關鍵字new</title>
+    <script>
+        /*
+            構造函數：
+                - 創建一個構造函數，專門有來創建大量物件的。
+                - 構造函數就是一個普通的函數，創建方式與普通函數(函數聲明)
+                  沒有區別，不同的是構造函數習慣上「首字母大寫」。
+
+            構造函數與普通函數不同之處：
+                - 區別就是調用的方式不同。
+                - 普通函數是直接調用 fun();。
+                - 構造函數需要使用new關鍵字來調用 new fun();。
+                - 默認返回值，故需有變量(此時即為物件)接收。
+
+            語法：
+                function Person(形參1,...){
+                    this.OOO = 形參1;
+                    this.OOO = 形參2;
+                    this.OOO = 形參3;
+                    this.fun = function{
+                        console.log(this.name);
+                    }
+                }
+
+                var per = new Person(實參1,...);
+                console.log(per);
+
+
+            構造函數的執行流程：
+                1.調用函數一執行立即創建一個新的物件(空物件)。-> 瀏覽器默認自動執行
+                2.將新建的物件設置為函數中的this，在構造函數中可以使用this來引用
+                  新建的物件，即this就是指向新建的物件。
+                3.逐行執行函數中的代碼。-> 瀏覽器默認自動執行
+                4.將新建的對象作為返回值返回(無需寫return)。 -> 瀏覽器默認自動執行
+
+            ※ 使用同一個構造函數(同函數名)創建的物件，我們稱為一類物件，也將一個構
+               造函數稱為一個類。
+            ※ 我們將通過一個構造函數所創建的物件稱為是該類的實例(即該構造函數的實
+               例)。
+
+            instanceof：
+                - 可以用來檢查一個物件是否為某一個類的實例。
+                - 如果是，返回true，返之false。
+                - 所有的物件都是Object的後代，所以任何物件和Object用instanceof
+                  檢查時，都會返回true。
+                - 語法：
+
+                    物件 instanceof 構造函數
+
+                    - 例：
+                        console.log(per instanceof Person); // true or fasle
+
+            構造函數vs工廠函數：
+                - 構造函數：
+                    - 輸出時，可以從函數名了解是否為同一類 (不同瀏覽器不同情況)。
+                    - 可以使用 instanceof 來檢查一個物件是否為該類(構造函數)的
+                      實例。
+                    - 瀏覽器自動返回新物件，無需寫return。
+
+                - 工廠函數：
+                    - 輸出時，都是同一個Object{}，無法區分，也無法使用instanceof。
+                    - 需要寫return。
+
+            ※※ this 總結：
+                1.當以函數的形式調用時，this是window。
+                2.當以物件的形式調用時，誰調用方法，this就是誰。
+                3.當以構造函數的形式調用時，this就是該構造函數新創建的物件。
+
+        */
+
+        //構造函數vs普通函數(函數聲明)：
+
+        //構造函數：
+        function Fun(){
+
+        }
+
+        var a = new Fun();
+        console.log(a); // Fun{}
+
+        // 普通函數(函數聲明)：
+        function fun(){
+
+        }
+        var b = fun();
+        console.log(b); // undefined
+
+
+
+        // 構造函數一：Person
+        function Person(name,age,hobby){
+            this.name = name;
+            this.age = age;
+            this.hobby = hobby;
+            this.fun = function(){
+                console.log(this.name);
+            }
+        }
+
+        var  per1 = new Person("三星堆",5300,"嚇人");
+        console.log(per1);
+        // Person {name: "三星堆", age: 5300, hobby: "嚇人", fun: ƒ}
+        console.log(per1.age); // 5300
+        per1.fun(); // "三星堆"
+
+        var per2 = new Person("光頭強",18,"沙雕");
+        // Person {name: "光頭強", age: 18, hobby: "沙雕", fun: ƒ}
+        console.log(per2); //
+        console.log(per2.age); // 18
+        per2.fun(); // "光頭強"
+
+        var per3 = new Person("DL",29,"音樂劇");
+        // Person {name: "DL", age: 29, hobby: "音樂劇", fun: ƒ}
+        console.log(per3);
+        console.log(per3.hobby); // "音樂劇"
+        per3.fun(); // "DL"
+
+
+
+        // 構造函數二：Dog
+        function Dog(name,age,gender){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+            this.fun1 = function(){
+                console.log(this.age);
+            }
+        }
+
+        var dog1 = new Dog("kobe",6,"男");
+        console.log(dog1);
+        // Dog { name: "kobe", age: 6, gender: "男", fun1: fun1() }
+        console.log(dog1.gender); // "男"
+        dog1.fun1(); // 6
+
+        var dog2 = new Dog("小黑", 8 , "男");
+        console.log(dog2);
+        // Dog { name: "小黑", age: 8, gender: "男", fun1: fun1() }
+        console.log(dog2.age); // 8
+        dog2.fun1(); // 8
+
+
+
+        // instanceof：
+        console.log(per1 instanceof Person); // true
+        console.log(per2 instanceof Dog); // false
+        console.log(dog1 instanceof Dog); // true
+
+        /*
+            所有的物件都是Object的後代，所以任何物件和Object用instanceof
+            檢查時，都會返回true。
+        */
+        console.log(dog2 instanceof Object); // ture
+        console.log(per3 instanceof Object); // ture
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
