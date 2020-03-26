@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array_for迴圈</title>
+    <script>
+        /*
+            遍歷陣列：就是將陣列中所有的元素都取出來。
+                - 可以使用for迴圈將陣列中所有元素取出。
+                - 例：
+                    var arr = ["三星堆","光頭強","DL"];
+                    console.log(arr.length);  // 3 (0~2)
+
+                    for( i = 0 ; i < arr.length ; i++){
+                        console.log(arr[i]);
+                    }
+
+
+        */
+        var arr = ["三星堆","光頭強","DL"];
+        console.log(arr.length);  // 3 (0~2)
+
+        for( i = 0 ; i < arr.length ; i++){
+            console.log(arr[i]);
+            // "三星堆"
+            // "光頭強"
+            // "DL"
+        }
+
+        var arr = ["三星堆","光頭強","DL","大龙","絨絨"];
+        console.log(arr.length);  // 5 (0~4)
+
+        for( i = 0 ; i < arr.length ; i++){
+            console.log(arr[i]);
+            // "三星堆"
+            // "光頭強"
+            // "DL"
+            // "大龙"
+            // "絨絨"
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

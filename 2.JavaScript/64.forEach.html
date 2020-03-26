@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forEach</title>
+    <script>
+        /*
+            遍歷陣列：
+                1.for()：
+                    一般都使用for循環去遍歷陣列。
+
+                2.forEach()：
+                    - JS中還為我們提供了forEach()方法來遍歷陣列，這個方法只支持IE8以上瀏
+                      覽器，IE8及以下瀏覽器均不支持，所以如果需要兼容IE8，就不可使用forEach
+                      ，需使用for循環來遍歷，手機端則可以使用forEach()來遍歷。
+                      
+                    - forEach()方法需要一個函數作為參數。
+                        - 像這種函數，由我們創建但不由我們調用，瀏覽器會自行調用，我們稱
+                          為「回調函數」。
+                        - 陣列中有幾個元素，函數就會執行幾次，每次執行時，瀏覽企會將遍歷
+                          到的元素以實參的行式傳遞進來，我們可以定義形參來讀取這些內容。
+                        - 瀏覽器會再回調函數中傳遞三個參數：
+                            第一個參數：就是當前正在遍歷的元素。
+                            第二個參數：就是當前正在遍歷的元素的索引。
+                            第三個參數：就是正在遍歷的陣列。
+                        - 例：
+                            var arr = ["光頭強","三星堆","DL","絨絨","大龙"];
+
+                            arr.forEach(function(){
+                                console.log("hello");
+                            }) // "hello"
+                               // "hello"
+                               // "hello"
+                               // "hello"
+                               // "hello"
+
+                            arr.forEach(function(a,b,c,d){
+                                    console.log("a = "+a);
+                                })
+                                // 第一個參數：正在遍歷的陣列元素
+                                // a = 光頭強
+                                // a = 三星堆
+                                // a = DL
+                                // a = 絨絨
+                                // a = 大龙
+
+                                arr.forEach(function(a,b,c,d){
+                                    console.log("b = "+b);
+                                })
+                                // 第二個參數：正在遍歷的陣列元素的索引
+                                // b = 0
+                                // b = 1
+                                // b = 2
+                                // b = 3
+                                // b = 4
+
+                                arr.forEach(function(a,b,c,d){
+                                    console.log("c = "+c);
+                                })
+                                // 第三個參數：正在遍歷的陣列
+                                // c = 光頭強,三星堆,DL,絨絨,大龙
+                                // c = 光頭強,三星堆,DL,絨絨,大龙
+                                // c = 光頭強,三星堆,DL,絨絨,大龙
+                                // c = 光頭強,三星堆,DL,絨絨,大龙
+                                // c = 光頭強,三星堆,DL,絨絨,大龙
+
+                                arr.forEach(function(a,b,c,d){
+                                    console.log("d = "+d);
+                                })
+                                // 沒有第四個參數
+                                // d = undefined
+                                // d = undefined
+                                // d = undefined
+                                // d = undefined
+                                // d = undefined
+
+        */
+
+        // 創建一組陣列
+        var arr = ["光頭強","三星堆","DL","絨絨","大龙"];
+
+
+        // forEach()：陣列中的元素有給次，瀏覽器就會調用(執行)函數幾次
+        arr.forEach(function(){
+            console.log("hello");  // "hello"*5
+        })
+
+        // 我們可以定義形參來讀取這些內容
+        arr.forEach(function(value,index,obj,d){
+            console.log("value = "+value);
+        })
+        /*
+        value = 光頭強
+        value = 三星堆
+        value = DL
+        value = 絨絨
+        value = 大龙
+        */
+
+        arr.forEach(function(value,index,obj,d){
+            console.log("index = "+index);
+        })
+        /*
+            index = 0
+            index = 1
+            index = 2
+            index = 3
+            index = 4
+        */
+
+        arr.forEach(function(value,index,obj,d){
+            console.log("obj = "+obj);
+        })
+        /*
+            obj = 光頭強,三星堆,DL,絨絨,大龙
+            obj = 光頭強,三星堆,DL,絨絨,大龙
+            obj = 光頭強,三星堆,DL,絨絨,大龙
+            obj = 光頭強,三星堆,DL,絨絨,大龙
+            obj = 光頭強,三星堆,DL,絨絨,大龙
+        */
+
+        arr.forEach(function(value,index,obj,d){
+            console.log("d = "+d);
+        })
+        /*
+            d = undefined
+            d = undefined
+            d = undefined
+            d = undefined
+            d = undefined
+
+        */
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

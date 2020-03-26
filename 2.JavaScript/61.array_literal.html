@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array_literal</title>
+    <script>
+        /*
+            創建陣列的方式：
+                1.構造函數創建陣列：
+                    var arr = new Array();
+
+                2.字面量創建陣列：
+                    - 語法：[];
+
+                        var arr = [];
+
+                    - 使用字面量創建陣列時，可以在創建時就指定陣列中的元素。
+
+                        var arr = [1,2,3,4,10,20];
+                        console.log(arr.length); // 6 (0~5)
+                        console.log(arr); // Array(6) [ 1, 2, 3, 4, 10, 20 ]
+                        console.log(arr[3]); // 4
+
+                3.使用構造函數創建陣列時，也可以同時添加元素，將要添加的元素作為構造函數的參數傳遞，元素間使用「,」隔開。
+
+                    var arr1 = new Array(10,20,30);
+                    console.log(arr1);
+
+                4.當只創建一個元素時，「字面量創建陣列、構造函數創建陣列」會有所不同。
+                    - 使用字面量創建只有一個元素的陣列時，即該陣列只有一個元素。
+
+                        var arr2 = [10];
+                        console.log(arr2); // 10
+                        console.log(arr2.length); // 1
+
+                    - 使用構造函數創建只有一個元素的陣列時，是表示創建一個長度為3的陣列。
+
+                        var arr3 = new Array[3];
+                        console.log(arr3); // Array(3) [ , , ]
+                        console.log(arr3.length); // 3 (0~2)
+
+                5.陣列中的元素可以是任意的數據類型
+                    var arr4 = ["hello",1,true,null,undefined];
+                    console.log(arr4); // Array(5) [ "hello", 1, true, null, undefined ]
+                    console.log(arr4[3]); // null
+
+                    - 可以是物件
+                        var obj = {name:"三星堆"};
+                        arr4[arr4.length] = obj;
+
+                        console.log(arr4);
+                        // Array(5) [ "hello", 1, true, null, undefined ]
+
+                        console.log(arr4[5]); // Object { name: "三星堆" }
+                        console.log(arr4[5].name); // "三星堆"
+
+                        arr4 = [{name:"三星堆"},{name:"光頭強"},{name:"DL"}]
+                        console.log(arr4);
+                        // Array(3) [ {name:"三星堆"}, {name:"光頭強"}, {name:"DL"} ]
+
+                        console.log(arr4[2]); // Object { name: "DL" }
+                        console.log(arr4[2].name); // "DL"
+
+                    - 可以是函數
+                        arr4 = [function(){console.log(true)},function(){console.log(false)}];
+                        console.log(arr4);
+                        // Array [ function(){console.log(true)},function(){console.log(false)}]
+
+                        arr4[0](); // 調用函數 => true
+                        arr4[1](); // 調用函數 => false
+
+                    - 陣列中也可以放陣列，如下這種陣列稱為二維陣列，若二維陣列中在放陣列，
+                      則稱為三維陣列，以此類推，但不常用。
+                        arr4 = [[1,2,3],[4,5,6],[7,8,9]];
+
+                         console.log(arr4);
+                        // Array(3) [ Array(3)[1,2,3], Array(3) [4,5,6], Array(3) [7,8,9] ]
+                        console.log(arr4[0]); // Array(3)[1,2,3]
+
+        */
+
+        // 字面量創建陣列
+        var arr = [1,2,3,4,10,20];
+        console.log(arr.length); // 6 (0~5)
+        console.log(arr); //  Array(6) [ 1, 2, 3, 4, 10, 20 ]
+        console.log(arr[3]); // 4
+
+        // 使用構造函數創建陣列並同時添加元素
+        var arr1 = new Array(10,20,30);
+        console.log(arr1); // Array(3) [ 10, 20, 30 ]
+
+        // 字面量創建只有一個元素的陣列時，表示該陣列只有一個元素
+        var arr2 = [10];
+        console.log(arr2); // Array [ 10 ]
+        console.log(arr2.length); // 1
+
+        // 構造函數創建只有一個元素的陣列時，表示的是創建一個長度為3的陣列
+        var arr3 = new Array(3);
+        console.log(arr3);  // Array(3) [ , , ]
+        console.log(arr3.length); // 3 (0~2)
+
+        // 陣列中的元素可以是任意的數據類型
+        var arr4 = ["hello",1,true,null,undefined];
+        console.log(arr4);  // Array(5) [ "hello", 1, true, null, undefined ]
+        console.log(arr4[3]); // null
+
+        // 可以是物件
+        var obj = {name:"三星堆"};
+        arr4[arr4.length] = obj;
+
+        console.log(arr4);
+        // Array(6) [ "hello", 1, true, null, undefined, Object { name: "三星堆" } ]
+        console.log(arr4[5]); // Object { name: "三星堆" }
+        console.log(arr4[5].name); // "三星堆"
+
+        arr4 = [{name:"三星堆"},{name:"光頭強"},{name:"DL"}];
+        console.log(arr4);
+        // Array(3) [ {name:"三星堆"}, {name:"光頭強"}, {name:"DL"} ]
+
+        console.log(arr4[2]); // Object { name: "DL" }
+        console.log(arr4[2].name); // "DL"
+
+
+        //可以是函數
+        arr4 = [function(){console.log(true)},function(){console.log(false)}];
+        console.log(arr4);
+        // Array [ function(){console.log(true)},function(){console.log(false)}]
+
+        arr4[0](); // 調用函數 => true
+        arr4[1](); // 調用函數 => false
+
+
+        // 陣列中也可以放陣列
+        arr4 = [[1,2,3],[4,5,6],[7,8,9]];
+        console.log(arr4);
+        // Array(3) [ Array(3)[1,2,3], Array(3) [4,5,6], Array(3) [7,8,9] ]
+        console.log(arr4[0]); //  Array(3)[1,2,3]
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

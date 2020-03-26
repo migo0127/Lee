@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>內建物件：Array</title>
+    <script>
+        /*
+            物件分為：
+                1.內建物件：EX標準定義的物件。
+                2.宿主物件：瀏覽器定義的物件。
+                3.自定義物件：開發者自行定義的物件。
+
+            1.內建物件：
+                Array(陣列、數組)：
+                    - 陣列也是一個物件。
+                    - 它和普通物件功能類似，也是用來存儲一些值的。
+                    - 不同的是普通物件是使用字符串作為屬性名，而陣列是使用數字作為
+                      索引來操作元素。
+                        - 索引(index)：
+                            - 從0開始的整數就是索引。
+                    - 陣列的存儲性能比普通物件要好，在開發中經常使用陣列來存儲一些數據。
+                    - 創建陣列物件：
+
+                            var arr = new Array();
+
+                            console.log(arr); // "" 空的陣列物件
+
+                    - 使用typeof檢查一個陣列時，會返回object
+
+                            console.log(typeof arr); // object
+
+                    - 向陣列中添加元素：
+                        - 語法：陣列[索引] = 值;
+
+                        arr[0] = 10;
+                        arr[1] = 20;
+                        arr[2] = 30;
+
+                    - 讀取陣列中的元素：
+                        - 語法：陣列[索引];
+                        - 如果讀取不存在的索引時，不會報錯而是返回undefined。
+
+                        console.log(arr[0]); // 10
+                        console.log(arr[1]); // 20
+                        console.log(arr[100]); // undefined
+
+                    - 獲取陣列的長度(元素的個數)：
+                        - 可以使用length屬性來獲取陣列的長度。
+                        - 語法：陣列.length
+
+                        console.log(arr.length); // 3 (0~2)
+
+                        - 對於「連續」的陣列使用length可以獲取到陣列的長度(元素的個數)。
+                        - 對於「非連續」的陣列使用length會獲取到陣列的最大索引+1，且對於
+                          非連續的索引會使用,隔開顯示，導致占用空間，故盡量不要創建非連續
+                          的陣列。
+
+                        arr[0] = 10;
+                        arr[1] = 20;
+                        arr[2] = 30;
+                        arr[10] = 50;
+                        arr[20] = 100;
+
+                        console.log(arr.length);
+                        // 21 (20+1)，且[2]~[10]~[20]中的空值會用,隔開表示，占用空間，不推。
+                        // 10,20,30,,,,,,,50,,,,,,,,,100
+
+                    - 修改length：
+                        - 如果修改的length大於原長度，則多出來的部份會空出來。
+                        - 如果修改的length小於原長度，則多出來的元素會被刪除。
+                        var arr1 = new Aeeay();
+
+                        arr1[0] = 10;
+                        arr1[1] = 20;
+                        arr1[2] = 30;
+
+                        console.log(arr1.length); // 3 (0~2)
+                        console.log(arr1); // 10,20,30
+
+                        arr1.length = 5;
+                        console.log(arr1.length); // 10,20,30,,
+
+                        arr1.length = 2;
+                        console.log(arr1.length); // 10,20
+
+                    - 向陣列的最候后一個位置添加元素：
+                        - 語法：陣列[陣列length] = 值;
+
+                        arr1[0] = 10;
+                        arr1[1] = 20;
+                        arr1[2] = 30;
+                        arr1[3] = 30;
+
+                        console.log(arr1.length); // 4 (0~3)
+                        console.log(arr1); // 10,20,30,30
+
+                        arr1[arr1.length] = 40;
+
+                        console.log(arr1.length); // 5 (0~4)
+                        console.log(arr1); // 10,20,30,30,40
+        */
+
+        // 創建一個陣列：
+        var arr = new Array();
+
+        console.log(arr); // "" 空的陣列物件
+        console.log(typeof arr); // object
+
+        // 向陣列添加值
+        arr[0] = 10;
+        arr[1] = 20;
+        arr[2] = 30;
+
+        console.log(arr); // Array(3) [ 10, 20, 30 ]
+
+        // 讀取陣列的值
+        console.log(arr[0]); // 10
+        console.log(arr[2]); // 30
+
+        // 獲取陣列的長度 length
+        console.log(arr.length); // 3 (0~2)
+
+        // 修改陣列的長度 length
+        arr.length = 5;
+        console.log(arr); // Array(5) [ 10, 20, 30, , ]
+        console.log(arr.length); // 5 (0~4)
+
+        arr.length = 2;
+        console.log(arr); // Array [ 10, 20 ]
+        console.log(arr.length); // 2 (0~1)
+
+        // 向陣列最後一個位置添加值
+        arr[arr.length] = 55;
+        console.log(arr); // Array(3) [ 10, 20, 55 ]
+        console.log(arr.length); // 3 (0~2)
+
+        arr[arr.length] = 75;
+        console.log(arr); // Array(4) [ 10, 20, 55, 75 ]
+        console.log(arr.length); // 4 (0~3)
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

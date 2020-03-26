@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>toString</title>
+    <script>
+        /*
+            當我們直接在頁面中打印一個物件時，實際上是輸出物件的toSring()方法的返回值，
+            如果我們希望再輸出物件時不輸出[object Object]，可以為物件添加一個toString()
+            方法。
+
+            - 例：
+                function Persone(name,age,gender){
+                    this.name = name;
+                    this.age = age;
+                    this.gender = gender;
+                }
+
+                var per = new Person("三星堆",5200,"謎樣");
+
+                console.log(per);
+                // Person {name: "三星堆", age: 5200, gender: "謎樣"}
+
+                console.log(per.toString());  // [object Object]
+
+            - 若希望輸出為 Person [name=三星堆, age=5200, gender=謎樣]
+                Person.prototype.toString = function(){
+                   return "Person[name="+this.name+",age="+this.age+",gender="+this.gender+"]";
+                };
+                var result = per.toString();
+                console.log(result); // Person[name=三星堆,age=5200,gender=謎樣]
+        */
+
+        //
+        function Person(name,age,gender){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+
+        var per = new Person("三星堆",5200,"謎樣");
+        console.log(per); // Person {name: "三星堆", age: 5200, gender: "謎樣"}
+        console.log(per.toString());  // [object Object]
+
+        console.log(Person.toString());
+        /* function Person(name,age,gender){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+        */
+
+        console.log(per.__proto__.hasOwnProperty("toString")); // fasle
+        console.log(per.__proto__.__proto__.hasOwnProperty("toString")); // true
+
+        /*
+        若希望輸出為 Person [name=三星堆, age=5200, gender=謎樣]
+        */
+        Person.prototype.toString = function(){
+            return "Person[name="+this.name+",age="+this.age+",gender="+this.gender+"]";
+        };
+        var result = per.toString();
+        console.log(result); // Person[name=三星堆,age=5200,gender=謎樣]
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

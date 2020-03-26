@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array的四種常用方法</title>
+    <script>
+    /*
+        array的四種常用方法：
+
+            1.push()：
+                - push()方法可以向陣列的末尾添加一個或多個元素，並返回陣列的新的長度。
+                - 可以將要添加的元素作為方法的參數傳遞，這樣這些元素就會自動添加到陣
+                  列的末尾。
+                - push()會將陣列的新長度作為返回值返回，故需要一個變量接收返回值。
+                - 例：
+                    創建一個陣列
+                    var arr = ["三星堆","光頭強"];
+                    console.log(arr);  // Array [ "三星堆", "光頭強" ]
+
+                    arr.push("DL");
+                    console.log(arr);  //Array(3) [ "三星堆", "光頭強", "DL" ]
+                    console.log(arr.length); // 3
+
+                    var result = arr.push("絨絨","大龙");
+
+                    console.log(arr);
+                    // Array(5) [ "三星堆", "光頭強", "DL", "絨絨" , "大龙"]
+                    console.log("result = "+result); // "result = 5"
+
+            2.pop()：
+                - pop()方法可以刪除陣列的最後一個元素，並將被刪除的元素作為返回值返回。
+                - 例：
+                    console.log(arr);
+                    // Array(5) [ "三星堆", "光頭強", "DL", "絨絨" , "大龙"]
+
+                    arr.pop();
+
+                    console.log(arr);
+                    // Array(4) [ "三星堆", "光頭強", "DL", "絨絨" ]
+
+                    result = arr.pop();
+                    console.log(arr); // Array(3) [ "三星堆", "光頭強", "DL" ]
+                    console.log("result = "+result); // "result = 絨絨 "
+
+                    arr.pop();
+                    result = arr.pop();
+                    console.log(arr); // Array(1) [ "三星堆"]
+                    console.log("result = "+result); // "result = 光頭強 "
+
+            3.unshift()：
+                - 向陣列開頭添加一個或多個元素，並返回新的陣列長度。
+                - 向開頭插入元素以後，其它元素的索引會依次調整。
+                - 例：
+                    console.log(arr); // Array(1) [ "三星堆"]
+
+                    arr.unshift("貓貓","龙哥");
+                    console.log(arr); // Array(3) [ "貓貓", "龙哥", "三星堆" ]
+                    console.log(arr.length); // 3
+                    console.log(arr[1]); // "龙哥"
+
+                    result = arr.unshift("大龙哥");
+                    console.log(arr);
+                    // Array(4) [ "大龙哥", "貓貓", "龙哥", "三星堆" ]
+                    console.log("result = "+result); // "result = 4"
+                    console.log(arr[1]); // "貓貓"
+
+            4.shift()：
+                - 可以刪除陣列的第一個元素，並將被刪除的元素作為返回值返回。
+
+            ※ psuh()、unshift()：尾端/前端，新增一個或多個元素，返回的值是新的長度。
+            ※ pop()、shift()：尾端/前端，刪除最後一個或第一個元素，返回的是被刪除的元素值。
+
+    */
+
+    // 創建一個陣列
+    var arr = ["三星堆","光頭強"];
+
+    console.log(arr);  // Array [ "三星堆", "光頭強" ]
+
+    // push()：向陣列末尾添加一個或多個元素，並返回陣列的新的長度
+    arr.push("DL");
+
+    console.log(arr);  //Array(3) [ "三星堆", "光頭強", "DL" ]
+    console.log(arr.length); // 3
+
+    var result = arr.push("絨絨","大龙");
+
+    console.log(arr); // Array(5) [ "三星堆", "光頭強", "DL", "絨絨" , "大龙"]
+    console.log("result = "+result); // "result = 5"
+
+
+    // pop()：可以刪除陣列的最後一個元素，並將被刪除的元素作為返回值返回。
+    console.log(arr);
+    // Array(5) [ "三星堆", "光頭強", "DL", "絨絨" , "大龙"]
+
+    arr.pop();
+
+    console.log(arr);
+    // Array(4) [ "三星堆", "光頭強", "DL", "絨絨" ]
+
+    result = arr.pop();
+    console.log(arr); // Array(3) [ "三星堆", "光頭強", "DL" ]
+    console.log("result = "+result); // "result = 絨絨 "
+
+    arr.pop();
+    result = arr.pop();
+    console.log(arr); // Array(1) [ "三星堆"]
+    console.log("result = "+result); // "result = 光頭強 "
+
+
+    // unshift()：向陣列開頭添加一個或多個元素，並返回新的陣列長度
+    console.log(arr); // Array(1) [ "三星堆"]
+
+    arr.unshift("貓貓","龙哥");
+    console.log(arr); // Array(3) [ "貓貓", "龙哥", "三星堆" ]
+    console.log(arr.length); // 3
+    console.log(arr[1]); // "龙哥"
+
+    result = arr.unshift("大龙哥");
+    console.log(arr);
+    // Array(4) [ "大龙哥", "貓貓", "龙哥", "三星堆" ]
+    console.log("result = "+result); // "result = 4"
+    console.log(arr[1]); // "貓貓"
+
+
+    // shift()：可以刪除陣列的第一個元素，並將被刪除的元素作為返回值返回
+    console.log(arr);
+    // Array(4) [ "大龙哥", "貓貓", "龙哥", "三星堆" ]
+    console.log(arr.length); // 4
+
+    arr.shift();
+    console.log(arr);
+    // Array(3) [ "貓貓", "龙哥", "三星堆" ]
+
+    result = arr.shift();
+    console.log(arr);
+    // Array [ "龙哥", "三星堆" ]
+    console.log("result = "+result);  // "result = 貓貓 "
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

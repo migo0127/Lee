@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prototype_2</title>
+    <script>
+        /*
+            prototype原型檢查方式：
+                1.in：
+                    - 使用「in」檢查物件中是否含有某個屬性時，如果物件中沒有但原型中有，
+                      也會返回true。
+                2. hasOwnProperty()：
+                    - 可以使用物件的「hasOwnProperty("屬性")」來檢查物件自身中是否含有該
+                      屬性。
+                    - 使用該方法只有當前物件自身含有該屬性時，才會返回true。
+
+                - 例一：
+                    function MyClass(){
+
+                    }
+
+                    MyClass.prototype.name = "我是原型中的name";
+
+                    var mc = new MyClass();
+                    console.log(mc.name); // "我是原型中的name"
+
+                    使用「in」檢查是否有name屬性
+                    console.log("name" in mc); // true
+
+                    使用「hasOwnProperty()」檢查是否有name屬性
+                    console.log(mc.hasOwnProperty("name")); // flase
+
+                    使用「hasOwnProperty()」來檢查mc自身是否有hasOwnProperty屬性
+                    console.log(mc.hasOwnProperty("hasOwnProperty")); // false
+
+                3. 原型物件也是物件，所以它也有原型。
+
+                    ※※ 搭配圖文說明。
+                    E:\Programming\Front-end engineer\Lee\2.JavaScript\img\57.__proto__2\__proto__的原型.jpg
+
+                    - 當我們使用一個物件的屬性或方法時，會先在自身中尋找，自身中如果有則
+                      直接使用，如果沒有則去原型物件中尋找，如果原型物件中有，則直接使用
+                      ，如果沒有則再去原型物件的原型中尋找，直到找到Object物件的原型，
+                      Object物件的原型沒有另一個原型，如果在Object中依然沒有找到，則
+                      返回undefined。
+
+                    使用「hasOwnProperty()」來檢查mc指向的原型中是否有hasOwnProperty屬性
+                    console.log(mc.__proto__.hasOwnProperty("hasOwnProperty")); // false
+
+                    使用「hasOwnProperty()」來檢查mc指向的原型的原型中是否有
+                    hasOwnProperty屬性
+                    console.log(mc.__proto__.__proto__.hasOwnProperty("hasOwnProperty"));
+                    // true
+
+                    mc指向的原型物件(Object)的原型(Object物件的原型)的原型，該Object物件的原型是否存在
+                    console.log(mc.__proto__.__proto__.__proto__);  // null 不存在 (空)
+                                    ↓          ↓              ↓
+                            mc指向的原型   指向的原型的原型   指向的原型的原型的原型
+                             (Object)       (Object的原型)     (Object的原型的原型)
+
+        */
+        function MyClass(){
+
+        }
+
+        MyClass.prototype.name = "我是原型中的name";
+
+        var mc = new MyClass();
+        console.log(mc.name); // "我是原型中的name"
+
+        /*
+        使用「in」檢查物件中是否含有某個屬性時，如果物件中沒有但原型中有，
+        也會返回true。
+        */
+        console.log("name" in mc); // true
+
+        /*
+        使用物件的「hasOwnProperty("屬性")」來檢查物件自身中是否含有該屬性。
+        */
+        console.log(mc.hasOwnProperty("name")); // flase
+
+        /*
+        使用「hasOwnProperty()」來檢查mc指向的原型中是否有hasOwnProperty屬性
+        */
+        console.log(mc.__proto__.hasOwnProperty("hasOwnProperty")); // false
+
+        /*
+        使用「hasOwnProperty()」來檢查mc指向的原型的原型中是否有hasOwnProperty屬性
+        */
+        console.log(mc.__proto__.__proto__.hasOwnProperty("hasOwnProperty"));
+        // true
+
+        /*
+        mc指向的原型物件是否存在
+        */
+        console.log(mc.__proto__); // Object { name: "我是原型中的name", … }
+
+        /*
+        mc指向的原型物件的原型，該原型物件的原型是否存在
+        */
+        console.log(mc.__proto__.__proto__); // Object{}
+
+        /*
+        mc指向的原型物件的原型，該原型物件的原型的原型是否存在
+        */
+        console.log(mc.__proto__.__proto__.__proto__);
+        // null 該原型不存在 (空)
+
+        /*
+        先檢查mc自身是否有該屬性，沒有則向指向的原型(Object)尋找，指向的原型也沒有，
+        則往指向的原型的原型(Object原型)找，若都沒有則返回undefined
+        */
+        console.log(mc.age); // undefined
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

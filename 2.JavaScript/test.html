@@ -3,10 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>工廠函數vs構造函數</title>
+    <title>test</title>
     <script>
+        var obj = {
+            name:"三星堆",
+            age:5200
+        };
 
-     
+        var obj2 = {
+            name:"光頭強",
+            age:18
+        };
+
+        var obj3 = {
+            name:"絨絨",
+            age:8
+        };
+
+        var obj4 = {
+            name:"DL",
+            age:29
+        }
+
+        // console.log(obj);
+        // console.log(obj2);
+        // console.log(obj3);
+
+        var arr = [obj,obj2,obj3,obj4];
+
+        function getAdult(arr){
+            var newArr = [];
+            for(i=0;i<arr.length;i++){
+                if(arr[i].age >= 18){
+                    newArr.push(arr[i]);
+                }
+            }
+
+            return newArr;
+        }
+
+        var result = new getAdult(arr);
+        console.log(result);
+
 
     </script>
 

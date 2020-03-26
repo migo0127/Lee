@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array練習_2</title>
+    <script>
+        /*
+            去除陣列中重覆的數字
+        */
+        var arr = [1,2,3,2,2,1,3,4,2,5];
+
+        for(i = 0 ; i < arr.length ; i++){
+            console.log("i = "+arr[i]);
+            for(j = i+1 ; j < arr.length ; j++){
+                console.log("j -->"+arr[j]);
+            }
+        }
+
+
+        // 獲取當前所有元素
+        for(i = 0 ; i < arr.length ; i++ ){
+            // 獲取當前元素後的所有元素
+            for(j = i+1 ; j < arr.length ; j++ ){
+                // 判斷兩個元素的值是否相等
+                if(arr[i] == arr[j]){
+                    // 如果相等，表示j為重覆值，刪除j對應的元素
+                    arr.splice(j,1);
+                    /*
+                    當刪除了當前j所在的元素(index=3,j=2)後，後邊的所有元素(如原本index=4
+                    ,元素=2)被影響到，造成全部自動往前補一位(原index=4,元素=2，自動補位成index=3,元素=2)，而此時index=3的位置已經比較過了，後補位的元素就會因
+                    此沒被比較到，所以需要再一次比較被刪除元素的所在位置上的新元素。
+                    */
+                }
+            }
+        }
+        console.log(arr); // Array(6) [ 1, 2, 3, 2, 4, 5 ]
+
+
+        // 獲取當前所有元素
+        for(i = 0 ; i < arr.length ; i++ ){
+            // 獲取當前元素後的所有元素
+            for(j = i+1 ; j < arr.length ; j++ ){
+                // 判斷兩個元素的值是否相等
+                if(arr[i] == arr[j]){
+                    // 如果相等，表示j為重覆值，刪除j對應的元素
+                    arr.splice(j,1);
+                    /*
+                    當刪除了當前j所在的元素(index=3,j=2)後，後邊的所有元素(如原本index=4
+                    ,元素=2)被影響到，造成全部自動往前補一位(原index=4,元素=2，自動補位成index=3,元素=2)，而此時index=3的位置已經比較過了，後補位的元素就會因
+                    此沒被比較到，所以需要再一次比較被刪除元素的所在位置上的新元素。
+                    */
+                   // 使j自減1，返回for循環時j++，再自加1，恢復成同值再比一次該位置上的值
+                   j--;
+                }
+            }
+        }
+        console.log(arr); // Array(5) [ 1, 2, 3, 4, 5 ]
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

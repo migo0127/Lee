@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prototype原型</title>
+    <script>
+        /*
+            構造函數的修改_2：
+                function Person1(name,age){
+                    this.name = name;
+                    this.age = age;
+                    this.sayName = fun;
+                }
+
+                function fun(){
+                        console.log("你好，我是"+this.name);
+                }
+
+                - 將函數定義在全局作用域中，污染了全局作用域的命名空間，而且定義在全
+                  局作用域中也很不安全(fun()容易被覆蓋)。
+
+            原型 prototype：
+                - 我們所創建的每一個函數，解析器(瀏覽器)都會向函數中添加一個隱藏屬性
+                  prototype，這個屬性對應著一個物件，這個物件就是我們所謂的原型物件。
+                - 如果函數作為普通函數調用時，prototype就沒有任何作用。
+                - 如果函數通過構造函數調用時，它所創建的物件中都會有一個隱含的屬性，
+                  指向該構造函數的原型物件，可以通過「__proto__」來訪問該屬性。
+
+                - 例一：
+
+                    ※※ 配合圖文說明
+                    E:\Programming\Front-end engineer\Lee\2.JavaScript\img\56.__proto__\__proto__.jpg
+
+                    function MyClass(){
+
+                    }
+
+                    var me = new MyClass();
+                    var me2 = new MyClass();
+
+                    console.log(me.prototype == MyClass.prototype);  // flase
+                    console.log(me.__proto__ == MyClass.prototype); // true
+                    console.log(me2.__proto__ == me3.__proto__); // true
+                    console.log(me2.__proto__ == MyClass.prototype); // true
+
+                    MyClass.prototype.a = 123;
+
+                    console.log(me.a); // 123
+                    console.log(me.a == MyClass.prototype.a); // true
+
+                    function MyPerson(){
+
+                    }
+
+                    console.log(MyClass.prototype == Person.prototype); // false
+
+                - 原型物件就相當於一個公共區域，所有同一個構造函數的類的實例都可以訪問到
+                  這個原型物件，我們可以將物件中共有的內容統一設置到原型物件中。
+                - 當我們訪問物件的一個屬性或方法時，它會先在物件自身中尋找，如果有則直接
+                  使用，如果沒有則會去原型物件中尋找，如果找到則直接使用。
+                - 例二：
+
+                    向MyClass的原型中添加屬性a
+                    MyClass.prototype.a = "我是MyClass.prototype中的a";
+
+                    向me中添加a屬性
+                    me.a = "我是mc中的a";
+
+                    console.log(me.a); // 我是mc中的a
+                    console.log(MyClass.prototype.a); // 我是MyClass.prototype中的a
+                    console.log(me3.a); // 我是MyClass.prototype中的a
+                    console.log(me3.__proto__.a);  // 我是MyClass.prototype中的a
+                    console.log(MyClass.a); // undefined
+
+                - 例三：
+                    function MyClass(name,age,gender){
+                        this.name = name;
+                        this.age = age;
+                        this.gender = gender;
+                    }
+
+                    向MyClass的原型中添加一個方法
+                    MyClass.prototype.sayName = function(){
+                        console.log("你好"+"我是"+this.name+"~"+"今年"+this.age+"~"+"性別："+this.age);
+                    }
+
+                    var a = new MyClass("三星堆",5200,"謎樣");
+                    console.log(a.name); // 三星堆
+                    a.sayName(); // 你好我是三星堆~今年5200~性別：5200
+                    MyClass.prototype.sayName(); // 你好我是undefined~今年undefined~性別：undefined
+
+                    var b = new MyClass("光頭強",18,"男");
+                    console.log(b.name); // 光頭強
+                    b.sayName(); // 你好我是光頭強~今年18~性別：18
+
+                    console.log(a.__proto__ == b.__proto__); // true
+                    console.log(a.__proto__ == MyClass.prototype); // true
+
+                - 以後我們創建構造函數時，可以將這些物件共有的屬性和方法，統一添加到構造
+                  函數的原型物件中，這樣不用分別為每一個物件添家，也不會影響到全局作用域
+                  ，就可以使每個物件都具有這些屬性和方法了。
+        */
+
+        function MyClass(){
+
+        }
+
+        var me = new MyClass();
+        var me2 = new MyClass();
+        var me3 = new MyClass();
+
+        console.log(MyClass.prototype == me.prototype); // false
+        console.log(MyClass.prototype == me.__proto__); // true
+        console.log(me2.__proto__ == me3.__proto__); // true
+        console.log(me2.__proto__ == MyClass.prototype); // true
+
+        MyClass.prototype.a = 123;
+        me.a = 456;
+
+        console.log(me.a); // 456
+        console.log(MyClass.prototype.a); // 123
+        console.log(me3.a);
+        console.log(me3.__proto__.a);  // 123
+        console.log(MyClass.a); // undefined
+
+        function Person(name,age,gender){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+
+        Person.prototype.sayName = function(){
+            console.log("你好"+"我是"+this.name+"~"+"今年"+this.age+"~"+"性別："+this.age);
+        }
+
+        var a = new Person("三星堆",5200,"謎樣");
+        console.log(a.name); // 三星堆
+        a.sayName(); // 你好我是三星堆~今年5200~性別：5200
+        Person.prototype.sayName(); // 你好我是undefined~今年undefined~性別：undefined
+
+
+        var b = new Person("光頭強",18,"男");
+        console.log(b.name); // 光頭強
+        b.sayName(); // 你好我是光頭強~今年18~性別：18
+
+        console.log(a.__proto__ == b.__proto__); // true
+        console.log(a.__proto__ == Person.prototype); // true
+
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>

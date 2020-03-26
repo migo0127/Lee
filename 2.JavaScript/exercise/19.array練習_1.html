@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array練習_1</title>
+    <script>
+
+        function Person(name,age){
+            this.name = name;
+            this.age = age;
+        }
+
+        Person.prototype.toString = function(){
+            return "Person[name = "+this.name+",age = "+this.age+"]";
+        }
+
+        var per = new Person("三星堆",5200);
+        // console.log(per);
+        // Object { name: "三星堆", age: 5200 }
+
+        // console.log(per.toString);
+        // function(){return "Person[name = "+this.name+",age = "+this.age+"]";}
+
+        // console.log(per.toString());
+        // Person[name = 三星堆,age = 5200]
+
+        var per = new Person("三星堆",5200);
+        var per2 = new Person("光頭強",18);
+        var per3 = new Person("DL",29);
+        var per4 = new Person("大龙",30);
+        var per5 = new Person("絨絨",8);
+
+        // 將這些per~5 物件放入一個陣列中
+        var perArr = [per,per2,per3,per4,per5];
+        // console.log(perArr[0]);
+         // Object { name: "三星堆", age: 5200 }
+        //  console.log(perArr[0].toString());
+         // Person[name = 三星堆,age = 5200]
+
+        /*
+            創建一個函數，可以將perArr中的滿18歲的person提取出來，然後封裝到一個新
+            的陣列中並返回。
+
+            函數的arr為形參，要提取信息的陣列
+        */
+
+        function getAdult(arr){
+            // 建立一個新的陣列
+            var newArr = [];
+
+            // 遍歷arr，獲取arr中所有per~5物件
+            for( i = 0 ; i < arr.length ; i++){
+                // 判斷per~5物件的age是否大於等於18
+                if(arr[i].age >= 18){
+                    // 如果大於等於18，則將這個物件添加到neaArr中
+                    newArr.push(arr[i]);
+                }
+            }
+            // 將新的陣列返回
+            return newArr;
+        }
+
+        var result = new getAdult(perArr);
+        console.log(result);
+        /*
+        Array(3)[Person {name: "三星堆", age: 5200},Person {name: "光頭強", age: 18},Person {name: "DL", age: 29}],Person {name: "大龙", age: 30}]
+        */
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
