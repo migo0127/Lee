@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math</title>
+    <script>
+        /*
+            物件分為：
+                1.內建物件：EX標準定義的物件。
+                2.宿主物件：瀏覽器定義的物件。
+                3.自定義物件：開發者自行定義的物件。
+
+            1.內建物件：
+                Math：
+                    - Math和其它物件不同，它不是一個構造函數，它屬於一個工具類，
+                      不用創建物件，它裡面封裝了數學運算相關的屬性和方法。
+                    - 比如：
+                        - 屬性：(可自行查詢其他屬性)
+                             Math.PI：表示圓周率
+                             console.log(Math.PI);  // 3.141592653589793
+
+                        - 方法：(以下幾個為常用的Math方法)
+                            1.Math.abs()：
+                                - 可以用來計算一個數的絕對值。
+                                - 例：
+                                    console.log(Math.abs(5)); // 5
+                                    console.log(Math.abs(-5)); // 5
+
+                            2.Math.ceil()：
+                                - 無條件進位，小數位自動進 1。
+                                - 例：
+                                    console.log(Math.ceil(0.1)); // 1
+                                    console.log(Math.ceil(0.11)); // 1
+                                    console.log(Math.ceil(0.15)); // 1
+                                    console.log(Math.ceil(1.19)); // 2
+
+                            3.Math.floor()：
+                                - 無條件捨去，小數位自動捨去。
+                                - 例：
+                                    console.log(Math.floor(0.1)); // 0
+                                    console.log(Math.floor(0.11)); // 0
+                                    console.log(Math.floor(0.15)); // 0
+                                    console.log(Math.floor(1.19)); // 1
+
+                            4.Math.round()：
+                                - 四捨五入。
+                                -例：
+                                    console.log(Math.round(0.1)); // 0
+                                    console.log(Math.round(0.11)); // 0
+                                    console.log(Math.round(0.15)); // 0
+                                    console.log(Math.round(1.9)); // 2
+
+                        ※※5.Math.random()：
+                                - 可以用來生成一個 0-1 之間的隨機數 (不包含0、1)。
+                                    - 語法：
+                                        console.log(Math.random());
+                                        
+                                    - 例：
+                                        for( i = 0 ; i < 5 ; i++){
+                                            console.log(Math.random());
+                                        }
+                                        // 0.6894015049199507
+                                        // 0.03990591339625016
+                                        // 0.022731541302864722
+                                        // 0.0019734404691688745
+                                        // 0.08862393413976419
+                                - 生成一個 0-10 的隨機數，並包含 0、10。
+                                - 生成一個 0-X 之間的隨機數，並包含 0、X。
+                                    - 語法：
+                                        console.log(Math.round(Math.random()*X));
+
+                                    - 例：0-10
+                                        for( i = 0 ; i < 5 ; i++){
+                                            console.log(Math.round(Math.random()*10));
+                                        }
+                                        // 9 5 0 6 5
+
+                                    - 例：0-20
+                                        for( i = 0 ; i < 5 ; i++){
+                                            console.log(Math.round(Math.random()*20));
+                                        }
+                                        // 11 13 17 19 20
+
+                                - 生成一個 1-10 的隨機數，並包含1、10。
+                                - 生成一個 x-y 之間的隨機數，並包含 x、y。
+                                    - 語法：
+                                    console.log(Math.round(Math.random()*y-x)+x);
+
+                                    - 例：1-10
+                                        for( i = 0 ; i < 5 ; i++){
+                                            console.log(Math.round(Math.random()*9)+1);
+                                        }
+                                        // 10 1 6 7 4
+
+                                    -例：生成一個 x-y 之間的隨機數，(11-25)
+                                        for( i = 0 ; i < 5 ; i++){
+                                            console.log(Math.round(Math.random()*14)+11);
+                                        }
+                                        // 13 21 12 19 20
+         */
+
+         // Math的屬性：
+         // Math.PI：圓周率
+         console.log(Math.PI);  // 3.141592653589793
+
+         // Math的方法：
+         // 1.Math.abs()：可以用來計算一個數的絕對值。
+         console.log(Math.abs(5)); // 5
+         console.log(Math.abs(-5)); // 5
+
+        // 2.Math.ceil()：無條件進位，小數位自動進 1。
+        console.log(Math.ceil(0.1)); // 1
+        console.log(Math.ceil(0.11)); // 1
+        console.log(Math.ceil(0.15)); // 1
+        console.log(Math.ceil(1.19)); // 2
+
+        // 3.Math.floor()：無條件捨去，小數位自動捨去。
+        console.log(Math.floor(0.1)); // 0
+        console.log(Math.floor(0.11)); // 0
+        console.log(Math.floor(0.15)); // 0
+        console.log(Math.floor(1.19)); // 1
+
+        //  4.Math.round()：四捨五入。
+        console.log(Math.round(0.1)); // 0
+        console.log(Math.round(0.11)); // 0
+        console.log(Math.round(0.15)); // 0
+        console.log(Math.round(1.9)); // 2
+
+        // 5.Math.random()：可以用來生成一個 0-1 之間的隨機數 (不包含0、1)。
+        for( i = 0 ; i < 5 ; i++){
+            console.log(Math.random());
+        }
+        // 0.6894015049199507
+        // 0.0.3990591339625016
+        // 0.0.22731541302864722
+        // 0.0.019734404691688745
+        // 0.0.8862393413976419
+
+        // 5.Math.random()：生成一個 0-10 的隨機數，並包含 0、10。
+        for( i = 0 ; i < 5 ; i++){
+            console.log(Math.round(Math.random()*10));
+        }
+        // 9 5 0 6 5
+
+        // 5.Math.random()：生成一個 0-20 的隨機數，並包含 0、20。
+        for( i = 0 ; i < 5 ; i++){
+            console.log(Math.round(Math.random()*20));
+        }
+        // 11 13 17 19 20
+
+        // 5.Math.random()：生成一個 1-10 的隨機數，並包含 1、10。
+        for( i = 0 ; i < 5 ; i++){
+            console.log(Math.round(Math.random()*9)+1);
+        }
+        // 10 1 6 7 4
+
+        // 5.Math.random()：生成一個 x-y 之間的隨機數，(11-25)
+        for( i = 0 ; i < 5 ; i++){
+            console.log(Math.round(Math.random()*14)+11);
+        }
+        // 13 21 12 19 20
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

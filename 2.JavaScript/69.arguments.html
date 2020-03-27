@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arguments</title>
+    <script>
+        /*
+            在調用函數時，瀏覽器每次都會傳遞進兩個隱含的參數：
+                1.函數的下上文物件 this。
+                2.封裝實參的物件 arguments。
+                    - arguments是一個類陣列物件(類似陣列，但不是陣列)，它也可以通過
+                      索引來操作數據，也可以獲取長度。
+                    - 在調用函數時，我們所傳遞的實參都會在arguments中保存。
+                    - arguments.length 可以用來獲取實參的長度(實參的個數)。
+                    - 我們即使不定義形參，也可以通過arguments來使用實參，只不過比較
+                      麻煩。
+                        arguments[0]：表示第一個實參
+                        arguments[1]：表示第二個實參...以此類推
+                    - arguments中有一個屬性「callee」，這個屬性對應著一個函數物件，
+                      就是當前正在執行的函數物件。
+                    - 例：
+         */
+
+         // arguments
+         function fun(){
+             console.log(arguments instanceof Array); // 檢查 arguments 是否為陣列
+             console.log(Array.isArray(arguments)); // 檢查 arguments 是否為陣列
+             // false => arguments 類似陣列，但不是陣列
+
+             console.log(arguments.length);
+             // 0 ，fun()沒有傳遞實參，所以實參長度為0
+
+             console.log(arguments.callee);
+             /* 當前正在執行的函數物件
+                fun(){
+                console.log(arguments instanceof Array); // 檢查 arguments 是否為陣列
+                console.log(Array.isArray(arguments)); // 檢查 arguments 是否為陣列
+                // false => arguments 類似陣列，但不…
+              */
+         }
+         fun();
+
+         function fun2(){
+            console.log(arguments.length);
+            // 3 => fun2(10,20,30);  實參長度為3，與形參無關
+
+            console.log(arguments[0]);  // 10
+            console.log(arguments[2]);  // 30
+            // arguments可以直接使用實參，就算函數未定義形參，只是比較麻煩
+
+         }
+         fun2(10,20,30);
+
+         function fun3(a,b){
+            console.log(arguments.length);
+            // 3 => fun2(10,20,30);  實參長度為3，與形參無關
+
+            console.log(arguments[0]);  // 10
+            console.log(arguments[2]);  // 30
+            // 若函數有定義形參，arguments一樣可以直接使用實參
+
+         }
+         fun2(10,20,30);
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

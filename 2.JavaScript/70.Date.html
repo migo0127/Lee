@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>內建物件：Date()</title>
+    <script>
+        /*
+            物件分為：
+                1.內建物件：EX標準定義的物件。
+                2.宿主物件：瀏覽器定義的物件。
+                3.自定義物件：開發者自行定義的物件。
+
+            1.內建物件：
+                Date()：
+                    - 在JS中使用Date物件來表示一個時間。
+                    - 如果直接使用構造函數創建一個Date()物件，則會封裝為當前代碼執行的時間。
+                    - 語法：
+                        var d = new Date();
+
+                        console.log(d); // 每次執行都會紀錄當次執行的時間，有區域性
+                        // Fri Mar 27 2020 13:38:57 GMT+0800 (台北標準時間)
+
+                    - 創建一個指定的時間物件：
+                        - 需要在構造函數中傳遞一個表示時間的字符串作為參數。
+                        - 日期格式： 月/日/年 時:分:秒
+                        var d2 = new Date("3/27/2020 13:40:00");
+
+                    - Date的各種方法：
+                        1.getDate()：
+                            - 獲取當前時間物件為幾號(1~31)。
+                            - 例：
+                                var d2 = new Date("3/27/2020 13:40:00");
+
+                                var date = d2.getDate();
+                                console.log(date); // 27 (27號)
+
+                        2.getDay()：
+                            - 獲取當前時間物件為星期幾。
+                            - 會返回一個 0-6的值。
+                                0：表示星期日
+                                1：表示星期一...以此類推
+                            - 例：
+                                var d2 = new Date("3/27/2020 13:40:00");
+
+                                var day = d2.getDay();
+                                console.log(day); // 5 (星期五)
+
+                        3.getMonth()：
+                            - 獲取當前時間物件的月份。
+                            - 會返回一個 0-11 的值。
+                                0：表示 1 月份
+                                1：表示 2 月份
+                                11：表示 12月份
+                            - 例：
+                                var d2 = new Date("3/27/2020 13:40:00");
+
+                                var month = d2.getMonth();
+                                console.log(month); // 2 (三月份、0-11)
+
+
+                        4.getFullYear()：
+                            - 獲取當前時間物件的年份。
+                            - 例：
+                                var d2 = new Date("3/27/2020 13:40:00");
+
+                                var year = d2.getFullYear();
+                                console.log(year); // 2202
+
+                        5.getHours()：
+                            - 獲取當前時間物件為幾時(時針，0-23)。
+                            - 例：
+                                var d2 = new Date("3/27/2020 13:40:00");
+
+                                var hours = d2.getHours();
+                                console.log(hours); // 13
+
+                        6.getMinutes()：
+                            - 獲取當前時間物件為幾分(分鐘，0~59)。
+                            - 例：
+                                var d2 = new Date("3/27/2020 13:40:00");
+
+                                var minutes = d2.getMinutes();
+                                console.log(minutes); // 40
+
+                        7.getSeconds()：
+                            - 獲取當前時間物件為幾秒(秒數，0~59)。
+                            - 例：
+                                var d2 = new Date("3/27/2020 13:40:00");
+
+                                var seconds = d2.getSeconds();
+                                console.log(seconds); // 0
+
+                        8.getMilliseconds()：
+                            - 獲取當前時間物件為幾毫秒。
+                            - 例：
+                                var d2 = new Date("3/27/2020 13:40:00");
+
+                                var milliseconds = d2.getMilliseconds();
+                                console.log(milliseconds); // 0
+
+                    ※  9.getTime()：
+                            - 獲取當前時間物件的時間戳。
+                            - 時間戳：指的是從格林威治標準時間的1970年1月1日，0時0分0秒
+                              到當前時間物件所花費的毫秒數(1秒 = 1000毫秒)。
+                            - 例：
+
+
+         */
+
+        // 創建一個時間物件，有時區性
+        var d = new Date();
+
+        console.log(d); // Fri Mar 27 2020 13:38:57 GMT+0800 (台北標準時間)
+
+        // 創建一個指定的時間物件，有時區性
+        var d2 = new Date("3/27/2020 13:40:00");
+        console.log(d2);
+        // Fri Mar 27 2020 13:40:00 GMT+0800 (台北標準時間)
+
+
+        // Date()的各別方法：
+        // 1.getDate()：獲取當前時間物件中的幾號
+        var d2 = new Date("3/27/2020 13:40:00");
+
+        var date = d2.getDate();
+        console.log(date); // 27 (27號)
+
+        //2.getDay()：獲取當前時間物件為星期幾(0-6)。
+        var d2 = new Date("3/27/2020 13:40:00");
+
+        var day = d2.getDay();
+        console.log(day); // 5 (星期五)
+
+        //3.getMonth()：獲取當前時間物件的月份 (0-11)。
+        var d2 = new Date("3/27/2020 13:40:00");
+
+        var month = d2.getMonth();
+        console.log(month); // 2 (三月份、0-11)
+
+        //4.getFullYear()：獲取當前時間物件的年份。
+        var d2 = new Date("3/27/2020 13:40:00");
+
+        var year = d2.getFullYear();
+        console.log(year); // 2202
+
+        //5.getHours()：獲取當前時間物件為幾時(時針，0-23)。
+        var d2 = new Date("3/27/2020 13:40:00");
+
+        var hours = d2.getHours();
+        console.log(hours); // 13
+
+        //6.getMinutes()：獲取當前時間物件為幾分(分鐘，0~59)。
+        var d2 = new Date("3/27/2020 13:40:00");
+
+        var minutes = d2.getMinutes();
+        console.log(minutes); // 40
+
+        //7.getSeconds()：獲取當前時間物件為幾秒(秒數，0~59)。
+        var d2 = new Date("3/27/2020 13:40:00");
+
+        var seconds = d2.getSeconds();
+        console.log(seconds); // 0
+
+        //8.getMilliseconds()：獲取當前時間物件為幾毫秒。
+        var d2 = new Date("3/27/2020 13:40:00");
+
+        var milliseconds = d2.getMilliseconds();
+        console.log(milliseconds); // 0
+
+        //9.getTime()：獲取當前時間物件的時間戳(毫秒)。
+        var d2 = new Date("3/27/2020 13:40:00");
+
+        var time = d2.getTime();
+        console.log(time); // 1585287600000 (毫秒)
+        console.log(time/1000); // 換算成秒數 => 1585287600
+        console.log(time/1000/60); // 換算成分鐘數 => 26421460
+        console.log(time/1000/60/60); // 換算成時數 => 440357.6666666667
+        console.log(time/1000/60/60/24); // 換算成天數 => 3016.148401826484
+        console.log(time/1000/60/60/24/365); // 換算成年數 => 50.269140030441406
+
+        var d3 = new Date("1/1/1970 0:0:0"); // 指定時間物件
+
+        time = d3.getTime(); // 換算時間戳
+        console.log(time);
+        // -28800000，依照時區換算，台北早格林威治8小時，所以是-毫秒，
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

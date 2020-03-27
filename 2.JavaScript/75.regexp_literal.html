@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegExp_literal</title>
+    <script>
+        /*
+            使用字面量來創建正則表達式：
+                - 語法： var 變量 = /正則表達式/匹配模式
+                ※ 字面量創建的正則表達式參數 不需用字符串方式書寫
+
+                ※ 使用字面量的方式創建正則表達式更加簡單，但是使用構造函數創建正則表式
+                   更加靈活(後續補充說明)。
+
+                - 例：
+                    // 構造函數創建正則表達式
+                    var reg = new RegExp("a","i");
+
+                    console.log(reg); //  /a/i
+                    console.log(typeof reg);  // object
+
+                    // 字面量創建正則表達式
+                    var reg2 = /a/i;
+
+                    console.log(reg2); //  /a/i
+                    console.log(typeof reg2); // object
+
+                - 使用方式：
+                    1.「|」：表示 或 的意思，[] == 「|」。
+                        - 例：
+                            var reg3 = /a|b/;
+
+                            console.log(reg3.test("avv")); // true
+                            console.log(reg3.test("cdv")); // false
+                    2.[]：[]里的內容也是 或 的關係，[] == 「|」。
+                            var reg3 = /[ab]/;
+
+                            console.log(reg3.test("avv")); // true
+                            console.log(reg3.test("cdv")); // false
+
+                    3.[a-z]：任意小寫字母。
+                    4.[A-Z]：任意大寫字母。
+                    5.[A-z]：任意大小寫字母。
+                        - 例：
+                            var reg3 = /[a-z]/;
+
+                            console.log(reg3.test("avv")); // true
+                            console.log(reg3.test("cBi")); // true
+                            console.log(reg3.test("AVD")); // false
+
+                            var reg3 = /[A-Z]/;
+
+                            console.log(reg3.test("avv")); // false
+                            console.log(reg3.test("cBi")); // true
+                            console.log(reg3.test("AVD")); // true
+
+                            var reg3 = /[A-z]/;
+
+                            console.log(reg3.test("avv")); // true
+                            console.log(reg3.test("cBi")); // true
+                            console.log(reg3.test("AVD")); // true
+
+                            // 檢查一個字符串中是否含有abc 或 adc 或 aec
+                            var reg3 = /a[bde]c/;
+                            // 以a開頭中間+隨意一個小寫[bde]+c結尾
+
+                            console.log(reg3.test("abc")); // true
+                            console.log(reg3.test("aBc")); // false
+                            console.log(reg3.test("AEC")); // false
+
+                    6.[^ ]：除了....外是否還有其他字符串。
+                        - 例：
+                            reg3 = /[^ab]/;  // 除了a或b外是否還有其他字符串
+
+                            console.log(reg3.test("ab")); // false
+                            console.log(reg3.test("b")); // false
+                            console.log(reg3.test("AB")); // true
+                            console.log(reg3.test("avd")); // true
+                            console.log(reg3.test("bvd")); // true
+                            console.log(reg3.test("cf")); // true
+
+                    7.[0-9]：任意數字。
+                        - 例：
+                            reg3 = /[0-9]/; // 是否有 0-9 任意數字
+
+                            console.log(reg3.test("ab")); // false
+                            console.log(reg3.test("123b")); // true
+                            console.log(reg3.test("A9B")); // true
+                            console.log(reg3.test("cAB")); // false
+
+                    8.[^0-9]：除了0-9(任意數字)外，是否還有其他字符串。
+                        - 例：
+
+
+        */
+        // 構造函數創建正則表達式
+        var reg = new RegExp("a","i");
+
+        console.log(reg); //  /a/i
+        console.log(typeof reg);  // object
+        // 字面量創建正則表達式
+        var reg2 = /a/i;
+
+        console.log(reg2); //  /a/i
+        console.log(typeof reg2); // object
+
+
+        // 創建一個正則表達式來檢查一個字符串中是否含有 a 或 b
+        // 1.「|」：表示 或 的意思。
+        var reg3 = /a|b/;
+
+        console.log(reg3.test("avv")); // true
+        console.log(reg3.test("cdv")); // false
+
+        // 2.使用[]：[]里的內容也是 或 的關係，與「|」相同。
+        reg3 = /[ab]/;
+
+        console.log(reg3.test("avv")); // true
+        console.log(reg3.test("cdv")); // false
+
+        // 3.[a-z]：任意小寫字母。
+        // 4.[A-Z]：任意大寫字母。
+        // 5.[A-z]：任意大小寫字母。
+        reg3 = /[a-z]/;
+
+        console.log(reg3.test("avv")); // true
+        console.log(reg3.test("cBi")); // true
+        console.log(reg3.test("AVD")); // false
+
+        reg3 = /[A-Z]/;
+
+        console.log(reg3.test("avv")); // false
+        console.log(reg3.test("cBi")); // true
+        console.log(reg3.test("AVD")); // true
+
+        reg3 = /[A-z]/;
+
+        console.log(reg3.test("avv")); // true
+        console.log(reg3.test("cBi")); // true
+        console.log(reg3.test("AVD")); // true
+
+        // 檢查一個字符串中是否含有abc 或 adc 或 aec
+        reg3 = /a[bde]c/;
+        // 以a開頭中間+隨意一個小寫[bde]+c結尾
+
+        console.log(reg3.test("abc")); // true
+        console.log(reg3.test("aBc")); // false
+        console.log(reg3.test("AEC")); // false
+
+
+        // 6.[^ ]：除了....外是否還有其他字符串。
+        reg3 = /[^ab]/;  // 除了a或b外是否還有其他字符串
+
+        console.log(reg3.test("ab")); // false
+        console.log(reg3.test("b")); // false
+        console.log(reg3.test("AB")); // true
+        console.log(reg3.test("avd")); // true
+        console.log(reg3.test("bvd")); // true
+        console.log(reg3.test("cf")); // true
+
+
+        //  7.[0-9]：任意數字。
+        reg3 = /[0-9]/; // 是否有 0-9 任意數字
+
+        console.log(reg3.test("ab")); // false
+        console.log(reg3.test("123b")); // true
+        console.log(reg3.test("A9B")); // true
+        console.log(reg3.test("cAB")); // false
+
+
+        // 8.[^0-9]：除了0-9(任意數字)外，是否還有其他字符串。
+        reg3 = /[^0-9]/; // 除了0-9(任意數字)外，是否還有其他字符串。
+
+        console.log(reg3.test("598")); // false
+        console.log(reg3.test("123b")); // true
+        console.log(reg3.test("A9B")); // true
+        console.log(reg3.test("cAB")); // true
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

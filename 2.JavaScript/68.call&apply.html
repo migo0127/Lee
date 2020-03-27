@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call() & apply()</title>
+    <script>
+        /*
+            call()和apply()：
+                - 這兩個方法都是函數物件的方法，需要通過函數物件來調用。
+                - 當函數調用call()和apply()都會調用函數執行。
+                - 在調用call()和apply()可以將一個物件指定為第一個參數，此時這個物
+                  件將會成為函數執行時的this。
+                - 例：
+                    function fun(){
+                        console.log(this.name);
+                    }
+
+                    var obj ={
+                        name:"三星堆",
+                        age:5200
+                    }
+
+                    var obj2 = {
+                        name:"光頭強",
+                        age:18
+                    }
+
+                - call()方法可以在第一個參數(物件)之后，再將實參依次傳遞。
+                    - 語法：
+                        函數.call(物件參數,形參1,形參2);
+                    - 例：
+                    function fun(a,b){
+                        console.log("a = "+a);
+                        console.log("b = "+b);
+                        console.log(this.name);
+                    }
+
+                    var obj ={
+                        name:"DL",
+                        age:29,
+                        sayName:fun
+                    }
+
+                    var obj2 = {
+                        name:"貓貓",
+                        age:8,
+                        sayName:fun
+                    }
+
+                    fun.call(obj); // 僅傳遞第一個物件參數，沒有傳遞實參給a、b(形參)
+                    //a = undefined 、  b = undefined 、 "DL"
+
+                    fun.call(obj2,"貓次方",520);
+                    // "a = 貓次方"
+                    // b = 520
+                    // this.name == obj2.name => "貓貓"
+
+                    fun.call("美成18歲",18);
+                    // 僅傳遞兩個參數，第一個仍傳遞物件參數，第二個傳遞a形參
+                    // a = 18
+                    // b = undefined
+                    // this.name == undefined
+
+                    fun.call("","絨絨",28);
+                    // "a = 絨絨"
+                    // b = 28
+                    // this.name == undefined
+
+                    // fun.call(,"美成18歲",18);
+                    // 第一個物件參數空著，會跳出錯誤。
+
+                - apply()方法需要將實參封裝到一個陣列中統一傳遞。
+                    - 語法：
+                        函數.apply(物件參數,[形參1,形參2]);
+                    -例：
+                        function fun(a,b){
+                        console.log("a = "+a);
+                        console.log("b = "+b);
+                        console.log(this.name);
+                        }
+
+                        var obj ={
+                            name:"絨絨",
+                            age:19,
+                            sayName:fun
+                        }
+
+                        var obj2 = {
+                            name:"大龙",
+                            age:29,
+                            sayName:fun
+                        }
+
+                        // fun.apply(obj,520,1314);
+                        // 使用apply()傳遞實參時，若沒有使用陣列方式統一傳遞會跳錯誤
+                        // Uncaught TypeError: CreateListFromArrayLike called on non-object
+
+                        fun.apply(obj2,[520,1314]);
+                        // a = 520
+                        // b = 1314
+                        // this.name == obj2.name => "大龙"
+
+                        fun.apply(obj,["hin好",]);
+                        // "a = hin好"
+                        // b = undefined
+                        // this.name == obj.name => "絨絨"
+
+                        fun.apply(["V道",]);
+                        // a = undefined
+                        // b = undefined
+                        // this.name = "V道".name => undefined
+
+                        fun.apply(obj,["V道",,"??"]);
+                        // "a = V道"
+                        // b = undefined
+                        // this.name == obj.name => "絨絨"
+
+            ※※ this的情況：
+                    1.以函數形式調用時，this永遠是window。
+                    2.以方法的形式調用時，this是調用方法的物件。
+                    3.以構造函數的形式調用時，this是新創件的那個物件。
+                    4.使用call()和apply()調用時，this是指定的那個物件。
+        */
+
+        function fun(){
+            console.log(this.name);
+        }
+
+        var obj ={
+            name:"三星堆",
+            age:5200,
+            sayName:fun
+        }
+
+        var obj2 = {
+            name:"光頭強",
+            age:18,
+            sayName:fun
+        }
+
+        // 使用函數調用時，this是window
+        fun(); // this.name == window.name  => <empty string>
+
+        // 使用物件形式調用時，this就是調用的物件
+        obj.sayName();
+        // this.name == obj.name  => "三星堆"
+
+        obj2.sayName();
+        // this.name == obj2.name  => "光頭強"
+
+        /* call()和apply()：在調用call()和apply()可以將一個物件指定為第一個參數
+        ，此時這個物件將會成為函數執行時的this。
+        */
+        fun.call(obj);
+        // this.name == obj.name  => "三星堆"
+
+        fun.apply(obj2);
+        // this.name == obj2.name  => "光頭強"
+
+        obj.sayName.call(obj2);
+        // this.name == obj2.name  => "光頭強"
+
+
+
+        // call()：可以在第一個參數(物件)之后，將實參依次傳遞。
+        function fun(a,b){
+            console.log("a = "+a);
+            console.log("b = "+b);
+            console.log(this.name);
+        }
+
+        var obj ={
+            name:"DL",
+            age:29,
+            sayName:fun
+        }
+
+        var obj2 = {
+            name:"貓貓",
+            age:8,
+            sayName:fun
+        }
+
+        fun.call(obj); // 僅傳遞第一個物件參數，沒有傳遞實參給a、b(形參)
+        //a = undefined 、  b = undefined 、 "DL"
+
+        fun.call(obj2,"貓次方",520);
+        // "a = 貓次方"
+        // b = 520
+        // this.name == obj2.name => "貓貓"
+
+        fun.call("美成18歲",18);
+        // 僅傳遞兩個參數，第一個仍傳遞物件參數，第二個傳遞a形參
+        // a = 18
+        // b = undefined
+        // this.name == undefined
+
+        fun.call("","絨絨",28);
+        // "a = 絨絨"
+        // b = 28
+        // this.name == "美成18歲".name => undefined
+
+        // fun.call(,"美成18歲",18);
+        // 第一個物件參數空著，會跳出錯誤。
+
+
+        // apply()方法需要將實參封裝到一個陣列中統一傳遞。
+        function fun(a,b){
+            console.log("a = "+a);
+            console.log("b = "+b);
+            console.log(this.name);
+        }
+
+        var obj ={
+            name:"絨絨",
+            age:19,
+            sayName:fun
+        }
+
+        var obj2 = {
+            name:"大龙",
+            age:29,
+            sayName:fun
+        }
+
+        // fun.apply(obj,520,1314);
+        // 使用apply()傳遞實參時，若沒有使用陣列方式統一傳遞會跳錯誤
+        // Uncaught TypeError: CreateListFromArrayLike called on non-object
+
+        fun.apply(obj2,[520,1314]);
+        // a = 520
+        // b = 1314
+        // this.name == obj2.name => "大龙"
+
+        fun.apply(obj,["hin好",]);
+        // "a = hin好"
+        // b = undefined
+        // this.name == obj.name => "絨絨"
+
+        fun.apply(["V道",]);
+        // a = undefined
+        // b = undefined
+        // this.name = "V道".name => undefined
+
+        fun.apply(obj,["V道",,"??"]);
+        // "a = V道"
+        // b = undefined
+        // this.name == obj.name => "絨絨"
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

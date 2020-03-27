@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正則表達式：Regular Expression</title>
+    <script>
+        /*
+            正則表達式：
+                - 用於定義一些字符串的規則。
+                - 計算機可以根據正則表達式來檢查一個字符串是否符合規則
+                  (ex：輸入的e-mail格式)，或者將字符串符合規則的內容提取出來。
+                - 語法：
+                    var 變量 = new RegExp("正則表達式","匹配模式");
+                    ※ 兩個參數都必須是使用字符串""框起。
+
+                    - 例：
+                        創建正則表達式：
+                        var reg = new RegExp("a"); // 正則表達式 = "a"
+
+                        console.log(reg);
+                        // 正則表達式的輸出會由 / / 框起 =>  /a/
+                        console.log(typeof reg); // object
+
+                    - 匹配模式：
+                        - 在構造函數中可以傳遞一個匹配模式作為第二個參數。
+                        - 參數可以是：
+                            i：表示忽略大小寫。
+                            g：全局匹配模式(後續補充)。
+
+                    - 例：
+                        var reg = new RegExp("a","i");
+                        // 正則表達式 = "a"，匹配模式 = "i"(忽略大小寫)
+
+
+                - 正則表達式的方法：
+                    test()：
+                        - 使用test()方法可以來檢查一個字符串是否符合正則表達式的規則，
+                          如果符合則返回true，返之false。
+
+                        - 例：
+                            var reg = new RegExp("a");
+                            // 這個表達式可以用來檢查一個字符串中是否含有a，不管位置
+
+                            var str = "a";
+                            var result = reg.test(str);
+                            console.log(result); // true
+
+                            var str = "b";
+                            result = reg.test(str);
+                            console.log(result); // false
+
+                            var str = "bca";
+                            result = reg.test(str);
+                            console.log(result); // true
+
+                            var str = "A";
+                            result = reg.test(str);
+                            console.log(result);
+                            // false => 未寫第二個參數，故嚴格區分大小寫
+
+
+                            // 添加匹配模式參數：
+                                var reg = new RegExp("a","i");
+                                // 正則表達式 = "a"，匹配模式 = "i"(忽略大小寫)
+
+                                var str = "A";
+                                result = reg.test(str);
+                                console.log(result); // true
+
+                                var str = "bba";
+                                result = reg.test(str);
+                                console.log(result); // true
+
+                                var str = "bsc";
+                                result = reg.test(str);
+                                console.log(result); // false
+
+
+                                var reg = new RegExp("ab","i");
+
+                                var str = "absc";
+                                result = reg.test(str);
+                                console.log(result); // true
+
+                                var str = "acbsc";
+                                result = reg.test(str);
+                                console.log(result); // false
+
+                                var str = "aBcbsc";
+                                result = reg.test(str);
+                                console.log(result); // true
+
+        */
+
+        // 創建正則表達式：
+        var reg = new RegExp("a"); // 正則表達式 = "a"
+
+        console.log(reg);
+        // 正則表達式的輸出會由 / / 框起 =>  /a/
+        console.log(typeof reg); // object
+
+
+        // test()：正則表達式的方法，用來檢查一個字符串是否符合正則表達式的規則。
+        var reg = new RegExp("a");
+        // 這個表達式可以用來檢查一個字符串中是否含有a，不管位置
+
+        var str = "a";
+        var result = reg.test(str);
+        console.log(result); // true
+
+        var str = "b";
+        result = reg.test(str);
+        console.log(result); // false
+
+        var str = "bca";
+        result = reg.test(str);
+        console.log(result); // true
+
+        var str = "A";
+        result = reg.test(str);
+        console.log(result);
+        // false => 未寫第二個參數(匹配模式)，故嚴格區分大小寫
+
+        // 添加匹配模式參數：
+        var reg = new RegExp("a","i");
+        // 正則表達式 = "a"，匹配模式 = "i"(忽略大小寫)
+
+        var str = "A";
+        result = reg.test(str);
+        console.log(result); // true
+
+        var str = "bba";
+        result = reg.test(str);
+        console.log(result); // true
+
+        var str = "bsc";
+        result = reg.test(str);
+        console.log(result); // false
+
+
+        var reg = new RegExp("ab","i");
+
+        var str = "absc";
+        result = reg.test(str);
+        console.log(result); // true
+
+        var str = "acbsc";
+        result = reg.test(str);
+        console.log(result); // false
+
+        var str = "aBcbsc";
+        result = reg.test(str);
+        console.log(result); // true
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>包裝類(packaging)</title>
+    <script>
+        /*
+            基本數據類型(5種)：
+             String、Number、Boolean、Null、Undfined。
+
+            引用(複合)數據類型：
+                Object。
+
+             - 在JS中為「瀏覽器」提供了三個包裝類(Packaging)，通過這三個包裝類
+               可以將基本數據類型的數據轉換為物件，但開發者不這麼使用。
+            ※   1.String()：
+                    - 可以將基本數據類型字符串轉換為String物件。
+                    - 例：
+                        var str = new String("hello");
+
+                        console.log(typeof str); // object
+
+                2.Number()：
+                    - 可以將基本數據類型數字轉換為Number物件。
+                    - 例：
+                        var num = new Number(123);
+
+                        console.log(typeof num); // object
+
+                3.Boolean()：
+                    - 可以將基本數據類型布爾值轉換為Boolean物件。
+                    - 例：
+                        var bool = new Boolean(true);
+
+                        console.log(typeof bool); // object
+
+            ※ 注意：
+                在實際應用中不會使用基本數據類型的物件，如果使用基本數據類型的
+                物件做一些比較時，可能會帶來一些不可預期的結果。
+                - 例：
+                    var bool = new Boolean(true);
+                    var a = true;
+
+                    console.log( a == bool); // true
+                    // => bool 被強制轉換為布爾值，object轉換為布爾值都是ture
+
+
+            - 方法和屬性只能添加給物件，不能添加給基本數據類型，當我們對一些基
+              本數據類型的值去調用屬性和方法時，瀏覽器會臨時使用包裝類將其轉換
+              為物件，然後在調用物件的屬性和方法，調用完以後，在將其轉換為基本
+              數據類型返回值，並立即銷毀該臨時物件。
+                - 例：
+                    var s = 123; // 基本數據類型 - Number類型
+
+                    s = s.toString(); // 臨時調用方法，將Number類型臨時轉換為物件
+
+                    s.hello = "你好"; // 再其臨時物件中添加屬性
+
+                    consoel.log(s.hello);
+                    console.log(typeof s);
+
+        */
+        var bool = new Boolean(true);
+        var a = true;
+
+        console.log( a == bool); // true
+        // => bool 被強制轉換為布爾值，object轉換為布爾值都是ture
+
+        console.log( a === bool); // false
+        // a = 基本數據類型 Boolean 、 bool = object ，類型不同
+
+
+
+        var s = 123; // 基本數據類型 - Number類型
+
+        s = s.toString(); // 臨時調用方法，將Number類型臨時轉換為物件
+
+        s.hello = "你好"; // 再其臨時物件中添加屬性
+
+        console.log(s.hello);
+        // undefined => 因該物件為臨時物件，瀏覽器調用完後就立即銷毀該臨時物件
+
+        console.log(typeof s);
+        // string => 轉換為臨時物件調用後在轉換為基本數據類型返回
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
