@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>regexp_1</title>
+    <script>
+        /* 
+        regExp的量詞：
+            - 通過量詞可以設置一個內容出現的次數。
+            - 量詞只對它前邊的一個內容起作用。
+
+                1.{n} 正好出現n次。
+                    - 例：
+                        var reg = /a{3}/;
+                        console.log(reg.test("a"));  // false
+                        console.log(reg.test("aba")); // false
+                        console.log(reg.test("a123a")); // false
+                        console.log(reg.test("aaa")); // true
+                        console.log(reg.test("aaa123")); // true
+
+                        reg = /ab{3}c/;
+                        console.log(reg.test("ababab")); // false
+                        console.log(reg.test("abbab")); // false
+                        console.log(reg.test("ab12bab")); // false
+                        console.log(reg.test("abbbab")); // false
+                        console.log(reg.test("bbbb")); // false        
+                        console.log(reg.test("abbbbc")); // false
+                        console.log(reg.test("abbbc")); // true
+
+                        reg = /b{3}/;
+                        console.log(reg.test("abba")); // false        
+                        console.log(reg.test("bbcbba")); // false
+                        console.log(reg.test("abbba")); // true
+                        console.log(reg.test("bbbb")); // true
+                        console.log(reg.test("bbbba")); // true
+                
+                2.{m,n}：出現 m-n 次。
+                    - 例：
+                        reg = /ab{1,3}c/;
+                        console.log(reg.test("abc")); // true
+                        console.log(reg.test("abbc")); // true
+                        console.log(reg.test("abbbc")); // true
+                        console.log(reg.test("abbbbc")); // false
+                
+                3.{m,}：出現 m 次以上。
+                    - 例：
+                       reg = /ab{2,}c/;
+                        console.log(reg.test("abc")); // false
+                        console.log(reg.test("abbc")); // true
+                        console.log(reg.test("abbbc")); // true
+                        console.log(reg.test("abbbbbbbc")); // true
+                        console.log(reg.test("abbbbbbbcc")); // true
+                        console.log(reg.test("aabbbbbbbcc")); // true
+                        console.log(reg.test("aababbbbbbcc")); // true 
+
+                4.「+」：至少一個，相當於{1,}。
+                    - 例：
+                        reg = /ab+c/;
+                        console.log(reg.test("ac")); // false
+                        console.log(reg.test("acbc")); // false 
+                        console.log(reg.test("acabc")); // true 
+                        console.log(reg.test("acabbbbc")); // true 
+
+                5.「*」：0個或多個，相當於{0,}。
+                    - 例：
+                        reg = /ab*c/;
+                        console.log(reg.test("ac")); // true
+                        console.log(reg.test("abc")); // true
+                        console.log(reg.test("abbbc")); // true
+                        console.log(reg.test("ababbc")); // true
+                        console.log(reg.test("abababc")); // true
+
+                6.「?」：0個或1個，相當於{0,1}。
+                    - 例：
+                        reg = /ab?c/;
+                        console.log(reg.test("ac")); // true
+                        console.log(reg.test("abc")); // true
+                        console.log(reg.test("abbc")); // false
+                        console.log(reg.test("ababc")); // true
+                        console.log(reg.test("ababbc")); // false
+
+                7.「^」：表示開頭，與[^ ]不同。
+                    - 例：
+                        reg = /^a/; // 表示檢查是否以a開頭的字符串
+                        console.log(reg.test("abc")); // true
+                        console.log(reg.test("aaabc")); // true
+                        console.log(reg.test("12aaabc")); // false
+
+                8.「$」：表示結尾。
+                    - 例：
+                        reg = /abc$/; // 表示檢查是否以c結尾的字符串
+                        console.log(reg.test("ab")); // false
+                        console.log(reg.test("asfsaabca")); // false
+                        console.log(reg.test("aabcaa")); // false
+                        console.log(reg.test("aadbc")); // false
+                        console.log(reg.test("54aabc")); // true
+
+                    ※ 注意：如果在正則表達式中同時使用「^」與「$」，
+                       則要求字符串必須完全符合正則表達式。
+                        reg = /^a$/;
+                        console.log(reg.test("aaa")); // false
+                        console.log(reg.test("aaba")); // false
+                        console.log(reg.test("aba")); // false
+                        console.log(reg.test("a")); // true
+
+                - 實例：創建一個正則表達式，用來檢查一個字符串是否是一個
+                  手機號？
+                    解法：
+                        確認手機號的規則(10位)：
+                            1.第一位以0開頭 => ^0
+                            2.第二位為數字 9 => 9{1}
+                            3.第三至八位為任意數字，共8位 => [0-9]{8}$
+
+                        ※ 依以上規則創建一個正則表達式：
+                            reg = /^09{1}[0-9]{8}$/;
+                            console.log(reg.test("0911234567")); // true
+                            console.log(reg.test("0811234567")); // false
+                            console.log(reg.test("1911234567")); // false
+                            console.log(reg.test("091123456799")); // false
+                            console.log(reg.test("0911234")); // false
+
+
+        */
+
+        // regExp的量詞：
+        // 1.{n}：正好出現n次。
+        var reg = /a{3}/;
+        console.log(reg.test("a"));  // false
+        console.log(reg.test("aba")); // false
+        console.log(reg.test("a123a")); // false
+        console.log(reg.test("aaa")); // true
+        console.log(reg.test("aaa123")); // true
+
+        reg = /ab{3}c/;
+        console.log(reg.test("ababab")); // false
+        console.log(reg.test("abbab")); // false
+        console.log(reg.test("ab12bab")); // false
+        console.log(reg.test("abbbab")); // false
+        console.log(reg.test("bbbb")); // false        
+        console.log(reg.test("abbbbc")); // false
+        console.log(reg.test("abbbc")); // true
+
+        reg = /b{3}/;
+        console.log(reg.test("abba")); // false        
+        console.log(reg.test("bbcbba")); // false
+        console.log(reg.test("abbba")); // true
+        console.log(reg.test("bbbb")); // true
+        console.log(reg.test("bbbba")); // true
+        
+
+        // 2.{m,n}：出現 m-n 次。
+        reg = /ab{1,3}c/;
+        console.log(reg.test("abc")); // true
+        console.log(reg.test("abbc")); // true
+        console.log(reg.test("abbbc")); // true
+        console.log(reg.test("abbbbc")); // false
+
+        // 3.{m,}：出現 m 次以上。
+        reg = /ab{2,}c/;
+        console.log(reg.test("abc")); // false
+        console.log(reg.test("abbc")); // true
+        console.log(reg.test("abbbc")); // true
+        console.log(reg.test("abbbbbbbc")); // true
+        console.log(reg.test("abbbbbbbcc")); // true
+        console.log(reg.test("aabbbbbbbcc")); // true
+        console.log(reg.test("aababbbbbbcc")); // true
+
+        // 4.「+」：至少一個，相當於{1,}。
+        reg = /ab+c/;
+        console.log(reg.test("ac")); // false
+        console.log(reg.test("acbc")); // false 
+        console.log(reg.test("acabc")); // true 
+        console.log(reg.test("acabbbbc")); // true 
+
+        // 5.「*」：0個或多個，相當於{0,}。
+        reg = /ab*c/;
+        console.log(reg.test("ac")); // true
+        console.log(reg.test("abc")); // true
+        console.log(reg.test("abbbc")); // true
+        console.log(reg.test("ababbc")); // true
+        console.log(reg.test("abababc")); // true
+
+        // 6.「?」：0個或1個，相當於{0,1}。
+        reg = /ab?c/;
+        console.log(reg.test("ac")); // true
+        console.log(reg.test("abc")); // true
+        console.log(reg.test("abbc")); // false
+        console.log(reg.test("ababc")); // true
+        console.log(reg.test("ababbc")); // false
+
+        // 7.「^」：表示開頭，與[^ ]不同。
+        reg = /^a/; // 表示檢查是否以a開頭的字符串
+        console.log(reg.test("abc")); // true
+        console.log(reg.test("aaabc")); // true
+        console.log(reg.test("12aaabc")); // false
+
+        //  8.「$」：表示結尾。
+        reg = /abc$/; // 表示檢查是否以c結尾的字符串
+        console.log(reg.test("ab")); // false
+        console.log(reg.test("asfsaabca")); // false
+        console.log(reg.test("aabcaa")); // false
+        console.log(reg.test("aadbc")); // false
+        console.log(reg.test("54aabc")); // true
+
+        // ※ 注意：如果在正則表達式中同時使用「^」與「$」，則要求字符串必須完全符合正則表達式。
+        reg = /^a$/;
+        console.log(reg.test("aaa")); // false
+        console.log(reg.test("aaba")); // false
+        console.log(reg.test("aba")); // false
+        console.log(reg.test("a")); // true
+
+        // 實例：創建一個正則表達式，用來檢查一個字符串是否是一個手機號？
+        reg = /^09{1}[0-9]{8}$/;
+        console.log(reg.test("0911234567")); // true
+        console.log(reg.test("0811234567")); // false
+        console.log(reg.test("1911234567")); // false
+        console.log(reg.test("091123456799")); // false
+        console.log(reg.test("0911234")); // false
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件(event)</title>
+</head>
+<body>
+    <!--
+        我們可以在事件對應的屬性中設置一些js代碼，這樣當事件被觸發時，這些代碼將會執行。
+         - 例：
+            <button id="btn" onclik="alert('討厭，你點我幹嘛！');">我是一個按鈕</button>
+
+            ※ 這種寫法我們稱為「結構和行為的藕合」，不方便維護，不推薦使用。
+
+     -->
+     <!-- ※ 這種寫法我們稱為「結構和行為的藕合」，不方便維護，不推薦使用。-->
+     <button id="btn" onclick="alert('討厭，你點我幹嘛！');">我是一個按鈕：結構與行為藕合</button>
+     <br />
+     <br />
+     <button id="btn2">我是第二個按鈕：單擊</button>
+     <br />
+     <br />
+     <button id="btn3">我是第三個按鈕：雙擊</button>
+     <br />
+     <br />
+     <button id="btn4">我是第四個按鈕：鼠標滑入</button>
+
+     <script type="text/javascript">
+         /*
+            事件：就是用戶和瀏覽器之間的交互行為。
+                比如：點擊按鈕、鼠標滑入、關閉視窗、拖曳視窗、改變視窗大小...等。
+
+            可以為按鈕的對應綁定「處理函數」的形式來響應事件，這樣當事件被觸發時，
+            其對應的函數將會被調用。
+         */
+        // 獲取按鈕物件
+        var btn2 = document.getElementById("btn2");
+
+        // 綁定一個單擊事件
+        // 像這種為單擊事件綁定的函數，我們稱為單擊響應函數
+        btn2.onclick = function(){
+            alert("你還點~~~");
+        };
+
+        // 綁定一個雙擊事件
+        var btn3 = document.getElementById("btn3");
+
+        btn3.ondblclick = function(){
+            alert("你又點!!");
+        }
+
+        // 綁定一個鼠標滑入事件
+        var btn4 = document.getElementById("btn4");
+
+        btn4.onmousemove = function(){
+            alert("欠驟喔~~!!");
+        }
+
+     </script>
+
+
+</body>
+</html>

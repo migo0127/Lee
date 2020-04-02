@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM查詢的其他方法</title>
+    <script>
+
+        window.onload = function(){
+        /*
+            DOM查詢的其它方法：
+                1.獲取body標籤：有兩種方式
+                    1.)getElenmentsTagName()：
+                        - 例：
+                            var body = document.getElenmentsByTagName("body")[0];
+                            console.log(body); // <body>...< / body>
+                  ※2.)在document中有一個屬性body，它保存的是body的引用。
+                        - 例：
+                            var body2 = document.body;
+                            console.log(body2); // <body>...< / body>
+
+                2.獲取html標籤：
+                    document.documentElement：保存的是html標籤。
+                        - 例：
+                            var html = document.documentElement;
+                            console.log(html); // <html>...< / html>
+
+                3.獲取全部的標籤：有兩種方式
+                    1.)getElenmentsByTagName("*")：獲取全部的標籤。
+                        - 例：
+                            var all = document.getElementsByTagName("*");
+                            console.log(all.length); // 8
+                            console.log(all);
+                            // HTMLCollection(8) [html, head, meta, meta, title, script, body, script, viewport: meta]
+
+                  ※2.)document.all：獲取全部的標籤。
+                        - 例：
+                            var all2 = document.all;
+                            console.log(all2.length); // 8
+                            console.log(all2);
+                            // HTMLCollection(8) [html, head, meta, meta, title, script, body, script, viewport: meta]
+
+                4.獲取class屬性：有三種方式
+                    - 根據元素的class屬性值查詢一組元素節點物件。
+                    - 有兩種方式：
+                        1.)getElementsByClassName()：可以根據class屬性值獲取一組元素物件，
+                           但此方法不支持IE8及以下的瀏覽器。
+                           - 例：
+                                var box1 = document.getElementsByClassName("box1");
+                                console.log(box1);
+                                // HTMLCollection(3) [div.box1, div.box1, div.box1]
+                                console.log(box1[0]);
+                                // <div class="box1"><div class="box2">bpx2</div></div>
+                                console.log(box1[0].innerHTML);
+                                // <div class="box2">box2</div>
+                                console.log(box1[0].innerText); // box2
+                                console.log(box1.length); // 3
+
+                        2.)document.querySeletor()：
+                            - 需要一個CSS選擇器的字符串作為參數，可以根據該CSS選擇器來查詢
+                              一個元素節點物件。
+                            - 雖然IE8中沒有getElenmentsByClassName()，但是可以使用此方法來
+                              代替使用。
+                            - 使用quertSelector()方法會返回唯一的一個元素，如果滿足條件的元
+                              素有多個，仍只會返回第一個元素。
+                            - 例：
+                                box1 = document.querySelector(".box1");
+                                console.log(box1);
+                                // <div class="box1"><div class="box2">box2</div></div>
+
+                                var box2 = document.querySelector(".box1 > .box2");
+                                console.log(box2); // <div class="box2">box2</div>
+                                console.log(box2.innerHTML); // box2
+
+                        3.)document.querySeletorAll()：
+                            - 此方法與querySelector()用法類似，不同的是它會將符合條件的
+                              元素封裝到一個陣列中返回。
+                            - 即使符合條件的元素只有一個，它也會返回陣列。
+                            - 例：
+                                box1 = document.querySelectorAll(".box1");
+                                console.log(box1); // NodeList(3) [div.box1, div.box1, div.box1]
+                                console.log(box1[0]);
+                                // <div class="box1"><div class="box2">box2</div></div>
+                                console.log(box1[0].innerHTML);
+                                // <div class="box2">box2</div>
+                                console.log(box1.length); // 3
+                                console.log(box1[1].innerText); // box3
+
+        */
+        // 1.獲取body標籤：有兩種方式
+        var body = document.getElementsByTagName("body")[0];
+        console.log(body); // <body>...< / body>
+
+        var body2 = document.body;
+        console.log(body2);  // <body>...< / body>
+
+        // 2.獲取html標籤：
+        var html = document.documentElement;
+        console.log(html); // <html>...< / html>
+
+        // 3.獲取全部的標籤：有兩種方式
+        var all = document.getElementsByTagName("*");
+        console.log(all.length); // 6
+        console.log(all);
+        //HTMLCollection(8) [html, head, meta, meta, title, script, body, script, viewport: meta]
+
+        var all2 = document.all;
+        console.log(all2.length); // 8
+        console.log(all2);
+        //HTMLCollection(8) [html, head, meta, meta, title, script, body, script, viewport: meta]
+
+        // 4.獲取class屬性：有三種方式
+        // 4-1.getElementsByClassName()：不支持IE8及以下瀏覽器。
+        var box1 = document.getElementsByClassName("box1");
+        console.log(box1); // HTMLCollection(3) [div.box1, div.box1, div.box1]
+        console.log(box1[0]); // <div class="box1"><div class="box2">bpx2</div></div>
+        console.log(box1[0].innerHTML); // <div class="box2">box2</div>
+        console.log(box1[0].innerText); // box2
+        console.log(box1.length); // 3
+
+        // 4-2.document.querySelector()：就算滿足多個條件，也只會返回第一個查詢到的元素。
+        box1 = document.querySelector(".box1");
+        console.log(box1);
+        // <div class="box1"><div class="box2">box2</div></div>
+        var box2 = document.querySelector(".box1 > .box2");
+        console.log(box2); // <div class="box2">box2</div>
+        console.log(box2.innerHTML); // box2
+
+
+        // 4-3.document.querySeletorAll()：會將查詢到的元素封裝成一個陣列返回。
+        box1 = document.querySelectorAll(".box1");
+        console.log(box1); // NodeList(3) [div.box1, div.box1, div.box1]
+        console.log(box1[0]);
+        // <div class="box1"><div class="box2">box2</div></div>
+        console.log(box1[0].innerHTML); // <div class="box2">box2</div>
+        console.log(box1.length); // 3
+        console.log(box1[1].innerText); // box3
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+    <div class="box1">
+        <div class="box2">box2</div>
+    </div>
+    <div class="box1">
+        <div class="box3">box3</div>
+    </div>
+    <div class="box1"></div>
+
+</body>
+</html>

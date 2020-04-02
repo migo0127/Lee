@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM讀取元素的樣式</title>
+    <style>
+
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+        }
+
+    </style>
+    <script>
+
+        window.onload = function(){
+            // btn01點擊按鈕以後讀取box1的樣式
+            var box1 = document.getElementById("box1");
+            var btn01 = document.getElementById("btn01");
+            btn01.onclick = function(){
+                /*
+                    1.currentStyle：獲取元素的「當前顯示」的樣式。
+                        - 語法：
+                            元素.currentStyle.樣式名;
+                        - currentStyle 可以用來讀取「當前元素」正在套用的樣式，
+                          如果當前元素沒有設置樣式，則獲取它的默認值。
+                          比如：沒有塊元素沒有設置width時，讀取的為 auto。
+
+                        - 通過 currentStyle 讀取到的樣式「僅能讀取」，不可修改，
+                          如果要修改必需通過style屬性來修改。
+
+                        - currentStyle 只有IE瀏覽器支持，其他瀏覽器都不支持。
+                */
+                console.log(box1.currentStyle.width);
+                console.log(box1.currentStyle.height);
+                console.log(box1.currentStyle.backgroundColor);
+            };
+
+            // btn02點擊按鈕以後讀取box1的樣式
+            var btn02 = document.getElementById("btn02");
+            btn02.onclick = function(){
+                /*
+                    2.getComputedStyle()：
+                        - getComputedStyle()方法可以獲取「元素當前」套用的樣式，
+                          這個方法是window的方法，可以直接使用。
+
+                        - getComputedStyle()會返回一個物件，物件中封裝了當前元
+                              素對應的樣式，如果獲取的樣式沒有設置，會獲取到真實
+                              的值(當前真實的值oopx)，而不是默認值(auto)。
+
+                         - 通過 getComputedStyle() 讀取到的樣式「僅能讀取」，不可
+                           修改，如果要修改必需通過style屬性來修改。
+
+                        - 在其他瀏覽器中可以使用，IE8及以下不支持。
+                        - 語法：
+                            - 需要兩個參數：
+                                第一個參數：要獲取樣式的元素。
+                                第二個參數：可以傳遞一個偽元素，但一般都傳遞null。
+                                var obj = getComputedStyle(元素,null).樣式名;
+                */
+                // var obj = getComputedStyle(box1,null).width;
+                console.log(getComputedStyle(box1,null).width);
+                console.log(getComputedStyle(box1,null).height);
+                console.log(getComputedStyle(box1,null).backgroundColor);
+            };
+
+
+            // btn03點擊按鈕自行判斷使用哪一個方法來讀取box1的樣式
+            /*
+                回調自定義函數，自行判斷瀏覽器是否有 window.getComputedStyle物件，
+                有就執行getComputedStyle()來返回值，沒有就使用currentStyle返回值。
+            */
+            var btn03 = document.getElementById("btn03");
+            btn03.onclick = function(){
+                var b1Width = getStyle(box1,"width");
+                console.log(b1Width);
+
+                var b1Height = getStyle(box1,"height");
+                console.log(b1Height);
+
+                var b1BgColor = getStyle(box1,"backgroundColor");
+                console.log(b1BgColor);
+
+            };
+        };
+
+        /*
+            自行定義一個函數，用來獲取指定元素的當前套用的樣式。
+            參數：
+                obj：要獲取樣式的元素。
+                name：要獲取的樣式名(字符串)。
+        */
+        function getStyle(obj,name){
+
+            if(window.getComputedStyle){
+                // 正常瀏覽器的方式
+                return getComputedStyle(obj,null)[name];
+            }else{
+                // IE8的方式
+                return obj.currentStyle[name];
+            }
+
+            // 也可寫成
+            // return window.getComputedStyle? getComputedStyle(obj,null)[name]:obj.currentStyle[name];
+
+            /*
+                也可寫成此方式，但不推薦此寫法，因IE9~11兩個都可使用，此方式會導致先
+                使用currentStyle來執行，但最好優先使用getComputedStyle()較好。
+            */
+            // if(obj.currentStyle){
+            //     // IE8的方式
+            //     return obj.currentStyle[name];
+            // }else{
+            //     // 正常瀏覽器的方式
+            //     return getComputedStyle(obj,null)[name];
+            // }
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+    <button id="btn01">currentStyle：IE only</button>
+    <button id="btn02">getComputedStyle：其他瀏覽器</button>
+    <button id="btn03">自定義函數判斷</button>
+    <br /><br />
+    <div id="box1" style="height: 300px;"></div>
+
+</body>
+</html>

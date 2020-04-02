@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM的查詢方式</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .wrap{
+            width: 700px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .inner,#btnlist{
+            width: 300px;
+            border: 1px black solid;
+            margin: 10px;
+            padding: 20px 10px;
+        }
+
+        .inner p {
+            margin: 20px 0;
+        }
+
+        .ul-list ul{
+            display: flex;
+
+        }
+
+        .inner li {
+            margin-right: 10px;
+            padding: 5px;
+            background-color:rgb(214, 184, 248);
+            border: 1px black solid;
+        }
+
+        #btnlist{
+            margin: 10px;
+        }
+
+        #btnlist button {
+            width: 300px;
+            margin-bottom: 15px;
+        }
+
+    </style>
+    <script>
+        /* 從btn07開始設置共用的函數，用來為指定元素綁定單擊響應函數。
+            參數：
+                第一個參數：idStr(自定義)，表示要綁定單擊響應函數的物件的id屬性值。
+                第二個參數：fun(自定義)，表示是件的回調函數，當單擊元素時，該函數將
+                會被觸發。
+        */
+        function myClick(idStr,fun){
+            var btn = document.getElementById(idStr);
+            btn.onclick = fun;
+        }
+
+        // 為window設置onload事件
+        window.onload = function(){
+
+            // 為id為btn01的按鈕綁定一個單擊響應函數。
+            // 查找#bj節點。
+            var btn01 = document.getElementById("btn01");
+            btn01.onclick = function(){
+                // 查詢#bj節點
+                var bj = document.getElementById("bj");
+                // 打印bj
+                console.log(bj);
+                // 打印bj文本
+                console.log(bj.innerHTML);
+                // innerHTML：通過這個屬性可以獲取到元素內部的HTML代碼
+                alert(bj.innerHTML);
+            };
+
+            // 為id為btn02的按鈕綁定一個單擊響應函數。
+            // 查找所有li節點。
+            var btn02 = document.getElementById("btn02");
+            btn02.onclick = function(){
+                // 查詢所有li節點
+                /*
+                   getElementsByTagName()：可以根據標籤名來獲取「一組」元素節點物件，
+                   這個方法會給我們返回一個類陣列物件(類似)，所有查詢到的元素都會封裝
+                   到物件中，即使查詢到的元素只有一個，也會封裝到陣列中返回。
+                */
+                var lis = document.getElementsByTagName("li");
+                // 打印lis
+                console.log(lis);
+                // lis的長度
+                console.log(lis.length);
+                // 遍歷lis
+                for( i = 0 ; i < lis.length ; i++){
+                    console.log(lis[i].innerHTML);
+                }
+            };
+
+            // 為id為btn03的按鈕綁定一個單擊響應函數。
+            // 查找mane=gender的所有節點。
+            var btn03 = document.getElementById("btn03");
+            btn03.onclick = function(){
+                // 查詢name=gender的所有節點
+                /*
+                   getElementsByName()：可以根據屬性名來獲取「一組」元素節點物件，
+                   也會返回一組類陣列物件。
+                */
+                var names = document.getElementsByName("gender");
+                // 打印names
+                console.log(names);
+                // 打印names長度
+                console.log(names.length);
+                // 變歷names
+                /*
+                    innerHTML：用於獲取元素內部的HTML代碼，但對於自結束標籤時，這個
+                    屬性沒有意義，只會獲取到空串。
+                    若要讀取元素節點屬性，可以直接使用「元素.屬性名」：
+                        比如：
+                            元素.id、元素.name、元素.value等等
+                        注意：
+                            class屬性不能採用這種方式，要改用className來讀取。
+                */
+                for( i = 0 ; i < names.length ; i++ ){
+                    console.log(names[i].type);
+                    console.log(names[i].name);
+                    console.log(names[i].value);
+                    console.log(names[i].className);
+                }
+            };
+
+            // 為id為btn04的按鈕綁定一個單擊響應函數。
+            // 查找#city下所有li節點。
+            var btn04 = document.getElementById("btn04");
+            btn04.onclick = function(){
+                // 獲取id為cuty的元素
+                var city = document.getElementById("city");
+                // 查找#city下的所有li節點
+                var citylis = city.getElementsByTagName("li");
+                // 打印citylis
+                console.log(citylis);
+                // 打印citylis索引[0]
+                console.log(citylis[0]);
+                // 打印citylis長度
+                console.log(citylis.length);
+                // 遍歷citylis
+                for( i = 0 ; i < citylis.length ; i++){
+                    console.log(citylis[i]);
+                    console.log(citylis[i].innerHTML);
+                }
+            };
+
+            // 為id為btn05的按鈕綁定一個單擊響應函數。
+            // 返回#city的所有子節點。
+            var btn05 = document.getElementById("btn05");
+            btn05.onclick = function(){
+                // 獲取id為city的節點
+                var city = document.getElementById("city");
+                // 返回#city的所有子節點
+                /*
+                   childNodes屬性：會獲取包括文本節點在內的所有節點，DOM標籤之間
+                   的空白也會當成文本節點。
+                   注意：在IE8及以下的瀏覽器中，不會將空白文本當成子節點，所以該
+                   屬性在IE8中會返回「4個子元素」，而其他瀏覽器返回「9個子節點」。
+                */
+                var citylis = city.childNodes;
+                // 打印citylis
+                console.log(citylis);
+                console.log(citylis[0]); // #text
+                console.log(citylis[1]); // <li id="bj">北京</li>
+                // 打印citylis的長度
+                console.log(citylis.length); // 9
+                // 遍歷citylis
+                for( i = 0 ; i < citylis.length ; i++){
+                    console.log(citylis[i]);
+                    console.log(citylis[i].innerHTML);
+                    console.log(citylis[i].innerText);
+                }
+
+                /*
+                   city.children屬性：可以獲取當前元素的「所有子元素」，而非子節點。
+                */
+                var citylis2 = city.children;
+                // 打印citylis2
+                console.log(citylis2);
+                console.log(citylis2[0]); // <li id="bj">北京</li>
+                console.log(citylis2[0]); // <li id="bj">上海</li>
+                // 打印citylis2長度
+                console.log(citylis2.length); // 4
+                // 遍歷citylis2
+                for( i = 0 ; i < citylis2.length ; i++){
+                    console.log(citylis2[i]);
+                    console.log(citylis2[i].innerHTML);
+                    console.log(citylis[i].innerText);
+                }
+            };
+
+            // 為id為btn06的按鈕綁定一個單擊響應函數。
+            // 返回#phone的第一個子節點。
+            var btn06 = document.getElementById("btn06");
+            btn06.onclick = function(){
+                // 獲取id為phone的元素
+                var phone = document.getElementById("phone");
+                // 返回#phone的第一個子節點
+                /*
+                   firstChild屬性：可以獲取到當前元素的第一個子節點(包括空白文本節點)。
+                */
+                var phonefirlis = phone.firstChild;
+                // 打印phonefirlis
+                console.log(phonefirlis);  // #text
+                // 打印phonefirlis文本內容
+                console.log(phonefirlis.innerHTML); // undefined
+
+                /*
+                    firstElementChild屬性：可以獲取當前元素的第一個子元素，但此屬
+                    性不支持IE8及以下的瀏覽器，如果需要兼容就盡量不要使用。
+                */
+                var phonefirlis2 = phone.firstElementChild;
+                // 打印phonefirlis
+                console.log(phonefirlis2);  // <li id="ios">IOS</li>
+                // 打印phonefirlis文本內容
+                console.log(phonefirlis2.innerHTML); // IOS
+            };
+
+            // 為id為btn07的按鈕綁定一個單擊響應函數，使用共用函數。
+            // 返回#bj的父節點。
+            myClick("btn07",function(){
+                // 獲取id為bj的節點
+                var bj = document.getElementById("bj");
+                // 返回#bj的父節點
+                /*
+                   parentNode屬性：找到當前節點的父節點(唯一)。
+                */
+                var bjparentnode = bj.parentNode;
+                // 打印bjparentnode
+                console.log(bjparentnode);
+                // 打印bjparentnode的文本
+                // innerHTML屬性：可以獲取到元素內部的文本內容，包含HTML標籤。
+                // innerText屬性：可以獲取到元素內部的文本內容，不包含HTML標籤。
+                console.log(bjparentnode.innerHTML);
+                console.log(bjparentnode.innerText);
+            });
+
+            // 為id為btn08的按鈕綁定一個單擊響應函數，使用共用函數。
+            // 返回#Android的前一個兄弟節點。
+            myClick("btn08",function(){
+                // 獲取id為android的元素
+                var android = document.getElementById("android");
+                // 返回#Android的前一個兄弟節點
+                /*
+                   previousSibling(包含空白文本)。
+                */
+                var androidprevsib = android.previousSibling;
+                // 打印androidpervsib
+                console.log(androidprevsib); // #text
+                console.log(androidprevsib.innerHTML); // undefined
+
+                /*
+                   previousElementSibling屬性：獲取當前元素的前一個兄弟元素(不包含
+                   空白文本)，但注意IE8及以下不支持。
+                */
+                var androidprevsib2 = android.previousElementSibling;
+                // 打印androidpervsib2
+                console.log(androidprevsib2); // <li id="ios">IOS</li>
+                // 打印androidpervsib2文本內容
+                console.log(androidprevsib2.innerHTML); // IOS
+                console.log(androidprevsib2.innerText); // IOS
+
+                // nextSibling屬性：獲取當前元素的下一個兄弟節點(包含空白文本)。
+                var androidprevsib3 = android.nextSibling;
+                console.log(androidprevsib3);  // #text
+                console.log(androidprevsib3.innerHTML); // undefined
+
+                /* nextElementSibling屬性：獲取當前元素的下一個兄弟元素(不包含
+                   空白文本)，但注意IE8及以下不支持。
+                */
+                var androidprevsib4 = android.nextElementSibling;
+                console.log(androidprevsib4); // <li>Wondows Phone</li>
+                console.log(androidprevsib4.innerHTML); // Wondows Phone
+                console.log(androidprevsib4.innerText); // Wondows Phone
+
+            })
+
+            // 為id為btn09的按鈕綁定一個單擊響應函數，使用共用函數。
+            // 返回#username的value屬性值。
+            myClick("btn09",function(){
+                // 獲取id為username的元素
+                var username = document.getElementById("username");
+                // 返回#username的value屬性值
+                //文本框的value屬性值就是文本框中輸入的內容(依輸入的值改變)。
+                // 打印uservalue
+                console.log(username.value); // name
+            })
+
+            // 為id為btn10的按鈕綁定一個單擊響應函數，使用共用函數。
+            // 設置#username的value屬性值。
+            myClick("btn10",function(){
+                // 獲取id為username的元素
+                var username = document.getElementById("username");
+                // 設置#username的value屬性值
+                username.value = "DL";
+            })
+
+            // 為id為btn11的按鈕綁定一個單擊響應函數，使用共用函數。
+            // 返回#bj的文本值。
+            myClick("btn11",function(){
+                // 獲取id為bj的元素
+                var bj = document.getElementById("bj");
+                // 返回#bj的文本值
+                console.log(bj.innerHTML); // 北京
+                console.log(bj.innerText); // 北京
+
+                // 另一種獲取文本值的方式(較麻煩)
+                // bj節點的第一個節點，就是本身自己
+                var bjfrichild = bj.firstChild;
+                // nodeValue：文本節點nodeValue的就是文本內容
+                console.log(bjfrichild.nodeValue); // 北京
+                // 亦可合併寫為
+                console.log(bj.firstChild.nodeValue); // 北京
+            })
+
+        };
+
+
+    </script>
+</head>
+<body>
+
+    <div class="wrap">
+        <div class="total">
+            <div class="inner">
+                <div class="ul-list">
+
+                    <p>你喜歡哪個城市？</p>
+
+                    <ul id="city">
+                        <li id="bj">北京</li>
+                        <li>上海</li>
+                        <li>東京</li>
+                        <li>台北</li>
+                    </ul>
+
+                    <p>你喜歡哪個單機遊戲？</p>
+
+                    <ul id="game">
+                        <li id="rl">紅警</li>
+                        <li>實況</li>
+                        <li>極品飛車</li>
+                        <li>魔獸</li>
+                    </ul>
+
+                    <p>你手機的操作系統是？</p>
+
+                    <ul id="phone">
+                        <li id="ios">IOS</li>
+                        <li id="android">Android</li>
+                        <li>Wondows Phone</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="inner">
+                Gender：
+                <input class="m" type="radio" name="gender" value="male">
+                Male
+                <input class="f" type="radio" name="gender" value="female">
+                Female
+                <br><br>
+                Name：
+                <input type="text" name="name" id="username" value="name">
+            </div>
+        </div>
+        <div id="btnlist">
+            <button id="btn01">01.查找#bj節點</button>
+            <button id="btn02">02.查找所有li節點</button>
+            <button id="btn03">03.查找mane=gender的所有節點</button>
+            <button id="btn04">04.查找#city下所有li節點</button>
+            <button id="btn05">05.返回#city的所有子節點</button>
+            <button id="btn06">06.返回#phone的第一個子節點</button>
+            <button id="btn07">07.返回#bj的父節點</button>
+            <button id="btn08">08.返回#Android的前一個兄弟節點</button>
+            <button id="btn09">09.返回#username的value屬性值</button>
+            <button id="btn10">10.設置#username的value屬性值</button>
+            <button id="btn11">11.返回#bj的文本值</button>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>email的正則表達式</title>
+    <script>
+        /*
+            email的正則表達式：
+                先確認email的規則：
+                    abc@abc.com.tw
+                    abc_123@163.com.tw
+                    abc.a@abc.com
+                    123@123.com
+
+                    以上統整後的規則：
+                    1.abc 123 _ . => ^\w{3,}(\.\w+)*
+                        => 開頭字母數字下滑線，三個以上(點字母數字下滑線，若有至少一次，否則0次)
+
+                    2.@ => @
+
+                    3.abc 163 => [A-z0-9]+
+                        => 字母數字，至少一次
+
+                    4..com  => \.[A-z]{2,5}
+                    5..tw   => \.[A-z]{2,5}
+
+                    4與5的規則一樣，且5可有可無，因此統整為：
+                    (\.[A-z]{2,5}){1,2}$  => 此規則至少1次，最多2次並以此結尾
+
+                最後統整出的email正則表達式為：
+                /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/
+        */
+        // email的正則表達式，可再依自行的規則進行修改：
+        var emailreg = /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/
+
+        console.log(emailreg.test("abc@yahoo.com.tw")); // true
+        console.log(emailreg.test("abc.123@y.com.tw")); // true
+        console.log(emailreg.test("abc_123@y.com")); // true
+        console.log(emailreg.test("_abc123@y.com")); // true
+        console.log(emailreg.test("123abc@y.com")); // true
+        console.log(emailreg.test("123.1@y.com")); // true
+        console.log(emailreg.test("123.@y.com")); // false
+        console.log(emailreg.test("123@y")); // false
+        console.log(emailreg.test("@$123@y.com.tw")); // false
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

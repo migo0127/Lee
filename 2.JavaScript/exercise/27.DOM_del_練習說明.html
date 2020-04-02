@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM_del的aDelete[i]說明</title>
+    <style>
+
+        #employeeTable {
+            margin: 20px auto;
+            border: black solid 1px;
+            border-collapse: collapse;
+        }
+
+        #employeeTable th ,  #employeeTable td{
+            border: black solid 1px;
+        }
+
+        #formDiv {
+            width: 250px;
+            margin: 20px auto;
+            padding: 20px;
+            border: black solid 1px;
+        }
+    </style>
+
+    <script>
+        window.onload = function(){
+
+            var aDelete = document.getElementsByTagName("a");
+
+            // 第二步：為每個超連接都綁定一個單擊響應函數
+            // 2-1.變歷aDelete
+            for (var i = 0; i < aDelete.length; i++) {
+                /*
+                    for循環會在頁面加載完成之後，立即執行，而響應函數會在超連接被點擊時才
+                    執行，當響應函數執行時，for循環棗已執行完畢(i會停在3，i=3)。
+
+                */
+                console.log("for循環正在執行的i = "+i);
+
+                aDelete[i].onclick = function () {
+
+                    console.log("響應函數正在執行的i = "+i);
+
+                    console.log(aDelete[i] == this); // false
+                    var tr = this.parentNode.parentNode;
+                    console.log(this);
+
+                    return false;
+                };
+            }
+    };
+
+
+    </script>
+</head>
+<body>
+    <table id="employeeTable">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>Tom</td>
+            <td>tom@tom.com</td>
+            <td>5000</td>
+            <td><a href="deleteEmp?id=001">Delete</a></td>
+        </tr>
+        <tr>
+            <td>Jerry</td>
+            <td>jerry@sohu.com</td>
+            <td>8000</td>
+            <td><a href="javascript:;">Delete</a></td>
+        </tr>
+        <tr>
+            <td>Bob</td>
+            <td>bob@tom.con</td>
+            <td>10000</td>
+            <td><a href="javascript:;">Delete</a></td>
+        </tr>
+    </table>
+
+    <div id="formDiv">
+        <h4>添加新員工</h4>
+
+        <table>
+            <tr>
+                <td class="word">Name:</td>
+                <td class="inp">
+                    <input type="text" name="empName" id="empName">
+                </td>
+            </tr>
+            <tr>
+                <td class="word">Email:</td>
+                <td class="inp">
+                    <input type="text" name="email" id="email">
+                </td>
+            </tr>
+            <tr>
+                <td class="word">Salary:</td>
+                <td class="inp">
+                    <input type="text" name="salary" id="salary">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button id="addEmpButton" value="abc">
+                    Submit
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</body>
+</html>

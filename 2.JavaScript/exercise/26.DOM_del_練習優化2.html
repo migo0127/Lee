@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM_del練習</title>
+    <style>
+
+        #employeeTable {
+            margin: 20px auto;
+            border: black solid 1px;
+            border-collapse: collapse;
+        }
+
+        #employeeTable th ,  #employeeTable td{
+            border: black solid 1px;
+        }
+
+        #formDiv {
+            width: 250px;
+            margin: 20px auto;
+            padding: 20px;
+            border: black solid 1px;
+        }
+    </style>
+    <script>
+        // 優化2：添加員工的功能 → 第三步 → 將獲取到的信息保存到tr中。
+
+        // 創建一個共用的刪除tr的單擊響應函數。
+            // 2-2.每個超連接都綁定一個共用的單擊響應函數。
+                // 2-2-1.獲取tr。
+                // 2-2-2.獲取要刪除的員工名字。
+                // 2-2-3.刪除之前彈出一個提示框。
+                // 2-2-4.如果用戶點擊確認。
+                // 2-2-5.return false 來取消超連接轉跳的默認行為。
+
+        function deleteA(){
+            /*
+                點擊超連接後，需要刪除所在的那一行，所以要獲取其父節點(td)的父節點(tr)
+                ，而這裡點擊哪個超連接，this就是誰。
+            */
+            // 獲取tr
+            var tr = this.parentNode.parentNode;
+
+            // 獲取要刪除的員工名字
+            var name = tr.children[0].innerHTML;
+            // 也可使用
+            // var name = tr.getElementsByTagName("td")[0].innerHTML;
+
+            // 刪除之前彈出一個提示框
+            /*
+                confirm()：
+                    - 用於創建一個帶有確認和取消按鈕的提示框。
+                    - 需要一個字符串作為參數，該字符串將會作為提示文字顯示。
+                    - 如果用戶點擊「確認」則會返回true，「取消」返回false。
+            */
+            var flag = confirm("確認要刪除"+name+"嗎？");
+
+            // 如果用戶點擊確認
+            if(flag){
+                // 刪除tr
+                tr.parentNode.removeChild(tr);
+            }
+            /*
+                點擊超連接後，接連接會自動轉跳頁面，這是超連接的默認行為，
+                但此時我們不希望出現轉跳默認行為，因此可以通過在響應函數的
+                最後 return false 來取消超連接轉跳的默認行為。
+            */
+            return false;
+        }
+
+
+        window.onload = function(){
+            // 點擊超連接以後，刪除該名員工的信息
+            // 第一步：獲取所有超連接
+            var aDelete = document.getElementsByTagName("a");
+
+            // 第二步：為每個超連接都綁定一個單擊響應函數
+            // 2-1.變歷aDelete
+            for(var i = 0 ; i < aDelete.length ; i++){
+                // 2-2.每個超連接都綁定一個單擊響應函數，使用共用的函數
+                aDelete[i].onclick = deleteA;
+            }
+
+            // 添加員工的功能：點擊按鈕後，將員工信息添加到表格中。
+            // 第一步：為提交按鈕綁定一個單擊響應函數。
+            // 第二步：獲取用戶添加的信息。
+            // 第三步：將獲取到的信息保存到tr中。
+            // 第四步：將tr添加到tbody中。
+
+            // 第一步：為提交按鈕綁定一個單擊響應函數。
+            var addEmpButton = document.getElementById("addEmpButton");
+            addEmpButton.onclick = function(){
+                // 第二步：獲取用戶添加的信息
+                // 獲取員工名字
+                var empName = document.getElementById("empName").value;
+                // 獲取email
+                var email = document.getElementById("email").value;
+                // 獲取salary
+                var salary = document.getElementById("salary").value;
+
+                /* 第三步：將獲取到的信息保存到tr中，如下
+                    3-1.創建一個tr
+                    3-2.設置tr的內容
+                    3-3. 獲取剛剛添加的a元素，並將其綁定為共用的單擊響應函數
+
+                    <tr>
+                        <td>Tom</td>
+                        <td>tom@tom.com</td>
+                        <td>5000</td>
+                        <td><a href="deleteEmp?id=001">Delete</a></td>
+                    </tr>
+                */
+
+                // 3-1.創建一個tr
+                var tr = document.createElement("tr");
+
+                // 3-2.設置tr的內容
+                tr.innerHTML = "<td>"+empName+"</td>"+
+                               "<td>"+email+"</td>"+
+                               "<td>"+salary+"</td>"+
+                               "<td><a href='deleteEmp?id=001'>Delete</a></td>";
+
+                // 3-3. 獲取剛剛添加的a元素，並將其綁定為共用的單擊響應函數
+                var a = tr.getElementsByTagName("a")[0];
+                a.onclick = deleteA;
+
+                // 第四步：將tr添加到tbody中
+                // 因tbody是瀏覽器默認添加的，所以需要透過table來獲取
+                // 4-1.獲取table
+                var employeeTable = document.getElementById("employeeTable");
+
+                // 4-2.獲取tbody，兩種方式
+                var tbody = employeeTable.children[0];
+                // var tbody = employeeTable.getElementsByTagName("tbody")[0];
+
+                // 4-3.將tr添加到tbody中
+                tbody.appendChild(tr);
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+
+    <table id="employeeTable">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>Tom</td>
+            <td>tom@tom.com</td>
+            <td>5000</td>
+            <td><a href="deleteEmp?id=001">Delete</a></td>
+        </tr>
+        <tr>
+            <td>Jerry</td>
+            <td>jerry@sohu.com</td>
+            <td>8000</td>
+            <td><a href="javascript:;">Delete</a></td>
+        </tr>
+        <tr>
+            <td>Bob</td>
+            <td>bob@tom.con</td>
+            <td>10000</td>
+            <td><a href="javascript:;">Delete</a></td>
+        </tr>
+    </table>
+
+    <div id="formDiv">
+        <h4>添加新員工</h4>
+
+        <table>
+            <tr>
+                <td class="word">Name:</td>
+                <td class="inp">
+                    <input type="text" name="empName" id="empName">
+                </td>
+            </tr>
+            <tr>
+                <td class="word">Email:</td>
+                <td class="inp">
+                    <input type="text" name="email" id="email">
+                </td>
+            </tr>
+            <tr>
+                <td class="word">Salary:</td>
+                <td class="inp">
+                    <input type="text" name="salary" id="salary">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button id="addEmpButton" value="abc">
+                    Submit
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+</body>
+</html>

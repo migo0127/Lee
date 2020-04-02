@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>regExp</title>
+    <script>
+        /*
+            正則表達式的其它語法：
+                若要檢查「.、/」這類特殊字符，需要使用轉義字符「\」。
+
+                若單純要檢查字符「.」，需要使用轉義字符。
+                    - 例：
+                        reg = /\./;
+                        console.log(reg); // /\./
+                        console.log(reg.test("123")); // false
+                        console.log(reg.test("asd")); // false
+                        console.log(reg.test("_")); // false
+                        console.log(reg.test("*(^$(*#")); // false
+                        console.log(reg.test("*(^$..87($")); // true
+
+                若單純要檢查字符「\」，需要使用轉義字符。
+                    - 例：
+                        reg = /\\/;
+                        console.log(reg); // /\\/
+                        console.log(reg.test("456ae")); // false
+                        console.log(reg.test("456a@!e")); // false
+                        console.log(reg.test("4.45")); // false
+                        console.log(reg.test("4\\45")); // true
+                ※ 注意：使用構造函數時，由於它的參數是一個字符串，而\是字符的轉義字符，
+                   如果要使用\則需要使用\\來代替。
+
+                1.「.」：表示任意字符。
+                    - 例：
+                    var reg = /./;
+                    console.log(reg.test("asd")); // true
+                    console.log(reg.test("123")); // true
+                    console.log(reg.test("_")); // true
+                    console.log(reg.test(" ")); // true
+                    console.log(reg.test("*&%*&$(")); // true
+
+
+                2.「\w」：表示任意字母、數字、_，「\w」==[A-z0-9_]。
+                    - 例：
+                    reg = /\w/;
+                    console.log(reg.test("123")); // true
+                    console.log(reg.test("_")); // true
+                    console.log(reg.test("dfkj")); // true
+                    console.log(reg.test("*(!@&")); // false
+
+                3.「/W」：表示除了任意字母、數字、_外，「/W」==[^A-z0-9_]。
+                    - 例：
+                    reg = /\W/;
+                    console.log(reg.test("123")); // false
+                    console.log(reg.test("sdd")); // false
+                    console.log(reg.test("_")); // false
+                    console.log(reg.test("*(^*")); // true
+
+                4.「\d」：任意的數字[0-9]，「\d」==[0-9]。
+                    - 例：
+                    reg = /\d/;
+                    console.log(reg.test("13")); // true
+                    console.log(reg.test("sd5w")); // true
+                    console.log(reg.test("sdw")); // false
+                    console.log(reg.test("(*$^")); // false
+                    console.log(reg.test("_")); // false
+
+                5.「\D」：除了任意的數字，「\D」==[^0-9]。
+                    - 例：
+                    reg = /\D/;
+                    console.log(reg.test("123")); // false
+                    console.log(reg.test("*#)@")); // true
+                    console.log(reg.test("_")); // true
+                    console.log(reg.test("did15")); // true
+
+                6.「\s」：空格，「\s」==[ ]。
+                    - 例：
+                    reg = /\s/;
+                    console.log(reg.test("wkjdo")); // false
+                    console.log(reg.test("wk122o")); // false
+                    console.log(reg.test("wk@*(*(o")); // false
+                    console.log(reg.test("w  15")); // true
+                    console.log(reg.test("w15 ")); // true
+
+                7.「\S」：除了空格，「\s」==[^ ]。
+                    - 例：
+                    reg = /\S/;
+                    console.log(reg.test("  ")); // false
+                    console.log(reg.test(" sd25 ")); // true
+                    console.log(reg.test(" **^25 ")); // true
+                    console.log(reg.test(" **s ")); // true
+
+                8.「\b」：邊界單詞。
+                    - 例：
+                    // 創建一個正則表達式檢查一個字符傳中是否含有單詞child
+                    reg = /child/; // 檢查是否含有字符child
+                    console.log(reg.test("doichildern"));  // true
+                    console.log(reg.test("doi child ern"));  // true
+                    console.log(reg.test("doi childern"));  // true
+
+                    // 若要精準檢查是否就是符合"child"這個單詞，需使用\b 邊界單詞來設限
+                    reg = /\bchild\b/;
+                    console.log(reg.test("2djschildern")); // false
+                    console.log(reg.test("2djs childern")); // false
+                    console.log(reg.test("2djs chi ld ern")); // false
+                    console.log(reg.test("2djs child ern")); // true
+
+                9.「\B」：除了邊界單詞。
+
+
+
+        */
+        // 正則表達式的其他語法：
+        // 1.「.」！表示任意字符。
+        var reg = /./;
+        console.log(reg.test("asd")); // true
+        console.log(reg.test("123")); // true
+        console.log(reg.test("_")); // true
+        console.log(reg.test(" ")); // true
+        console.log(reg.test("*&%*&$(")); // true
+
+        // ※ 若單純要檢查字符「.」，需要使用轉義字符。
+        reg = /\./;
+        console.log(reg); // /\./
+        console.log(reg.test("123")); // false
+        console.log(reg.test("asd")); // false
+        console.log(reg.test("_")); // false
+        console.log(reg.test("*(^$(*#")); // false
+        console.log(reg.test("*(^$..87($")); // true
+
+        // ※ 若單純要檢查字符「\」，需要使用轉義字符。
+        reg = /\\/;
+        console.log(reg); // /\\/
+        console.log(reg.test("456ae")); // false
+        console.log(reg.test("456a@!e")); // false
+        console.log(reg.test("4.45")); // false
+        console.log(reg.test("4\\45")); // true
+
+
+        //  2.「w」：表示任意字母、數字、_。
+        reg = /\w/;
+        console.log(reg.test("123")); // true
+        console.log(reg.test("_")); // true
+        console.log(reg.test("dfkj")); // true
+        console.log(reg.test("*(!@&")); // false
+
+        // 3.「/W」：表示除了任意字母、數字、_外，「/W」==[^A-z0-9_]。
+        reg = /\W/;
+        console.log(reg.test("123")); // false
+        console.log(reg.test("sdd")); // false
+        console.log(reg.test("_")); // false
+        console.log(reg.test("*(^*")); // true
+
+        // 4.「\d」：任意的數字[0-9]。
+        reg = /\d/;
+        console.log(reg.test("13")); // true
+        console.log(reg.test("sd5w")); // true
+        console.log(reg.test("sdw")); // false
+        console.log(reg.test("(*$^")); // false
+        console.log(reg.test("_")); // false
+
+        // 5.「\D」：除了任意的數字，「\D」==[^0-9]。
+        reg = /\D/;
+        console.log(reg.test("123")); // false
+        console.log(reg.test("*#)@")); // true
+        console.log(reg.test("_")); // true
+        console.log(reg.test("did15")); // true
+
+        // 6.「\s」：空格。
+        reg = /\s/;
+        console.log(reg.test("wkjdo")); // false
+        console.log(reg.test("wk122o")); // false
+        console.log(reg.test("wk@*(*(o")); // false
+        console.log(reg.test("w  15")); // true
+        console.log(reg.test("w15 ")); // true
+
+        // 7.「\S」：除了空格，「\s」==[^ ]。
+        reg = /\S/;
+        console.log(reg.test("  ")); // false
+        console.log(reg.test(" sd25 ")); // true
+        console.log(reg.test(" **^25 ")); // true
+        console.log(reg.test(" **s ")); // true
+
+        // 8.「\b」：邊界單詞。
+        // 創建一個正則表達式檢查一個字符傳中是否含有單詞child
+        reg = /child/; // 檢查是否含有字符child
+        console.log(reg.test("doichildern"));  // true
+        console.log(reg.test("doi child ern"));  // true
+        console.log(reg.test("doi childern"));  // true
+
+        // 若要精準檢查是否就是符合"child"這個單詞，需使用\b 邊界單詞來設限
+        reg = /\bchild\b/;
+        console.log(reg.test("2djschildern")); // false
+        console.log(reg.test("2djs childern")); // false
+        console.log(reg.test("2djs chi ld ern")); // false
+        console.log(reg.test("2djs child ern")); // true
+
+        // 9.「\B」：除了邊界單詞。
+        // 若接收到一個用戶輸入的字符串中，含有空格時
+        var str = "    DL    ";
+        console.log(str); // "    DL    "
+
+        //去除空格
+        str = str.replace(/\s/g,""); // 所有空格都去除
+        console.log(str);  // "DL"
+
+        // 若只要去除前後的空格，中間空格不去除，就不可使用上方/\s/g的方式
+        // 去除掉字符串前面的空格，去除空格就是使用""來替換
+        var str = "    D  L    ";
+        str = str.replace(/^\s/g,"");
+        // ^\s：表示除了開頭空格替換  ； 此處的g(全局匹配)：表示去去除^\s開頭的空格
+        // 而^\s開頭的空格只會有一個，所以只會去除一個，而不是所有開頭前的空格全去除！
+        console.log(str); // "   DL    "
+
+        str = str.replace(/^\s*/,"");
+        console.log(str); // "DL    "
+
+        // 去掉字符串後面的空格
+        var str = "    D  L    ";
+        str = str.replace(/\s*$/,"");
+        console.log(str);// "    DL"
+
+        // 合併前後空格去除，中間不去除，沒設定g
+        var str = "    D  L    ";
+        str = str.replace(/^\s*|\s*$/,""); // 沒有加上全局匹配就只會去除前或後其中一個
+        console.log(str); // "D  L    "
+
+        // 合併前後空格去除，中間不去除，設定g
+        var str = "    D  L    ";
+        str = str.replace(/^\s*|\s*$/g,""); // 加上全局匹配就會前後都去除
+        console.log(str); // "D  L"
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

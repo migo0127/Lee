@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用DOM操作CSS</title>
+    <style>
+
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+        }
+
+    </style>
+    <script>
+
+        window.onload = function(){
+            // 通過JS修改元素的樣式：點擊按鈕1後，修改box1的大小
+            // 獲取box1
+            var box1 = document.getElementById("box1");
+            // 獲取btn01，並綁定單擊響應函數
+            var btn01 = document.getElementById("btn01");
+            btn01.onclick = function(){
+                // 修改box1的寬度
+                /*
+                    通過JS修改元素的樣式：
+                        - 語法：
+                            元素.style.樣式名 = "樣式值";
+
+                            ※ 留意「樣式值」為字符串！！
+
+                        - 注意：
+                            如果CSS的樣式名中含有「-」，這種名稱在JS中是不合法的，
+                            比如：background-color，此時需要將這種樣式名修改為駝峰
+                            命名法，去掉「-」，將「-」後的字母改為大寫。
+                            background-color => backgroundColor。
+                            border-top-width => borderTopWidth。
+
+                        - 通過style屬性設置的樣式都是「內聯樣式」，而內聯樣式有較高
+                          的優先級，所以通過JS修改的樣式往往會立即顯示。
+
+                        - 但是如果在樣式中寫了「!important」，則此時樣式會有最高的
+                          優先級，即使通過JS也不能覆蓋該樣式，此時將會導致JD修改樣
+                          式失效，所以盡量不要為樣式添加「!important」。
+                */
+                box1.style.width = "300px";
+                box1.style.height = "300px";
+                box1.style.backgroundColor = "pink";
+            };
+
+             // 通過JS讀取元素的樣式：點擊按鈕1後，讀取box1的樣式
+             var btn02 = document.getElementById("btn02");
+             btn02.onclick = function(){
+                /*
+                    讀取box1的樣式：
+                        - 語法：
+                            元素.style.樣式名;
+
+                        - 注意：
+                            通過style屬性設置和讀取的都是「內聯樣式」，無法讀取到
+                            樣式表(style標籤)中的樣式。
+                */
+                // 需先按按鈕1套用JS設置的內聯樣式後，按鈕2才能讀取到。
+                console.log(box1.style.width);
+                console.log(box1.style.height);
+                console.log(box1.style.backgroundColor);
+
+                // 若是沒有先套用JS設置的內聯樣式，就直接按按鈕2，會是空串。
+             };
+
+        };
+
+
+    </script>
+
+
+</head>
+<body>
+    <button id="btn01">按鈕1</button>
+    <button id="btn02">按鈕2</button>
+    <br /><br />
+    <div id="box1"></div>
+
+</body>
+</html>

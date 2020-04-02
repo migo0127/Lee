@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM的增加、刪除、修改方法</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .wrap{
+            width: 700px;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .inner,#btnlist{
+            width: 300px;
+            border: 1px black solid;
+            margin: 10px;
+            padding: 20px 10px;
+        }
+
+        .inner p {
+            margin: 20px 0;
+        }
+
+        .ul-list ul{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .inner li {
+            margin: 10px;
+            padding: 5px;
+            background-color:rgb(214, 184, 248);
+            border: 1px black solid;
+        }
+
+        #btnlist{
+            margin: 10px;
+        }
+
+        #btnlist button {
+            width: 300px;
+            margin-bottom: 15px;
+        }
+    </style>
+    <script>
+
+        // 設置共用的調用函數
+        function myClick(idStr,fun){
+            var btn = document.getElementById(idStr);
+            btn.onclick = fun;
+        }
+
+        window.onload = function(){
+
+            // bnt01.創建一個"廣州"節點，添加到#city下
+            myClick("btn01",function(){
+                /*
+                    一、創建廣州節點分三步驟：<il>廣州</li>
+                        1.創建li子節點。
+                        2.創建文本節點。
+                        3.將文本節點添加到li子節點中，appendChild()。
+
+                    二、添加到#city下：
+                        父節點.appendChild(子節點);
+                */
+
+                // 第一步：創建li節點
+                /*
+                    document.createElement()：
+                        - 可以用於創建一個元素節點物件。
+                        - 需要一個標籤名作為參數，將會根據該標籤名創建元素節點物件，並
+                          將創建好的物件作為返回值返回。
+                */
+                var gzLi = document.createElement("li");
+
+                // 第二步：創建文本節點
+                /*
+                    document.createTextNode()：
+                        - 可以用來創建一個文本節點物件。
+                        - 需要一個文本內容作為參數，將會根據該內容創建文本節點，並將新
+                          的節點作為返回值返回。
+                */
+                var gzText = document.createTextNode("廣州");
+
+                // 第三步：合併，將gzText設置為gzLi的子節點。
+                /*
+                    appendChild()：
+                        - 向一個父節點中添加一個新的子節點。
+                        - 語法：
+                            父節點.appendChild(子節點);
+                */
+                gzLi.appendChild(gzText);
+
+                // 將新創建好的子節點添加到#city下步驟
+                // 獲取id為city的節點
+                var city = document.getElementById("city");
+
+                // 將廣州節點添加到city下
+                city.appendChild(gzLi);
+
+            })
+
+            // btn02.將"廣州"節點插入到#bj前面
+            myClick("btn02",function(){
+                // 創建一個"廣州"節點(三步驟)
+                // 1.創建li節點
+                var gzLi = document.createElement("li");
+                // 2.創建文本節點
+                var gzText = document.createTextNode("廣州");
+                // 3.將文本節點添加在li節點下
+                gzLi.appendChild(gzText);
+
+                // 將"廣州"節點插入到#bj前面步驟
+                // 方法一：比較常用
+                /*
+                    insertBefore()：
+                        - 可以在指定的子節點前插入新的子節點。
+                        - 語法：兩種
+                         ※ 1.子節點.parentNode.insertBefore(新子節點,舊子節點);
+                            2.父節點.insertBefore(新子節點,舊子節點);
+
+                            ※ parentNode：獲取父節點(具有唯一性)。
+                               第1種比較常用。
+                               第2種還需要再獲取父節點，才能執行，步驟多一些。
+                // */
+
+                // 獲取bj
+                var bj = document.getElementById("bj");
+
+                // 將"廣州"節點插入到#bj前面
+                bj.parentNode.insertBefore(gzLi,bj);
+
+                // 方法二：
+                // // 獲取bj
+                // var bj = document.getElementById("bj");
+
+                // // 獲取bj的父元素city
+                // var city = document.getElementById("city");
+
+                // // 將"廣州"節點插入到#bj前面
+                // city.insertBefore(gzLi,bj);
+            })
+
+            // btn03.使用"廣州"節點替換#bj節點
+            myClick("btn03",function(){
+                // 創建一個"廣州"節點(三步驟)
+                var gzLi = document.createElement("li");
+                var gzText = document.createTextNode("廣州");
+                gzLi.appendChild(gzText);
+
+                // 使用"廣州"節點替換#bj節點步驟
+                // 獲取bj
+                var bj = document.getElementById("bj");
+
+                // 使用"廣州"節點替換#bj節點
+                /*
+                    replaceChild()：
+                        - 可以使用指定的子節點替換已有的子節點。
+                        - 語法：兩種
+                            子節點.parentNode.replaceChild(新節點,被替節點);
+                            父節點.replaceChild(新節點,被替節點);
+                */
+                bj.parentNode.replaceChild(gzLi,bj);
+
+            })
+
+            // btn04.刪除#bj節點
+            myClick("btn04",function(){
+                // 獲取bj
+                var bj = document.getElementById("bj");
+
+                // 刪除#bj節點
+                /*
+                    removeChild()：
+                        - 可以刪除一個子節點。
+                        - 語法：兩種
+                            子節點.removerChild(要刪的子節點);
+                            父節點.removerChild(要刪的子節點);
+                */
+                bj.parentNode.removeChild(bj);
+            })
+
+            // btn05.讀取#city內的HTML代碼
+            myClick("btn05",function(){
+                // 獲取city
+                var city = document.getElementById("city");
+
+                // 讀取#city內的HTML代碼
+                alert(city.innerHTML);
+            })
+
+            // btn06.設置#bj內的HTML代碼
+            myClick("btn06",function(){
+                // 獲取bj
+                var bj = document.getElementById("bj");
+
+                // 設置#bj內的HTML代碼
+                bj.innerHTML = "長沙";
+            })
+
+            // btn07.向#city中添加廣州
+            myClick("btn07",function(){
+                // 獲取city
+                var city = document.getElementById("city");
+
+                // 向#city中添加廣州
+                // city.innerHTML = "<li>廣州</li>";
+                // 此方式是整個li重新被賦值 == 廣州
+
+                // city.innerHTML += "<li>廣州</li>";
+                // 此方式是原city+廣州
+                /*
+                    ※※ 注意：
+                         - 使用innerHTML也可以完成DOM的新增、刪除、修改相關操作，
+                           但使方式是將整個指定節點的HTML全部重整，而不是僅對單一
+                           個指定節點進行操作，故較不推薦直接使用此法。
+
+                        - 一般會將上面的創建子節點、創建文本節點與innerHTML的方式
+                          結果使用，只會影響指定的節點，不會影響整個節點的HTML。
+                            - 例：
+                                // 創建li
+                                    var gzLi = document.createElement("li");
+                                    gzLi.innerHTML = "廣州";
+                                    city.appendChild(gzLi);
+                */
+                // 創建li
+                var gzLi = document.createElement("li");
+                gzLi.innerHTML = "廣州";
+                city.appendChild(gzLi);
+            })
+
+        }
+    </script>
+
+</head>
+<body>
+
+    <div class="wrap">
+        <div class="inner">
+            <div class="ul-list">
+
+                <p>你喜歡哪個城市？</p>
+
+                <ul id="city">
+                    <li id="bj">北京</li>
+                    <li>上海</li>
+                    <li>東京</li>
+                    <li>台北</li>
+                </ul>
+            </div>
+        </div>
+        <div id="btnlist">
+            <button id="btn01">01.創建一個"廣州"節點，添加到#city下</button>
+            <button id="btn02">02.將"廣州"節點插入到#bj前面</button>
+            <button id="btn03">03.使用"廣州"節點替換#bj節點</button>
+            <button id="btn04">04.刪除#bj節點</button>
+            <button id="btn05">05.讀取#city內的HTML代碼</button>
+            <button id="btn06">06.設置#bj內的HTML代碼</button>
+            <button id="btn07">07.向#city中添加廣州</button>
+
+        </div>
+    </div>
+
+
+
+</body>
+</html>

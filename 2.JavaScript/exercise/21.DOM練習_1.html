@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM練習_1</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        #pic{
+            width: 700px;
+            height: 500px;
+            margin: 20px auto;
+            background-color: #bfa;
+            padding: 10px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        #pic > p{
+            margin-bottom: 5px;
+        }
+
+        #pic > img{
+            width: 100%;
+            height: 90%;
+            object-fit: cover;
+        }
+
+    </style>
+
+    <script>
+
+        window.onload = function(){
+            // 點擊按鈕切換圖片
+
+            // 獲取兩個按鈕
+            var perv = document.getElementById("perv");
+            var next = document.getElementById("next");
+
+            // 要切換圖片就是要修改img標籤的scr屬性(img為自結束標籤)，會獲得一個類陣列物件
+            // 獲取img標籤的索引[0]
+            var img = document.getElementsByTagName("img")[0];
+
+            // 創建一個陣列用來保存圖片的路徑
+            var imgArr = ["./img/21/大龙 - 8.jpg","./img/21/大龙 - 10.jpg","./img/21/大龙 - 61.jpg","./img/21/大龙 - 88.jpg","./img/21/云次方 - 40.jpg","./img/21/云次方 - 41.jpg"];
+
+            // 創建一個變量用來保存當前正在顯示的圖片的索引
+            var index = 0;
+
+            // 獲取id為picinfo的p元素
+            var picinfo = document.getElementById("picinfo");
+
+            // 設置提示文字，並顯示初始位置
+            picinfo.innerHTML = "一共有 "+imgArr.length+" 張，當前第 "+(index+1)+" 張";
+
+
+            // 為prev按鈕設置點擊響應函數
+            perv.onclick = function(){
+                // 切換到上一張時，index自減
+                index--;
+
+                // 判斷index是否小於0
+                if( index < 0){
+                    // 循環回到最後一張
+                    index = imgArr.length - 1;
+                }
+
+                // 切換圖片就是修改img的src屬性
+                // 要修改一個元素的屬性： 元素.屬性 = 屬性值
+                img.src = imgArr[index];
+
+                // 當點擊按鈕後，重新設置提示文字
+                picinfo.innerHTML = "一共有 "+imgArr.length+" 張，當前第 "+(index+1)+" 張";
+
+            };
+
+            // 為next按鈕設置點擊響應函數
+            next.onclick = function(){
+                // 切換到下一張時，index自增
+                index++;
+
+                //// 判斷index是否大於陣列索引
+                if( index > imgArr.length - 1){
+                    // 循環回到第一張
+                    index = 0;
+                }
+
+                // 切換圖片就是修改img的src屬性
+                // 要修改一個元素的屬性： 元素.屬性 = 屬性值
+                img.src = imgArr[index];
+
+                 // 當點擊按鈕後，重新設置提示文字
+                picinfo.innerHTML = "一共有 "+imgArr.length+" 張，當前第 "+(index+1)+" 張";
+
+            };
+
+        };
+
+
+    </script>
+</head>
+<body>
+
+    <div id="pic">
+        <p id="picinfo"></p>
+
+        <img src="./img/21/大龙 - 8.jpg" alt="惹">
+        <button id="perv">上一張</button>
+        <button id="next">下一張</button>
+    </div>
+
+</body>
+</html>

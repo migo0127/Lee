@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM：圖片切換練習</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap{
+            width: 700px;
+            height: 500px;
+            margin: 20px auto;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: pink;
+            text-align: center;
+        }
+
+        .wrap > p,.wrap > button{
+            margin-bottom: 5px;
+        }
+
+        .wrap > img{
+            width: 100%;
+            height: 90%;
+            object-fit: cover;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+    <div class="wrap">
+        <p id="picinfo"></p>
+        <img id="pic" src="./img/22/声入人心 - 1.jpg" alt="">
+        <button id="perv">perv</button>
+        <button id="next">next</button>
+    </div>
+
+    <script>
+
+        var perv = document.getElementById("perv");
+        var next = document.getElementById("next");
+        var pic = document.getElementById("pic");
+
+        var imgArr = ["./img/22/声入人心 - 1.jpg","./img/22/声入人心 - 2.jpg","./img/22/声入人心 - 5.jpg","./img/22/阿龙川蔡 - 1.jpg","./img/22/老云家 - 2.jpg"];
+
+        var index = 0;
+
+        var picinfo = document.getElementById("picinfo");
+
+        picinfo.innerHTML = "一共有 "+imgArr.length+" 張，目前為第 "+(index+1)+" 張";
+
+        perv.onclick = function(){
+            index--;
+            if(index < 0){
+                index = imgArr.length - 1;
+            }
+
+            pic.src = imgArr[index];
+
+            picinfo.innerHTML = "一共有 "+imgArr.length+" 張，目前為第 "+(index+1)+" 張";
+        };
+
+        next.onclick = function(){
+            index++;
+            if( index > imgArr.length - 1 ){
+                index = 0;
+            }
+
+            pic.src = imgArr[index];
+
+            picinfo.innerHTML = "一共有 "+imgArr.length+" 張，目前為第 "+(index+1)+" 張";
+        };
+
+    </script>
+
+</body>
+</html>

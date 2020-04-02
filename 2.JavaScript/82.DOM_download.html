@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM的加載</title>
+    <script>
+        /*
+            DOM的加載方式：
+                瀏覽器在加載一個頁面時，是按照自上向下的順序加載的，讀取到一行就運
+                行一行，如果script標籤寫到頁面的上邊，在代碼執行時，因頁面還沒有加
+                ，頁面沒有加載、DOM物件也就還沒有加載，會導致無法獲取到DOM物件，會
+                出現錯誤(ncaught TypeError: Cannot set property 'onclick' of null)。
+                    - 例：
+                        var btn = document.getElementById("btn");
+                        btn.onclick = function(){
+                            alert("我有執行嗎??");
+                        }
+
+        */
+        // 先加載js，後加載DOM，會跳錯誤
+        // var btn = document.getElementById("btn");
+        // btn.onclick = function(){
+        //     alert("我有執行嗎??");
+        // };
+
+        /*
+            onload：
+                onload事件會在整個頁面加載完成之後才觸發，為window綁定一個onload事件，
+                該是件對應的響應函數將會在頁面加載完成之後才執行，這樣可以確保我們的代
+                碼執行時所有的DOM物件都已經加載完畢了。
+                    - 例：
+                        window.onload = function(){
+                            var btn2 = document.getElementById("btn2");
+                            btn2.onclick = function(){
+                                alert("window.onload的按鈕");
+                            };
+                        };
+        */
+        // 為window綁定一個onload事件
+        window.onload = function(){
+            var btn2 = document.getElementById("btn2");
+            btn2.onclick = function(){
+                alert("window.onload的js");
+            };
+        };
+
+
+
+    </script>
+</head>
+<body>
+
+    <button id="btn">我是第一個按鈕：js寫在前並先加載，後加載DOM</button>
+    <br />
+    <br />
+    <button id="btn2">我是第二個按鈕：js寫在前，待DOM載完再加載js</button>
+    <br />
+    <br />
+    <button id="btn3">我是第三個按鈕：js寫在後，先加載DOM，後加載js</button>
+
+    <script>
+        /*
+            將js代碼編寫到頁面的下部就是為了可以在頁面加載完畢以後，再執行js代碼。
+                - 例：
+                    var btn3 = document.getElementById("btn3");
+                    btn3.onclick = function(){
+                        alert("我是在body下面的js");
+                    };
+
+            ※ js代碼寫在前後都各有優點，但建議仍寫在body內的下面，這樣就可以先加載DOM，
+               在加載js，不會影響文本加載的效率，但寫在前面則會比較好維護，故看公司需求，
+               並沒有特別規定一定要寫在哪。
+        */
+        // js寫在body內的下面
+        var btn3 = document.getElementById("btn3");
+        btn3.onclick = function(){
+            alert("我是在body下面的js");
+        };
+
+    </script>
+
+</body>
+</html>

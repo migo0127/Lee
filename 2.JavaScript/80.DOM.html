@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+
+</head>
+<body>
+
+    <button id="btn">我是一個按鈕</button>
+
+    <script>
+        /*
+            DOM (Document Object Model)：文本物件模型。
+                - DOM中的每一個部份都是一個節點，都是一個物件。
+                - 節點主要分四類：
+                    1.文檔節點：整個HTML文檔。
+                    2.元素節點：HTML文檔中的HTML標籤(EX：p標籤、div標籤...等)。
+                    3.屬性節點：元素的屬性(類：id、class)。
+                    4.文本節點：HTML標籤中的文本內容(<標籤>文本</標籤>)。
+
+                - 節點的屬性：
+                                nodeName   nodeType   nodeValue
+                    文檔節點    #document      9         null
+                    元素節點      標籤名       1         null
+                    屬性節點      屬性名       2        屬性值
+                    文本節點      #text        3       文本內容
+
+        */
+        /* 瀏覽器已經為我們提供 文檔節點物件，這個物件是window屬性(全局)，可以在頁面
+           中直接使用，文檔節點代表的是整個網頁。
+         */
+        console.log(document);  // HTMLDocument  or  #document
+
+        // 獲取到button物件
+        var btn = document.getElementById("btn");
+        console.log(btn); // [object HTMLButtonElement]
+
+        //修改按鈕的文字
+        console.log(btn.innerHTML); // 我是一個按鈕
+        btn.innerHTML = "I'm a button";
+        console.log(btn.innerHTML); // I'm a button
+        
+    </script>
+
+
+</body>
+</html>
