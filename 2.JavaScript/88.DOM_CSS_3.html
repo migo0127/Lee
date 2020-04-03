@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM操作CSS的其它屬性</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            padding: 20px;
+            border: 30px yellow solid;
+        }
+
+        .inner{
+            width: 100%;
+            height: 100%;
+            background-color: #bfa;
+        }
+
+        #box5{
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+        }
+
+        #box4{
+            width: 150px;
+            height: 150px;
+            background-color: #bfa;
+        }
+
+
+        #box3{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+
+        #box6{
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            overflow: auto;
+        }
+
+        #box7{
+            width: 100px;
+            height: 400px;
+            background-color: #bfa;
+        }
+
+        #box8{
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            overflow: auto;
+        }
+
+        #box9{
+            width: 300px;
+            height: 400px;
+            background-color: #bfa;
+        }
+
+        #box10{
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            overflow: auto;
+        }
+
+        #box11{
+            width: 300px;
+            height: 400px;
+            background-color: #bfa;
+        }
+
+        #box12{
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            overflow: auto;
+        }
+
+        #box13{
+            width: 300px;
+            height: 400px;
+            background-color: #bfa;
+        }
+
+    </style>
+    <script>
+
+        window.onload = function(){
+            /*
+                DOM操作CSS的其它屬性：以下都是只讀取，不可修改。
+
+                    1.clientWidth、clientHeight：
+                        - 這兩個屬性可以獲取元素的可見寬度和高度，包括內容區和內邊距，但
+                          不包括邊框。
+                        - 這些屬性返回的值都不帶[px]，返回的都是一個數字，可直接進行計算。
+                        - 只讀取，不可修改。
+                        - 語法：
+                            元素.clientWidth;
+                            元素.clientHeight;
+                        - 例：
+                            // 獲取btn01、btn02
+                            var btn01 = document.getElementById("btn01");
+                            var btn02 = document.getElementById("btn02");
+                            // 設置單擊響應函數
+                            btn01.onclick = function(){
+                                alert(box1.clientWidth); // 140
+                                console.log("box1的clientWidth為："+box1.clientWidth);
+                            };
+
+                            btn02.onclick = function(){
+                                alert(box1.clientHeight); // 140
+                                console.log("box1的clientHeight為："+box1.clientHeight);
+                            };
+
+                    2.offsetWidth、offsetHeight：
+                        - 獲取元素的整個可見框寬度和高度，包括內容區、內邊距和邊框(box模型)。
+                        - 這些屬性返回的值都不帶[px]，返回的都是一個數字，可直接進行計算。
+                        - 只讀取，不可修改。
+                        - 語法：
+                            元素.offsetWidth;
+                            元素.offsetHeight;
+                        - 例：
+                            // 設置單擊響應函數
+                            btn03.onclick = function(){
+                                alert(box2.offsetWidth);
+                                var b2OWidth = box2.offsetWidth;
+                                console.log("box2的offsetWidth為："+b2OWidth);
+                            };
+
+                            btn04.onclick = function(){
+                                alert(box2.offsetHeight);
+                                var b2OHeight = box2.offsetHeight;
+                                console.log("box2的offsetHeight為："+b2OHeight);
+                            };
+
+                    3.offsetParent：
+                        - 可以用來獲取當前元素有開定位的祖先元素，元素本身有無定位無關係。
+                        - 會獲取到離當前元素最近的開啟了定位的祖先元素，如果所有的祖先元素
+                          都沒有開啟定位，則會返回body。
+                        - 只讀取，不可修改。
+                        - 例：
+                             btn05.onclick = function(){
+                                box5.style.position = "relative";
+                            };
+
+                            btn06.onclick = function(){
+                                alert(box3.offsetParent);
+                                console.log("離box3最近有開啟定位的祖先元素是："+box3.offsetParent);
+                                console.log("離box3最近有開啟定位的祖先元素的id是："+box3.offsetParent.id);
+                            };
+
+                    4.offserLeft、offsetTop：
+                        - offserLeft：當前元素相對於其定位父元素的水平偏移量。
+                        - offsetTop：當前元素相對於其定位父元素的垂直偏移量。
+                        - 這兩個屬性返回的值都不帶[px]，返回的都是一個數字，可直接進行計算。
+                        - 注意：偏移量是根據整個HTML頁面來計算的，非視口。
+                        - 只讀取，不可修改。
+                        - 例：
+                            btn07.onclick = function(){
+                                alert(box3.offsetLeft);
+                                var b3OLeft = box3.offsetLeft;
+                                console.log("box3與離當前開啟定位的祖先元素的水平偏移量："+b3OLeft);
+                            };
+
+                            btn08.onclick = function(){
+                                alert(box3.offsetTop);
+                                var b3OTop = box3.offsetTop;
+                                console.log("box3與離當前開啟定位的祖先元素的垂直偏移量："+b3OTop);
+                            };
+
+                    5.scrollWidth、scrollHeight：
+                        - 可以獲取元素整個滾動區域的寬度和高度。
+                        - 注意：滾動軸會占面積，當元素滾動區沒有超過父元素時，計算時會扣除
+                          滾動條占有的面積後顯示，當元素滾動區超過父元素時，就依實際面積顯
+                          示。
+                            EX：設置width:200px，滾動軸：15，顯示的是185。
+                        - 這兩個屬性返回的值都不帶[px]，返回的都是一個數字，可直接進行計算。
+                        - 只讀取，不可修改。
+
+                    6.scrollLeft、scrollTop：
+                        - scrollLeft：可以獲取水平滾動條滾動的距離。
+                        - scrollTop：可以獲取垂直滾動條滾動的距離。
+                        - 這兩個屬性返回的值都不帶[px]，返回的都是一個數字，可直接進行計算。
+                        - 注意滾動軸拉至底時，不是剛好就是width、height，需留意！！
+                        - 只讀取，不可修改。
+
+                     7.scrollHeight - scrollTop == clientHeight
+                        - 滾動區的高度 - 滾動軸垂直滾動到底的距離 == 可見高度。
+                        - 通常用來設置「OO條例」，只有當用戶將滾動軸拉至最底時，才能進行
+                          一個步驟的觸發條件，請參考28.DOM_CSS_練習1.html。
+            */
+
+            // 獲取btn
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            var btn03 = document.getElementById("btn03");
+            var btn04 = document.getElementById("btn04");
+            var btn05 = document.getElementById("btn05");
+            var btn06 = document.getElementById("btn06");
+            var btn07 = document.getElementById("btn07");
+            var btn08 = document.getElementById("btn08");
+            var btn09 = document.getElementById("btn09");
+            var btn10 = document.getElementById("btn10");
+            var btn11 = document.getElementById("btn11");
+            var btn12 = document.getElementById("btn12");
+            var btn13 = document.getElementById("btn13");
+            var btn14 = document.getElementById("btn14");
+            var btn15 = document.getElementById("btn15");
+            var btn16 = document.getElementById("btn16");
+            var btn17 = document.getElementById("btn17");
+            var btn17 = document.getElementById("btn18");
+
+            var btn00 = document.getElementsByClassName("btn00");
+            var box = document.getElementsByClassName("box");
+
+            // class：btn00
+            for(var i = 0 ; i < btn00.length ; i++){
+                btn00[i].onclick = function(){
+                    for(var j = 0 ; j < box.length; j++){
+                        box[j].style.width = "200px";
+                    }
+                }
+            };
+
+            /*
+                1.clientWidth、clientHeight：可獲取元素的可見寬度和高度，包括內容區和
+                內邊距，但不包括邊框。
+            */
+            // 設置單擊響應函數
+            btn01.onclick = function(){
+                alert(box1.clientWidth);
+                var b1CWidth = box1.clientWidth;
+                console.log("box1的clientWidth為："+b1CWidth);
+            };
+
+            btn02.onclick = function(){
+                alert(box1.clientHeight);
+                var b1CHeight = box1.clientHeight;
+                console.log("box1的clientHeight為："+b1CHeight);
+            };
+
+            /*
+                2.offsetWidth、offsetHeight：獲取元素的整個可見框寬度和高度，包括內容
+                區、內邊距和邊框(box模型)。
+            */
+            // 設置單擊響應函數
+            btn03.onclick = function(){
+                alert(box2.offsetWidth);
+                var b2OWidth = box2.offsetWidth;
+                console.log("box2的offsetWidth為："+b2OWidth);
+            };
+
+            btn04.onclick = function(){
+                alert(box2.offsetHeight);
+                var b2OHeight = box2.offsetHeight;
+                console.log("box2的offsetHeight為："+b2OHeight);
+            };
+
+            /*
+                3.offsetParent：可以用來獲取當前元素有開定位的祖先元素，元素本身有無定
+                位無關係。
+            */
+            btn05.onclick = function(){
+                box5.style.position = "relative";
+            };
+
+            btn06.onclick = function(){
+                alert(box3.offsetParent);
+                var b3OParent = box3.offsetParent;
+                console.log("離box3最近有開啟定位的祖先元素是："+b3OParent);
+                console.log("離box3最近有開啟定位的祖先元素的id是："+b3OParent.id);
+            };
+
+            /*
+               4.offsetLeft、offsetTop：
+            */
+            btn07.onclick = function(){
+                alert(box3.offsetLeft);
+                var b3OLeft = box3.offsetLeft;
+                console.log("box3與離當前開啟定位的祖先元素的水平偏移量："+b3OLeft);
+            };
+
+            btn08.onclick = function(){
+                alert(box3.offsetTop);
+                var b3OTop = box3.offsetTop;
+                console.log("box3與離當前開啟定位的祖先元素的垂直偏移量："+b3OTop);
+            };
+
+            /*
+                 5.scrollWidth、scrollHeight：可以獲取元素整個滾動區域的寬度和高度。
+             */
+             btn09.onclick = function(){
+                alert(box6.scrollWidth);
+                var b6SWidth = box6.scrollWidth;
+                console.log("box6的滾動區寬度為："+b6SWidth);
+             };
+
+             btn10.onclick = function(){
+                alert(box6.scrollHeight);
+                var b6SHeight = box6.scrollHeight;
+                console.log("box6的滾動區高度為："+b6SHeight);
+            };
+
+            btn11.onclick = function(){
+                alert(box8.scrollWidth);
+                var b8SWidth = box8.scrollWidth;
+                console.log("box8的滾動區寬度為："+b8SWidth);
+             };
+
+             btn12.onclick = function(){
+                alert(box8.scrollHeight);
+                var b8SHeight = box8.scrollHeight;
+                console.log("box8的滾動區高度為："+b8SHeight);
+            };
+
+            /*
+                6.scrollLeft、scrollTop：
+            */
+            btn13.onclick = function(){
+                alert(parseInt(box10.scrollLeft));
+                var b10SLeft = parseInt(box10.scrollLeft);
+                console.log("box10的滾動軸水平滾動距離為："+b10SLeft);
+            };
+
+            btn14.onclick = function(){
+                alert(parseInt(box10.scrollTop));
+                var b10STop = parseInt(box10.scrollTop);
+                console.log("box10的滾動軸垂直滾動距離為："+b10STop);
+            };
+
+            /*
+                7.scrollHeight - scrollTop == clientHeight
+            */
+
+            btn15.onclick = function(){
+                var b12CHeight = box12.clientHeight;
+                console.log("box12的 clientHeight 可見高度為："+b12CHeight);
+            };
+
+            btn16.onclick = function(){
+                var b12Sheight = box12.scrollHeight;
+                console.log("box12的 scrollHeight 滾動區高度為："+b12Sheight);
+            };
+
+            btn17.onclick = function(){
+                var b12STop = parseInt(box12.scrollTop);
+                console.log("box12的 scrollTop 垂直滾動軸距離為："+b12STop);
+            };
+
+            btn18.onclick = function(){
+                var b12Sheight = box12.scrollHeight;
+                console.log("box12.scrollHeight = "+b12Sheight);
+                var b12CHeight = box12.clientHeight;
+                console.log("box12.clientHeight = "+b12CHeight);
+                var b12STop = parseInt(box12.scrollTop);
+                console.log("parseInt(box12.scrollTop) = "+b12STop);
+                console.log("scrollHeight："+b12Sheight+" - "+"scrollTop："+b12STop+" == "+"clientHeight："+b12CHeight);
+                console.log(b12Sheight - b12STop == b12CHeight);
+            };
+
+        };
+
+    </script>
+</head>
+<body id="body">
+    <p>1.clientWidth、clientHeight：可獲取元素的可見寬度和高度，包括內容區和內邊距，但「不包括邊框」。</p>
+    <button class="btn00">修改box的內聯樣式：width 200px</button>
+    <button id="btn01">clientWidth</button>
+    <button id="btn02">clientHeight</button>
+    <br />
+    <p>● box1：width: 100px; height: 100px; padding: 20px (pink); border: 30px yellow solid;</p>
+    <div id="box1" class="box">
+        <div class="inner">box1</div>
+    </div>
+    <br />
+    <hr />
+    <p> 2.offsetWidth、offsetHeight：獲取元素的整個可見框寬度和高度，包括內容區、內邊距和邊框(box模型)。</p>
+    <button class="btn00">22修改box的內聯樣式：width 200px</button>
+    <button id="btn03">offsetWidth</button>
+    <button id="btn04">offsetHeight</button>
+    <br />
+    <p>● box2：width: 100px; height: 100px; padding: 20px (pink); border: 30px yellow solid;</p>
+    <div id="box2" class="box">
+        <div class="inner">box2</div>
+    </div>
+    <br />
+    <hr />
+    <p>3.offsetParent：可以用來獲取當前元素有開定位的祖先元素，元素本身有無定位無關係，會獲取到離當前元素最近的開啟了定位的祖先元素，如果所有的祖先元素都沒有開啟定位，則會返回body。</p>
+    <button id="btn05">為 box5 開啟 position: relative;</button>
+    <button id="btn06">offsetParent：查看離box3最近有開起定位的祖先元素</button>
+    <br />
+    <p> 4.offserLeft、offsetTop：</p>
+    <button id="btn07">offserLeft：當前元素相對於其定位父元素的水平偏移量</button>
+    <button id="btn08">offsetTop：當前元素相對於其定位父元素的垂直偏移量</button>
+    <p>● 原始狀態：都沒有開啟定位</p>
+    <div id="box5">box5
+        <div id="box4">box4
+            <div id="box3">box3</div>
+        </div>
+    </div>
+    <br />
+    <hr />
+    <p> 5.scrollWidth、scrollHeight：可以獲取元素整個滾動區域的寬度和高度。</p>
+    <p>注意：滾動軸會占面積，當元素滾動區沒有超過父元素時，計算時會扣除滾動條占有的面積後顯示，當元素滾動區超過父元素時，就依實際面積顯示。</p>
+    <button id="btn09">scrollWidth：獲取滾動區域的寬度</button>
+    <button id="btn10">scrollHeight：獲取滾動區域的高度</button>
+    <br />
+    <br />
+    <p>● box6：寬200px、高200px； box7：寬100px、高400px，滾動條：15</p>
+    <div id="box6">
+        <div id="box7">box7</div>
+    </div>
+    <br />
+    <br />
+    <p> 5-1.scrollWidth、scrollHeight：可以獲取元素整個滾動區域的寬度和高度。</p>
+    <p>注意：滾動軸會占面積，當元素滾動區沒有超過父元素時，計算時會扣除滾動條占有的面積後顯示，當元素滾動區超過父元素時，就依實際面積顯示。</p>
+    <button id="btn11">scrollWidth：獲取滾動區域的寬度</button>
+    <button id="btn12">scrollHeight：獲取滾動區域的高度</button>
+    <br />
+    <br />
+    <p>● box8：寬200px、高200px； box9：寬300px、高400px，滾動條：15</p>
+    <div id="box8">
+        <div id="box9">box9</div>
+    </div>
+    <hr />
+    <p>6.scrollLeft、scrollTop：</p>
+    <p></p>
+    <button id="btn13">scrollLeft：可以獲取水平滾動條滾動的距離</button>
+    <button id="btn14">scrollTop：可以獲取垂直滾動條滾動的距離</button>
+    <br />
+    <p>● box10：寬200px、高200px； box11：寬300px、高400px，滾動條：15</p>
+    <p>● 注意：水平軸拉至底：115、垂直軸拉至底：215</p>
+    <div id="box10">
+        <div id="box11">box11</div>
+    </div>
+    <hr />
+    <p>7.：</p>
+    <p></p>
+    <button id="btn15">clientHeight：可見的高度，包含內容區、內邊距，不包含邊框</button>
+    <button id="btn16">scrollHeight：獲取滾動區域的高度</button>
+    <button id="btn17">scrollTop：獲取垂直滾動條滾動的距離</button>
+    <br />
+    <p>● box12：寬200px、高200px； box13：寬300px、高400px，滾動條：15</p>
+    <p>● scrollHeight - scrollTop == clientHeight </p>
+    <button id="btn18">scrollHeight - scrollTop == clientHeight</button>
+    <br />
+    <br />
+    <div id="box12">
+        <div id="box13">box13</div>
+    </div>
+    <hr />
+
+
+</body>
+</html>

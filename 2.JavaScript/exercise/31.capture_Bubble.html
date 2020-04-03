@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #u1{
+            background-color: #bfa;
+        }
+    </style>
+    <script>
+
+        window.onload = function(){
+            var btn01 = document.getElementById("btn01");
+            var u1 = document.getElementById("u1");
+
+            btn01.onclick = function(){
+                var lis = document.createElement("li");
+                lis.innerHTML = "<a href='javascript:;' class='link'>新添加的超連接</a>";
+                u1.appendChild(lis);
+            };
+
+            var allA = document.getElementsByTagName("a");
+            for(var i = 0 ; i < allA.length ; i++){
+                allA[i].onclick = function(){
+                    alert("我是allA的單擊響應函數");
+                };
+            }
+
+            // 為共同祖先設置觸發事件：獲取
+            u1.onclick = function(event){
+                event = event || window.event;
+                if(event.target.className == "link"){
+                    alert("我是u1的單擊響硬函數");
+                }
+            };
+
+        };
+
+    </script>
+</head>
+<body>
+
+    <button id="btn01">添加新的超連接</button>
+    <br />
+    <br />
+    <div id="u1">
+        <li><a href="javascript:;" class="link">超連接一</a></li>
+        <li><a href="javascript:;" class="link">超連接二</a></li>
+        <li><a href="javascript:;" class="link">超連接三</a></li>
+    </div>
+
+</body>
+</html>

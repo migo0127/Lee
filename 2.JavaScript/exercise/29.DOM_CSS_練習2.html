@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>div跟著滑鼠移動練習</title>
+    <style>
+
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+        }
+
+    </style>
+    <script>
+
+        window.onload = function(){
+            /*
+                box1可以跟隨滑數移動
+            */
+            // 獲取box1
+            var box1 = document.getElementById("box1");
+            // 綁定滑鼠移動事件
+            /*
+            注意：是要依整個HTML當做觸發區塊，所以是設置document的滑鼠移動觸發事件，
+                 而不是box1，若是設置給box1，一旦滑鼠往上移脫離box1區塊，就不會在移
+                 動。
+            */
+            document.onmousemove = function(event){
+                // 設置box1的postion
+                box1.style.position = "absolute"
+
+                // 解決瀏覽器兼容性問題
+                event = event || window.event;
+
+                // 獲取滑鼠坐標
+                /*
+                    ※※ 配合圖片說明
+                    E:\Programming\Front-end engineer\Lee\2.JavaScript\exercise\img\29\pageX_Y&offsetLeft_top_vs_clientX_Y.jpg
+
+                    clientX、clientY：
+                        - 用於獲取滑鼠在「當前的可見視窗」的坐標，其左上角永遠是(0,0)，
+                          就算視窗下拉後，視口的左上仍為(0,0)，即依視口為準。
+                        - 即根據「視口」來定位坐標。
+
+                    pageX、pageY：
+                        - 可以獲取滑鼠在「整個HTML頁面」的坐標，即(0,0)坐標永遠在左上角，
+                          當視窗下拉時，其看不到的左上為(0,0)，坐標不會因視口改變而改變。
+                        - 即根據「整個HTML頁面」來定位坐標。
+                        - IE8及以下不支持，所以如果需要兼容IE8，就不要使用。
+
+                    offsetLeft、offsetTop：
+                        - 當前元素相對於其定位父元素的水平、垂直偏移量。
+                        - 是根據「整個HTML頁面」來定位坐標，而非視口。
+                */
+                /*
+                    因瀏覽器兼容性問題，此處仍使用clientX、clientY來獲取滑鼠坐標位置，
+                    但因clientX、clientY是依「視口」定位坐標，而offsetLeft、offsetTop
+                    是依「document(整個HTML)」來定位坐標，故兩者有一個滾動軸的距離差，
+                    所以要為box1加上滾動軸的距離，box1才會確實的跟著滑鼠移動，而不會有
+                    所偏差。
+                */
+                // 獲取滾動條的距離，須解決兼容性問題
+                /*
+                    chrome：認為瀏覽器的滾動條是body的，可以通過body.scrollTop來獲取。
+                    其他瀏覽器：認為滾動條是html的。
+                */
+                // 垂直距離
+                var sTop = document.body.scrollTop || document.documentElement.scrollTop;
+                // 水平距離
+                var sLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+
+                // 返回的是數字，沒有"px"
+                var left = event.clientX;
+                var top = event.clientY;
+
+                // 設置box1的偏移量
+                box1.style.left = left+sLeft+"px";
+                box1.style.top = top+sTop+"px";
+            }
+        };
+
+
+    </script>
+</head>
+<body style="height:1000px">
+    <div id="box1"></div>
+</body>
+</html>

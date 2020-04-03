@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件的冒泡</title>
+    <style>
+
+        body{
+            background-color: silver;
+        }
+
+        p{
+            width: 1100px;
+            background-color: yellow;
+        }
+
+        #box1{
+            width: 200px;
+            height: 200px;
+            background-color: #bfa;
+        }
+
+        #span{
+            font-size: 20px;
+            background-color: skyblue;
+        }
+
+        #box2{
+            width: 200px;
+            height: 200px;
+            background-color: #bfa;
+        }
+
+        #span2{
+            font-size: 20px;
+            background-color: skyblue;
+        }
+
+    </style>
+    <script>
+
+        window.onload = function(){
+             /*
+            事件的冒泡(Bubble)：
+                - 所謂的冒泡指的就是事件的向上傳遞，當後代元素上的事件被觸發時，其祖
+                  先元素的「相同事件(ex:onclick)也會被觸發。
+                - 在開發中大部份情況下冒泡都是有用的，如果不希望發生事件的冒泡可以通
+                  過事件物件來取消冒泡。
+                - 默認為冒泡。
+                - 取消冒泡：
+                    - 可以將事件物件的cancelBubble設置為true，即可取消冒泡。
+                        事件物件.cancelBubble = true;
+            */
+            // 冒泡：
+            var span = document.getElementById("span");
+            var box1 = document.getElementById("box1");
+
+            span.onclick = function(){
+                alert("我是span的響應函數");
+            };
+
+            box1.onclick = function(){
+                alert("我是box1的響應函數");
+            };
+
+            document.body.onclick = function(){
+                alert("我是body的響應函數");
+            };
+
+            // 取消冒泡
+            var span2 = document.getElementById("span2");
+            var box2 = document.getElementById("box2");
+
+            span2.onclick = function(event){
+                alert("我是span2的響應函數");
+                // 設置取消冒泡
+                // 事件物件的兼容問題
+                event = event || window.event;
+
+                // 取消冒泡
+                event.cancelBubble = true;
+            };
+
+            box2.onclick = function(){
+                alert("我是box2的響應函數");
+            };
+
+        };
+
+
+
+    </script>
+
+</head>
+<body>
+    <p>1.冒泡：當後代元素上的事件被觸發時，其祖先元素的「相同事件(ex:onclick)也會被觸發。</p>
+    <p>● 點擊span後，會觸發span的響應函數，並向上傳遞給祖先元素box1及body觸發相同事件(onclick)。</p>
+    <p>● 點擊box1後，會觸發box1的響應函數，並向上傳遞給祖先元素body觸發相同事件(onclick)。</p>
+    <p>● 點擊body後，會觸發body的響應函數，並向上傳遞給祖先元素html，但此時的html沒有設置相同的事件(onclick)，所以不會冒泡。</p>
+    body
+    <div id="box1">box1
+        <span id="span">span</span>
+    </div>
+    <br />
+    <br />
+    <p>2.取消冒泡：可以將事件物件的cancelBubble設置為true，即可取消冒泡。</p>
+    <p>● 為span2設置取消冒泡 event.cancelBubble = true; 。</p>
+    <p>● box2沒有設置冒泡，仍會向上傳遞給body觸發冒泡事件。</p>
+    body
+    <div id="box2">box2
+        <span id="span2">span2</span>
+    </div>
+
+</body>
+</html>

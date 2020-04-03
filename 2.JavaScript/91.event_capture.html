@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件的獲取(陸：事件的委派)</title>
+    <style>
+        #u1{
+            background-color: #bfa;
+        }
+
+        #u2{
+            background-color: pink;
+        }
+    </style>
+    <script>
+
+        window.onload = function(){
+            /*
+                點擊按鈕後添加新的超連接
+            */
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            var u1 = document.getElementById("u1");
+            var u2 = document.getElementById("u2");
+
+            btn01.onclick = function(){
+                // 創建li
+                var lis = document.createElement("li");
+                lis.innerHTML = "<a href='javascript:;'>新的超連接</a>";
+
+                // 將li添加至ul中
+                u1.appendChild(lis);
+            };
+
+            /*
+                為每一個超連接都綁定一個單擊響應函數，透過下面的方式進行事件綁定時，
+                會發生新添加的a超連接不會有效果，只能操作為已有的超連接設置事件，新
+                添加的超連接都要重新綁定，這種操作比較麻煩。
+            */
+            var allA = document.getElementsByTagName("a");
+            //變歷a
+            // for(var i = 0 ; i < allA.length ; i++){
+            //     allA[i].onclick = function(){
+            //         alert("我是allA的單擊響應函數");
+            //     };
+            // }
+
+            /*
+                事件的獲取、捕獲(event capture)：
+                    - 指將事件統一綁定給元素的「共同的祖先元素」，這樣當祖先元素上
+                      的事件觸發時，會一直向下傳遞至後代元素，從而通過祖先元素的響
+                      應函數來處理事件。
+                    - 事件的獲取是從外往內傳遞，而冒泡是從內往外傳遞，通過獲取可以
+                      減少事件綁定的次數，提高程序的性能。
+                    - 瀏覽器在執行時，是會先進行事件的獲取(從外往內傳遞)，找到目標
+                      元素後在進行冒泡(從內往外傳遞)，通常獲取階段不觸發事件，冒泡
+                      階段才觸發事件，可參考93.capture_bubble.html。
+                    - 注意：
+                        - 獲取：不會觸發後代元素的相同事件。
+                        - 冒泡：會觸發祖先元素的相同事件。
+                    ※ 可查看 https://ithelp.ithome.com.tw/articles/10191970
+            */
+            // a超連接的共同祖先u1綁定一個單擊響應函數
+            u1.onclick = function(){
+                // 此時 ul、li、a 及新添加的a 都會觸發此事件
+                alert("我是u1的單擊響應函數");
+            }
+
+            //
+            btn02.onclick = function(){
+                // 創建li
+                var lis = document.createElement("li");
+                lis.innerHTML = "<a href='javascript:;' class='link'>新的超連接</a>";
+
+                // 將li添加至ul中
+                u2.appendChild(lis);
+
+                // 為u2綁定單擊響應事件，並設置觸發物件是我們期望的元素才執行
+                u2.onclick = function(event){
+                    event = event || window.event;
+                    /*
+                        target：
+                            - 表示觸發該事件的物件。
+
+                    */
+                    if(event.target.className == "link"){
+                        // 此處設置的條件是有瑕疵的，後續會優化
+                        alert("我是u2的指定觸發物件");
+                    }
+                };
+            };
+
+        };
+
+
+    </script>
+
+</head>
+<body>
+    <p>1.事件的獲取：ul、li、a 及新添加的a 都會觸發此事件</p>
+    <button id="btn01">添加超連接</button>
+    <br />
+    <br />
+    <div id="u1">
+        <li><a href="javascript:;">超連接一</a></li>
+        <li><a href="javascript:;">超連接二</a></li>
+        <li><a href="javascript:;">超連接三</a></li>
+    </div>
+    <br />
+    <hr />
+    <button id="btn02">添加超連接</button>
+    <br />
+    <p>2.事件的獲取：並設置觸發物件是我們期望的元素才執行。</p>
+    <p>● event.target.className == "link"</p>
+    <div id="u2">
+        <li><a href="javascript:;" class="link">超連接一</a></li>
+        <li><a href="javascript:;" class="link">超連接二</a></li>
+        <li><a href="javascript:;" class="link">超連接三</a></li>
+    </div>
+
+</body>
+</html>

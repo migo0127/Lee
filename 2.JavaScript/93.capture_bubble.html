@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件的獲取及冒泡</title>
+    <style>
+
+        #box1{
+            width: 250px;
+            height: 250px;
+            background-color: #bfa;
+        }
+
+        #box2{
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            margin: 0 auto;
+        }
+
+        #box3{
+            width: 150px;
+            height: 150px;
+            background-color: skyblue;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        /*
+            事件的傳播：
+
+                ※ 參考圖片說明：
+                E:\Programming\Front-end engineer\Lee\2.JavaScript\img\93.capture_bubble\.93.capture_bubble.jpg
+
+                - 關於事件的傳播，網景公司與微軟工司有不同的見解。
+                - 微軟公司認為事件應該是由內向外傳播，也就是當前事件觸發時，應該先觸發當
+                  前元素上的事件，然後再向當前元素的祖先元素上傳遞，也就說事件應該再冒泡
+                  階段執行。
+                - 網景公司認為事件應該是由外向內傳播，也就是當前事件觸發時，應該先觸發當
+                  前元素的最外層的祖先元素的事件，然後在向內傳播給後代元素。
+                - W3C綜合了兩個公司的方案，將事件的傳播分成了三個階段：
+
+                    1.獲取(捕獲)階段：
+                        - 在獲取階段時，從最外層的祖先元素向目標元素進行事件的獲取，但是
+                          默認此時不會觸發事件(類似先知道有哪些設置的事件)。
+
+                    2.目標階段：
+                        - 事件獲取到目標元素，獲取階段結束，開始在目標元素上觸發事件。
+
+                    3.冒泡階段：
+                        - 事件從目標元素向它的祖先元素傳遞，依次觸發祖先元素上的事件。
+
+                    - 如果希望在獲取階段就觸發事件，可以將addEventLintener()的第三個參
+                      數設置為true，但一般情況下我們不會希望在獲取階段就觸發事件，所以
+                      這個參數一般都是false。
+        */
+
+
+    </script>
+</head>
+<body>
+    <div id="box1">box1
+        <div id="box2">box2
+            <div id="box3">box3</div>
+        </div>
+    </div>
+
+</body>
+</html>

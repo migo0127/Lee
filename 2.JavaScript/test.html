@@ -3,56 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
-    <script>
-        var obj = {
-            name:"三星堆",
-            age:5200
-        };
-
-        var obj2 = {
-            name:"光頭強",
-            age:18
-        };
-
-        var obj3 = {
-            name:"絨絨",
-            age:8
-        };
-
-        var obj4 = {
-            name:"DL",
-            age:29
+    <title>Document</title>
+    <style>
+        #u1{
+            background-color: #bfa;
         }
+    </style>
+    <script>
 
-        // console.log(obj);
-        // console.log(obj2);
-        // console.log(obj3);
+        window.onload = function(){
+            var btn04 = document.getElementById("btn04");
+            bind(btn04,)
 
-        var arr = [obj,obj2,obj3,obj4];
-
-        function getAdult(arr){
-            var newArr = [];
-            for(i=0;i<arr.length;i++){
-                if(arr[i].age >= 18){
-                    newArr.push(arr[i]);
+            function bind(obj,eventStr,fun){
+                // 判斷是否有 addEventListener()
+                if(obj.addEventListener){
+                    obj.addEventListener(eventStr,fun,false);
+                }else{
+                    /*
+                        attachEvent的this是window，是瀏覽器調用的，所以要變成由
+                        開發來調用，並指定是誰來調用，使this變成調用的物件。
+                        call(obj);
+                    */
+                    obj.attachEvent("on"+eventStr,function(){
+                        // 讓瀏覽器先調用匿名函數，在由我們指定執行調用的物件
+                        fun.call(obj);
+                    });
                 }
             }
+        };
 
-            return newArr;
-        }
-
-        var result = new getAdult(arr);
-        console.log(result);
-
-
-        <i class="fas fa-air-freshener"></i>
 
 
     </script>
-
 </head>
 <body>
-    
+
+    <p>4.</p>
+    <p>● 兼容瀏覽器</p>
+    <button id="btn04">我是按鈕04</button>
+
 </body>
 </html>

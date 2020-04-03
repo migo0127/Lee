@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>將div跟著滑鼠移動的練習，設置取消冒泡</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+        }
+
+        #box2{
+            width: 500px;
+            height: 400px;
+            background-color: pink;
+        }
+    </style>
+    <script>
+
+        window.onload = function () {
+
+            var box1 = document.getElementById("box1");
+            document.onmousemove = function (event) {
+                box1.style.position = "absolute";
+                event = event || window.event;
+                var sTop = document.body.scrollTop || document.documentElement.scrollTop;
+                // 水平距離
+                var sLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+
+                // 返回的是數字，沒有"px"
+                var left = event.clientX;
+                var top = event.clientY;
+
+                // 設置box1的偏移量
+                box1.style.left = left + sLeft + "px";
+                box1.style.top = top + sTop + "px";
+            }
+
+            // box2取消冒泡
+            var box2 = document.getElementById("box2");
+            box2.onmousemove = function(event){
+                event = event || window.event;
+                event.cancelBubble = true;
+            }
+        };
+
+
+    </script>
+</head>
+
+<body style="height:1000px">
+
+    <div id="box2">
+        <p>box2：取消冒泡，滑鼠移入時，box1不會跟著移入。</p>
+        <p>因為box2的區域沒有被傳遞。</p>
+        </div>
+    <div id="box1"></div>
+</body>
+
+</html>

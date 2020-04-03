@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM：事件物件</title>
+    <style>
+
+        #areaDiv{
+            width: 400px;
+            height: 100px;
+            border: 1px solid black;
+            margin-bottom: 20px;
+        }
+
+        #showMsg{
+            width: 400px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+    </style>
+    <script>
+
+        window.onload = function(){
+            /*
+                當滑鼠在areaDiv中移動時，在showMsg中顯示滑鼠的坐標位置。
+            */
+            // 獲取兩個div
+            var areaDiv = document.getElementById("areaDiv");
+            var showMsg = document.getElementById("showMsg");
+
+            /*
+                onmousemove 事件：
+                    - 當滑鼠在元素中移動時，該事件將會被觸發。
+
+                事件物件；
+                    - 當事件的響應函數被觸發時，瀏覽器每次都會將一個事件物件
+                      作為實參傳遞給響應函數的形參，在事件物件中封裝了當前事
+                      件相關的一切信息，比如：滑鼠的坐標、鍵盤哪個按鍵被按下
+                      、滑鼠滾動的方向...等等。
+                    - 因為可以自行定義一個形參來獲取該事件物件。
+                    - 注意：
+                        在IE8及以下，響應函數被觸發時，瀏覽器不會傳遞事件物件
+                        作為實參傳遞給響應函數，而是將事件物件作為window物件
+                        的屬性保存。
+            */
+            areaDiv.onmousemove = function(event){
+                /*
+                    clientX、clientY：
+                        - 用於獲取滑鼠在「當前可見視窗」的坐標，即可見視口的左上
+                          永遠是(0,0)，就算視窗下拉，左上仍是(0,0)，如固定定位。
+                        - clientX：可以獲取滑鼠指針的水平坐標。
+                        - clientY：可以獲取滑鼠指針的垂直坐標。
+
+                    chrome、firefox、IE8以上：
+                        - 會將事件物件作為實參傳遞給響應函數。
+                        - 因此可以直接使用：
+                            event.clientX
+                            event.clientY
+
+                    IE8及以下：
+                        - 是將事件物件作為window物件的屬性保存。
+                        - 需要透過window調用屬性
+                            window.event.clientX
+                            window.event.clientY
+
+                    ※ 注意：兩種判斷方法
+                        當使用 window.event.clientX 時，IE、chrome都支持，
+                        但firefox不支持，因此需要進行條件判斷來選擇使用。
+                */
+                // 判斷方法一：
+                // if(!event){
+                //     event = window.event;
+                // }
+
+                // 判斷方法二： || (或)，找true，並返回true的值
+                event = event || window.event;
+
+                var x = event.clientX;
+                var y = event.clientY;
+
+                showMsg.innerHTML = "滑鼠的 x = "+x+"，y = "+y;
+            };
+
+        };
+
+
+    </script>
+</head>
+<body>
+    <div id="areaDiv"></div>
+    <div id="showMsg"></div>
+</body>
+</html>

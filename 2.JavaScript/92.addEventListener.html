@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addEventListener() vs attachEvent</title>
+    <script>
+        window.onload = function(){
+            /*
+            點擊按鈕以後彈出多個內容。
+            */
+            // 獲取按鈕物件
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            var btn03 = document.getElementById("btn03");
+            var btn04 = document.getElementById("btn04");
+
+            /*
+                使用「物件.事件 = 函數」的形式綁定響應函數時，它只能同時為一個元素的
+                一個事件綁定一個響應函數，不能綁應多個，如果綁定多個，後面的會覆蓋前
+                面的。
+
+            */
+            btn01.onclick = function(){
+                alert("我是「物件.事件 = 函數」的第1次");
+            };
+
+            btn01.onclick = function(){
+                alert("我是「物件.事件 = 函數」的第2次");
+            };
+
+            /*
+                addEventListener()：
+                    - 通過 addEventListener()方法可以為元素綁定響應函數。
+                    - 參數：3個
+                        第一個參數：事件的字符串，不要「on」。
+                        第二個參數：回調函數，當事件觸發時該函數會被調用。
+                        第三個參數：是否在獲取階段觸發事件，需要一個布爾值，一般都
+                        傳遞false。
+                    - 語法：
+
+                        物件.addEventListener("事件字符串(不要on"),function(){},false);
+
+                    - 使用 addEventListener() 可以同時為一個元素的相同事件同時綁定
+                      多個響應函數，這樣當事件被觸發時，響應函數將會照函數的綁定順序
+                      執行。
+            */
+            // btn02.addEventListener("click",function(){
+            //     alert("我是addEventListener()的第1次");
+            // },false);
+
+            // btn02.addEventListener("click",function(){
+            //     alert("我是addEventListener()的第2次");
+            // },false);
+
+            // btn02.addEventListener("click",function(){
+            //     alert("我是addEventListener()的第3次");
+            // },false);
+
+            // 併在一起
+            // btn02.addEventListener("click",function(){
+            //     alert("我是addEventListener()的第1次");
+            //     alert("我是addEventListener()的第2次");
+            //     alert("我是addEventListener()的第3次");
+            // },false);
+
+            /*
+                attachEvent()：
+                    - 在IE7及以下中可以使用attachEvent()來綁定事件。
+                    - 參數：2個
+                        第一個參數：事件的字符串，要on。
+                        第二個參數：回調函數。
+                    - 語法：
+
+                        物件.attachEvent("事件字符串(要on"),function(){});
+
+                    - attachEvent() 方法也可以同時為一個事件綁定多個響應函數，
+                      不同的事它是後綁定的先執行，執行順序與addEventListener()
+                      剛好相反。
+
+                    - 併在一起：1>2>3，分開寫3>2>1。
+            */
+            // btn03.attachEvent("onclick",function(){
+            //     alert("我是attachEvent的第1次");
+            // });
+
+            // btn03.attachEvent("onclick",function(){
+            //     alert("我是attachEvent的第2次");
+            // });
+
+            // btn03.attachEvent("onclick",function(){
+            //     alert("我是attachEvent的第3次");
+            // });
+
+            // 併在一起：1>2>3，分開寫3>2>1
+            // btn03.attachEvent("onclick",function(){
+            //     alert("我是attachEvent的第1次");
+            //     alert("我是attachEvent的第2次");
+            //     alert("我是attachEvent的第3次");
+            // });
+
+            // btn04 兼容瀏覽器
+            bind(btn04,"click",function(){
+                alert("我是自定義的第1次");
+                alert("我是自定義的第2次");
+                alert("我是自定義的第3次");
+            });
+
+            // 兼容瀏覽器，自行定義一個函數
+            /*
+                自定義參數：
+                    obj：要綁定的事件物件。
+                    eventStr：事件的字符串(傳時不要on)。
+                    fun：回調函數
+
+            */
+            function bind(obj,eventStr,fun){
+                // 判斷是否有 addEventListener()
+                if(obj.addEventListener){
+                    obj.addEventListener(eventStr,fun,false);
+                }else{
+                    /*
+                        attachEvent的this是window，是瀏覽器調用的，所以要變成由
+                        開發來調用，並指定是誰來調用，使this變成調用的物件。
+                        call(obj);
+                    */
+                    obj.attachEvent("on"+eventStr,function(){
+                        // 讓瀏覽器先調用匿名函數，在由我們指定執行調用的物件
+                        fun.call(obj);
+                    });
+                }
+            }
+
+        };
+
+
+    </script>
+</head>
+<body>
+
+    <p>1.物件.事件 = 函數</p>
+    <p>只能為同一個元素綁定一個事件一個響應函數，若綁定多個相同事件，後面的會覆蓋前面的。</p>
+    <button id="btn01">我是按鈕01</button>
+    <br />
+    <hr />
+    <p>2.物件.addEventListener("事件字符串(不要on"),function(){},false);</p>
+    <p>● IE8及以下不支持。</p>
+    <button id="btn02">我是按鈕02</button>
+    <br />
+    <hr />
+    <p>3.物件.attachEvent("事件字符串(要on"),function(){});</p>
+    <p>● 只有IE7及以下支持，其他瀏覽器不支持。</p>
+    <button id="btn03">我是按鈕03</button>
+    <br />
+    <hr />
+    <p>4.function bind(obj,eventStr,fun){if(obj.addEventListener){obj.addEventListener(eventStr,fun,false);}else{obj.attachEvent("on"+eventStr,function(){fun.call(obj);});}}</p>
+    <p>● 兼容瀏覽器</p>
+    <button id="btn04">我是按鈕04</button>
+
+</body>
+</html>
