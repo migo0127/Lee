@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM</title>
+    <script>
+
+        window.onload = function(){
+            /*
+                BOM (Browser Object Model)：
+                    - 瀏覽器物件模型。
+                    - BOM可以使我們通過JS來操作瀏覽器。
+                    - 在BOM中為我們提供了一組物件，用來完成對瀏覽器的操作。
+                    - BOM物件(共5個)：
+
+                        1.Window：
+                            - 代表的是整個瀏覽器的窗口，同時window也是網頁中的全局物件。
+
+                        2.Navigator：
+                            - 代表的是當前瀏覽器的訊息，通過該物件可以用來識別不同的瀏覽器。
+
+                        3.Location：
+                            - 代表的是當前瀏覽器的網址欄訊息，通過Location可以獲取網址欄訊
+                              息，或者操作瀏覽器跳轉頁面。
+
+                        4.History：
+                            - 代表瀏覽器的歷史紀錄，可以通過該物件來操作瀏覽器的歷史紀錄，
+                              由於隱私問題，該物件不能獲取到具體的歷史紀錄，只能操作瀏覽器
+                              向前或向後翻頁，而且該操作只在當次訪問時有效。
+
+                        5.Screen：
+                            - 代表用戶的螢幕的訊息，通過該物件可以獲取到用戶的顯示器相關訊
+                              息。
+
+                    - 這些BOM物件在瀏覽器中都是作為window物件的屬性保存的，可以通過window
+                      物件來使用，也可以直接使用。
+                      - 例：
+                        console.log(window.navigator);
+                        console.log(navigator);
+                        console.log(window.location);
+                        console.log(location);
+
+            */
+            console.log(window.navigator);
+            console.log(navigator);
+            console.log(window.location);
+            console.log(location);
+
+            /*
+                2.Navigator：
+                    - 代表當前瀏覽器的訊息，通過該物件可以用來識別不同的瀏覽器。
+                    - 由於歷史原因，Navigator物件中的大部份屬性都已經不能幫助我們
+                      來識別瀏覽器了。
+                    - 一般我們只會使用「userAgent」來判斷瀏覽器的訊息。
+                        - userAgent(用戶代理，即瀏覽器代理)：
+                            - 是一個字符串，這個字符串中包含有用的描述瀏覽器的訊息
+                              內容，不同的瀏覽器會有不同的userAgent。
+
+                    - userAgent：
+                        console.log(navigator.userAgent);
+
+                        火狐：
+                            Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:74.0) Gecko/20100101 Firefox/74.0 101.BOM.html:66:21
+
+                        chrome：
+                            Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36
+
+                        IE8：
+                            Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Zoom 3.6.0)
+
+                        IE9：
+                            Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Zoom 3.6.0)
+
+                        IE10：
+                            Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Zoom 3.6.0)
+
+                        IE11(edge)：
+                            Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Zoom 3.6.0; rv:11.0) like Gecko
+
+                        ※ 在IE11中已經將微軟和IE相關的標識符都已經去除了，所以我們基本已經
+                           不能通過userAgent來識別一個瀏覽器是否是IE了！！
+
+                        - 因為如果不能通過userAgent來判斷，還是可以通過一些瀏覽器特有的物件
+                          來判斷瀏覽器訊息，比如：ActiveXObject (IE獨有的構造函數)。
+
+            */
+            var uAgent = navigator.userAgent;
+            console.log(uAgent);
+
+            // 判斷是哪一個瀏覽器
+            if(/firefox/i.test(uAgent)){
+                console.log("你是火狐瀏覽器");
+            }else if(/chrome/i.test(uAgent)){
+                console.log("你是chrome瀏覽器");
+            }else if(/msie/i.test(uAgent)){
+                console.log("你是IE瀏覽器");
+            }else if("ActiveXObject" in window){
+                console.log("你是IE11，爛東西!!!");
+            }
+        };
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

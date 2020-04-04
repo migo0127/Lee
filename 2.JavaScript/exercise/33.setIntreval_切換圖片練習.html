@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setIntreval()：切換圖片練習</title>
+    <style>
+
+        .wrap,.wrap2{
+            width:400px ;
+            height:600px;
+        }
+
+        .wrap > img,.wrap2 > img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+    </style>
+    <script>
+        /*
+            使圖片可以自動切換，不停止：
+                第一步：獲取img1
+                第二步：創建一組陣列來保存所有圖片的src屬性
+                第三步：初始化圖片索引
+                第四步：設定定時器
+                    4-1.使索引自增
+                    4-2.判斷索引是否超過最大索引，有兩種方式
+                第五步：修改src屬性
+        */
+
+        window.onload = function(){
+            // 第一步：獲取img1
+            var img1 = document.getElementById("img1");
+
+            // 第二步：創建一組陣列來保存圖片的src屬性
+            var img1Arr = ["./img/33/大龙 - 45.jpg","./img/33/大龙 - 46.jpg","./img/33/大龙 - 47.jpg","./img/33/大龙 - 48.jpg","./img/33/大龙 - 49.jpg","./img/33/大龙 - 50.jpg"];
+
+            // 第三步：初始化圖片索引
+            var img1Index = 0;
+
+            // 第四步：設定定時器
+            var timer = setInterval(function(){
+                // 4-1.使索引自增
+                img1Index++;
+
+                // 4-2.判斷索引是否超過最大索引，有兩種方式
+                // 方式一：
+                // if(img1Index >= img1Arr.length){
+                //     img1Index = 0;
+                // }
+
+                // 方法二：
+                img1Index %= img1Arr.length;
+
+                // 第五步：修改src屬性
+                img1.src = img1Arr[img1Index];
+
+            },1000);
+
+            /*
+                點擊開始按鈕後開始切換圖片，點擊停止後停止切換圖片：
+
+                    開始按鈕：
+                        第一步：獲取btn01、btn02、img2
+                        第二步：為btn01綁定單擊響應函數
+                        第三步：創建一組陣列保存所有圖片src屬性
+                        第四步：初始化索引位置
+                        第五步：在全局作用域中，創建變量保存定時器標識
+                        第六步：設定定時器
+                            6-1：使圖片索引自增
+                            6-2：圖片循環，條件判斷
+                            6-3：賦值src屬性
+                        第七步：在開啟定時器之前，將上一個(不管有沒有)的定時器關閉。
+
+                    停止按鈕：
+                        第一步：為btn02綁定單擊響應函數
+                        第二步：設定停止相對應的定時器
+            */
+
+            // 開始：
+            // 第一步：獲取btn01、btn02、img2
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            var img2 = document.getElementById("img2");
+
+            // 第五步：在全局作用域中，創建變量保存定時器標識
+            var timer2;
+
+            // 第二步：為btn01綁定單擊響應函數
+            btn01.onclick = function(){
+                /*
+                    目前，我們每點擊一次開始按鈕，就等於會開啟一個定時器，點擊多次
+                    就是開啟多個定時器，這樣就會導致圖片的切換速度越來越快，並且我
+                    們只能關閉最後一次開啟的定時器，因變量一直被重新賦值(覆蓋)，只
+                    保存最後一次開啟定時器的標識。
+
+                    所以為了避免每按下開始按鈕後就重新開啟一次定時器的情況，可以在
+                    點擊開啟定時器之前，將上一個定時器關閉，這樣就不會一直重新開啟。
+                */
+
+                // 第七步：在開啟定時器之前，將上一個(不管有沒有)的定時器關閉。
+                 clearInterval(timer2);
+
+                // 第三步：創建一組陣列保存所有圖片src屬性
+                var img2Arr = ["./img/33/大龙 - 45.jpg","./img/33/大龙 - 46.jpg","./img/33/大龙 - 47.jpg","./img/33/大龙 - 48.jpg","./img/33/大龙 - 49.jpg","./img/33/大龙 - 50.jpg"];
+
+                // 第四步：初始化索引位置
+                var img2Index = 0;
+
+                // 第六步：設定定時器
+                timer2 = setInterval(function(){
+                    // 6-1：使圖片索引自增
+                    img2Index++;
+
+                    // 6-2：圖片循環，條件判斷
+                    img2Index %= img2Arr.length;
+
+                    // 6-3：賦值src屬性
+                    img2.src = img2Arr[img2Index];
+
+                },1000);
+            };
+
+            // 停止：
+            // 第一步：為btn02綁定單擊響應函數
+            btn02.onclick = function(){
+                // 第二步：設定停止相對應的定時器
+                clearInterval(timer2);
+            };
+
+
+        };
+
+
+    </script>
+
+</head>
+<body>
+
+    <div class="wrap">
+    <img id="img1" src="./img/33/大龙 - 45.jpg" alt="">
+    </div>
+    <br />
+    <br />
+    <div class="wrap2">
+    <img id="img2" src="./img/33/大龙 - 45.jpg" alt="">
+    </div>
+    <br />
+    <br />
+    <button id="btn01">開始</button>
+    <button id="btn02">停止</button>
+
+
+</body>
+</html>

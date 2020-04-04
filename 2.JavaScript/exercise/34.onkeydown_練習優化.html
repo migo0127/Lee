@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鍵盤事件的優化練習</title>
+    <style>
+
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: #bbffaa;
+            position: absolute;
+        }
+
+    </style>
+    <script>
+
+        window.onload = function(){
+            /*
+                使div可以根據按下的方向鍵(↑ ↓ ← →)向該方向移動。
+
+                ※優化：在第一次移動時，第一次與第二次會有間隔小遲緩。
+                    - 將速度與方向分開。
+                        - 讓 onkeydown 只控制 方向。
+                        - 由 定時器 來控制 移動速度。
+                    - 步驟：
+                        第一步：定義一個變量，用來表示移動的初始速度
+                        第二步：創建一個變量保存方向
+                        第三步：開啟一個定時器，用來控制div的移動速度
+                        第四步：為 document 綁定鍵盤按下事件
+                            4-1.重新賦值direction，使其可以有正確的keyCode，並引入switch
+                            4-2.按下設定的鍵後，變更速度
+                        第五步：為document綁定鍵盤鬆開事件
+                            5-1.當鍵盤按鍵鬆開時，direction重新賦值為 0，使其不在有方向的值
+            */
+
+            // 第一步：定義一個變量，用來表示移動的初始速度
+            var speed = 10;
+
+            // 第二步：創建一個變量保存方向
+            var direction = 0;
+
+            // 第三步：開啟一個定時器，用來控制div的移動速度
+            var timer = setInterval(function(){
+                // 判斷按下的方向鍵及移動速度
+                switch(direction){
+                    case 37: // 左
+                        box1.style.left = box1.offsetLeft - speed + "px";
+                        break;
+                    case 39: // 右
+                        box1.style.left = box1.offsetLeft + speed + "px";
+                        break;
+                    case 38: // 上
+                        box1.style.top = box1.offsetTop - speed + "px";
+                        break;
+                    case 40: // 下
+                        box1.style.top = box1.offsetTop + speed + "px";
+                        break;
+                }
+            },30);
+
+            // 第四步：為 document 綁定鍵盤按下事件
+            document.onkeydown = function(event){
+                event = event || window.event;
+
+                // 4-2.按下設定的鍵後，變更速度
+                if(event.ctrlKey){
+                     speed = 30;
+                }else if(event.altKey){
+                    speed = 5;
+                }else if(event.shiftKey){
+                    speed = 0;
+                }else{
+                    speed = 10;
+                }
+
+                // 4-1.重新賦值direction，使其可以有正確的keyCode，並引入switch
+                direction = event.keyCode;
+            }
+
+            // 第五步：為document綁定鍵盤鬆開事件
+            document.onkeyup = function(event){
+                event = event || window.event;
+                // 5-1.當鍵盤按鍵鬆開時，direction重新賦值為 0，使其不在有方向的值
+                direction = 0;
+
+            };
+
+        };
+
+    </script>
+
+</head>
+<body>
+
+    <div id="box1"></div>
+
+</body>
+</html>

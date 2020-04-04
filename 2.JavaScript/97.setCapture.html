@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IE8：setCapture()</title>
+    <script>
+
+    window.onload = function(){
+        var btn01 = document.getElementById("btn01");
+        var btn02 = document.getElementById("btn02");
+
+        btn01.onclick = function(){
+            alert("我是btn01的事件");
+        };
+
+        btn02.onclick = function(){
+            alert("我是btn02的事件");
+        };
+
+        /*
+            setCapture()：
+                - 當調用一個元素的setCapture()方法以後，這個元素會把下一次所有的滑鼠按下
+                  的相關事件獲取到自身上，全部變成觸發此元素的事件。
+                - 即就算點擊btn02，也是觸發btn01的事件，不管做什麼事，只要滑鼠點擊的動作
+                  時，都是觸發btn01的事件，就算點空白處也是觸發btn01事件。
+        */
+        btn01.setCapture();
+    };
+
+
+    </script>
+</head>
+<body>
+
+    <button id="btn01">btn01</button>
+    <button id="btn02">btn02</button>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滑鼠的拖拽_4：將拖拽設置為一個共用函數</title>
+    <style>
+
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+            position: absolute;
+        }
+
+        #box2{
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            position: absolute;
+            top: 200px;
+            left: 200px;
+        }
+
+        #img1{
+            border: 1px solid black;
+            position: absolute;
+            top: 300px;
+            left: 200px;
+        }
+
+    </style>
+    <script>
+        /*
+            優化：
+                當頁面有文字或圖片時，使用全選功能再拖拽元素時，會有異常。
+        */
+
+        window.onload = function(){
+            /*
+                拖拽box1元素：
+                    - 拖拽流程：
+                        1.onmousedown：當滑鼠在要被拖拽的元素上按下不放時，觸發按下事件。
+                            1-1.當按下box1進行拖拽時，box1會固定在滑鼠左上角走，所以要進
+                                求值處理。
+                            1-2.取消瀏覽器默認去搜索引擎搜索內容的默認行為。
+                                1-2-1.獲取所有滑鼠按下事件(IE)。
+                        2.onmousemove：當滑鼠移動時被拖拽元素跟隨滑鼠移動。
+                        3.onmouseup：當滑鼠鬆開時，被拖拽元素固定再當前位置。
+                            3-1.滑鼠鬆開後，要結束跟隨滑鼠移動的事件。
+                            3-2.滑鼠鬆開後，也要結束鬆開後的事件，否則每次滑鼠有做按下再
+                                "鬆開"的動作，就會再次觸發onmouseup事件。
+                            1-2-2.釋放所有滑鼠按下事件(IE)。
+            */
+            // 獲取box1
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            var img1 = document.getElementById("img1");
+
+            // 為box1設置拖拽
+            drag(box1);
+
+            // 為box2設置拖拽
+            drag(box2);
+
+            // 為img1設置拖拽
+            drag(img1);
+
+
+            // 將拖拽設置共用函數
+            function drag(obj){
+                 // 為obj綁定一個滑鼠按下事件
+                // 1.當滑鼠在要被拖拽的元素上按下不放時，觸發拖拽事件
+                obj.onmousedown = function (event) {
+                    // 1-2. 取消瀏覽器默認去搜索引擎搜索內容的默認行為。
+                    // 1-2-1. 先設置obj獲取所有滑鼠案下的事件
+                    /*
+                        setCapture()：
+                            - 參考97.setCapture().html 說明。
+                            - 只有IE支持，但火狐不會報錯，chrome會報錯。
+                    */
+                    // 判斷方式一：
+                    // if(obj.setCapture){
+                    //     obj.setCapture();
+                    // }
+
+                    // 判斷方式二： && 找flase
+                    obj.setCapture && obj.setCapture();
+
+                    event = event || window.event;
+                    // 1-1. 獲取obj被按下時的坐標位置偏移量，使obj與滑鼠固定在那個點上。
+                    /*
+                        配合圖片說明：
+                        E:\Programming\Front-end engineer\Lee\2.JavaScript\img\95.mouse_drag_2\95.mouse_drag_2.jpg
+                    */
+
+                    // 滑鼠.clientX - 元素.offsetLeft;
+                    // 滑鼠.clientY - 元素.offsetTop;
+                    var oLeft = event.clientX - obj.offsetLeft;
+                    var oTop = event.clientY - obj.offsetTop;
+
+
+                    // 2.為document綁定一個onmousemove事件
+                    document.onmousemove = function (event) {
+                        // 解決瀏覽器兼容問題，獲取坐標
+                        event = event || window.event;
+                        // 當滑鼠移動時被拖拽元素跟隨滑鼠移動
+                        // 獲取滑鼠坐標，並減去滑鼠點擊在元素上時的偏移量位置，使obj不會
+                        // 跟隨在滑鼠的左上角，而是點哪就固定在那個點上。
+                        var left = event.clientX - oLeft;
+                        var top = event.clientY - oTop;
+
+                        // 解決瀏覽器兼容問題，並獲取滾動軸偏移量
+                        var sTop = document.body.scrollTop || document.documentElement.scrollTop;
+                        var sLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+
+                        // 修改obj的偏移量
+                        obj.style.left = left + sLeft + "px";
+                        obj.style.top = top + sTop + "px";
+
+                        /*
+                            當我們拖拽一個網頁中的內容(文字或圖片或全選後拖拽時)，瀏覽器會
+                            默認去搜索引擎中搜索內容，這是瀏覽器提供的默認行為，此時會導致
+                            拖拽功能的異常，如果不希望發生這個行為，則可以通過reture false
+                            來取消默認行為。
+
+                            ※ IE8不支持 return false。
+                        */
+                        return false;
+
+                    }
+
+                    // 3.為 document 綁定一個滑鼠鬆開事件
+                    document.onmouseup = function () {
+                        /*
+                            3-1.當滑鼠鬆開時，被拖拽的元素固定在當前位置，就是取消document
+                            的documentmove事件。
+                        */
+                        document.onmousemove = null;
+
+                        // 3-2.取消document的documentup事件
+                        document.onmouseup = null;
+
+                        // 1-2-2.釋放所有滑鼠按下事件(IE)。
+                        // 判斷方式一：
+                        // if(obj.releaseCapture){
+                        //     obj.releaseCapture();
+                        // }
+
+                        // 判斷方式二
+                        obj.releaseCapture && obj.releaseCapture();
+                    }
+                };
+            }
+        };
+
+    </script>
+</head>
+<body>
+    <p>我是一段文字，全選時我有跟著動嗎?</p>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <img id="img1" src="./img/98.mouse_drag_4/大龙 - 43.jpg" alt="">
+
+</body>
+</html>

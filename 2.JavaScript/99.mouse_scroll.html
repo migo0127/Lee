@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滑鼠滾動事件</title>
+    <style>
+
+        body{
+            height: 2000px;
+        }
+
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+        }
+    </style>
+    <script>
+
+       window.onload = function(){
+        /*
+            當滑鼠在元素中向下滾動時，元素變長，在元素中向下滾動時，元素變長，
+            但在元素外滾動時，不會影響到元素。
+        */
+        // 獲取box1
+        var box1 = document.getElementById("box1");
+
+        // 為box1綁定一個滑鼠滾動事件
+        /*
+            onmousewheel事件：
+                - 滑鼠滾動軸滾動事件，會在滾動軸滾動時觸發。
+                - 火狐不支持。
+
+            ※ DOMMouseScroll：
+                - 在火狐中需要使用 DOMMouseScroll 來綁定滑鼠滾動軸滾動事件。
+                - 注意：DOMMouseScroll 事件需要通過 addEventListener()來綁定。
+
+        */
+
+        // 為box1的其他瀏覽器綁定滑鼠滾動軸滾動事件
+        box1.onmousewheel = function(event){
+
+            event = event || window.event;
+
+            // 判斷滑鼠滾動軸的滾動方向
+            /*
+                wheelDelta 屬性：
+                    - 可以獲取滑鼠滾動軸滾動的方向。
+                    - wheelDelta 不看大小，只看正負值。
+                    - 向上滾：正值。
+                    - 向下滾：負值。
+                    - 注意：火狐不支持這個屬性。
+
+                detail屬性：
+                    - 火狐使用 detail 來獲取滑鼠滾動軸滾動的方向。
+                    - 向上滾：負值。
+                    - 向下滾：正值。
+                    - 與 Delta 正好相反。
+
+                ※ 因此需要進行條件判斷。
+            */
+            // 向下滾變長，向上滾變短
+            if(event.wheelDelta > 0 || event.detail < 0 ){
+                if( box1.clientHeight > 50 ){
+                    box1.style.height = box1.clientHeight - 10 + "px";
+                }
+            }else{
+                box1.style.height = box1.clientHeight + 10 + "px";
+            }
+
+            /*
+                若頁面也有滾動條時，當滾動軸滾動，頁面也會随之滾動，此時就會發生
+                元素在滾動的同時，被頁面滾到上方去了，這是瀏覽器對滾動的默認行為
+                ，只要滑鼠的滾動軸一滾動，頁面也會跟著滾動，就算是在元素內滾動，
+                也是默認整個網頁的滾動，所以如果不希望發生在元素內滾動時，頁面跟
+                著滾的的行為，可以取消默認行為。
+
+                - return false。
+
+                - event.preventDefault()：
+                    - addEventListener()方式無法使用 return fasle 的方式來取消
+                      默認行為，需要使用 event.preventDefault() 來取消默認行為。
+
+                    - 注意：IE8及以下不支持 event.preventDefault()，所以需要使用
+                      條件判斷。
+
+            */
+            /*
+                event.preventDefault()：addEventListener()的取消默認方式，需解決
+                IE8不支持的相容性問題：
+             */
+            event.preventDefault && event.preventDefault();
+
+            // addEventListener() 以外的默認取消方式：
+            return false;
+        };
+
+        // 為火狐綁定滑鼠滾動軸滾動事件，需要通過 addEventListener()來綁定。
+        // 要先解決addEventListener()相容性問題
+        function bind(obj,eventStr,fun){
+            if(obj.addEventListener){
+                obj.addEventListener(eventStr,fun,false);
+            }else{
+                obj.attachEvent("on"+eventStr,function(){
+                    fun.call(obj);
+                });
+            }
+        };
+
+        //  為火狐綁定滑鼠滾動軸滾動事件
+        // box1.onmousewheel 調用此函數來進行，與調用匿名函數的方式類似
+        bind(box1,"DOMMouseScroll",box1.onmousewheel);
+
+       };
+
+
+    </script>
+</head>
+<body>
+
+    <div id="box1"></div>
+
+</body>
+</html>

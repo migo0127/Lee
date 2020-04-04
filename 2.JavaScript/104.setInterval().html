@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定時器的調用</title>
+    <script>
+
+        // 使count中的內容，自動切換
+
+        window.onload = function(){
+            var count = document.getElementById("count");
+            /*
+                JS的程序執行速度是非常快的，因此如果希望一段程式可以每間隔一段時間
+                執行一次，可以使用定時調用。
+
+                setInterval()：類似for迴圈
+                    - 定時調用，定時器，為window物件的方法。
+                    - 可以將一個函數，每隔一段時間執行一次。
+                    - 參數：(2個)
+                        第一個參數：回調函數，該函數會每隔一段時間被調用一次。
+                        第二個參數：每次調用間隔的時間，單位是毫秒。
+
+                    - 返回值：
+                        - 返回一個Number類型的數據，這個數字用來作為此定時器的唯一
+                          標識，類似 返回1 表示此定時調用為 1號定時器，因同一個頁面
+                          可能會有多個定時調用，因此需要透過唯一標識來停止該定時器。
+
+                clearInterval()：
+                    - 可以用來關閉一個定時器。
+                    - clearInterval()方法中需要一個定時器的標示作為參數，用來關閉相
+                      對應的定時器。
+            */
+            // 初始化變量
+            var i = 0;
+
+            // 設定一個定時調用
+            var timer = setInterval(function(){
+                count.innerHTML = i++;
+                // 當i自增到6時停止，頁面會顯示到5
+                if( i == 6){
+                    // 停止相對應標識的定時器
+                    clearInterval(3);
+                }
+            },1000)
+
+            console.log(timer); // 3
+
+        };
+
+    </script>
+</head>
+<body>
+
+    <h1 id="count"></h1>
+
+</body>
+</html>

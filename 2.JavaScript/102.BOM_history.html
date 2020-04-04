@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM：History</title>
+    <script>
+        /*
+            History：
+                - History物件可以用來操作瀏覽器向前或向後翻頁。
+                - 屬性：
+                    length：
+                        - 可以獲取到「當次」訪問的超連接數量，關閉頁面後重新計算。
+                - 方法：(3種)
+                    1.back()：
+                        - 返回上一個頁面，作用和瀏覽器的 ← 按鈕一樣。
+
+                    2.forward()：
+                        - 跳轉到下一個頁面，作用和瀏覽器的 → 按鈕一樣。
+
+                    3.go()：
+                        - 可以用來返回/跳轉到幾頁，返回幾頁、跳轉幾頁。
+                        - 它需要一個整數作為參數。
+                            1：表示往下一個頁面，相當於forward()。
+                            2：表示往下兩個頁面。
+                            -1：表示返回一個頁面。
+                            -2.表示返回二個頁面。
+        */
+
+        window.onload = function(){
+            var btn01 = document.getElementById("bon01");
+            var btn02 = document.getElementById("bon02");
+            var btn03 = document.getElementById("bon03");
+            var btn04 = document.getElementById("bon04");
+
+            btn01.onclick = function(){
+                history.back();
+            };
+
+            btn02.onclick = function(){
+                history.forward();
+            };
+
+            btn03.onclick = function(){
+                history.go(1);
+            };
+
+            btn04.onclick = function(){
+                alert(history.length);
+            };
+        };
+
+    </script>
+</head>
+<body>
+
+    <h3>History</h3>
+
+    <a href="101.BOM_navigator.html">101.BOM_navigator.html</a>
+    <br />
+    <a href="100.keyboard.html">100.keyboard.html</a>
+    <br />
+    <a href="99.mouse_scroll.html">99.mouse_scroll.html</a>
+    <br />
+    <br />
+
+    <button id="bon01">back</button>
+    <button id="bon02">forward</button>
+    <button id="bon03">go</button>
+    <button id="bon04">length</button>
+
+</body>
+</html>

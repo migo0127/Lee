@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout()：延時調用</title>
+    <script>
+
+        window.onload = function(){
+            /*
+                setTimeout()：
+                    - 延時調用，延時定時器，是window物件的方法。
+                    - 延時調用可以使一個函數不馬上執行，而是閣一段時間後才執行，
+                      且只會「執行一次」！！
+                    - 比如：15秒後關閉廣告，即可使用延時調用來實現功能。
+
+                ※※ 延時調用 vs 定時調用：
+                    - 最大的區別：
+                        延時調用：只會執行一次。
+                        定時調用：會執行多次。
+
+                    - 延時調用和定時調用實際上是可以相互代替的，在開發中可以根據自己
+                      的需求去選擇，但大多時候仍多以定時調用使用居多。
+
+                clearTimeout()：
+                    - clearTimeout() 用來關閉一個延時調用。
+
+            */
+            // 開啟一個延時調用，只會執行一次
+            var i = 0;
+            var timer = setTimeout(function(){
+                console.log(i++);
+                console.log(++i);
+            },3000);
+
+            // 關閉延時調用
+            // clearTimeout(timer);
+        };
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

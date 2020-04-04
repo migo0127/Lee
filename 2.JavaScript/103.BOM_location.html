@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM：Lication</title>
+    <script>
+
+        window.onload = function(){
+            var btn01 = document.getElementById("bon01");
+            var btn02 = document.getElementById("bon02");
+            var btn03 = document.getElementById("bon03");
+            var btn04 = document.getElementById("bon04");
+
+            /*
+            Lication：
+                - Lication物件中封裝了瀏覽器的網址欄訊息。
+                - 如果直接打印Location，則可以獲取到當前網址欄的完整路徑。
+                    - 例：
+                        console.log(location);
+                        // http://127.0.0.1:5500/2.JavaScript/103.BOM_location.html
+
+                - 如果直接將location屬性修改為一個完整路徑或相對路徑，則我們頁面會自
+                  動跳轉到該路徑，並且會生成相應的歷史紀錄(可以有返回ˋ上一頁功能)。
+                    - 例：
+                        location = "https://www.google.com/"
+                        location = "99.mouse_scroll.html"
+
+                - 方法：(3種)
+
+                    1.assign()：
+                        - 用來跳轉到其他的頁面，作用和直接修改location屬性一樣。
+                        - 會生成相應的歷史紀錄，可以有返回上一頁的功能。
+                            - 例：
+                                location.assign("99.mouse_scroll.html");
+
+                    2.reload()：
+                        - 用於重新加載當前頁面，作用和重整(F5)一樣。
+                        - 如果在reload()中傳第一個 true 作為參數，則會強制清空緩存並
+                          刷新頁面，即原本在文本框輸入的文字，若沒有true作參數，刷新
+                          頁面後，文本框原本的文字仍會存在，若有true作為參數，則會強
+                          制清空緩存，文字會清空。
+
+                          ※ 用火狐測試！
+
+                    3.replace()：
+                        - 可以使用一個新的頁面替換當前頁面，調用完畢也會跳轉頁面。
+                        - 不會生成歷史紀錄，不能使用返回上一頁功能。
+            */
+
+            btn01.onclick = function(){
+                location.assign("99.mouse_scroll.html");
+            };
+
+            btn02.onclick = function(){
+                location.reload();
+            };
+
+            btn03.onclick = function(){
+                location.reload(true);
+            };
+
+            btn04.onclick = function(){
+                location.replace("https://www.google.com/");
+            };
+        };
+
+    </script>
+</head>
+<body>
+
+    <h3>Location</h3>
+
+    <input type="text">
+    <br />
+    <br />
+
+    <button id="bon01">assign()：會生成相應的歷史紀錄</button>
+    <br />
+    <br />
+    <button id="bon02">reload()：重新加載頁面，不會清空緩存</button>
+    <br />
+    <br />
+    <button id="bon03">reload(true)：強制清空緩存</button>
+    <br />
+    <br />
+    <button id="bon04">replace()：不會生成歷史紀錄</button>
+
+</body>
+</html>
