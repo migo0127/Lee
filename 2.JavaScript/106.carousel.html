@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>輪播圖</title>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <style>
+
+        .d-flex{
+            display: flex;
+        }
+
+        #carouselWrap{
+            width:630px;
+            height: 470px;
+            background-color: #bfa;
+            margin: 50px auto;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        #imgList{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            left: 0;
+            /* ul的寬度由JS控制，這樣可以隨圖片增加減少來控制寬度 */
+        }
+
+        #imgList li{
+            margin:0 20px;
+        }
+
+        #carouselPoint{
+            position: absolute;
+            bottom: 30px;
+            /* 輪播圖的點點居中位置由JS控制，這樣可以隨點點多少來保持居中 */
+            left: 0;
+        }
+
+        #carouselPoint a{
+            width: 15px;
+            height: 15px;
+            background-color:rgb(255, 255, 255);
+            opacity: 0.5;
+            /* 解決IE8透明度兼容問題 */
+            filter: alpha(opacity=50);
+            margin:0 5px;
+        }
+
+        #carouselPoint a:hover{
+            background-color: black;
+            /* 設置默認第一個點點保持焦點由JS控制 */
+        }
+
+
+    </style>
+    <script src="./exercise/js/tools.js"></script>
+    <script>
+
+        window.onload = function(){
+            /*
+                A.設置ul的寬度：
+                    圖片寬度(加margin、padding)*共幾張圖片+"px"
+
+                    A.第一步：獲取ul、獲取頁面中所有img標籤
+                    A.第二步：設置ul寬度
+
+            */
+            // A.第一步：獲取ul、獲取頁面中所有img標籤
+            var imgList = document.getElementById("imgList");
+            var imgArr = document.getElementsByTagName("img");
+
+            // A.第二步：設置ul寬度，圖片寬度(加margin、padding)*共幾張圖片+"px"
+            imgList.style.width = 630 * imgArr.length + "px";
+
+            /*
+                 B.設置輪播圖點點的位置居中：
+                     點點要居中就是要 (外部容器的寬度-點點的整體寬度)/2 + px
+
+                     B.第一步：獲取點點div(carouselPoint)
+                     B.第二步：獲取外部容器carouselWrap
+                     B.第三步：設置點點居中 (外部容器的寬度-點點的整體寬度)/2 + px
+
+
+            */
+            // B.第一步：獲取carouselPoint
+            var carouselPoint = document.getElementById("carouselPoint");
+
+            // B.第二步：獲取外部容器carouselWrap
+            var carouselWrap = document.getElementById("carouselWrap");
+
+            // B.第三步：設置點點居中
+            carouselPoint.style.left = (carouselWrap.clientWidth - carouselPoint.clientWidth) / 2 + "px";
+
+            /*
+                C.設置輪播圖的第一個點點的焦點默認樣式
+
+            */
+            // C.第一步：獲取所有的a
+            var carouselPointA = document.getElementsByTagName("a");
+
+            // C.第二步：初始化索引
+            var carouselPointAIndex = 0;
+
+            // C.第三步：設置輪播圖的第一個點點的焦點
+            carouselPointA[carouselPointAIndex].style.backgroundColor = "black";
+
+            /*
+                D.點擊輪播圖點點切換到指定圖片
+                    點擊第一個，顯示第一張圖片....以此類推
+
+                    D.第一步：遍歷a
+                        D.1-1.為每一個a都添加一個num屬性，讓a來保存自己的索引。
+                              因for迴圈會先執行完畢，i會停在最後一個數字，會導
+                              致無法引用i作為索引參數。
+                        D.1-2.綁定單擊響應函數
+                        D.1-3.獲取點擊a時的索引，並將重新賦值給 carouselPointAIndex
+                        D.1-4.點擊點點後切換對應的圖片(此時無動化效果，與1-5擇一)
+                        D.1-5.點擊點點後切換對應的圖片(有動畫效果，引入外部tools.js文件)
+
+                    D.第二步：創建一個方法用來設置點點的焦點樣式(選中的變黑色)
+                        D.2-1.變歷所有的a，並將它們的背景色都設置為空串，即為默認樣式 透明
+                        D.2-2.背景色設置為空串，即為默認樣式 透明
+                        D.2-3.將點選中的為黑色
+
+                    D.第三步：調用方法，讓被選中的點變黑色，其它為透明色。
+
+            */
+            // 為所有的a都綁定單擊響應函數
+            // D.第一步：遍歷a
+            for(var i = 0 ; i < carouselPointA.length ; i++){
+                /*
+                    D.1-1.為每一個a都添加一個num屬性，讓a來保存自己的索引。
+                        因for迴圈會先執行完畢，i會停在最後一個數字，會導
+                        致無法引用i作為索引參數。
+                */
+                carouselPointA[i].num = i;
+
+                // D.1-2.綁定單擊響應函數
+                carouselPointA[i].onclick = function(){
+                    // D.1-3.獲取點擊a時的索引，並將重新賦值給 carouselPointAIndex
+                    carouselPointAIndex = this.num;
+
+                    // D.1-4.點擊點點後切換對應的圖片(此時無動化效果)
+                    /*
+                                索引   left
+                        第一張   0      0
+                        第二張   1     -630
+                        第一張   2     -1260...
+                    */
+                   // imgList.style.left = -630 * carouselPointAIndex + "px";
+
+                   // D.第三步：調用方法，讓被選中的點變黑色，其它為透明色。
+                   setA();
+
+                   // D.1-5.點擊點點後切換對應的圖片(有動畫效果，引入外部tools.js文件)
+                   move(imgList,"left",-630*carouselPointAIndex,20,function(){
+
+                   });
+                };
+            }
+
+            /*
+                D.第二步：創建一個方法用來設置點點的焦點樣式(選中的變黑色)
+            */
+           function setA(){
+                // D.2-1.變歷所有的a，並將它們的背景色都設置為空串，即為默認樣式 透明
+                for(var i = 0 ; i < carouselPointA.length ; i++){
+                    // D.2-2.背景色設置為空串，即為默認樣式 透明
+                    carouselPointA[i].style.backgroundColor = "";
+
+                    // D.2-3.將點選中的為黑色
+                    carouselPointA[carouselPointAIndex].style.backgroundColor = "black";
+                }
+           }
+
+        };
+
+
+    </script>
+</head>
+<body>
+
+    <div id="carouselWrap">
+        <ul id="imgList" class="d-flex">
+            <li>
+                <img src="./img/106.carousel/4.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/106.carousel/2.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/106.carousel/3.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/106.carousel/1.jpg" alt="">
+            </li>
+            <li>
+                <img src="./img/106.carousel/5.jpg" alt="">
+            </li>
+        </ul>
+        <div id="carouselPoint" class="d-flex" >
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>
+
+</body>
+</html>

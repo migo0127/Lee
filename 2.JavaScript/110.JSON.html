@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON：就是一個特殊格式的字符串</title>
+    <script src="js/json2.js"></script>
+    <script>
+
+        /*
+            ※JSON：就是一個特殊格式的字符串！！
+
+            JSON (JavaScript Object Notation)：
+                - JS物件符號(標識符)。
+                - JS中的物件只有JS自己認識，其它的語言都不認識。
+                - JSON就是一個特殊格式的字符串，這個字符串可以被任意的語言(java、C..等)
+                  所識別，並且可以轉換為任意語言中的物件，JSON在開發中主要用來作數據的交
+                  互。
+                - JSON和JS物件的格式一樣，只不過JSON字符串中的「屬性名」必須加上「""」雙
+                  引號，單引號也不行，其他的和JS一致。
+                    - 例：
+                        JS的物件寫法：
+                            var obj = {name:"三星堆",age:18,gender:"男"};
+
+                        JSON的寫法：屬性名都必須加上雙引號""！！
+                            obj = '{"name":"三星堆","age":18,"gender":"男"}';
+
+                - JSON的分類(2種)：
+                    1.物件{}：
+                        obj = '{"name":"三星堆","age":18,"gender":"男"}';
+                    2.陣列[]：
+                        arr = '[1,2,3,"hello",true]';
+                        arr2 = '[{"name":"三星堆","age":18,"gender":"男"},{"name":"三星堆","age":18,"gender":"男"}]';
+
+                - JSON中允許的值(6種)：
+                    1.字符串。
+                    2.數值。
+                    3.布爾值。
+                    4.null。
+                    5.普通物件。
+                        Ps.函數不可以！！
+                    6.陣列。
+        */
+        // JS的物件寫法：
+        var obj = {name:"三星堆",age:18,gender:"男"};
+        console.log(typeof obj); // object
+        console.log(obj); // Object { name: "三星堆", age: 18, gender: "男" }
+
+        // JSON的寫法：屬性名都必須加上雙引號""！！
+        obj = '{"name":"三星堆","age":18,"gender":"男"}';
+        console.log(typeof obj); // string
+        console.log(obj); // {"name":"三星堆","age":18,"gender":"男"}
+
+
+        /*
+            JSON的轉換：
+                - 將JSON字符串轉換為JS中的物件，在JS中為我們提供了一個工具類，
+                  就叫JSON。
+                - 這個物漸可以幫助我們將一個JSON轉換為JS物件，也可以將一個JS物
+                  件轉換為JSON。
+
+            1.JSON --> JS：
+                JSON.parse()：
+                    - 可以將JSON字符串轉換為js物件。
+                    - 它需要一個JSON字符串作為參數，會將該字符串轉換為JS物件，
+                      並返回值。
+                    - 例：
+                        var json = '{"name":"三星堆","age":18,"gender":"男"}';
+                        var obj = JSON.parse(json);
+                        console.log(obj);
+                        // Object { name: "三星堆", age: 18, gender: "男" }
+
+                        var json1 = '[1,2,3,"hello",true]';
+                        var arr = JSON.parse(json1);
+                        console.log(arr); // Array(5) [ 1, 2, 3, "hello", true ]
+
+            2.JS --> JSON：
+                JSON.stringify()：
+                    - 可以將一個JS物件轉換為JSON字符串。
+                    - 需要一個JS物件作參數，會返回一個JSON字符串。
+                    - 例：
+                        var obj2 = {name:"光頭強",age:18,gender:"男"};
+                        var json3 = JSON.stringify(obj2);
+                        console.log(json3);
+                        // '{"name":"光頭強","age":18,"gender":"男"}'
+
+                        var arr2 = [false,5,7,"您好"];
+                        var json4 = JSON.stringify(arr2);
+                        console.log(json4);
+                        // '[false,5,7,"您好"]'
+
+            ※※ JSON這個物件在IE7及以下的瀏覽器中會報錯！！
+                - 目前有兩種方式可解決：
+                    1.eval()：此屬性功能強大，但有安全隱患，故最好不要使用！！
+                        - 參考 111.eval().html 說明。
+
+                    2.引入外部js文件，如css的reset一樣，已有其他開發者寫好共用文件。
+                        E:\Programming\Front-end engineer\Lee\2.JavaScript\js\json2.js
+        */
+       // JSON -> JS：
+       // JSON.parse()：
+        var json = '{"name":"三星堆","age":18,"gender":"男"}';
+        var obj = JSON.parse(json);
+        console.log(obj);
+        // Object { name: "三星堆", age: 18, gender: "男" }
+
+        var json1 = '[1,2,3,"hello",true]';
+        var arr = JSON.parse(json1);
+        console.log(arr);
+        // Array(5) [ 1, 2, 3, "hello", true ]
+
+
+        // 2.JS --> JSON：
+        // JSON.stringify()：
+        var obj2 = {name:"光頭強",age:18,gender:"男"};
+        var json3 = JSON.stringify(obj2);
+        console.log(json3);
+        // '{"name":"光頭強","age":18,"gender":"男"}'
+
+        var arr2 = [false,5,7,"您好"];
+        var json4 = JSON.stringify(arr2);
+        console.log(json4);
+        // '[false,5,7,"您好"]'
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

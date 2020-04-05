@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setInterval()練習：透過外部js文件引入</title>
+    <style>
+
+        *{
+            padding: 0;
+            margin:0;
+        }
+
+        .wrap{
+            height: 300px;
+            margin:20px;
+        }
+
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+            position: absolute;
+            /*
+                8-2.使用crrentSttle()時，若當前樣式沒有設置，IE8會返回默認值 auto，
+                auto 將無法進行操作，所以再此將left設置0，以便後續JS賦值使用。
+            */
+            left: 0;
+        }
+
+        #box2{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+            top: 200px;
+            left: 0;
+        }
+
+        .box2{
+            height: 1000px;
+            border: 1px solid black;
+            position: absolute;
+            top: 0;
+            left: 800px;
+        }
+
+        p{
+            margin-bottom: 10px;
+            width: 780px;
+        }
+
+    </style>
+
+    <script src="js/tools.js"></script>
+
+    <script>
+         /*
+            ● 透過外部js文件引入。
+        */
+
+        window.onload = function(){
+
+            // 第一步：獲取box1、btn01
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            var btn03 = document.getElementById("btn03");
+            var btn04 = document.getElementById("btn04");
+            var btn05 = document.getElementById("btn05");
+
+            // 第二步：為botn01、btn02綁定單擊響應事件
+            btn01.onclick = function(){
+                // 第十步：調用動畫共用函數，向右
+                move(box1,"left",800,30);
+            };
+
+            btn02.onclick = function(){
+                // 第十一步：調用動話共用函數，向左
+                move(box1,"left",0,30);
+
+            };
+
+            btn03.onclick = function(){
+                // 第十二步：調用動話共用函數，向左
+                move(box2,"left",800,10);
+
+            };
+
+            btn04.onclick = function(){
+                // 第十三步：調用動話共用函數，box2寬度變寬
+                move(box2,"width",800,10);
+            };
+
+            btn05.onclick = function(){
+                // 第十四步：調用動話共用函數，並傳遞回調函數
+                move(box2,"width",800,10,function(){
+                    move(box2,"height",400,10,function(){
+                        move(box2,"top",0,10,function(){
+                            move(box2,"width",100,10,function(){
+                                move(box2,"height",100,10);
+                            });
+                        });
+                    });
+                });
+            };
+
+            /*
+                第三步：
+                若是將var timer 寫再全局作用域中，讓此變量保存有所的定時器標識，就會
+                發生相互停止及重新賦值的問題，因此不要將定時器的標識用全局變量保存，
+                而是用 obj.tomer 物件.屬性的方式，由物件自己來保存。
+            */
+             // var timer;  不要使用全局變量來保存定時器標識！
+
+            /*
+                第四步：設置一個定時器共用函數，用來執行簡單的左右移動。
+                    參數：
+                        obj：要調用的物件
+                        attributes：要調用的屬性，比如：left、top、width、height
+                        target：要達成的目標位置
+                        speed：移動的速度
+                        callback：回調函數，這個函數將會在動畫執行完畢以後執行
+            */
+        }
+    </script>
+
+</head>
+<body>
+    <div class="wrap">
+        <button id="btn01">點擊後box1向右持續移動</button>
+        <button id="btn02">點擊後box1向左持續移動</button>
+        <button id="btn03">點擊後box2向左持續移動</button>
+        <button id="btn04">點擊後box2寬度變寬</button>
+        <button id="btn05">點擊後測試box2的回調函數</button>
+        <br />
+        <br />
+        <div id="box1">box1</div>
+        <div id="box2">box2</div>
+        <div class="box2"></div>
+    </div>
+
+</body>
+</html>

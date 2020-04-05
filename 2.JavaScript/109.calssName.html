@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>className：類的操作</title>
+    <style>
+
+        .box1{
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+        }
+
+        .box2{
+            height: 200px;
+            background-color: pink;
+        }
+
+    </style>
+    <script>
+
+        window.onload = function(){
+
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            var btn03 = document.getElementById("btn03");
+            var btn04 = document.getElementById("btn04");
+
+            // 調用新增函數
+            btn01.onclick = function () {
+                /*
+                    修改box的樣式：
+                        1.style屬性：
+                            - 通過style屬性來修改元素的樣式，每修改一個樣式，瀏覽器就需
+                              要重新渲染一次頁面，這樣的執行性能是比較差的，而且這種形式
+                              當我們要修改多個樣式時，也不太方便。
+                            - 且這種方式屬於表現與行為耦合。
+                            - 例：
+                                box.style.width = "200px";
+                                box.style.height = "200px";
+                                box.style.backgroundColor = "pink";
+
+                        2.class屬性：
+                            - 可以通過修改元素的class屬性來間接的修改樣式，這樣一來，我
+                              們只需要修改一次，即可同時修改多個樣式。
+                            - 瀏覽器只需要重新渲染頁面一次，性能較好，並且這種方式，可以
+                              使表現與行為進一步的分離。
+                            - 例：
+                                box.className = "box2";
+
+                                // 要留意需要加一個空格，必免拼串成box1box2
+                                box.className += " box2";
+
+                            - 通常會創建函數來調用方法使用，並匯整為js外部文件使用。
+                                2-1.新增class屬性值。
+                                2-2.判斷(檢查)有無指定的class屬性值。
+                                2-3.刪除指定的class屬性值
+                                2-4.切換：沒有則新增指定class屬性值、有則刪除指定class
+                                    屬性值，最常用。
+                */
+                // 1.style屬性修改樣式：
+                // box.style.width = "200px";
+                // box.style.height = "200px";
+                // box.style.backgroundColor = "pink";
+
+                // class屬性修改樣式：
+                // box.className = "box2";
+
+
+                // 要留意需要加一個空格，必免拼串成box1box2
+                // 2.box.className += " box2";
+
+
+                // 調用新增函數
+                addClass(box,"box2");
+
+            };
+
+            btn02.onclick = function(){
+                // 調用檢查函數
+                alert(hasClass(box,"box2"));
+            };
+
+            btn03.onclick = function(){
+                // 調用刪除函數
+                removeClass(box,"box2");
+            };
+
+            btn04.onclick = function(){
+                // 調用切換函數
+                toggleClass(box,"box2");
+            };
+
+
+            // 2-1.新增：定義一個函數，用來向一個元素中添加指定的class屬性值。
+                /*
+                    參數：
+                        第一個參數：obj，要添加的class屬性的元素
+                        第二個參數：cn，要添加的class屬性值。
+                */
+                function addClass(obj,cn){
+
+                    // 判斷有沒有該class屬性值，沒有才新增，避免重覆新增同一個屬性值
+                    if(!hasClass(obj,cn)){
+                        // 要留意多加一個空格，避免屬性名拼串
+                        obj.className += " "+cn;
+                    }
+               }
+
+               // 2-2.判斷(檢查)一個元素中是否含有指定的class屬性值
+               function hasClass(obj,cn){
+                    /*
+                        判斷obj中有沒有cn class，要使用正則表達式。
+                        創建一個正則表達式。
+                    */
+                    var reg = new RegExp("\\b"+cn+"\\b");
+
+                    return reg.test(obj.className);
+               }
+
+               // 2-3.刪除指定的class屬性值
+               function removeClass(obj,cn){
+                   // 創建一個正則表達式，檢查有沒有該指定要刪的屬性值
+                    var reg = new RegExp("\\b"+cn+"\\b");
+
+                    obj.className = obj.className.replace(reg,"");
+               }
+
+               // 2-4.切換函數：有指定的class屬性值時刪除，沒有就新增，最常用！
+               function toggleClass(obj,cn){
+
+                // 判斷obj中是否有cn
+                if(hasClass(obj,cn)){
+                    // 有，則刪除
+                    removeClass(obj,cn);
+                }else{
+                    // 沒有，則添加
+                    addClass(obj,cn);
+                }
+
+               }
+        };
+
+    </script>
+
+</head>
+<body>
+
+    <button id="btn01">新增按鈕</button>
+    <button id="btn02">檢查按鈕</button>
+    <button id="btn03">刪除按鈕</button>
+    <button id="btn04">切換按鈕</button>
+    <br />
+    <br />
+    <div id="box" class="box1"></div>
+
+</body>
+</html>

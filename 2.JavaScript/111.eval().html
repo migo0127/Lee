@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eval()：解決IE7及以下的JSON，但不推荐使用！！</title>
+    <script>
+        /*
+            eval()：
+                - 這個函數可以用來執行「一段字符串」形式的JS代碼，並將執行結果返回。
+                    - 例：
+                        var str = "console.log('hello World！');";
+                        eval(str);  // "hello World！"
+
+                - 如果使用eval()執行的字符串中含有「{}」，它會將「{}」當成是
+                  代碼塊，如果不希望將其當成是代碼塊解析時，則需要在字符串前
+                  後各加上一個()即可。
+                    - 例：
+                        // JSON --> JS，含有{}時
+                        var json = '{"name":"三星堆","age":18,"gender":"男"}';
+                        // var str = eval(json); // 報錯
+
+                        // 在{}前後加上()
+                        var str2 = eval("("+json+")");
+                        console.log(str2);
+                        // Object { name: "三星堆", age: 18, gender: "男" }
+
+                 - eval()這個函數的功能很強大，可以直接執行一個字符串中的js代碼，
+                   但是在開發中盡量不要使用，首先它的執行性能比較差，最重要的是它
+                   具有安全隱患，故不建議使用！！
+
+        */
+       // eval()：
+        var str = "console.log('hello World！');";
+        eval(str); // "hello World！"
+
+        // JSON --> JS，含有{}時
+        var json = '{"name":"三星堆","age":18,"gender":"男"}';
+        // var str = eval(json); // 報錯
+
+        // 在{}前後加上()
+        var str2 = eval("("+json+")");
+        console.log(str2);
+        // Object { name: "三星堆", age: 18, gender: "男" }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二級菜單優化：過渡效果</title>
+    <style>
+
+        a{
+            text-decoration: none;
+            height:30px;
+            line-height: 30px;
+            background-color: rgba(252,252,228,0.664);
+            color:rgba(92,143,92);
+        }
+
+        a:hover{
+            background-color: rgb(92, 143, 92);
+            color: white;
+        }
+
+        #my_menu{
+            width: 180px;
+        }
+
+        #my_menu div {
+            overflow: hidden;
+        }
+
+        #my_menu span,a{
+            display: block;
+            padding-left: 10px;
+            font-size: 14px;
+        }
+
+        .menuSpan{
+            height: 30px;
+            line-height: 30px;
+            background: linear-gradient(grey, rgb(53, 52, 52));
+            color: white;
+            overflow: hidden;
+        }
+
+        .collapsed{
+            height: 30px;
+        }
+
+    </style>
+    <script src="./js/tools.js"></script>
+    <script>
+
+        window.onload = function(){
+            /*
+                透過 collapsed 來控制菜單的折疊與展開狀態：
+                每一個菜單都是一個div，當div具有 collapsed 這個類時，div就是折疊狀態，
+                當div沒有 collapsed 這個類時，div就是展開狀態。
+
+                點擊菜單，切換菜單的顯示狀態：
+                    第一步：獲取所有的class為menuSpan元素
+                    第二步：當單擊span時，其父元素div會有折疊、展開的效果
+                        2-1.變歷span
+                        2-2.為每個span綁定單擊響應函數
+                        2-3.此時的this就是當前被點擊的span，獲取當前span的父元素
+                        2-4.調用toggleClass()：
+                            為div調用切換函數，有則刪除(展開)，無則加上(折疊)
+
+                        2-5.定義一個變量，用來保存當前已展開的菜單
+                        2-6.重新賦值openDiv為當前打開的菜單
+
+                        2-7.點擊當前菜單展開時，前一個菜單需折疊起來：需進行判斷
+                            openDiv：當前已展開的div
+                            parentDiv：當前被點擊要展開的div
+
+                            2-7-1.條件一：openDiv != parentDiv
+                                需要先判斷 openDiv 和 parentDiv 是否相同，即確認當前已展
+                                開的菜單與當前被點擊要展開的菜單是否為同一個，如果是同一個
+                                ，則不需要在調用toggleClass來添加collapsed，若不是同一個，
+                                才需要添加collapsed 來折疊。
+
+                            2-7-2.條件二：!hasClass(openDiv,"collapsed")
+                                判斷當前已展開的菜單是否含有collapsed屬性值，若沒有，才
+                                需要調用toggleClass添加 collapsed 來折疊。
+
+                            2-7-3.為了可以統一處理動畫過渡效果，故將 addClass()改為
+                                toggleClass()，方便操作。
+                                但修改為 toggleClass()後，我們希望此處的toggleClass()
+                                只有添加功能，不需要移除功能，所以透過2-7-2.條件二來
+                                追加判斷，使沒有 collapsed 的才會進入判斷做添加。
+
+                ※ 添加過渡效果：
+
+                    第三步：創建一個共用的過渡函數
+                        3-1.獲取元素切換之前的高度
+                        3-2.獲取元素切換之後的高度
+                        3-3.動畫效果就是將高度從 beginHei 向 endHei 過渡：
+                            將元素高度重置為beginHei (一開始div的高度)。
+                        3-4.執行動畫效果，從 beginHei 向 endHei 過渡
+                    第四步：切換狀態時調用動畫
+                    第五步：切換狀態時調用動畫
+                        5-1.因調用toggleMenu()來執行動畫時，會再次執行方式內的
+                            toggleClass(obj,"collapsed"); 所以原本寫的就不需要
+                            ，若沒有刪掉，就會發生重覆打開的效果。
+                        5-2.調用動畫
+
+            */
+
+            // 第一步：獲取所有的class為menuSpan元素
+            // querySelectorAll 兼容IE8
+            var menuSpan = document.querySelectorAll(".menuSpan");
+
+            // 2-5.定義一個變量，用來保存當前已展開的菜單
+            var openDiv = menuSpan[0].parentNode;
+
+            // 第二步：當單擊span時，其父元素div會有折疊、展開的效果
+            // 2-1.變歷span
+            for( var i = 0 ; i < menuSpan.length; i++){
+
+                // 2-2.為每個span綁定單擊響應函數
+                menuSpan[i].onclick = function(){
+
+                    // 2-3.此時的this就是當前被點擊的span，獲取當前span的父元素
+                    var parentDiv = this.parentNode;
+
+                    // 第四步：切換狀態時調用動畫
+                    toggleMenu(parentDiv);
+
+
+                    /* 2-7.點擊當前菜單展開時，前一個菜單需折疊起來：
+                            openDiv：當前已展開的div
+                            parentDiv：當前被點擊要展開的div
+
+                        2-7-1.條件一：openDiv != parentDiv
+                            需要先判斷 openDiv 和 parentDiv 是否相同，即確認當前已展
+                            開的菜單與當前被點擊要展開的菜單是否為同一個，如果是同一個
+                            ，則不需要在調用toggleClass來添加collapsed，若不是同一個，
+                            才需要添加collapsed 來折疊。
+
+                        2-7-2.條件二：!hasClass(openDiv,"collapsed")
+                              判斷當前已展開的菜單是否含有collapsed屬性值，若沒有，才
+                              需要調用toggleClass添加 collapsed 來折疊。
+                    */
+                    if(openDiv != parentDiv && !hasClass(openDiv,"collapsed")){
+
+                        /*
+                            2-7-3.為了可以統一處理動畫過渡效果，故將 addClass()改為
+                               toggleClass()，方便操作。
+                               但修改為 toggleClass()後，我們希望此處的toggleClass()
+                               只有添加功能，不需要移除功能，所以透過2-7-2.條件二來
+                               追加判斷，使沒有 collapsed 的才會進入判斷做添加。
+                        */
+                        // addClass(openDiv,"collapsed");
+
+                        /*
+                         5-1.
+                            因調用toggleMenu()來執行動畫時，會再次執行方式內的
+                            toggleClass(obj,"collapsed"); 所以原本寫的就不需要
+                            ，若沒有刪掉，就會發生重覆打開的效果。
+                        */
+                        // toggleClass(openDiv,"collapsed");
+
+                        // 第五步：切換狀態時調用動畫
+                        // 5-2.調用動畫
+                        toggleMenu(openDiv);
+                    }
+
+                    // 2-6.重新賦值openDiv為當前打開的菜單
+                    openDiv = parentDiv;
+
+                };
+            }
+
+            /*
+                ※ 添加過渡效果
+                第三步：創建一個共用的過渡函數
+                    3-1.獲取元素切換之前的高度
+                    3-2.獲取元素切換之後的高度
+                    3-3.動畫效果就是將高度從 beginHei 向 endHei 過渡：
+                        將元素高度重置為beginHei (一開始div的高度)。
+                    3-4.執行動畫效果，從 beginHei 向 endHei 過渡
+                第四步：切換狀態時調用動畫
+                第五步：切換狀態時調用動畫
+                    5-1.因調用toggleMenu()來執行動畫時，會再次執行方式內的
+                        toggleClass(obj,"collapsed"); 所以原本寫的就不需要
+                        ，若沒有刪掉，就會發生重覆打開的效果。
+                    5-2.調用動畫
+            */
+            // ※ 添加過渡效果
+            // 第三步：創建一個共用的過渡函數
+            function toggleMenu(obj){
+
+                // 3-1.獲取元素切換之前的高度
+                var beginHei = obj.offsetHeight;
+                /*
+                    2-4.調用toggleClass()：
+                    為div調用切換函數，有則刪除(展開)，無則加上(折疊)
+                */
+                toggleClass(obj,"collapsed");
+
+                // 3-2.獲取元素切換之後的高度
+                var endHei = obj.offsetHeight;
+
+                /*
+                    3-3.動畫效果就是將高度從 beginHei 向 endHei 過渡：
+                        將元素高度重置為beginHei (一開始div的高度)。
+                */
+               obj.style.height = beginHei + "px";
+
+                // 3-4.執行動畫效果，從 beginHei 向 endHei 過渡
+                move(obj,"height",endHei,20,function(){
+                    // 3-6.動畫過渡執行完畢後，內聯樣式已經沒有存在的意義了，故要刪除
+                    obj.style.height = "";
+                });
+
+            }
+
+        };
+
+
+    </script>
+</head>
+<body>
+
+    <div id="my_menu" class="sdmenu">
+        <div>
+            <span class="menuSpan">在線工具</span>
+            <a href="javascript:;">圖像優化</a>
+            <a href="javascript:;">收藏夾圖標生成器</a>
+            <a href="javascript:;">郵件</a>
+            <a href="javascript:;">htaccess密碼</a>
+            <a href="javascript:;">梯度圖像</a>
+            <a href="javascript:;">按鈕生成器</a>
+        </div>
+
+        <div class="collapsed">
+            <span class="menuSpan">支持我們</span>
+            <a href="javascript:;">推薦我們</a>
+            <a href="javascript:;">鏈接我們</a>
+            <a href="javascript:;">網絡資源</a>
+        </div>
+
+
+        <div class="collapsed">
+            <span class="menuSpan">合作伙伴</span>
+            <a href="javascript:;">JavaScript工具包</a>
+            <a href="javascript:;">CSS驅動</a>
+            <a href="javascript:;">CodingForums</a>
+            <a href="javascript:;">CSS例子</a>
+        </div>
+
+        <div class="collapsed">
+            <span class="menuSpan">測試電流</span>
+            <a href="javascript:;">Current or not</a>
+            <a href="javascript:;">Current or not</a>
+            <a href="javascript:;">Current or not</a>
+            <a href="javascript:;">Current or not</a>
+        </div>
+    </div>
+
+</body>
+</html>
