@@ -1,0 +1,574 @@
+一、資料庫基本概念：
+
+	1.資料庫：信息存儲的倉庫，包括一系列的關係措施。
+	2.表：一個資料庫中可以有若干張表，形式上類似於一份excel檔。
+	3.字段：表裡面的信息會分若干個欄目來存儲，這些欄目在資料庫技術中稱為「字段」，
+				   欄目裡面存儲的具體信息稱為「字段值」。
+	4.紀錄：一條信息(一整行→)稱為一條紀錄。
+	
+	※ 一個資料庫管理系統中可以建立若干個資料庫(ex：school_db、company_db...)，每個
+	    資料庫中又可以建立若干張表(ex：學生資料excel、教師資料excel、員工資料excel)，每
+		張表中可以有若干條紀錄(ex：001  三星堆  男  5200  上海....)。
+		
+二、MySQL支持的數據類型：
+	
+三、(My)SQL使用入門：
+
+	(一). SQL是標準的資料庫管理系統語言，而My是在SQL的基礎上擴充的非標準語言。
+	(二). SQL分類：
+	
+		1.DDL ( Data Definition Languages )語句：		
+			- 資料定義語句，通過這類語言可以對資料庫( 架構 )進行「創建、刪除、更改」。
+			- 類似於 創建一個資料庫、新增資料庫內部的各種架構。
+				- 比如：
+						創建好一個資料庫 company_db，對 company_db 建立內部架構，建立一個表
+						名 students，該表( students )內的各種表頭規劃與資料類型的設定。 
+						
+		2.DML ( Data Manipulation Languages ) 語句：
+			- 資料操作語句，用於紀錄的添加、刪除、更新和查詢資料庫紀錄並檢查資料完整性。
+				- 比如：
+					對表( students ) 新增/修改/刪除 一筆紀錄。
+		
+		3.DCL ( Data Control Languages )語句：
+			- 資料控制語句，通過此類語句可以對資料庫的相關權限進行設置。
+			
+	(三). SQL的三種分類的使用方式：
+		1. DDL語句 ( 資料定義語句 )：
+			- 對資料庫管理系統內部的物件(資料庫)進行創建、刪除、修改等操作的語言，DDL語句更多
+			   是由「資料庫管理員(DBA)」使用，開發人員一般很少使用，登錄MySQL之後就可以使用
+			   SQL語言對資料褲進行各種操作。
+			- 語法：
+				1-1.針對「資料庫」的相關語法：
+					(1). 創建資料庫：				
+						create databases 資料庫名;
+						
+					(2).查看資料庫列表：
+						show databases;
+						
+					(3). 操作指定的資料庫：
+						use databases 資料庫名;
+						
+					(4). 刪除資料庫：				
+						detele databases 資料庫名;
+						
+					(5).查看指定資料庫裡的所有資料表：
+						show tables;
+						
+				1-2.針對「表架構」的相關語法：
+				
+					※ []：表示可省略不寫。
+					
+					(1). 創建表：
+						create tabale 表名(
+							字段1名字 字段類型1 列的約束條件,
+							字段2名字 字段類型2 列的約束條件,
+							....
+							)
+							
+					(2). 查看表的定義(內容)：
+						desc 表名;
+					
+					(3). 查看創建表的SQL語句：
+						show create table 表名 \G
+						
+						※  \G選項：使紀錄能夠按照字段的豎向排列，以便更好地顯示內容較長的紀錄，\G後
+						      無需在加分號。
+							  
+					(4). 修改表及字段：
+						A. 更改表名：
+							alter table 原表名 rename [to] 新表名;
+							
+						B 查看表的定義(內容)：
+							desc 表名;
+						
+						C. 新增表字段：
+							alter table 表名 add [column] 字段名 字段類型 [frist|after 字段名];
+							
+						D. 修改表字段的類型：
+							alter table 表名 modify  [column] 字段名 字段類型 [frist|after 字段名];
+							
+						E. 修改表字段名：
+							alter table 表名 change [column] 原字段名 新字段名 字段類型 [frist|after 字段名];
+							
+						※ modify vs change：
+							- modify 與 change 都可以修改表的類型。
+							- 不同的是 change 後面需要接兩次字段名，不方便，不過使用change的優點是可以修改
+							   字段的名字。
+							   
+						F.	修改字段的排列順序：
+							- 前面介紹的字段新增與修改語法(add / modify / change)都有一個選項 frist | after 字段名
+							   ，可以用來修改字段在表中的位置，新增字段時默認是加載在表中最後位置，而modify /
+							   change 默認不會改變字段的位置。
+								
+								alter table students add sName varchar;
+								alter table students add sAge varchar;
+								alter table students add sId varchar;
+								
+								desc studerns;
+								--------------------------------------------------------------------
+								|      Field       |   Type              |   Null  |  Key  |  Default  |   Extra   |
+								--------------------------------------------------------------------
+								|     sName    |   varchar(20)   |   Yes   |           |  Null       |               |
+								--------------------------------------------------------------------
+								|     sAge       |   varchar(20)   |   Yes   |           |  Null       |               |
+								--------------------------------------------------------------------
+								|     sId            |   varchar(20)   |   Yes   |           |  Null       |               |
+								--------------------------------------------------------------------
+								
+								alter table students modify sId tinyint frist;								
+								--------------------------------------------------------------------
+								|      Field       |   Type              |   Null  |  Key  |  Default  |   Extra   |
+								--------------------------------------------------------------------
+								|     sId            |  tinyint(4)       |   Yes   |           |  Null       |               |
+								--------------------------------------------------------------------
+								|     sName    |   varchar(20)   |   Yes   |           |  Null       |               |
+								--------------------------------------------------------------------
+								|     sAge        |   varchar(20)   |   Yes   |           |  Null       |               |
+								--------------------------------------------------------------------
+							
+								alter table students modify sAge int;								
+								desc students;
+								--------------------------------------------------------------------
+								|      Field       |   Type              |   Null  |  Key  |  Default  |   Extra   |
+								--------------------------------------------------------------------
+								|     sId            |  tinyint(4)       |   Yes   |           |  Null       |               |
+								--------------------------------------------------------------------
+								|     sName    |   varchar(20)   |   Yes   |           |  Null       |               |
+								--------------------------------------------------------------------
+								|     sAge        |   int(11)          |   Yes   |           |  Null       |                |
+								--------------------------------------------------------------------
+								
+							G. 刪除表字段：
+								alter table 表名 drop [column] 字段名;
+							
+					(5). 刪除表：
+						dorp table 表名;
+		
+		2.DML語句 (資料操作語句)：
+			- 用於紀錄的添加、刪除、更新和查詢資料庫紀錄並檢查資料完整性。
+			- 語法：
+			
+				2-1.新增/查詢/修改/刪除：
+				
+					(1).插入紀錄：增
+						A.單筆插入：
+							insert into 表名(字段1,字段2,...,字段n) value(值1,值.....,值n);
+							※ 也可以不用指定字段名，但後面的value順序需要與表裡的字段排序一致。
+							
+						B.一次插入多筆：
+							insert into 表名(字段1,字段2,...,字段n) 
+							values (值1,值2,...,值n),
+										(值1,值2,...,值n),
+										(值1,值2,...,值n);
+										
+					(2).查詢紀錄：查
+						
+						A.指定表名內的紀錄全部查詢：
+						select * from 表名 [where 條件];
+						
+						B.指定表名內的單一字段紀錄查詢：
+						select 字段1 from 表名 [where 條件];
+						
+						C.指定表名內多個字段紀錄查詢：
+						select 字段1,字段2,...,字段n from 表名  [where 條件];;
+						
+						D.查詢紀錄並由小到大排序：asc
+						select * from 表名 order by 條件 asc
+						
+						select * from 表名 order by 條件1 asc,條件2 asc,條件3 asc;
+						
+						E.查詢紀錄並由大到小排序：desc
+						select * from 表名 order by 條件 desc;
+						
+						select * from 表名 order by 條件1 desc,條件2 asc,條件3 desc;
+						
+						F.模糊查詢紀錄：
+						select * from 表名 where 條件 like %O;
+						※ 「%O」：表示只要符合結尾是O，不管前面幾個字。
+						
+						select * from 表名 where 條件 like _O;
+						※ 「_O」：表示為兩個字且結尾是O的字。
+						
+						G.運算符查詢： = < > <= >= != or and
+						select * from 表名 where 條件;
+						select * from 表名 where 條件 and/or 條件 ;
+						
+						H.查詢去除重覆的紀錄：distinct
+							- 語法：
+								select distinct from 表名;
+								
+								select distinct 字段 from 表名;
+								※ 「distinct」：一般使用 distinct時，只會篩選一個字段！
+								
+						I. 查詢排序後的紀錄「限制顯示」的筆數：
+							i.顯示單筆：
+								select * from 表名 where 條件 asc/desc limit 索引;
+								
+							ii.顯示第幾筆到第幾筆：						
+								select * from 表名 where 條件 asc/desc limit 第幾索引起,取幾個;
+								select * from 表名 where 條件 asc/desc limit 0,2;
+						
+					(3).更新紀錄：改
+						A.單筆更新紀錄：
+							update 表名 set 字段1=值1,字段2=值2,...,字段n=值n [where 條件];
+						
+						B.一次多筆更新紀錄：
+							update 表1,表2,...,表n set 表1.字段1=表達式1,表n.字段n=表達式n [where 條件];
+							
+							※ 補充：多表更新更多的用在根據一個表的字段來動態的更新另一個表的字段。
+								EX：
+										update students,scores set students.sName=sam, scores.score=99 
+										where students.sId=088 and scorce.sId=088(or scorce.sId=students.sId);									
+										
+							※ 注意：若是都沒有填寫 [where 條件]，將會把所有紀錄的字段全部修改！！
+							
+					(4).刪除紀錄：刪
+						A.刪除單表中的資料：
+							delete from 表名 [where 條件];
+							
+						B.刪除多個表中的資料：
+							delete 表1,表2,...,表n  from 表1,表2,...,表n  [where 條件];
+							
+							※ 注意：不管是單表還是多表，若沒加where條件將會把表中的所有紀錄都刪除！！
+				
+				2-2. 聚合函數：
+					- 語法：
+						(1). sum：加總
+							select sum(字段) from 表名;
+							
+							select sum(salary) form employee;
+							----------------
+							|  sum(salary) |
+							----------------
+							|   281000.00  |
+							----------------
+							
+							(X) select id,sum(salary) from employee;
+							→ 因為是將薪資加總呈顯，所以不會有id對應的值，雖然語法上不會有報錯，但顯示的
+							     會是不正確的id值，所以不要一起使用。
+								 
+							(X)select id,sum(salary) from employee;	 
+							----------------------
+							|    id   |  sum(salary) |
+							----------------
+							|    1    |   281000.00  |
+							-----------------------
+											
+						(2).count：紀錄的總筆數
+							select count( * | 字段) from 表名;
+							
+							select count( * ) from employee;
+							select count( Ssn ) from employee;							
+							----------------          ----------------      
+							|    count(*)     |          |  count(Ssn)   |
+							----------------          ----------------
+							|           8          |           |           8          |
+							----------------           ----------------					
+						
+						(3).max：只是單純找出最大值，只會顯示一筆，但有可能資料是有多筆相同的最大值
+							select max(字段) from 表名;
+							
+							select max(salary) from employee;
+							----------------
+							|  max(salary) |
+							----------------
+							|  550000.00  |
+							----------------
+														
+							(X) select id,max(salary) from employee;
+							→ max只會單純找到salary的最大值，並顯示該一筆紀錄，但資料上有可能有多筆相同最
+							     大值的salary，所以不會挑出相對應的id值，而是找出id的最大值，就會造成id與字段
+								 是不相符的情況，因此也不要一起使用。
+								 
+								(X) select id,max(salary) from employee;
+								----------------------
+								|    id   | max(salary) |
+								----------------------
+								|    8    |  550000.00  |
+								----------------------
+								 
+						(4).min：只是單純找出最小值，只會顯示一筆，但有可能資料是有多筆相同的最小值
+							select min(字段) from 表名;
+							
+							select min(salary) from employee;
+							----------------
+							|  min(salary) |
+							----------------
+							|    25000.00   |
+							----------------
+							
+							(X) select id,min(salary) from 表名;
+							→ 與max情況一樣，不要一起使用。
+
+								(X) select id,min(salary) from employee;
+								----------------------
+								|    id   | min(salary) |
+								----------------------
+								|    1    |  25000.00   |
+								----------------------
+														
+						(5).group by：
+							- 分類聚合，意似 依某個字段聚合。
+							- 語法：
+								select sum(字段) from 表名 group by 字段;
+								
+								select sum(salary) from 表名 group by department;
+								→ 依部門做薪資的加總計算，如果有三個部門就會顯示三條薪資總數。
+								----------------
+								|  sum(salary) |
+								----------------
+								|    55000.00   |
+								----------------
+								|    93000.00   |
+								----------------
+								|   133000.00  |
+								----------------
+								
+								select department,sum(salary) from 表名 group by department;
+								→ 因為有多加指定依部門做分類在進行薪資加總計算，所以會有相對應的
+								     部門值可以顯示。
+									------------------------------------
+									|	  department    	|  sum(salary) |
+									------------------------------------
+									|	           1               |    55000.00   |
+									------------------------------------
+									|	           4               |    93000.00   |
+									------------------------------------
+									|	           5               |   133000.00  |
+									------------------------------------		 
+									 
+						(6).whit rollup：
+							- 分類聚合後的結果再進行匯總，類似最後會出現一個總計的概念，所以也沒有相應值。
+							- 語法：	
+								select sum(字段) from 表名 group up 字段 with rollup;
+								
+								select sum(salary) form employee group up department with rollup;
+								→ 若有三個部門，則會顯示三條薪資加總數及最後有一筆三個的加總值。
+								----------------
+								|  sum(salary) |
+								----------------
+								|    55000.00   |
+								----------------
+								|    93000.00   |
+								----------------
+								|   133000.00  |
+								----------------
+								|   281000.00  |
+								----------------	
+								
+								(X) select department,sum(salary) from 表名 group by department with rollup;
+								→  with rollup 一樣沒有相對應的department。
+									------------------------------------
+									|	  department    	|  sum(salary) |
+									------------------------------------
+									|	           1               |    55000.00   |
+									------------------------------------
+									|	           4               |    93000.00   |
+									------------------------------------
+									|	           5               |   133000.00  |
+									------------------------------------	
+									|	         Null            |   281000.00  |
+									------------------------------------	
+								
+						(7).having：
+							- 對聚合後的結果再進行篩選。
+							- 語法：
+								select sum(字段) from 表名 group by 字段 having sum(字段) > 值;
+								
+								select sum(salary) from employee group by department having sum(salary) > 60000;
+								→ 依部門進行薪資加總後，再對加總後的部門新資做大於60000的篩選，只有大於
+									 60000的才會顯示。
+									 ---------------
+									|  sum(salary) |
+									----------------
+									|    93000.00   |
+									----------------
+									|   133000.00  |
+									---------------								 
+								
+									 
+								(X)select department,sum(salary) from employee group by department with rollup having sum(salary) > 60000;
+								→因 with rollup 沒有對應值。
+									------------------------------------
+									|	  department    	|  sum(salary) |
+									------------------------------------
+									|	           4               |    93000.00   |
+									------------------------------------
+									|	           5               |   133000.00  |
+									------------------------------------	
+									|	         Null            |   281000.00  |
+									------------------------------------									
+								
+								※※ having vs where：
+									- 不同點：
+										- where：是在「聚合前」就先對紀錄進行篩選過濾。
+										- having：是在「聚合後」才對紀錄進行篩選過濾。	
+							
+						(8). 一起使用：
+							select sum(字段),max(字段),min(字段) from 表名;
+							
+							select sum(salary),max(salary),min(salary) from employee;
+							 ---------------------------------------------
+							|  sum(salary) |  max(salary) |  min(salary) |
+							---------------------------------------------- 
+							|   281000.00  |    55000.00   |    25000.00  |
+							----------------------------------------------
+							
+							select sum(salary),max(salary),min(salary) from employee group by department;
+							 ---------------------------------------------
+							|  sum(salary) |  max(salary) |  min(salary) |
+							---------------------------------------------- 
+							|    55000.00   |    55000.00   |    55000.00  |
+							----------------------------------------------
+							|    93000.00   |    43000.00   |    25000.00  |
+							----------------------------------------------
+							|   133000.00  |    40000.00   |    25000.00  |
+							----------------------------------------------
+							
+							select department,sum(salary),max(salary),min(salary) from employee group by department;
+							 -----------------------------------------------------------------
+							|	  department    	|  sum(salary) |  max(salary) |  min(salary) |
+							-----------------------------------------------------------------
+							|	           1               |    55000.00   |    55000.00   |    55000.00  |
+							------------------------------------------------------------------
+							|	           4               |    93000.00   |    43000.00   |    25000.00  |
+							------------------------------------------------------------------
+							|	           5               |   133000.00  |    40000.00   |    25000.00  |
+							------------------------------------------------------------------
+							
+				2-3.表連接：
+					- 需求：顯示不同表中的字段的時候即可使用表連接。
+					- 分兩類：
+						(1). 內連接：
+							- 選取兩張表中相互匹配的紀錄。
+							- 語法：	
+								select * | 字段 from 表1,表2...,表n where 條件;
+								
+								- 例一：
+									select * from courses,scores where courses.cId = coures.cId;
+								
+								- 例二：只顯示不同表中有相同且符合條件的字段區域
+									select `courses`.`cId`,`courses`.`cName`,`courses`.`credit`,`courses`.`isCompulsory`,`courses`.`tId`,`scores`.`sId`,`scores`.`cId`,`scores`.`score` from `courses`,`scores` where `courses`.`cId`=`scores`.`cId`;
+									
+								- 例三：只顯示不同表中有相同且符合條件的字段區域並且依 `courses`.`credit`排序
+									select `courses`.`cId`,`courses`.`cName`,`courses`.`credit`,`courses`.`isCompulsory`,`courses`.`tId`,`scores`.`sId`,`scores`.`cId`,`scores`.`score` from `courses`,`scores` where `courses`.`cId`=`scores`.`cId` order by `courses`.`credit` asc
+						
+						(2). 外連接：
+							- 不僅僅選取兩張表相互匹配的紀錄，在依左連接/右連接的條件會選出其他不匹配的紀錄。
+							- 語法：	
+								A. 左連接：
+									- 包含左邊表中的所有紀錄，意似 依左邊表中的內容為主列出左邊所有選中的字段的紀
+									   錄，而右表中沒有和它匹配的紀錄也會顯示出來。
+									- 語法：	
+										select * | 字段 from 左表 left join 右表 on 條件;
+										
+										- 例：
+											select * from teachers left join courses on teachers.tId=courses.tId;
+					
+								B. 右連接：
+									- 包含右邊表中的所有紀錄，意似 依右邊表中的內容為主列出右邊所有選中的字段的紀
+									   錄，而右表中沒有和它匹配的紀錄也會顯示出來。
+									- 語法：	
+										select * from 左表 right join 右表 on 條件;
+										
+										- 例：	
+											select * from teachers right join courses on teachers.tId = coures.tId;
+											
+									※ 左連接和右連接是可以互相轉換使用的！
+									
+					2-4.子查詢：
+						- 需求：一個查詢需要另外一個查詢的結果參與的時候。
+						- 用於子查詢的關鍵字：in、not in、exists、no exists。
+						- 語法：	
+							A. in：在...裡面
+								select  * | 字段 from 表名 where 字段 in (子語句);
+								
+								- 例：
+									select courses.tId from courses where  courses.tId in ( select teacher.tId from teacher);
+
+									※ 若查詢結果是唯一的，則可以使用=代替in。
+										假設 courses.tId只有一筆時
+										select * from teachers where courses.tId in (select courses.tId from courses);
+										= select * from teachers where courses.tId = (select courses.tId from courses limit 1);
+									
+							B. not in：不在...裡面
+								select *|字段 from 表名 where 字段 not in (子語句);
+								
+								- 例：
+									select teachers.tId,teacher.sName from teachers where teachers.tId not in ( select tId from courses);
+									
+							C.exists：
+								- 判斷後面的子語句有沒有查詢出紀錄來，如果有查詢出紀錄來則返回true，顯示出來，
+								   如果沒有紀錄，則返回false，不會顯示出來，並且查詢出來的紀錄的具體值是NULL也
+								   沒關係，此時也是返回true，也會顯示出來。
+								- 語法：	
+									select *|字段 from 表名 where exists (子語句);
+								
+									select * from teachers where exists (select * from courses where teacher.tId=courses.tId);		
+
+							D.not exists：
+								- 與 exists 相反，沒有的即返回false的顯示出來，有的返回true的不顯示。
+								- 語法：
+									select *|字段 from 表名 where not exists (子語句);
+									
+									select * from teachers where not exists ( select * form courses where teachers.tId=courses.tId);
+									
+					2-5.紀錄聯合：
+						- 我們常常會碰到需要將兩個表或多個表的資料按照一定的查詢條件查詢出來後，將結果合併
+						   到一起顯示，這時就需要用到多個select語句，並用 union 或者 union all 隔開即可實現。
+						- 聯合的先決條件：
+							查詢的「列(直/豎)」個數要相等，若表a的列有3個，而表b有4個，就無法進行聯合。
+						- 語法：	
+							A. union：
+								- 會將紀錄去除重覆後聯合起來。
+								- 語法：	
+									select 字段 from 表名 union 子語句;
+									
+									- 例：									
+										selcet project.Dnum from project union select department.Dnumber from department;
+									
+							B.union all：
+								- 保持原樣，紀錄有幾條就幾條進行聯合，不會去除重覆。
+								- 語法：
+									select 字段 from 表名 union all 子語句;
+										
+									- 例：
+										select project.Dnum from project union all select department.Dnum from department;
+								
+							※ union vs union all：
+								- 差別在於：
+									1.union：會去除重覆後顯示聯合紀錄的結果。
+									2.union all：不會去除重覆，而是將兩個表的聯合紀錄結果完整呈現。
+						   
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+
+
+
+
+
+
+
+			
+			
+			
+			
+	
+	

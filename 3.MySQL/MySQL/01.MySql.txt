@@ -1,0 +1,538 @@
+一、數據庫相關概念：
+		1.DB：數據庫，保存一組有組織的數據容器。
+		2.DBMS：數據庫管理系統，又稱為數據庫軟件(產品)，用於管理DB中的數據。
+		3.SQL：結構化查詢語言，用於和DBMS溝通的語言。
+
+二、數據庫存儲數據的特點：
+		1.將數據放到表中，表在放到庫中。
+		2.一個數據庫可以有多個表，每個表都有一個名字，用來標識自己，表名具有唯一性。
+		3.表具有一些特性，這些特性定義了數據在表中如何存儲，類似java中的"類"的設計。
+		4.表由列組成，我們也稱為字段。所有表都是由一個或多個列組成，每一列類似JS中的屬性。
+		5.表中的數據是按行存儲的，每一行類似JS中的物件。
+	
+三、MySQ服務的啟動和停止：
+		方式一：本機 → 右鍵管理 → 服務 → 找到自己創建的MySQLXXX資料庫 → 右鍵啟動/停止。
+		方式二：通過管理元身分運行cmd
+			1.啟動服務指令：net start 資料庫名
+			2.停止服務指令：net stop 資料庫名
+
+四、MySQL服務的登錄和退出
+		方式一：
+			通過mysql自帶的客戶端，但此方式只限root用戶(最高權限)。
+		
+		方式二：
+			通過windows自帶的用戶端 cmd。
+				1.登錄：
+					1-1.連接遠端：
+						mysql -h主機名 -P端口號 -u用戶名 -p密碼
+					
+					1-2.連接本機：
+						mysql -u用戶名 -p密碼				
+					
+					※ 需留意「-p與密碼」間不可以有空格！！
+				2.退出：
+					exit 或 ctrl+c。
+	
+五、MySQL的常見命令：
+
+		1.查看當前所有的資料庫：
+			show databases;
+			
+		2.打開指定的資料庫：
+			- 此時會進入指定的資料庫。		
+			- 指令：
+				use 資料庫名;
+			
+		3.查看當前庫的所有表
+			show tables;
+			
+		4.查看其它庫的所有表：
+			- 不會進入到指定的資料庫，只是調出指定資料庫的表資料。
+			- 指令：	
+				show tables from 資料庫名;
+				
+		5.創建表：
+			- 真實創建進資料庫中儲存著。
+			- 指令：
+					create table 表名(
+							列名 列數據類型,
+							列名 列數據類型,
+							.....
+							列名 列數據類型
+					);
+			- 例：
+					create custominfo(
+							id int;
+							name varchar(20)
+					);
+					
+			6.查看表結構：
+					desc 表名;
+					
+			7.查看服務器版本：
+					方式一：登錄到mysql服務端
+						select version();
+						
+					方式二：沒有登錄到mysql服務端，而是在cmd
+						mysql --version  或  mysql --V
+						
+六、基礎查詢：
+	(一). 語法：
+		select 查詢列表(顯示) from 表名;
+		
+		- 特點：
+			1.查詢列表可以是：表中的字段、常量值、表達式、函數。
+				- 常量值若是字符型和日期型時必須用單引號引起來，數值型則不需要。
+				- 查詢函數：
+					select 函數名(實參列表);
+				- 查詢表達式：
+					select 100/1234;
+			2.查詢的結果是一個虛擬的表格。
+		
+		1. 「+」：
+			- mysql中的「+」號僅僅只有一個功能：運算符。
+			- 兩個操作數都為數值型，則做加法運算。
+				- 例： select 100+90;   #190
+				
+			- 其中一方為字符型，則mysql會試圖將字符型數值轉換成數值型，如果轉換成功
+			   ，則繼續做加法運算，如果轉換失敗，則將字符型數值轉換成0。
+				- 例：
+					轉換成功：
+						select "123"+90;   # 213
+					
+					轉換失敗：
+						select "john" + 90;  -> 轉換失敗  ->  0+90  # 90
+				
+				- 只要其中一方為null，則結果肯定為null。
+					select null+10;  # null
+		2.concat：
+			- 連接/拼接字符。
+			- 若非字符，則會轉換為字符。
+			- 若連接的字段也有Null，也會呈現為null。
+			- 語法：	
+				select concat (字符1,字符12,字符3) as 別名 from 表名;
+				select concat(數值1,數值2數值3) as 別名 from 表名;
+				->數值1,數值2數值3 會被轉為 字符1,字符12,字符3		
+			
+			- 例：
+				select concat(`sName`,`sNickname`) as 別名 from `students`;
+		
+		3.ifnull函數：
+			- 判斷字段的值或表達式是否為null，如果為true則轉換為指定的值，否則返回原本的值。
+			- 語法：	
+				select ifnull(字段,轉換成功後要顯示的值) from 表名;
+				
+				select ifnull(commission_pac,0) from 表名。
+				
+		4.isnull函數：
+			- 判段某字段或表達式是否為null，如果是則返回1(true)，否則返回0(false)。
+			- 例：
+				select isnull(commission_pac) from employee;
+				→ 選擇commission_pac是null，則返回1(true)。
+				
+		5.distinct：
+			- 去重覆。
+			- 例：
+				select distinct 字段名 from 表名;
+				
+				(X) select distinct a,b from 表名;
+				(X) select distinct a,distinct b from 表名;
+
+七.進階查詢：
+	(一). 條件查詢
+		- 語法：
+			select 查詢列表 from 表名 where 篩選條件;
+		
+		- 執行流程：
+			①. from 表名
+			②. where 篩選條件
+			③. select 查詢列表
+	(二). 條件分類：	
+		1.按條件表達式篩選：
+			- 條件運算式： >、<、=、 != (sql寫法：<>) 、>= 、<=。
+			- 例1：查詢工資 > 12000的員工
+				select employee from employee 
+				where salary > 12000;
+			
+			- 例2：查詢部門編號不等於90的員工名和部門編號
+				select last_name,department_id from employee 
+				where department_id <> 90;
+				
+				select last_name,department_id from employee 
+				where department_id 1= 90;
+				
+		2.按邏輯表達式篩選：
+			- 邏輯運算符：&&、||、!、and、or、not。
+			- 作用：用於連接條件表達式。
+				- &&和and：找false。
+				- ||和or：找true。
+				- !和not：反轉。
+			- 例1：查詢工資在10000到20000之間的員工名、工資以及獎金。
+				select last_name,salary,commission_pat from employee
+				where salary>=10000 and salary<=20000;
+				
+			- 例2：查詢部門編號不是在90和110之間，或者工資高於15000的員工信息
+				寫法一：
+					select * from employee 
+					where department_id < 90 and department_id >100 or salary >15000;
+				寫法二：
+					select * from employee
+					where not(department_id>= 90 and department_id<=100) or salary >15000;
+			
+		3.模糊查詢：
+			3-1.like：
+				- 一般搭配通配符使用，可以判斷字符型和數值型。
+				-	通配符特點：	
+					①.「%」：任意多個字符，包含0個字符 。
+						- 例：查詢員工中包含字符a的員工信息
+							select * from employee where last_name "%a%";
+					②.「 _」：任意單個字符。
+						- 例：查詢員工名中第三個字符為e，第五個字符為a的員工名和工資
+							select last_name,salary from employee 
+							where last_name like "__e_a%";
+					③. 「\」、ESCAPE：轉義字符。
+						- ESCAPE：聲明該符號為轉義字符。
+						- 例：查詢員工中第二個字符為_的員工名
+							select last_name from employee 
+							where last_name like "_\_%";
+							
+							select last_name from employee 
+							where last_name like "_$_%" escape "$";
+					
+			3-2.between and：
+				- 在....之間。
+				- 例：查詢員工編號在100到120之間的員工信息
+					select * from employee 
+					where employee_id between 100 and 200;
+					
+					select * from employee 
+					where employee_id >= 100 and employee_id<=200;
+					
+				- 注意事項：
+					①. 使用between and 可以提高語句的簡潔度。
+					②.包含臨界值。
+					③.兩個臨界值不可以互換。
+					
+			3-3.in：
+				- 含義：判斷某字段的值是否屬於in列表中的某一項。
+				- 特點：	
+					①.使用in提高語句簡潔度。
+					②.in列表的值類型必須一致或兼容，比如：123
+					③.in列表不支持轉義符的模糊查詢。
+					
+				- 例：查詢員工的工種編號是 IT_PROG、AD_VP、AD_PRES 中的一個員工名和工種編號
+					select last_name,job_id from employee 
+					where job_id in (" IT_PROG" , " AD_VP"," AD_PRES");
+				
+					select last_name,job_id from employee 
+					where job_id = " IT_PROG" OR where job_id = " AD_VP" OR job_id = " AD_PRES";
+				
+			3-4.is null、is not null：
+				- SQL的「=」不能判斷等於 null。
+				- SQL要用 is null、is not null 判斷null值。	
+				- 也只能用於判斷null值。
+				- 例1：查詢沒有獎金的員工名和獎金率
+					select last_name,commission_pac from employee 
+					where commission_pac is null;
+					
+					(X)select last_name,commission_pac from employee 
+					where commission_pac = null;
+					→ MYSQL的「=」不支持等於 null。
+					
+				- 例2：查詢有獎金的員工名和獎金率
+				select last_name,commission_pac from employee 
+				where commission_pac is not null;
+				
+			3-5.<=>：
+				- 安全等於。
+				- 即可以判斷null，也可以叛斷普通的數值。
+				- 例1：查詢沒有獎金的員工名和獎金率
+					select last_name,commission_pac from employee 
+					where commission_pac <=> null;
+					
+					select last_name,commission_pac from employee 
+					where commission_pac is null;
+					
+				- 例2：查詢工資等於 12000的員工
+				select employee from employee 
+				where salary <=> 12000;
+				
+				- is null vs <=>：
+					- is null：僅僅可以叛斷null值，可讀性較高，建議使用。
+					- <=>  ：即可以判斷null值，也可以判斷普通值，但可讀性較低。
+				
+				測試1：查詢員工號為176的員工的姓名和部門號和年薪(含獎金率)
+					select last_name,department_id,salary*12*(1+ifnull(commission_pac),0)  as 年薪
+					from employee
+					where department_id = 176
+					
+				測試2：查詢沒有獎金，且工資小於18000的salary,last_name
+					select salary,last_name from employee 
+					where commission_pac is null and salary < 18000; 
+		
+				測試3：查詢employee表中，job_id不為"IT"或者工資為12000的員工信息
+					select * 
+					from employee 
+					where job_id <> "IT" or salary = 12000;
+					
+				測試4：查詢部門department表的結構
+					desc department;
+					
+				測試5：查詢部門department表涉及到了哪些位置編號
+					select distinct lcoation_id from department;
+					
+				※ 經典面試題：
+					試問：
+					select * from employee 和
+					select * from employee where commission_pac like "%%" and last_name like "%%";
+					結果是否一樣？並請說明原因。
+					
+					Ans：
+						結果不一樣。
+						如果判斷的字段有null值時，select * from employee; 與 
+						select * from employee where commission_pac like "%%" and last_name like "%%";
+						的查詢結果會不一樣。
+						
+						※ 補充，若是以下方式則查詢結果一樣。
+						select * from employee; 
+						select * from employee where commission_pac like "%%" or last_name like "%%";
+		
+		4.排序查詢：
+			order by：
+				- 特點：	
+					 ①.asc代表的是升序，desc代表的是降序，如果都不寫，默認是升序。
+					 ②.order by 子句中可以支持單字字段、多個字段、表達式、函數、別名。
+					 ③.order by 子句一般是放在查詢語句的最後面，但limit子句除外(會在order by後面or更後)。
+				- 語法：	
+					select 查詢列表
+					from 表名
+					[where 篩選條件]
+					order by 排序列表 [asc|desc];
+					
+					- 例1：查詢員工信息，要求工資從高到低排序。
+						select * from employee
+						order by salary desc;
+					
+					- 例2：查詢部門編號>=90的員工信息，按入職時間的先後進行排序[添加篩選條件]
+						select * from employee
+						where department_id >=90
+						order by hiredate asc;
+						
+					- 例3：按年薪的高低顯示員工的信息和年薪[按表達式排序]
+						select *,salary*12*(1+ifnull(commission_pac,0)) as 年薪 from employee
+						order by	salary*12*(1+ifnull(commission_pac,0)) desc;
+						
+					- 例4：按年薪的高低顯示員工的信息和年薪[按別名排序]
+						select *,salary*12*(1+ifnull(commission_pac,0)) as 年薪 from employee
+						order by	年薪 desc;
+					
+					- 例5：按姓名的長度顯示員工的姓名和工資[按函數排序]
+						select length(last_name),last_name,salary
+						order by length(last_name) desc;
+					
+					- 例6：查詢員工信息，要求先按工資排序，再按員工編號排序[多個字段排序]
+						select * from 
+						order by salary asc,order by employee_id desc;
+						
+						→ 此時會先依薪資升序排序，當薪資有相同的時候(ex：有兩筆薪資相同)，則依此兩筆就會
+						     依員工編號做降序排序。
+					
+					- 例7：選擇工資不在8000到17000的員工姓名和工資，按工資降序
+						select last_name,salary from employee
+						where salary not between 8000 and 17000
+						order by salary desc;
+						
+					- 例8：查詢信箱中包含e的員工信息，並先按信箱的字節數降序，再按部門號升序
+						select * from employee
+						where email like "%e%"
+						order by length(email) desc,order by department_id asc;
+						
+		5.常見函數：
+			- 概念：類似於js的函數，將一組邏輯語句封裝在函數體中，對外暴露函數名。
+			- 好處：	
+				1.隱藏了實現細節。
+				2.提高代碼的重用性。
+			- 特點：
+				 ①.叫什麼 (函數名)。
+				 ②.幹什麼 (函數功能)。	
+			- 語法：
+				select 函數名(實參列表) [from 表名];				
+			- 分類：
+				1.單行函數：如 concat、length、ifnull等。
+				2.分組函數：
+					- 功能：做統計使用，又稱為統計函數，聚合函數、組函數。
+			
+			5-1.字符函數：
+				(1).length()：
+					- 獲取參數值的「字節個數」。
+					- 語法：	
+						select length(字符);
+					- 例：
+						select length("John");  # 4
+						select length("張三豐hahaha");  #15，UTF-8的中文占3字節
+						
+				(2).concat()：
+					- 拼接字符。
+					- 語法：
+						select concat("字符"|字段,"字符"|字段,"字符"|字段);
+					- 例：
+						select concat(last_name,"_",first_name) ac 姓名 from employee;						
+					
+				(3).uppar()、lower()：
+					- uppar()：轉換為大寫。
+					- lower()：轉換為小寫。
+					- 語法：
+						select upper("字符"|字段);
+						lect lower("字符"|字段);
+					- 例：
+						select uppar("job");  # JOB
+						select lower("Job");  # job
+						
+					測試1：將姓變大寫，名變小寫，然後拼接
+						select concat(uppar(last_name),lower(first_name)) as 姓名 from employee;
+					
+				(4).substr()、substring()：
+					- 截取指定字符。
+					- 注意：SQL的索引是從「1」開始！！
+					- 語法：
+						select substr(實參1,索引起位,[長度]) from 表名;
+						
+					- 例1：截取從指定索引後面的所有字符。
+						select substr("李莫愁愛上了陸展元",7);  # 陸展元
+					
+					- 例2：截取從指定索引處指定字符長度的字符
+						select substr("李莫愁愛上了陸展元",1,3);  # 李莫愁，索引1開始，截取3個長度的字符
+						
+					-測試2：姓名中首字符大寫，其它字符小寫，然後用_拼接
+						select concat(uppar(substr(last_name,1,1)),"_",lower(substr(last_name,2)))  as 姓名
+						from employee;
+						# W_eng
+						
+				(5).instr()：
+					- 返回字符第一次出場的索引位置，如果找不到返回0。
+					- 例：
+						select instr("楊不悔愛上了殷六俠","殷六俠") as out_put;
+						# 7
+						
+						select instr("楊不殷六俠悔愛上了殷六俠","殷六俠") as out_put;
+						# 3
+						
+						select instr("楊不殷六俠悔愛上了殷六俠","殷十俠") as out_put;
+						# 0
+					
+				(6).trim()：
+					- 去掉前後(指定)字符。
+					- 語法：
+						select trim(字符);
+						
+						select trim("指定字符" from "字符|字節") from 表名;
+					- 例：
+						select trim("aaaaaaaaa張翠山aaaaaaaaaa") as 姓名;
+						# 張翠山
+						
+						select trim("aaaaaaaaa張aaaa翠山aaaaaaaaaa") as 姓名;
+						# 張aaaa翠山
+						
+						select trim("aa" form "aaaaaaaaa張aaaa翠山aaaaaaaaaa") as 姓名;
+						# a張aaaa翠山
+				
+				(7).lpad()：
+					- 用指定字符實現左填充指定長度。
+					- 語法：
+						select lpad("字符|字段",長度,"指定字符");
+						
+					- 例：左填充
+						select lpad("殷素素",7,"*") as 姓名;  # ****殷素素
+						
+						select lpad("殷素素",2,"*") as 姓名;  # 殷素
+						
+				(8).rpad()：
+					- 用指定字符實現右填充指定長度。
+					- 語法：
+						select rpad("字符|字段",長度,"指定字符");
+						
+					- 例：左填充
+						select rpad("殷素素",7,"*") as 姓名;  # 殷素素****
+						
+						select rpad("殷素素",12,"ab") as 姓名;  # 殷素素ababababa
+					
+				(9)replace()：
+					- 替換指定字符。
+					- 語法：
+						select replace("字符|字段","要被替換的字符","替換的字符");
+						
+						select ewplace("張無忌愛上了周芷若","周芷若","趙敏");  
+						# 張無忌愛上了趙敏
+						
+						select ewplace("周芷若周芷若張無忌愛上了周芷若","周芷若","趙敏") as out_put;  
+						# 趙敏趙敏張無忌愛上了趙敏
+	
+			5-2.數學函數：
+				(1).round()：
+					- 四捨五入。
+					- 例：
+						select round(-1.55); # -2
+						select round(1.356) # 1
+						select round(1.214,2)  # 1.21
+						select round(1.216,2)  # 1.22
+				
+				(2).ceil()：
+					- 向上取整，返回 >= 該參數的最小整數。
+					- 例：
+						select ceil(10.2);  # 11
+						select ceil(-1.20);  # -1
+						
+				(3).floor()：
+					- 向下取整，返回 <= 該參數的最大整數。
+					- 例：
+						select floor(2.12); # 2
+						select floor(-9.99);  # -10
+						
+				(4).truncate()：
+					- 截斷指字符後的數。
+					- 例：
+						select truncate(1.666699,1);  # 1
+						
+				(5).mod()：
+					- 取餘數。
+					- 例：
+						select mod(10,3); # 1
+						select mod(-10,3); # -1
+						select mod(-10,-3); # -1
+						select mod(10,-3); # 1
+						
+						※ 當值有正負值時，其餘數是依"被整除(第一個)"的數為正或負。
+						※ 數學公式：mod(a,b) =>  a-a/b*b
+						# mod(-10,-3) =>  -10 - (-10/-3)* -3 => -10 - (-3)*-3 => -10 -(-9) => -10+9 = -1 
+						
+					
+						
+		
+		
+		
+		
+		
+		
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+	
+	
