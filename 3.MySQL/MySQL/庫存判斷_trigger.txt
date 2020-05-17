@@ -1,0 +1,51 @@
+一、設定一個觸發器，用來判斷訂單插入前商品庫存是否足夠支持：
+
+// 1.修改結束標識符
+delimiter $$
+
+// 2.創建插入訂單前的觸發器：判斷商品庫存
+create trigger before_insert_orders_t before insert on my_orders for each row
+begin
+			// 2-1.先取出現在的商品庫存數據，並用一個變量@inv保存
+			select inv from my_goods where id = now.goods_id into @inv;
+			
+			// (select inv from my_goods where id = now.goods_id) into @inv;
+			
+			// 2-2.判斷訂單插入前商品庫存是否足夠支持
+			if @inv < now.goods_num  then 
+			
+				// 2-3中斷操作：暴力解決，主動出錯，即插入一個不存在的數據，讓系統報錯
+				insert into XXX values("XXX");		
+				
+			end if;
+	
+end
+// 3.結束標識符
+$$
+
+// 4.修改回原來的結束標識符
+delimiter ;
+
+
+二、設定一個觸發器，用來自動減少庫存數量
+
+// 1.修改結束標識符
+delimiter $$
+
+// 2.創建插入訂單後的觸發器：自動依訂單插入後，減少相對應的商品庫存數量
+create trigger after_insert_orders_ t after insert on my_orders for each row
+begin
+
+		// 更新商品庫存，new代表著新增的訂單
+		update my_goods set inv = inv - now.goods_num where id = now.goods_id;
+		
+		// (update my_goods set inv = inv - now.goods_num) where id = now.goods_id;		
+
+end
+// 結束標識符
+$$
+
+// 修改回原來的結束標識符
+delimiter ;
+
+

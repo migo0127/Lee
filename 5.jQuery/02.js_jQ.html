@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js jQ</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+    <style>
+
+        body{
+            background-color: black;
+        }
+
+    </style>
+    <script>
+
+        // js寫法
+        window.onload = function(){
+
+            let img = document.getElementsByTagName("img")[0];
+            console.log(img);
+            // <img src="https://s1.yimg.com/uu/api/res/1.2/r_V5MJHoSO0_kJ8Ep5AaiA--~B/Zmk9dWxjcm9wO2N3PTMyNTtkeD0wO2NoPTE5MztkeT0wO3c9MzkyO2g9MzA4O2NyPTE7YXBwaWQ9eXRhY2h5b24-/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-04/4124d4c0-8606-11ea-9d7f-0e2f2a87fc8b" alt="">
+
+            let width = window.getComputedStyle(img).width;
+            console.log(width);
+            // 325px
+        }
+
+        // jQ寫法：
+        $(document).ready(function(){
+            let $img = $("img");
+            console.log($img);
+              // <img src="https://s1.yimg.com/uu/api/res/1.2/r_V5MJHoSO0_kJ8Ep5AaiA--~B/Zmk9dWxjcm9wO2N3PTMyNTtkeD0wO2NoPTE5MztkeT0wO3c9MzkyO2g9MzA4O2NyPTE7YXBwaWQ9eXRhY2h5b24-/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-04/4124d4c0-8606-11ea-9d7f-0e2f2a87fc8b" alt="">
+
+            let $width = $img.width();
+            console.log($width);
+        })
+
+
+    </script>
+
+</head>
+<body>
+
+    <img src="https://s1.yimg.com/uu/api/res/1.2/r_V5MJHoSO0_kJ8Ep5AaiA--~B/Zmk9dWxjcm9wO2N3PTMyNTtkeD0wO2NoPTE5MztkeT0wO3c9MzkyO2g9MzA4O2NyPTE7YXBwaWQ9eXRhY2h5b24-/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-uploaded-images/2020-04/4124d4c0-8606-11ea-9d7f-0e2f2a87fc8b" alt="">
+
+    <img src="./img/logo_長.svg" alt="">
+
+</body>
+</html>

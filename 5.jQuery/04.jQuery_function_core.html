@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery的核心函數</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+    <script>
+
+        /*
+            ● $(); 就代表調用jQuery的核心函數。
+
+            ● $(); 核心函數可以接收以下參數：
+                1.接收一個函數：
+                    $(function(){
+                        console.log("function")
+
+                         2.可以接收一個字符串(2種)，返回一個jQuery物件，物件中保存了找到的
+                           DOM元素。
+                            2-1.接收一個字符串選擇器：
+                                let $box1 = $(".box1");
+                                console.log($box1);
+
+                                let $box2 = $("#box2");
+                                console.log($box2);
+
+                            // 2-2.接收一個字符串代碼片段返回一個jQuery物件，物件中保存了創
+                               建的DOM元素。
+                                let $p = $("<p>我是一個p元素</p>");
+                                console.log($p);
+                                $box1.append($p);
+
+                        // 3.接收一個DOM元素，會被包裝成一個jQuery物件返回給我們
+                        let span = document.getElementsByTagName("span")[0];
+                        console.log(span);
+
+                        let $span = $(span);
+                        console.log($span);
+
+                    });
+
+            ● jQuery物件：
+                    1.jQuery物件是一個偽陣列。
+                    2.有0到length-1的屬性，並且有length屬性。
+
+        */
+       //  $(); 核心函數可以接收以下參數：
+       // 1.接收一個函數
+       $(function(){
+            // 2.接收一個字符串(2種)
+            // 2-1.接收一個字符串選擇器
+            let $box1 = $("box1");
+            console.log($box1);
+
+            let $box2 = $("#box2");
+            console.log($box2);
+
+            // 2-2.接收一個字符串代碼片段
+            let $p = $("<p>我是一個p元素</p>");
+            console.log($p);
+            $box1.append($p);
+
+            // 3.接收一個DOM元素
+            let span = document.getElementsByTagName("span")[0];
+            console.log(span);
+
+            let $span = $(span);
+            console.log($span);
+
+       })
+
+
+    </script>
+</head>
+<body>
+
+    <div class="box1">我是box1</div>
+    <div id="box2">我是box2</div>
+    <span>我是span</span>
+</body>
+</html>

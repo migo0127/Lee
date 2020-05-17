@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body{
+            height: 1000px;
+        }
+
+        #box1{
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+            /* position: absolute; */
+        }
+    </style>
+    <script>
+
+        window.onload = function(){
+
+            // 寫法一：
+
+            // var box1 = document.getElementById("box1");
+
+            // box1.onmousedown = function(event){
+            //     event = event || window.event;
+                
+            //     let offLeft = event.clientX - box1.offsetLeft;
+            //     let offTop = event.clientY - box1.offsetTop;
+
+            //     document.onmousemove = function(event){
+            //         event = event || window.event;
+
+            //         let left = event.clientX - offLeft;
+            //         let top = event.clientY - offTop;
+
+            //         let sLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+            //         let sTop = document.body.scrollTop || document.documentElement.scrollTop;                    
+
+            //         box1.style.position = "absolute";
+            //         box1.style.left = left + sLeft + "px";
+            //         box1.style.top = top + sTop + "px";
+            //     }
+
+            //     document.onmouseup = function(){
+                
+            //         document.onmousemove = null;
+
+            //         document.onmouseup = null;
+            //     };
+            // };
+
+             // 寫法二：
+
+            // document.getElementById("box1").addEventListener("mousedown",function(event){
+            //     event = event || window.event;
+
+            //     let offLeft = event.clientX - box1.offsetLeft;
+            //     let offTop = event.clientY - box1.offsetTop;
+
+            //     document.addEventListener("mousemove",function(event){
+            //         event = event || window.event;
+
+            //         let left = event.clientX - offLeft;
+            //         let top = event.clientY - offTop;
+
+            //         let sLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+            //         let sTop = document.body.scrollTop || document.documentElement.scrollTop;                    
+
+            //         box1.style.position = "absolute";
+            //         box1.style.left = left + sLeft + "px";
+            //         box1.style.top = top + sTop + "px";
+
+            //     },false);
+
+
+            //     document.addEventListener("mouseup",function(event){
+            //         event = event || window.event;
+            //         document.addEventListener("mousemove",function(event){
+                        
+            //         }) 
+            //         document.addEventListener("mouseup",function(event){ 
+                        
+            //         });
+            //     },false);
+
+            // },false);
+
+
+            // 寫法三：
+
+            bind(document.getElementById("box1"),"mousedown",function(event){
+                event = event || window.event;
+
+                let offLeft = event.clientX - box1.offsetLeft;
+                let offTop = event.clientY - box1.offsetTop;
+
+                bind(document,"mousemove",function(event){
+                    event = event || window.event;
+
+                    let left = event.clientX - offLeft;
+                    let top = event.clientY - offTop;
+
+                    let sLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+                    let sTop = document.body.scrollTop || document.documentElement.scrollTop;                    
+
+                    box1.style.position = "absolute";
+                    box1.style.left = left + sLeft + "px";
+                    box1.style.top = top + sTop + "px";
+
+                });
+
+                // bind(document,"mouseup",function(event){
+                //     event = event || window.event;
+
+                //     bind(document,"mousemove",function(){
+                        
+                //     });
+
+                //     bind(document,"mouseup",function(){
+                        
+                //     });
+
+                //  });
+        });
+
+
+        function bind(obj,eventStr,callback){
+            if(window.addEventListener){
+                obj.addEventListener(eventStr,callback,false);
+            }else{
+                obj.attachEvent("on"+eventStr,function(){
+                    callback.call(obj);
+                });
+            }
+        }
+        
+            
+        };
+
+    </script>
+</head>
+<body>
+
+    <div id="box1"></div>
+    
+</body>
+</html>

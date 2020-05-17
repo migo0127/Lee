@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$符號衝突</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+    <script>
+
+        /*
+            當 $ 符號以先被js聲明為變量使用，就有可能發生覆蓋問題，可使用以下方式處理：
+
+                1.釋放$的使用權：
+                    - 注意：釋放操作必須編寫在其他jQuery之前。
+                    - 釋放之後不能再使用$來寫jQuery，需改用jQuery編寫。
+                    - 例：
+                        jQuery.noConflict();  // 釋放$使用權
+                        jQuery(function(){
+
+                        })
+
+                2.自定義一個訪問符號：
+                var DL = jQuery.noConflict(); // 釋放$符號使用權，並重新定義一個訪問符號
+                DL(function(){
+
+                })
+        */
+        // 釋放$使用權
+        // jQuery.noConflict();
+        // jQuery(function(){
+        //     console.log("jQuery");
+        // })
+
+        // 自定義符號：
+        var DL = jQuery.noConflict();
+        DL(function(){
+            console.log("DL");
+        })
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

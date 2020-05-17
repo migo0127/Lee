@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+    <!-- 引入jQuery的線上CDN -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+
+    <!--
+
+        js入口函數加載寫法：
+        <script>
+            window.onload = finction(){
+
+            }
+        </script>
+
+        jQ入口函數加載寫法：
+        <script>
+            1.第一種寫法：
+                $(document).reday(function(){
+
+                })
+
+            2.第二種寫法：
+                jQuery(document).ready(function(){
+
+                })
+
+            3.第三種寫法：(推薦)
+                $(function(){
+
+                })
+
+            4.第四種寫法：
+                jQuery(function(){
+
+                })
+
+        </script>
+     -->
+</head>
+<body>
+
+    <label for="btn01">點擊按鈕獲得值：</label>
+    <input type="text" id="username">
+    <br />
+    <input type="button" name="btn01" id="btn01" value="js">
+    <input type="button" name="btn02" id="btn02" value="jquery">
+
+
+    <script>
+
+        // js寫法
+        let btn01 = document.getElementById("btn01");
+
+        btn01.onclick = function(){
+            let username = document.getElementById("username").value;
+            alert(username);
+        }
+
+        // jQ寫法：
+        $("#btn02").click(function(){
+            let username = $("#username").val();
+            alert(username);
+        })
+
+        /*
+         1.使用jQuery核心函數：$/jQuery => $()
+         2.使用jQuery核心物件：執行$()返回的物件，即誰執行，該物件就是誰。
+            ex：
+                $("#btn02") => jQuery的核心函數
+                $("#btn02").val()
+                ----------
+                    ↓
+                  #btn02 即為jQuery的核心物件
+        */
+
+
+    </script>
+</body>
+</html>

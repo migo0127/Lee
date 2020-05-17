@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>靜態方法和實例方法</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+    <script>
+        // 1.定義一個類
+        function AClass(){
+        }
+
+        // 2.給這個類添加一個靜態方法
+        // 直接添加給類的就是靜態方法
+        AClass.staticMethod = function(){
+            console.log("staticMethod");
+        }
+
+        // 靜態方法透過類名調用
+        AClass.staticMethod();
+
+        // 3.給這個類添加一個實例方法
+        // 添加在原型上的就是實例方法
+        AClass.prototype.instanceMethod = function(){
+            console.log("instanceMethod");
+        }
+
+        // 實例方法透過類的實例調用
+        // 創建一個實例(創建一個物件)
+        let a = new AClass();
+
+        // 通過實例調用實例方法
+        a.instanceMethod();
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

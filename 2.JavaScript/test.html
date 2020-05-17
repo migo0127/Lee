@@ -4,44 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        #u1{
-            background-color: #bfa;
-        }
-    </style>
     <script>
 
-        window.onload = function(){
-            var btn04 = document.getElementById("btn04");
-            bind(btn04,)
+        let date = new Date();
 
-            function bind(obj,eventStr,fun){
-                // 判斷是否有 addEventListener()
-                if(obj.addEventListener){
-                    obj.addEventListener(eventStr,fun,false);
-                }else{
-                    /*
-                        attachEvent的this是window，是瀏覽器調用的，所以要變成由
-                        開發來調用，並指定是誰來調用，使this變成調用的物件。
-                        call(obj);
-                    */
-                    obj.attachEvent("on"+eventStr,function(){
-                        // 讓瀏覽器先調用匿名函數，在由我們指定執行調用的物件
-                        fun.call(obj);
-                    });
-                }
-            }
-        };
+        let year,month,day,hour,min,sec;
 
+        year = date.getFullYear();
+
+        month = (date.getMonth()+1) < 10? "0"+ (date.getMonth()+1) : (date.getMonth()+1);
+
+        day = (date.getDate() < 10) ? "0"+ date.getDate() : date.getDate();
+
+        hour = (date.getHours() <10) ? "0" + date.getHours() : date.getHours();
+
+        min = (date.getMinutes < 10) ? "0" + date.getMinutes() : date.getMinutes();
+
+        sec = (date.getSeconds < 10) ? "0" + date.getSeconds() : date.getSeconds();
+
+        console.log(`${ year }-${ month }-${ day } ${ hour }:${ min }:${ sec }`);
 
 
     </script>
 </head>
 <body>
-
-    <p>4.</p>
-    <p>● 兼容瀏覽器</p>
-    <button id="btn04">我是按鈕04</button>
-
+    
 </body>
 </html>

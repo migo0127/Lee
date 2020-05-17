@@ -4,53 +4,357 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./source/css/normalize.css">
+    <link rel="stylesheet" href="./source/fontawesome/fontawesome-free-5.12.0-web/css/all.min.css">
     <style>
 
-        *{
+        .d-flex{
+            display: flex;
+        }
+
+        a{
+            text-decoration: none;
+            color:rgb(255, 255, 255);
+            font-size: 0.875rem;
+        }
+
+        .box-border{
+            box-sizing: border-box;
+        }
+
+        .list-nustyle{
+            list-style: none;
+            margin: 10px 20px;
             padding: 0;
-            margin: 0;
         }
 
         .wrap{
-            margin: 50px;
-            width: 500px;
-            height: 700px;
-            background-color: slateblue;
+            width: 100%;
+            display: flex;
+        }
+
+        .wrap li{
+            padding: 5px 0 0 0;
+            box-sizing: border-box;
+        }
+        .left-wrap{
+            width: 15%;
+            background-color: rgb(61, 70, 77);
+        }
+
+        .right-wrap{
+            width: 85%;
+        }
+
+        .left-wrap .logo-txt{
+            width: 100%;
+            height: 4rem;
+            line-height: 4rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: rgb(255, 255, 255);
+            background-color: rgba(57, 155, 255,.9);
+            text-align: center;
+        }
+
+        .login-info{
+            width: 100%;
+            height: 10rem;
+            background-color: rgba(255, 255, 255,.1);
+        }
+
+        .login-info .login-img{
+            width: 100%;
+            height:75%;
+            padding-top: 20px;
+        }
+
+        .login-img img{
+            width: 45%;
+            height: 100%;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .login-name{
+            font-size: 20px;
+            margin-top: 10px;
+            text-align: center;
+            color: rgb(255, 255, 255);
+        }
+
+        .navlist{
+            margin: 0 auto;
+        }
+
+        .right-wrap .top-inner{
+            width: 100%;
+            height: 4rem;
+            padding: 0 40px;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #399BFF;
+        }
+
+        .top-inner .nav-inp{
             position: relative;
         }
 
-        .box1 , .box2 , .box3{
-            width:200px;
-            height: 200px;
-            margin-bottom: 10px;
+        .top-inner #nav-search{
+            width: 13rem;
+            height: 2rem;
+            background-color: rgba(255,255,255,.9);
+            border-radius: 20px;
+            padding-left: 10px;
+            border: none;
+            outline: none;
         }
 
-        .box1{
-            background-color: #bfa;
+        .top-inner #btn-search{
+            width: 3.5rem;
+            height: 2rem;
+            border-radius: 20px;
+            background: transparent;
+            position: absolute;
+            left: 50%;
+            transform: translateX(55px);
+            border: none;
+            outline: none;
         }
 
-        .box2{
-            background-color: orange;
-            position: fixed;
-            /* top:0;
-            left:0; */
+        .nav-logout .home{
+            margin-right: 10px;
         }
 
-        .box3{
-            background-color: skyblue;
+        .nav-h1 #h1{
+            margin: 0;
+            padding: 0;
+            color:rgb(255, 255, 255);
         }
 
+        .nav-logout a{
+            font-size: 1.125rem;
+        }
 
     </style>
-
-
-
 </head>
 <body>
+
     <div class="wrap">
-        <div class="box1"></div>
-        <div class="box2"></div>
-        <div class="box3"></div>
+        <!-- 左邊區塊 -->
+        <div class="left-wrap">
+            <!-- tilite -->
+            <div class="logo-txt">COMPANY</div>
+            <!-- 左上頭像 -->
+            <div class="login-info">
+                <div class="login-img box-border">
+                    <img src="./test/大龙 - 48.jpg" alt="大頭照">
+                </div>
+                <!-- 左上登入用戶名 -->
+                <div class="login-name">DL</div>
+            </div>
+            <!-- 左下功能列表 -->
+            <div class="navlist">
+                <!-- 1.權限管理區 -->
+                <ul id="permission-area" class="list-nustyle">
+                    <li><a href="javascript:;">權限管理</a></li>
+                        <ul id="per-info" class="list-nustyle">
+                            <li id="per-add">
+                                <a href="">新增帳戶</a></li>
+                            <li id="per-fix"><a href="javascript:;">修改密碼</a></li>
+                            <li id="per-set"><a href="javascript:;">權限設定</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- 2.會員管理區 -->
+                <ul id="user-area" class="list-nustyle">
+                    <li><a href="javascript:;">會員管理</a>
+                        <ul id="user-info" class="list-nustyle">
+                            <li id="user-list"><a href="javascript:;">會員列表</a></li>
+                            <li id="user-add"><a href="javascript:;">新增會員</a></li>
+                            <li id="user-pwd"><a href="javascript:;">重置密碼</a></li>
+                            <li id="user-block"><a href="javascript:;">會員黑名單</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- 3.老師管理區 -->
+                <ul id="teacher-area" class="list-nustyle ">
+                    <li><a href="javascript:;">老師管理</a>
+                        <ul id="teacher-info" class="list-nustyle">
+                            <li id="teacher-list"><a href="javascript:;">師列表</a></li>
+                            <li id="teacher-add"><a href="javascript:;">新增老師</a></li>
+                            <li id="teacher-block"><a href="javascript:;">老師黑名單</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- 4.課程管理區 -->
+                <ul id="course-area" class="list-nustyle">
+                    <li><a href="javascript:;">課程管理</a>
+                        <ul id="course-info" class="list-nustyle">
+                            <li id="course-list"><a href="javascript:;">實體課程列表</a></li>
+                            <li id="course-add"><a href="javascript:;">新增實體課程</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- 5.教室管理區 -->
+                <ul id="class-area" class="list-nustyle">
+                    <li><a href="javascript:;">教室管理</a>
+                        <ul id="class-info" class="list-nustyle">
+                            <li id="class-list"><a href="javascript:;">教室列表</a></li>
+                            <li id="class-add"><a href="javascript:;">新增教室</a></li>
+                            <li id="class-device"><a href="javascript:;">教室設備</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- 6.廠商管理區 -->
+                <ul id="firm-area" class="list-nustyle">
+                    <li><a href="javascript:;">廠商管理</a>
+                        <ul id="firm-info" class="list-nustyle">
+                            <li><a href="javascript:;">影片廠商管理</a>
+                                <ul id="movie-firm" class="list-nustyle">
+                                    <li id="movie-list"><a href="javascript:;">影片廠商列表</a></li>
+                                    <li id="movie-firm-add"><a href="javascript:;">新增影片廠商</a></li>
+                                    <li id="movie-firm-block"><a href="javascript:;">影片廠商黑名單</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:;">商品廠商管理</a>
+                                <ul id="commodity-firm" class="list-nustyle">
+                                    <li id="commodity-list"><a href="javascript:;">商品廠商列表</a></li>
+                                    <li id="commodity-firm-add"><a href="javascript:;">新增商品廠商</a></li>
+                                    <li id="commodity-firm-block"><a href="javascript:;">商品廠商黑名單</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- 7.商品管理區 -->
+                <ul id="goods-area" class="list-nustyle">
+                    <li><a href="javascript:;">商品管理</a>
+                        <ul id="movie-goods" class="list-nustyle">
+                            <li><a href="">影片商品管理</a>
+                                <ul id="movie-info" class="list-nustyle">
+                                    <li id="movie-list"><a href="javascript:;">影片商品列表</a></li>
+                                    <li id="movie-add"><a href="javascript:;">新增影片商品</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:;">樂器商品管理</a>
+                                <ul id="commodity-info" class="list-nustyle">
+                                    <li id="commodity-list"><a href="javascript:;">樂器商品列表</a></li>
+                                    <li id="commodity-add"><a href="javascript:;">新增樂器商品</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- 8.訂單管理區 -->
+                <ul id="order-area" class="list-nustyle">
+                    <li><a href="javascript:;">訂單管理</a>
+                        <ul id="order-list" class="list-nustyle">
+                            <li><a href="javascript:;">實體課程訂單管理</a>
+                                <ul id="class-order" class="list-nustyle">
+                                    <li id="class-list"><a href="javascript:;">實體課訂單列表</a></li>
+                                    <li id="class-add"><a href="javascript:;">新增影片商品</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:;">影片廠商訂單管理</a>
+                                <ul id="movie-order" class="list-nustyle">
+                                    <li id="movie-order-list"><a href="javascript:;">影片訂單列表</a></li>
+                                    <li id="movie-order-add"><a href="javascript:;">新增影片商品</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:;">商品廠商訂單管理</a>
+                                <ul id="commodity-order" class="list-nustyle">
+                                    <li id="commodity-order-list"><a href="javascript:;">商品訂單列表</a></li>
+                                    <li id="commodity-order-add"><a href="javascript:;">新增樂器商品</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- 9.行銷管理區 -->
+                <ul id="discount-class-area" class="list-nustyle">
+                    <li><a href="javascript:;">行銷管理</a>
+                        <ul id="discount-class-info" class="list-nustyle">
+                            <li id="discount-class-list"><a href="javascript:;">課程優惠列表</a></li>
+                            <li id="discount-class-add"><a href="javascript:;">新增課程優惠</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                 <!-- 10.公告管理區 -->
+                 <ul id="board-area" class="list-nustyle">
+                    <li><a href="javascript:;">公告管理</a>
+                        <ul id="discount-info" class="list-nustyle">
+                            <li><a href="javascript:;">Banner</a>
+                                <ul id="banner-info" class="list-nustyle">
+                                    <li id="banner-list"><a href="javascript:;">Banner列表</a></li>
+                                    <li id="banner-add"><a href="javascript:;">新增Banner</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:;">公告欄</a>
+                                <ul id="board-info" class="list-nustyle">
+                                    <li id="board-list"><a href="javascript:;">文章列表</a></li>
+                                    <li id="board-add"><a href="javascript:;">新增文章</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:;">Q&A</a>
+                                <ul id="qa-info" class="list-nustyle">
+                                    <li id="qa-list"><a href="javascript:;">Q&A列表</a></li>
+                                    <li id="qa-add"><a href="javascript:;">新增Q&A</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- 11.項目管理區 -->
+                <ul id="items-area" class="list-nustyle">
+                    <li><a href="javascript:;">項目管理</a>
+                        <ul id="money-info" class="list-nustyle">
+                            <li><a href="javascript:;">付款項目類別</a>
+                                <ul id="money-info" class="list-nustyle">
+                                    <li id="money-list"><a href="javascript:;">金流項目列表</a></li>
+                                    <li id="money-add"><a href="javascript:;">新增金流項目</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:;">物流項目類別</a>
+                                <ul id="logistics-info" class="list-nustyle">
+                                    <li id="logistics-list"><a href="javascript:;">物流項目列表</a></li>
+                                    <li id="logistics-add"><a href="javascript:;">新增物流項目</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="javascript:;">商品項目類別</a>
+                                <ul id="goods-title-info" class="list-nustyle">
+                                    <li id="goods-title-list"><a href="javascript:;">新增商品項目類別</a></li>
+                                    <li id="goods-title-add"><a href="javascript:;">新增樂器商品</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="right-wrap">
+            <div class="top-inner d-flex box-border">
+                <form action="" method="post" class="nav-inp">
+                    <input type="search" name="nav-search" id="nav-search" maxlength="8"><button type="submit" name="btn-serch" id="btn-search"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="nav-h1">
+                    <h1 id="h1">OOO</h1>
+                </div>
+                <div class="nav-logout">
+                    <span class="home">
+                        <a href="#"><i class="fas fa-home"></i></a>
+                    </span>
+                    <span class="logout">
+                        <a href="javascript:;">Logout</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+
 </body>
 </html>

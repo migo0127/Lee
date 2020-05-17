@@ -12,6 +12,8 @@
             border: black solid 1px;
         }
 
+        
+
         #formDiv {
             width: 250px;
             margin: 20px;
@@ -49,7 +51,7 @@
                     //  但是此时我们不希望出现默认行为，可以通过响应函数的最后return false来取消默认行为
 
                     return false;
-        
+
             }
 
             // 点击超链接以后，删除一个员工的信息
@@ -61,7 +63,7 @@
             for (var i = 0; i < allA.length; i++) {
                 allA[i].onclick = delA;
             }
-        
+
 
 
             // 添加员工的功能
