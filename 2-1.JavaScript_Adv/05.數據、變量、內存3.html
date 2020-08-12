@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數據、變量、內存3</title>
+</head>
+<body>
+    
+    <script type='text/javascript'>
+    /* 
+        ● 關於【引用變量】賦值的問題：
+            - N個引用變量指向同一個物件(Object)，通過一個變量修改物件內部數據，另一個變量看到的是修改之後的數據。
+            - 2個引用變量指像同一個物件(Object)，讓其中一個引用變量指向另一個新物件，另一個引用變量依舊指向前一個物件。
+    */
+    // N個引用變量指向同一個物件(Object)，通過一個變量修改物件內部數據，另一個變量看到的是修改之後的數據
+    let a = {
+        name:'DL'
+    }
+    let b = a;
+    b.age = 30;
+    console.log(a.age); // 30
+    b.name = 'AYG';
+    console.log(a.name); // AYG
+
+    function fn(obj){
+        obj.age = 32;
+    }
+    fn(a);
+    console.log(a.age); // 32
+
+
+    // 2個引用變量指像同一個物件(Object)，讓其中一個引用變量指向另一個新物件，另一個引用變量依舊指向前一個物件。
+    let pa = {
+        name:'ZZ'
+    }
+    let ba = pa;
+    pa = {
+        name:'SS',
+        age:28
+    }
+    console.log(ba.name , pa.name , pa.age); // 'ZZ' 'SS' 28
+
+    function fn2(obj){
+        obj = {
+            age:24
+        }
+    }
+    fn2(pa);
+    console.log(pa.age); // 28
+
+
+    </script>
+
+</body>
+</html>

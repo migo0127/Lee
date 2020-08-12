@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-Tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數據、變量、內存2</title>
+</head>
+<body>
+
+    
+    <script type='text/javascript'>
+    /* 
+        Q：var a = value，a內存中到底保存的是什麼？
+
+        A： value是基本數據時，保存的就是這個數據。
+            value是引用數據(Object)時，保存的就是物件的地址值。
+            value是一個變量時，保存value的內存內容(可能是基本數據，也可能是地址值)。    
+    */
+    // value是基本數據時
+    let a = 3;
+
+    // value是引用數據(Object)時
+    let b = function(){
+
+    }
+
+    // value是一個變量時
+    let c = 'abc';  // c 保存的是'abc'
+    c = b;   // c 保存的是 b的內容(地址值)
+    c = a; // c 保存的是 3
+    c  = {}; //  c 保存的是一個新的內容(地址值)
+
+
+    </script>
+
+</body>
+</html>

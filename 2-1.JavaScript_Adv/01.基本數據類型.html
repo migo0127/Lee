@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本數據類型</title>
+</head>
+<body>
+
+    
+    <script type='text/javascript'>
+    /*
+        一、分類：
+            (一)、基本(值)類型：
+                1.String：任意字符串。
+                2.Number：任意的數字。
+                3.Boolean：true / false。
+                4.undefined：undefuned。
+                5.null：null。
+            
+            (二)、物件(引用)類型：
+                1.Object：任意物件(儲存數據)。
+                    1-1.Function：一種特別的物件(可以執行代碼，儲存執行代碼)。
+                    1-2.Array：一種特跌的物件(數值下標，內部數據是有序的)。
+
+        二、判斷數據類型：
+            1.typeof：
+                - 返回的是一個【字符串】所表達的數據類型('string'、'number'...)。
+                - 可以判斷：undefined、string、number、boolean、function。
+                - 不可判斷：null與object、object與array。
+
+            2.instanceof：Object
+                - 判斷物件(Object)的具體類型(Function/Array)。
+            
+            3.=== (全等於)：
+                - 可以判斷：undefined、null (唯一值)。
+     */
+    // typeof：判斷基本數據類型
+
+     let a;
+     console.log(a , typeof a , typeof a === 'undefined'); // undefined、'undefined'、true
+    //  console.log(a instanceof undefined);  //報錯 TypeError: Right-hand side of 'instanceof' is not an object
+    
+    let b = 3;
+    console.log(b , typeof b, typeof b === 3 , typeof b == 3, typeof b === '3', typeof b == '3'); 
+    // 3 'number' false false false false
+    console.log(typeof b === 'number', typeof b == 'number'); // true
+
+    let c = 'DL';
+    console.log(typeof c,typeof c === 'string');
+    // 'string' true
+
+    let d = false;
+    console.log(typeof d , typeof d === 'boolean' , d === false);
+    // 'boolean' true true 
+
+    let f = null;
+    console.log(typeof f , typeof f === 'null' , typeof f === 'object');
+    // 'object' false true
+    // console.log(f instanceof null); // 報錯  TypeError: Right-hand side of 'instanceof' is not an object
+
+    console.log("------------------------");
+
+    // instanceof：判斷物件(引用)類型
+    let p = {
+        p1:[1,'DL',console.log],
+        p2:function(){
+            console.log('p2');
+            return function(){
+                return 'AYG';
+            }
+        }
+    }
+
+    console.log(p instanceof Object, typeof p); 
+    // true 'object'
+
+    console.log(p.p1 instanceof Object, p.p1 instanceof Array, typeof p.p1); 
+    // true true 'object'
+
+    console.log(p.p1[0] instanceof Object, typeof p.p1[0]); 
+    // false 'number'
+
+    console.log(p.p1[2] instanceof Object,p.p1[2] instanceof Function, typeof p.p1[2]);
+    // true true 'function'
+
+    console.log(p.p2 instanceof Object, p.p2 instanceof Function, typeof p.p2(), typeof p.p2()()); 
+    // true true 'function' 'string'
+
+    console.log("--------------------------------");
+
+    // null
+    let g = null;
+    console.log(typeof g, g === null, typeof g === 'object');
+    // 'object' true true
+    console.log(g instanceof Object);
+    // false
+
+    </script>
+
+</body>
+</html>

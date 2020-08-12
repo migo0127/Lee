@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本數據類型2</title>
+</head>
+<body>
+
+    
+    
+    <script type='text/javascript'>
+    /* 
+        一、undefined 與 null 的區別？
+            - undefined：代表已定義(聲明)，但未賦值。
+            - null：代表已定義(聲明)，只是賦值為 null。
+
+        二、什麼時候給變量賦值為 null 呢？
+            - 初始賦值時：表明將要賦值為物件(Object)。
+            - 結束前賦值：讓物件成為垃圾物件(被瀏覽器中的垃圾回收器回收)。
+        
+        三、嚴格區別變量類型與數據類型？
+            - 數據的類型：
+                1.基本類型。
+                2.物件類型。
+            
+            - 變量的類型(變量內儲存的值的類型)：
+                1.基本類型：保存的就是基本類型的數據。
+                2.引用類型：保存的是物件的唯一地址值。
+    */
+   // undefined vs null？
+   // ● undefined：已定義但未賦值
+   let a;
+   console.log(a); // undefined
+
+   // ● null：已定義，賦值為null，表明後面將賦值為Object類型
+   let b = null; // 起始：初始賦值為null，表明將要賦值為物件
+   
+   b = { // 確認賦值為 {}
+       name:'LL',
+       age:20
+   };
+
+   b = null; // 最後讓b指向的物件成為垃圾物件，使其被垃圾器回收
+
+   
+    </script>
+
+</body>
+</html>
