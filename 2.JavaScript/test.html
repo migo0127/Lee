@@ -6,23 +6,40 @@
     <title>Document</title>
     <script>
 
-        let date = new Date();
-
-        let year,month,day,hour,min,sec;
-
-        year = date.getFullYear();
-
-        month = (date.getMonth()+1) < 10? "0"+ (date.getMonth()+1) : (date.getMonth()+1);
-
-        day = (date.getDate() < 10) ? "0"+ date.getDate() : date.getDate();
-
-        hour = (date.getHours() <10) ? "0" + date.getHours() : date.getHours();
-
-        min = (date.getMinutes < 10) ? "0" + date.getMinutes() : date.getMinutes();
-
-        sec = (date.getSeconds < 10) ? "0" + date.getSeconds() : date.getSeconds();
-
-        console.log(`${ year }-${ month }-${ day } ${ hour }:${ min }:${ sec }`);
+      for(let i = 1 ; i < 6 ; i++){
+        for(let j = i ; j < i + 1  ; j++){
+            document.write("<br>")
+          for(let k = 1 ; k < j + 1; k++){
+            switch(j){
+              case 1 :
+                document.write("&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;");
+                document.write("&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;");
+                break;
+              case 2 :
+                document.write("*&nbsp;&nbsp;");
+                document.write("&nbsp;");
+                document.write("*&nbsp;&nbsp;");
+                break;
+              case 3 :
+                // document.write("&nbsp;*");
+                // document.write("*");
+                if(k === 1){
+                  document.write("&nbsp;*&nbsp;*&nbsp;*&nbsp;*&nbsp;*");
+                }
+                break;
+              case 4 :
+                if(k === 1){
+                  document.write("&nbsp;&nbsp;&nbsp;*&nbsp;*&nbsp;*");
+                }
+                break;
+              case 5:
+              if(k === 1){
+                document.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;");
+              }
+            }
+          }
+        }
+      }
 
 
     </script>

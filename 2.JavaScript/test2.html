@@ -6,14 +6,18 @@
     <title>Document</title>
     <script>
 
-        let resArr = ["麥當勞","MOS","肯德基","早餐店","水餃"];
-        let resRandom = Math.floor(Math.random()*5);
+   const obj = {
+       x: 1,
+       y: 2
+   }
 
-        for(let i = 0 ; i < resArr.length ; i++){
-            console.log("可選擇的午餐有"+resArr[i]+"<br />");
-        }
+   const a = [];
+   let i = 0;
 
-        console.log(`今天午餐選擇為：${resArr[resRandom]}`);
+   for(a[i++] in obj) /* empty */;
+
+   console.log("a: ",a);
+
 
     </script>
 </head>
